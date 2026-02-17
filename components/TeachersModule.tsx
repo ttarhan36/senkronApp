@@ -164,6 +164,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
    }, [allClasses, teacher]);
 
    const isOwnProfile = userRole === UserRole.TEACHER && currentUserId === teacher?.id;
+   const canEditCredentials = isOwnProfile || (userRole === UserRole.ADMIN && editMode);
 
    const timingStats = useMemo(() => {
       if (!teacher) return { dutyDays: 0, gapsCount: 0 };
@@ -645,12 +646,12 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                         <div className="bg-[#1e293b]/80 border border-white/5 p-4 shadow-lg relative overflow-hidden rounded-sm group hover:border-[#3b82f6]/40 transition-all">
                            <div className="flex items-center justify-between mb-4">
                               <div className="flex items-center gap-2"><i className="fa-solid fa-key text-[#3b82f6] text-xs"></i><span className="text-[9px] font-black text-white/90 uppercase tracking-widest">HESAP_KİMLİK_BİLGİLERİ</span></div>
-                              {isOwnProfile && <span className="text-[7px] font-bold text-green-500 uppercase tracking-widest animate-pulse">DÜZENLEME AKTİF</span>}
+                              {canEditCredentials && <span className="text-[7px] font-bold text-green-500 uppercase tracking-widest animate-pulse">DÜZENLEME AKTİF</span>}
                            </div>
                            <div className="space-y-3">
                               <div className="flex flex-col gap-1">
                                  <span className="text-[8px] font-bold text-slate-500 uppercase ml-1">KULLANICI ADI</span>
-                                 {isOwnProfile ? (
+                                 {canEditCredentials ? (
                                     <input
                                        className="bg-black border border-white/10 p-2 text-[11px] font-black text-white outline-none focus:border-[#3b82f6] transition-all"
                                        value={credentials.username}
@@ -663,7 +664,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
                               <div className="flex flex-col gap-1">
                                  <span className="text-[8px] font-bold text-slate-500 uppercase ml-1">ŞİFRE</span>
-                                 {isOwnProfile ? (
+                                 {canEditCredentials ? (
                                     <input
                                        type="text"
                                        className="bg-black border border-white/10 p-2 text-[11px] font-black text-[#fbbf24] outline-none focus:border-[#fbbf24] transition-all"
@@ -675,7 +676,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                  )}
                               </div>
 
-                              {isOwnProfile && (
+                              {canEditCredentials && (
                                  <button onClick={handleUpdateSelfCredentials} className="w-full mt-2 h-10 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all shadow-lg">GÜNCELLE</button>
                               )}
                            </div>
@@ -1050,6 +1051,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                        <div className="flex flex-col min-w-0 flex-1">
                                           <div className="flex items-center justify-between gap-2">
                                              <span className="text-[13px] font-black uppercase leading-tight truncate text-high-contrast flex-1">{t.name}</span>
+                                             {t.isExemptFromDuty && <i className="fa-solid fa-shield-halved text-orange-500 text-[10px] shrink-0 drop-shadow-[0_0_6px_rgba(234,88,12,0.5)]" title="NÖBET MUAF"></i>}
                                              <div className="flex items-center gap-1.5 shrink-0 opacity-80 bg-black/40 px-2 py-0.5 rounded-sm border border-white/5">
                                                 <div className="flex items-center gap-1"> <span className={`text-[8px] font-black ${teacherSectionCount === 0 ? 'text-red-500' : 'text-[#3b82f6]'}`}>{teacherSectionCount}</span> <span className="text-[5px] font-black text-slate-500 uppercase">Ş</span> </div>
                                                 <div className="w-[1px] h-2 bg-white/10"></div>

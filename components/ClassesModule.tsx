@@ -102,15 +102,16 @@ const ClassesModule: React.FC<ClassesModuleProps> = ({
     return dailyHours * 5;
   };
 
-  // YETKİ KONTROLÜ: Sınav yönetimi için
+  // YETKİ KONTROLÜ: Sınav yönetimi SADECE öğretmende - İdareci yalnızca izler
   const canManageExam = (lessonId?: string) => {
-    if (userRole === UserRole.ADMIN && editMode) return true;
+    // İdareci sınavları yalnızca izleyebilir, müdahale edemez
+    if (userRole === UserRole.ADMIN) return false;
     if (userRole === UserRole.TEACHER && userId && selectedClass) {
       // Eğer belirli bir ders ID'si verilmemişse, bu sınıfta herhangi bir derse atanmış mı diye bak (Modalı açmak için)
       if (!lessonId) {
         return selectedClass.assignments?.some(a => a.teacherId === userId);
       }
-      // Belirli bir ders için yetki kontrolü
+      // Belirli bir ders için yetki kontrolü: Sadece kendi dersinin sınavını tanımlayabilir
       return selectedClass.assignments?.some(a => a.lessonId === lessonId && a.teacherId === userId);
     }
     return false;
@@ -700,7 +701,7 @@ const ClassesModule: React.FC<ClassesModuleProps> = ({
                 return (<div key={exam.id} className="slim-row bg-[#0f172a] px-3 justify-between border border-white/5 hover:bg-slate-800 transition-all group h-[52px]"><div className="flex items-center gap-3"><div className={`w-9 h-9 flex flex-col items-center justify-center border rounded-sm ${isDone ? 'bg-green-600/10 border-green-500/30' : diffDays <= 3 ? 'bg-red-600/10 border-red-500/30 animate-pulse' : 'bg-white/5 border-white/10'}`}><span className={`text-[12px] font-black leading-none ${isDone ? 'text-green-500' : diffDays <= 3 ? 'text-red-500' : 'text-white'}`}>{dayDisplay}</span><span className="text-[6px] font-bold text-slate-500 uppercase">{monthNames[monthIndex] || 'TAR'}</span></div><div className="flex flex-col min-w-0"><span className="text-[12px] font-black text-white uppercase truncate">{lesson?.name || 'DERS'}</span><div className="flex items-center gap-2"><span className="text-[7px] font-black text-[#fbbf24] uppercase">{exam.slot.toUpperCase().replace('EXAM', '')}. YAZILI</span><span className={`text-[6px] font-black uppercase tracking-widest ${isDone ? 'text-green-500' : diffDays === 0 ? 'BUGÜN' : `${diffDays} GÜN KALDI`} `}>{isDone ? 'TAMAMLANDI' : diffDays === 0 ? 'BUGÜN' : `${diffDays} GÜN KALDI`}</span></div></div></div>
                   {canManageExam(exam.lessonId) && (<button onClick={() => handleDeleteExam(exam.id, exam.lessonId)} className="w-8 h-8 flex items-center justify-center text-slate-700 hover:text-red-500 transition-all opacity-0 group-hover:opacity-100"><i className="fa-solid fa-trash-can text-xs"></i></button>)}
                 </div>);
-              }) : (<div className="py-12 text-center opacity-20 border-2 border-dashed border-white/5"><i className="fa-solid fa-calendar-xmark text-4xl mb-4"></i><p className="text-[10px] font-black uppercase tracking-[0.4em]">SINAV TAKVİMİ BOŞ</p></div>)}</div></div></div><div className="absolute bottom-4 left-0 right-0 px-6 py-4 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/95 to-transparent z-[100]"><button onClick={() => { if (!canManageExam()) onWatchModeAttempt(); else setIsExamModalOpen(true); }} className="w-full h-14 bg-[#fbbf24] text-black font-black text-[11px] uppercase tracking-widest shadow-[0_10px_40px_rgba(251,191,36,0.3)] border border-white/20 flex items-center justify-center gap-3 transition-all active:scale-95 hover:brightness-110"><i className="fa-solid fa-calendar-plus text-sm"></i> SINAV TANIMLA</button></div></div>
+              }) : (<div className="py-12 text-center opacity-20 border-2 border-dashed border-white/5"><i className="fa-solid fa-calendar-xmark text-4xl mb-4"></i><p className="text-[10px] font-black uppercase tracking-[0.4em]">SINAV TAKVİMİ BOŞ</p></div>)}</div></div></div>{userRole !== UserRole.ADMIN && <div className="absolute bottom-4 left-0 right-0 px-6 py-4 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/95 to-transparent z-[100]"><button onClick={() => { if (!canManageExam()) onWatchModeAttempt(); else setIsExamModalOpen(true); }} className="w-full h-14 bg-[#fbbf24] text-black font-black text-[11px] uppercase tracking-widest shadow-[0_10px_40px_rgba(251,191,36,0.3)] border border-white/20 flex items-center justify-center gap-3 transition-all active:scale-95 hover:brightness-110"><i className="fa-solid fa-calendar-plus text-sm"></i> SINAV TANIMLA</button></div>}</div>
             )}
             {activeTab === 'ÖĞRENCİ' && (
               selectedStudentId && selectedStudent ? (
