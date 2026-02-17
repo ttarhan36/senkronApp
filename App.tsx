@@ -24,20 +24,33 @@ const App: React.FC = () => {
     return saved ? JSON.parse(saved) : null;
   });
 
+  const authProcessingRef = useRef(false);
+
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, authSession) => {
-      // SIGNED_IN: Normal giriş
-      // INITIAL_SESSION: Sayfa yenilendiğinde mevcut oturum
-      // TOKEN_REFRESHED: Token yenilendiğinde
-      if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') && authSession?.user && !session) {
-        // OAuth veya Magic Link ile giriş yapıldığında burası tetiklenir
+      // SIGNED_OUT: Çıkış
+      if (event === 'SIGNED_OUT') {
+        setSession(null);
+        localStorage.removeItem('senkron_session');
+        authProcessingRef.current = false;
+        return;
+      }
+
+      // SIGNED_IN, INITIAL_SESSION, TOKEN_REFRESHED
+      if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') && authSession?.user) {
+        // Zaten bir session varsa veya işlem devam ediyorsa, tekrar çalıştırma
+        const existingSession = localStorage.getItem('senkron_session');
+        if (existingSession && session) return;
+        if (authProcessingRef.current) return;
+        authProcessingRef.current = true;
+
         const user = authSession.user;
         let userRole = UserRole.ADMIN;
         let schoolId = '';
         let fullName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'KULLANICI';
 
         try {
-          // 1. Profil tablosunu kontrol et
+          // 1. Profil tablosunu kontrol et (en güvenilir kaynak)
           const { data: profile } = await supabase
             .from('user_profiles')
             .select('*')
@@ -45,14 +58,24 @@ const App: React.FC = () => {
             .maybeSingle();
 
           if (profile) {
+            // Mevcut kullanıcı — profili kullan
             userRole = (profile.role as UserRole) || UserRole.ADMIN;
             schoolId = profile.school_id;
             fullName = profile.full_name;
           }
-          // 2. Metadata'da var mı?
+          // 2. Metadata'da var mı? (profil oluşturulmuş ama tablo sorgusu başarısız olmuş olabilir)
           else if (user.user_metadata?.school_id) {
             schoolId = user.user_metadata.school_id;
             userRole = (user.user_metadata.role as UserRole) || UserRole.ADMIN;
+            fullName = user.user_metadata.full_name || fullName;
+
+            // Metadata var ama profil yok — profili yeniden oluştur (eksik kalmış olabilir)
+            await supabase.from('user_profiles').upsert({
+              user_id: user.id,
+              school_id: schoolId,
+              full_name: fullName.toUpperCase(),
+              role: userRole
+            }, { onConflict: 'user_id' });
           }
           // 3. HİÇBİR KAYIT YOKSA -> OTOMATİK ADMİN KAYDI YAP (Google ile ilk giriş)
           else {
@@ -60,17 +83,29 @@ const App: React.FC = () => {
             schoolId = `SCH-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`.toUpperCase();
             const newSchoolName = (fullName + " OKULU").toUpperCase();
 
-            // Paralel kayıt oluşturma (Hata yönetimi için sırayla da yapılabilir ama hız için Promise.all)
-            await Promise.all([
-              supabase.from('schools').insert({ id: schoolId, name: newSchoolName }),
-              supabase.from('school_config').insert({ school_id: schoolId, config_json: DEFAULT_DNA }),
-              supabase.from('user_profiles').insert({
-                user_id: user.id,
-                school_id: schoolId,
-                full_name: fullName.toUpperCase(),
-                role: UserRole.ADMIN
-              })
-            ]);
+            // Sırayla kayıt oluştur (race condition önlemi)
+            // Önce okul
+            const { error: schoolErr } = await supabase.from('schools').upsert(
+              { id: schoolId, name: newSchoolName },
+              { onConflict: 'id' }
+            );
+            if (schoolErr) console.error("School insert error:", schoolErr);
+
+            // Sonra config
+            const { error: configErr } = await supabase.from('school_config').upsert(
+              { school_id: schoolId, config_json: DEFAULT_DNA },
+              { onConflict: 'school_id' }
+            );
+            if (configErr) console.error("Config insert error:", configErr);
+
+            // Son olarak profil (upsert ile mükerrer önlenir)
+            const { error: profileErr } = await supabase.from('user_profiles').upsert({
+              user_id: user.id,
+              school_id: schoolId,
+              full_name: fullName.toUpperCase(),
+              role: UserRole.ADMIN
+            }, { onConflict: 'user_id' });
+            if (profileErr) console.error("Profile insert error:", profileErr);
 
             // Kullanıcı metadatasını güncelle ki sonraki girişlerde db araması gerekmesin
             await supabase.auth.updateUser({
@@ -91,12 +126,9 @@ const App: React.FC = () => {
           }
         } catch (err) {
           console.error("Google Login Auto-Register Error:", err);
-          // Hata durumunda kullanıcıyı logout yapabiliriz veya notification gösterebiliriz
+        } finally {
+          authProcessingRef.current = false;
         }
-      } else if (event === 'SIGNED_OUT') {
-
-        setSession(null);
-        localStorage.removeItem('senkron_session');
       }
     });
 
