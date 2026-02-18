@@ -1721,11 +1721,22 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                      <QRCodeCanvas value={qrData} size={200} />
                   </div>
 
-                  <div className="w-full space-y-2">
+                  <div className="w-full space-y-3">
                      <p className="text-[9px] text-center text-slate-400 font-bold uppercase mb-2 px-4">
                         BU QR KOD İLE İLK GİRİŞ YAPILDIĞINDA ŞİFRE DEĞİŞİKLİĞİ ZORUNLUDUR.
                      </p>
-                     <button onClick={() => setIsQRModalOpen(false)} className="w-full h-12 bg-black text-white font-black text-[11px] uppercase tracking-widest hover:bg-[#3b82f6] transition-all shadow-xl">
+
+                     <a
+                        href={`https://wa.me/?text=${encodeURIComponent(`🎓 SENKRON GİRİŞ LİNKİ\n\nSayın ${qrTeacherName},\n\nAşağıdaki linke tıklayarak sisteme giriş yapabilirsiniz:\n${qrData}\n\n⚠️ İlk girişinizde şifrenizi değiştirmeniz gerekmektedir.`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full h-12 bg-[#25D366] text-white font-black text-[11px] uppercase tracking-widest shadow-xl flex items-center justify-center gap-3 hover:brightness-110 active:scale-95 transition-all rounded-sm"
+                     >
+                        <i className="fa-brands fa-whatsapp text-lg"></i>
+                        WHATSAPP İLE PAYLAŞ
+                     </a>
+
+                     <button onClick={() => setIsQRModalOpen(false)} className="w-full h-12 bg-black text-white font-black text-[11px] uppercase tracking-widest hover:bg-[#3b82f6] transition-all shadow-xl rounded-sm">
                         KAPAT
                      </button>
                   </div>

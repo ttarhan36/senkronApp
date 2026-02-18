@@ -21,6 +21,12 @@ import { standardizeBranchCode, standardizeDayCode } from './utils';
 
 const App: React.FC = () => {
   const [session, setSession] = useState<UserSession | null>(() => {
+    // QR kod ile giriş yapılıyorsa mevcut oturumu temizle
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('action') === 'qrlimit') {
+      localStorage.removeItem('senkron_session');
+      return null;
+    }
     const saved = localStorage.getItem('senkron_session');
     return saved ? JSON.parse(saved) : null;
   });
