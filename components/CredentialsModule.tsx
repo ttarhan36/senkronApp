@@ -107,46 +107,45 @@ const CredentialsModule: React.FC<CredentialsModuleProps> = ({ onSuccess, school
     );
 
     return (
-        <div className="h-full flex flex-col bg-[#0d141b] text-white overflow-hidden relative">
+        <div className="h-full flex flex-col bg-[#0d141b] text-white overflow-hidden relative font-mono">
             {/* Background Grid */}
             <div className="absolute inset-0 bg-grid-hatched opacity-20 pointer-events-none"></div>
 
             {/* Header Area */}
-            <div className="flex-shrink-0 p-4 pb-2 z-10 bg-gradient-to-b from-[#0d141b] to-[#0d141b]/90 backdrop-blur-sm border-b border-white/5">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4">
-                    <div>
-                        <h1 className="text-3xl md:text-4xl font-black tracking-widest text-white uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] leading-none">
+            <div className="flex-shrink-0 p-4 pb-2 z-10 bg-[#0d141b] border-b border-white/5">
+                <div className="flex flex-col gap-6 mb-4">
+                    {/* Title */}
+                    <div className="flex items-center gap-4">
+                        <div className="w-1 h-8 bg-[#3b82f6]"></div>
+                        <h1 className="text-2xl md:text-3xl font-black tracking-[0.2em] text-white uppercase leading-none">
                             ŞİFRELER
                         </h1>
-                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-2 border-l-2 border-[#3b82f6] pl-2">
-                            HESAP YÖNETİM MERKEZİ
-                        </p>
                     </div>
 
-                    {/* Tabs */}
-                    <div className="flex bg-[#1e293b] p-1 rounded-lg border border-white/10 shadow-lg">
+                    {/* Tabs - Full Width Grid - NO RADIUS */}
+                    <div className="grid grid-cols-2 gap-1 bg-transparent">
                         <button
                             onClick={() => setActiveTab('TEACHERS')}
-                            className={`flex-1 md:flex-none px-6 py-2.5 rounded-md text-[10px] font-black tracking-widest transition-all uppercase ${activeTab === 'TEACHERS' ? 'bg-[#3b82f6] text-white shadow-md transform scale-105' : 'text-slate-500 hover:text-white'}`}
+                            className={`h-12 flex items-center justify-center text-[10px] md:text-xs font-black tracking-widest transition-all uppercase border border-white/10 ${activeTab === 'TEACHERS' ? 'bg-[#3b82f6] text-white border-[#3b82f6]' : 'bg-[#1e293b]/50 text-slate-500 hover:text-white hover:bg-[#1e293b]'}`}
                         >
-                            Öğretmenler
+                            ÖĞRETMENLER
                         </button>
                         <button
                             onClick={() => setActiveTab('STUDENTS')}
-                            className={`flex-1 md:flex-none px-6 py-2.5 rounded-md text-[10px] font-black tracking-widest transition-all uppercase ${activeTab === 'STUDENTS' ? 'bg-[#3b82f6] text-white shadow-md transform scale-105' : 'text-slate-500 hover:text-white'}`}
+                            className={`h-12 flex items-center justify-center text-[10px] md:text-xs font-black tracking-widest transition-all uppercase border border-white/10 ${activeTab === 'STUDENTS' ? 'bg-[#3b82f6] text-white border-[#3b82f6]' : 'bg-[#1e293b]/50 text-slate-500 hover:text-white hover:bg-[#1e293b]'}`}
                         >
-                            Öğrenciler
+                            ÖĞRENCİLER
                         </button>
                     </div>
                 </div>
 
-                {/* Search */}
+                {/* Search - Sharp Corners */}
                 <div className="relative mb-2">
-                    <i className="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+                    <i className="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
                     <input
                         type="text"
-                        placeholder={`${activeTab === 'TEACHERS' ? 'Öğretmen' : 'Öğrenci'} Ara...`}
-                        className="w-full h-12 bg-[#1e293b]/80 border border-white/10 rounded-xl pl-12 text-sm font-bold text-white outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/50 transition-all placeholder:text-slate-600 uppercase tracking-wider shadow-inner"
+                        placeholder={`${activeTab === 'TEACHERS' ? 'ÖĞRETMEN' : 'ÖĞRENCİ'} KADROSUNDA ARA...`}
+                        className="w-full h-12 bg-black border border-white/10 pl-10 text-xs font-bold text-white outline-none focus:border-[#3b82f6] transition-all placeholder:text-slate-600 uppercase tracking-wider"
                         value={searchQuery}
                         onChange={e => setSearchQuery(e.target.value)}
                     />
@@ -154,31 +153,23 @@ const CredentialsModule: React.FC<CredentialsModuleProps> = ({ onSuccess, school
             </div>
 
             {/* List Content */}
-            <div className="flex-1 overflow-y-auto custom-scrollbar p-2 md:p-4 z-0 space-y-3">
+            <div className="flex-1 overflow-y-auto custom-scrollbar p-2 md:p-4 z-0 space-y-2 pb-20">
                 {loading ? (
                     <div className="flex flex-col items-center justify-center p-12 text-slate-600 animate-pulse">
-                        <i className="fa-solid fa-circle-notch fa-spin text-3xl mb-4"></i>
-                        <span className="text-xs font-black tracking-widest">YÜKLENİYOR...</span>
+                        <div className="w-8 h-8 border-2 border-[#3b82f6] border-t-transparent animate-spin mb-4"></div>
+                        <span className="text-[10px] font-black tracking-widest uppercase">VERİLER_YÜKLENİYOR</span>
                     </div>
                 ) : filteredList.length === 0 ? (
-                    <div className="text-center p-12 border-2 border-dashed border-white/5 rounded-2xl">
-                        <i className="fa-solid fa-users-slash text-4xl text-slate-700 mb-4"></i>
-                        <p className="text-sm font-bold text-slate-600 uppercase tracking-widest">Kayıt Bulunamadı</p>
+                    <div className="text-center p-12 border border-dashed border-white/10 bg-[#1e293b]/20">
+                        <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">EŞLEŞEN KAYIT YOK</span>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-20">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                         {filteredList.map((user: any, index) => (
-                            <div key={user.id || user.number} className="group relative bg-[#1e293b]/40 hover:bg-[#1e293b] border border-white/5 hover:border-[#3b82f6]/30 rounded-xl p-4 transition-all duration-200 shadow-md">
-                                {/* Decorator Bar */}
-                                <div className={`absolute top-4 bottom-4 left-0 w-1 rounded-r-lg transition-colors ${user.username ? 'bg-[#3b82f6]' : 'bg-red-500'}`}></div>
-
-                                <div className="flex items-start gap-4 pl-3">
-                                    {/* Avatar */}
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#1e293b] to-black border border-white/10 flex items-center justify-center shadow-lg shrink-0">
-                                        <span className="text-xs font-black text-slate-400 group-hover:text-white transition-colors">
-                                            {user.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase()}
-                                        </span>
-                                    </div>
+                            <div key={user.id || user.number} className="group relative bg-[#1e293b]/60 hover:bg-[#1e293b] border border-white/5 hover:border-[#3b82f6]/50 p-4 transition-all duration-200">
+                                <div className="flex items-center gap-4">
+                                    {/* Status Dot (No Avatar) */}
+                                    <div className={`w-2 h-2 shrink-0 ${user.username ? 'bg-[#3b82f6] shadow-[0_0_8px_#3b82f6]' : 'bg-red-500 animate-pulse'}`}></div>
 
                                     {/* Info */}
                                     <div className="flex-1 min-w-0">
@@ -186,37 +177,32 @@ const CredentialsModule: React.FC<CredentialsModuleProps> = ({ onSuccess, school
                                             {user.name}
                                         </h3>
 
-                                        <div className="flex flex-col gap-0.5 mt-1.5">
-                                            <div className="flex items-center gap-2">
-                                                <i className="fa-solid fa-user text-[8px] text-slate-600 w-3 text-center"></i>
-                                                <span className={`text-[10px] font-mono tracking-wider ${user.username ? 'text-blue-400' : 'text-red-400 italic'}`}>
-                                                    {user.username || 'KULLANICI ADI YOK'}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <i className="fa-solid fa-key text-[8px] text-slate-600 w-3 text-center"></i>
-                                                <span className={`text-[10px] font-mono tracking-wider ${user.password ? 'text-amber-400' : 'text-red-400 italic'}`}>
-                                                    {user.password || 'ŞİFRE YOK'}
-                                                </span>
-                                            </div>
+                                        <div className="flex items-center gap-3 mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                                            <span className="text-[9px] font-mono tracking-wider text-blue-400 truncate">
+                                                {user.username || 'NO_USER'}
+                                            </span>
+                                            <span className="text-[9px] text-slate-600">|</span>
+                                            <span className="text-[9px] font-mono tracking-wider text-amber-400 truncate">
+                                                {user.password || 'NO_PASS'}
+                                            </span>
                                         </div>
                                     </div>
 
                                     {/* Actions */}
-                                    <div className="flex flex-col gap-2 shrink-0">
+                                    <div className="flex justify-end gap-1 shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
+                                        <button
+                                            onClick={() => handleShareWhatsapp(user)}
+                                            className="w-8 h-8 flex items-center justify-center bg-green-500/10 text-green-500 border border-green-500/20 hover:bg-green-500 hover:text-white transition-all"
+                                            title="WhatsApp"
+                                        >
+                                            <i className="fa-brands fa-whatsapp text-xs"></i>
+                                        </button>
                                         <button
                                             onClick={() => handleOpenEdit(user)}
-                                            className="w-8 h-8 rounded-lg bg-[#3b82f6]/10 text-[#3b82f6] border border-[#3b82f6]/20 flex items-center justify-center hover:bg-[#3b82f6] hover:text-white transition-all shadow-sm"
+                                            className="w-8 h-8 flex items-center justify-center bg-[#3b82f6]/10 text-[#3b82f6] border border-[#3b82f6]/20 hover:bg-[#3b82f6] hover:text-white transition-all"
                                             title="Düzenle"
                                         >
                                             <i className="fa-solid fa-pen text-xs"></i>
-                                        </button>
-                                        <button
-                                            onClick={() => handleShareWhatsapp(user)}
-                                            className="w-8 h-8 rounded-lg bg-green-500/10 text-green-500 border border-green-500/20 flex items-center justify-center hover:bg-green-500 hover:text-white transition-all shadow-sm"
-                                            title="WhatsApp Paylaş"
-                                        >
-                                            <i className="fa-brands fa-whatsapp text-xs"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -226,46 +212,38 @@ const CredentialsModule: React.FC<CredentialsModuleProps> = ({ onSuccess, school
                 )}
             </div>
 
-            {/* EDIT MODAL */}
+            {/* EDIT MODAL - Sharp Corners */}
             {isEditModalOpen && editingUser && (
-                <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-end md:items-center justify-center p-0 md:p-4 animate-in fade-in duration-200">
-                    <div className="bg-[#1e293b] border border-white/10 w-full md:max-w-md p-6 rounded-t-2xl md:rounded-2xl shadow-2xl relative animate-in slide-in-from-bottom-10 md:slide-in-from-bottom-0 md:zoom-in-95 duration-300">
-                        <div className="w-12 h-1 bg-white/10 rounded-full mx-auto mb-6 md:hidden"></div>
-
-                        <div className="flex items-center gap-4 mb-8">
-                            <div className="w-12 h-12 rounded-full bg-[#3b82f6]/20 border border-[#3b82f6]/30 flex items-center justify-center text-[#3b82f6] font-black text-lg">
-                                {editingUser.name.charAt(0)}
-                            </div>
-                            <div>
-                                <h3 className="text-lg font-black text-white uppercase tracking-widest leading-none mb-1">HESAP DÜZENLE</h3>
-                                <p className="text-xs text-slate-400 font-bold uppercase truncate max-w-[200px]">{editingUser.name}</p>
-                            </div>
+                <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
+                    <div className="bg-[#0d141b] border border-white/10 w-full max-w-sm p-8 shadow-2xl relative animate-in zoom-in-95 duration-200">
+                        <div className="mb-8 border-b border-white/5 pb-4">
+                            <h3 className="text-sm font-black text-white uppercase tracking-[0.2em] mb-1">HESAP DÜZENLE</h3>
+                            <p className="text-[10px] text-[#3b82f6] font-bold uppercase truncate">{editingUser.name}</p>
                         </div>
 
                         <div className="space-y-6">
-                            <div className="relative group">
-                                <label className="text-[9px] font-black text-[#3b82f6] uppercase tracking-widest absolute -top-2 left-2 bg-[#1e293b] px-2 transition-colors group-focus-within:text-white">KULLANICI ADI</label>
+                            <div>
+                                <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest block mb-1">KULLANICI ADI</label>
                                 <input
-                                    className="w-full h-12 bg-black/40 border border-white/10 rounded-lg px-4 text-sm font-bold text-white outline-none focus:border-[#3b82f6] transition-all"
+                                    className="w-full h-10 bg-black border border-white/10 px-3 text-xs font-bold text-white outline-none focus:border-[#3b82f6] transition-all uppercase"
                                     value={editForm.username}
                                     onChange={e => setEditForm({ ...editForm, username: e.target.value })}
                                 />
                             </div>
-                            <div className="relative group">
-                                <label className="text-[9px] font-black text-[#fbbf24] uppercase tracking-widest absolute -top-2 left-2 bg-[#1e293b] px-2 transition-colors group-focus-within:text-white">ŞİFRE</label>
+                            <div>
+                                <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest block mb-1">ŞİFRE</label>
                                 <input
-                                    className="w-full h-12 bg-black/40 border border-white/10 rounded-lg px-4 text-sm font-bold text-[#fbbf24] font-mono outline-none focus:border-[#fbbf24] transition-all"
+                                    className="w-full h-10 bg-black border border-white/10 px-3 text-xs font-bold text-[#fbbf24] font-mono outline-none focus:border-[#fbbf24] transition-all"
                                     value={editForm.password}
                                     onChange={e => setEditForm({ ...editForm, password: e.target.value })}
                                 />
                             </div>
                         </div>
 
-                        <div className="flex gap-3 mt-10">
-                            <button onClick={() => setIsEditModalOpen(false)} className="flex-1 h-12 border border-white/10 text-slate-400 font-black text-[10px] uppercase tracking-widest hover:bg-white/5 rounded-lg transition-colors">İPTAL</button>
-                            <button onClick={handleSave} disabled={saving} className="flex-[2] h-12 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 rounded-lg shadow-lg disabled:opacity-50 flex items-center justify-center gap-2 transition-transform active:scale-95">
-                                {saving ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className="fa-solid fa-check"></i>}
-                                {saving ? 'KAYDEDİLİYOR...' : 'DEĞİŞİKLİKLERİ KAYDET'}
+                        <div className="flex gap-2 mt-8 pt-4 border-t border-white/5">
+                            <button onClick={() => setIsEditModalOpen(false)} className="flex-1 h-10 border border-white/10 text-slate-500 font-black text-[9px] uppercase tracking-widest hover:bg-white/5 hover:text-white transition-colors">İPTAL</button>
+                            <button onClick={handleSave} disabled={saving} className="flex-1 h-10 bg-[#3b82f6] text-white font-black text-[9px] uppercase tracking-widest hover:bg-blue-600 shadow-lg disabled:opacity-50 transition-colors">
+                                {saving ? 'KAYDEDİLİYOR...' : 'KAYDET'}
                             </button>
                         </div>
                     </div>
