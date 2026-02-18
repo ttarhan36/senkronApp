@@ -5,10 +5,11 @@ interface Props {
     userId: string;
     userType: 'teacher' | 'student';
     currentUsername?: string;
+    currentPassword?: string;
     onSuccess: (newUsername: string, newPassword: string) => void;
 }
 
-const ForcePasswordChangeModal: React.FC<Props> = ({ userId, userType, currentUsername, onSuccess }) => {
+const ForcePasswordChangeModal: React.FC<Props> = ({ userId, userType, currentUsername, currentPassword, onSuccess }) => {
     const [newUsername, setNewUsername] = useState(currentUsername || '');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -32,6 +33,10 @@ const ForcePasswordChangeModal: React.FC<Props> = ({ userId, userType, currentUs
         }
         if (newPassword !== confirmPassword) {
             setError("ŞİFRELER EŞLEŞMİYOR");
+            return;
+        }
+        if (newUsername.trim() === currentUsername && newPassword === currentPassword) {
+            setError("GÜVENLİĞİNİZ İÇİN KULLANICI ADI VEYA ŞİFRENİZİ DEĞİŞTİRMENİZ ZORUNLUDUR");
             return;
         }
 

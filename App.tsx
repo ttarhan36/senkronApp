@@ -787,6 +787,7 @@ const App: React.FC = () => {
           userId={session.id}
           userType={session.role === UserRole.TEACHER ? 'teacher' : 'student'}
           currentUsername={teachers.find(t => t.id === session.id)?.username || ''}
+          currentPassword={teachers.find(t => t.id === session.id)?.password || ''}
           onSuccess={(newUsername: string, newPassword: string) => {
             // Session'ı güncelle
             setSession(prev => prev ? ({ ...prev, isFirstLogin: false }) : null);
