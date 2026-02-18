@@ -1419,7 +1419,11 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <div className="flex justify-between items-center mb-6">
                      <div>
                         <h3 className="text-[14px] font-black text-white uppercase tracking-widest">SINAV PLANLA</h3>
-                        <span className="text-[8px] font-black text-orange-500 uppercase tracking-[0.4em] mt-2 block">{examSchedulerTarget.lessonName} | {examSchedulerTarget.className}</span>
+                        <div className="flex items-center gap-2 mt-2">
+                           <span className="text-[8px] font-black text-orange-500 uppercase tracking-[0.4em]">{examSchedulerTarget.lessonName} | {examSchedulerTarget.className}</span>
+                           <span className="text-[8px] font-bold text-pink-500 flex items-center gap-1 border-l border-white/10 pl-2 ml-1"><i className="fa-solid fa-venus text-[7px]"></i> {allClasses.find(c => c.name === examSchedulerTarget.className)?.students?.filter(s => s.gender === Gender.FEMALE).length || 0}</span>
+                           <span className="text-[8px] font-bold text-blue-500 flex items-center gap-1"><i className="fa-solid fa-mars text-[7px]"></i> {allClasses.find(c => c.name === examSchedulerTarget.className)?.students?.filter(s => s.gender === Gender.MALE).length || 0}</span>
+                        </div>
                      </div>
                      <button onClick={() => setIsExamSchedulerOpen(false)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all"><i className="fa-solid fa-xmark text-lg"></i></button>
                   </div>
@@ -1607,7 +1611,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
          {/* GRADE TERMINAL MODAL */}
          {/* GRADE TERMINAL MODAL */}
          {isGradeTerminalOpen && gradeTerminalTarget && (<div className="fixed inset-0 z-[9500] flex flex-col bg-[#0f172a] animate-in zoom-in-95 duration-200"> <div className="h-16 bg-[#162431] border-b border-white/10 flex items-center justify-between px-3 md:px-6 shrink-0 shadow-2xl z-10 gap-2">
-            <div className="flex items-center gap-3 shrink-0"> <div className="w-9 h-9 bg-[#fbbf24] text-black flex items-center justify-center font-black text-base shadow-[0_0_20px_rgba(251,191,36,0.4)] md:w-10 md:h-10 md:text-lg"> <i className="fa-solid fa-pen-nib"></i> </div> <div className="hidden md:block"> <h2 className="text-[18px] font-black text-white uppercase tracking-tighter leading-none">{gradeTerminalTarget.className}</h2> <span className="text-[9px] font-bold text-[#fbbf24] uppercase tracking-widest mt-1 block truncate max-w-[200px]" title={gradeTerminalTarget.lessonName}>{gradeTerminalTarget.lessonName} NOT GİRİŞİ</span> </div> </div>
+            <div className="flex items-center gap-3 shrink-0"> <div className="w-9 h-9 bg-[#fbbf24] text-black flex items-center justify-center font-black text-base shadow-[0_0_20px_rgba(251,191,36,0.4)] md:w-10 md:h-10 md:text-lg"> <i className="fa-solid fa-pen-nib"></i> </div> <div> <h2 className="text-[14px] md:text-[18px] font-black text-white uppercase tracking-tighter leading-none">{gradeTerminalTarget.className}</h2> <div className="flex items-center gap-2 mt-0.5 md:hidden"> <span className="text-[9px] font-bold text-pink-500 flex items-center gap-1"><i className="fa-solid fa-venus text-[8px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.FEMALE).length || 0}</span> <span className="text-[9px] font-bold text-blue-500 flex items-center gap-1"><i className="fa-solid fa-mars text-[8px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.MALE).length || 0}</span> </div> <span className="hidden md:block text-[9px] font-bold text-[#fbbf24] uppercase tracking-widest mt-1 truncate max-w-[200px]" title={gradeTerminalTarget.lessonName}>{gradeTerminalTarget.lessonName} NOT GİRİŞİ</span> </div> </div>
 
             {/* SEARCH BAR ADDED */}
             <div className="flex-1 max-w-[140px] md:max-w-xs mx-2 relative min-w-0">
@@ -1669,7 +1673,11 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <div className="p-5 border-b border-white/10 flex justify-between items-center bg-[#162431] shrink-0">
                      <div>
                         <h3 className="text-[14px] font-black text-white uppercase tracking-widest">OPTİK CEVAP ANAHTARI</h3>
-                        <span className="text-[8px] font-black text-[#a855f7] uppercase tracking-[0.2em] mt-2 block">{gradeTerminalTarget.lessonName} | {activeExamSlot === 5 ? 'SÖZLÜ' : activeExamSlot + '. YAZILI'}</span>
+                        <div className="flex items-center gap-2 mt-2">
+                           <span className="text-[8px] font-black text-[#a855f7] uppercase tracking-[0.2em]">{gradeTerminalTarget.lessonName} | {activeExamSlot === 5 ? 'SÖZLÜ' : activeExamSlot + '. YAZILI'}</span>
+                           <span className="text-[8px] font-bold text-pink-500 flex items-center gap-1 border-l border-white/10 pl-2 ml-1"><i className="fa-solid fa-venus text-[7px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.FEMALE).length || 0}</span>
+                           <span className="text-[8px] font-bold text-blue-500 flex items-center gap-1"><i className="fa-solid fa-mars text-[7px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.MALE).length || 0}</span>
+                        </div>
                      </div>
                      <button onClick={() => setIsAnswerKeyModalOpen(false)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all"><i className="fa-solid fa-xmark text-lg"></i></button>
                   </div>
