@@ -47,16 +47,32 @@ const ForcePasswordChangeModal: React.FC<Props> = ({ userId, userType, currentUs
             const table = userType === 'teacher' ? 'teachers' : 'students';
             const trimmedUsername = newUsername.trim();
 
-            // Aynı kullanıcı adının başkası tarafından kullanılıp kullanılmadığını kontrol et
-            const { data: existing } = await supabase
+            // Aynı kullanıcı adının başkası tarafından kullanılıp kullanılmadığını kontrol et (her iki tabloda da)
+            const otherTable = userType === 'teacher' ? 'students' : 'teachers';
+
+            // Kendi tablosunda kontrol
+            const { data: existingSame } = await supabase
                 .from(table)
                 .select('id')
                 .eq('username', trimmedUsername)
                 .neq('id', userId)
                 .maybeSingle();
 
-            if (existing) {
+            if (existingSame) {
                 setError("BU KULLANICI ADI ZATEN KULLANIMDA. BAŞKA BİR AD SEÇİN.");
+                setLoading(false);
+                return;
+            }
+
+            // Diğer tabloda kontrol (öğretmen-öğrenci çakışması önleme)
+            const { data: existingOther } = await supabase
+                .from(otherTable)
+                .select('id')
+                .eq('username', trimmedUsername)
+                .maybeSingle();
+
+            if (existingOther) {
+                setError("BU KULLANICI ADI BİR " + (otherTable === 'teachers' ? 'ÖĞRETMEN' : 'ÖĞRENCİ') + " TARAFINDAN KULLANIMDA. BAŞKA BİR AD SEÇİN.");
                 setLoading(false);
                 return;
             }

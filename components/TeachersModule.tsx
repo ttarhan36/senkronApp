@@ -736,9 +736,22 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
       // Check for duplicate username
       if (normalizedUsername) {
-         const isDuplicate = teachers.some(t => t.username === normalizedUsername && t.id !== editingTeacherId);
-         if (isDuplicate) {
-            onSuccess("BU KULLANICI ADI ZATEN KULLANIMDA");
+         // Check in teachers list (local state is sufficient for same table check usually, but for strict consistency DB check is better. Here we check local state for speed)
+         const isDuplicateTeacher = teachers.some(t => t.username === normalizedUsername && t.id !== editingTeacherId);
+         if (isDuplicateTeacher) {
+            onSuccess("BU KULLANICI ADI ZATEN BİR ÖĞRETMEN TARAFINDAN KULLANIMDA");
+            return;
+         }
+
+         // Check in students table (must query DB)
+         const { data: existingStudent } = await supabase
+            .from('students')
+            .select('id')
+            .eq('username', normalizedUsername)
+            .maybeSingle();
+
+         if (existingStudent) {
+            onSuccess("BU KULLANICI ADI BİR ÖĞRENCİ TARAFINDAN KULLANIMDA");
             return;
          }
       }
