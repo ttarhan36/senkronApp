@@ -260,7 +260,10 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
                            <div className="text-left"><span className="text-[10px] font-black text-white block uppercase">KUSURSUZ_SAAT</span><span className="text-[7px] text-slate-500 uppercase">TAM SAAT DOĞRULAMA</span></div>
                         </div>
                      </div>
-                     <button onClick={handleRunAI} className="w-full py-7 bg-[#3b82f6] text-white font-black text-[13px] uppercase tracking-[0.5em] shadow-2xl transition-all hover:scale-[1.02] active:scale-95 border border-white/10 hover:shadow-[0_0_50px_rgba(59,130,246,0.4)]">PROGRAMI OLUŞTUR</button>
+                     <button onClick={handleRunAI} className="w-full py-4 bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold text-xs uppercase tracking-widest shadow-lg hover:shadow-blue-500/50 transition-all active:scale-[0.98] rounded-lg border border-white/10 flex items-center justify-center gap-3">
+                        <i className="fa-solid fa-wand-magic-sparkles"></i>
+                        PROGRAMI OLUŞTUR
+                     </button>
                   </div>
                )}
             </div>
@@ -351,7 +354,10 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
                   </table>
                </div>
                <div className="p-5 bg-black/80 border-t border-[#354a5f] shrink-0 flex justify-center">
-                  <button onClick={handleFinalApprove} className="px-24 py-6 bg-[#3b82f6] text-white font-black text-[14px] uppercase tracking-[0.4em] shadow-[0_0_50px_rgba(59,130,246,0.4)] hover:brightness-110 active:scale-95 transition-all rounded-sm border border-white/10">KUSURSUZ_PLANI_MÜHÜRLLE</button>
+                  <button onClick={handleFinalApprove} className="px-12 py-4 bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold text-xs uppercase tracking-widest shadow-lg hover:shadow-blue-500/50 transition-all rounded-lg border border-white/10 flex items-center gap-3 active:scale-[0.98]">
+                     <i className="fa-solid fa-check-double"></i>
+                     KUSURSUZ_PLANI_MÜHÜRLLE
+                  </button>
                </div>
             </div>
          )}
