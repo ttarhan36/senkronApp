@@ -26,6 +26,12 @@ const App: React.FC = () => {
   });
 
   const authProcessingRef = useRef(false);
+  const sessionRef = useRef(session);
+
+  // sessionRef'i güncel tut
+  useEffect(() => {
+    sessionRef.current = session;
+  }, [session]);
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, authSession) => {
@@ -41,7 +47,7 @@ const App: React.FC = () => {
       if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') && authSession?.user) {
         // Zaten bir session varsa veya işlem devam ediyorsa, tekrar çalıştırma
         const existingSession = localStorage.getItem('senkron_session');
-        if (existingSession && session) return;
+        if (existingSession && sessionRef.current) return;
         if (authProcessingRef.current) return;
         authProcessingRef.current = true;
 
@@ -136,7 +142,7 @@ const App: React.FC = () => {
     return () => {
       authListener.subscription.unsubscribe();
     };
-  }, [session]);
+  }, []); // Artık session'a bağımlı değil — stale closure sorunu çözüldü
 
 
   const [activeModule, setActiveModule] = useState<ModuleType>(
