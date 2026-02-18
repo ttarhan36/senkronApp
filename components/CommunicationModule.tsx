@@ -197,18 +197,7 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
   return (
     <div className="h-full flex flex-col space-y-4 animate-slide-up px-1 overflow-hidden" onClick={() => setActiveMenuId(null)}>
       {/* HEADER ACTIONS */}
-      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center bg-[#0d141b] border border-white/5 p-2 sm:p-3 shrink-0 rounded-sm shadow-xl gap-3">
-        <div className="flex bg-black/40 p-1 gap-1 overflow-x-auto no-scrollbar mask-fade-right">
-          {['ALL', ...Object.values(CommsType)].map(t => (
-            <button
-              key={t}
-              onClick={(e) => { e.stopPropagation(); setFilterType(t as any); }}
-              className={`px-3 sm:px-4 py-1.5 text-[8px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${filterType === t ? 'bg-[#3b82f6] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}
-            >
-              {t === 'ALL' ? 'TÜMÜ' : t}
-            </button>
-          ))}
-        </div>
+      <div className="flex flex-col sm:flex-row justify-end items-stretch sm:items-center bg-[#0d141b] border border-white/5 p-2 sm:p-3 shrink-0 rounded-sm shadow-xl gap-3">
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -256,17 +245,17 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
                   <div className="flex flex-col min-w-0 flex-1 pr-4">
                     <div className="flex items-center gap-3">
                       <i className="fa-solid fa-users text-[12px]" style={{ color: audienceColor }}></i>
-                      <span className="text-[14px] font-black text-white uppercase tracking-tighter group-hover:text-[#3b82f6] truncate">{item.title}</span>
-                      <span className="text-[6px] font-black px-1.5 py-0.5 rounded-sm border uppercase" style={{ borderColor: `${audienceColor}40`, color: audienceColor, backgroundColor: `${audienceColor}10` }}>
-                        {getAudienceLabel(item.audience)}
-                      </span>
+                      <span className="text-[13px] font-medium text-white/80 uppercase tracking-tighter group-hover:text-[#3b82f6] truncate">{item.title}</span>
                     </div>
                     <div className="flex wrap items-center gap-x-4 gap-y-2 mt-2">
                       <span className="text-[7px] font-bold text-slate-500 uppercase tracking-widest">{new Date(item.timestamp).toLocaleString('tr-TR')}</span>
                       <div className="flex items-center gap-1.5 bg-black/40 px-2 py-0.5 border border-white/5 rounded-sm">
                         <span className="text-[6px] font-black text-slate-500 uppercase tracking-tighter">SLOT:</span>
-                        <span className="text-[7px] font-black text-[#fbbf24] uppercase tracking-widest">{item.type}</span>
+                        <span className="text-[7px] font-black text-[#fbbf24] uppercase tracking-widest">DUYURU</span>
                       </div>
+                      <span className="text-[6px] font-black px-1.5 py-0.5 rounded-sm border uppercase" style={{ borderColor: `${audienceColor}40`, color: audienceColor, backgroundColor: `${audienceColor}10` }}>
+                        {getAudienceLabel(item.audience)}
+                      </span>
                     </div>
                   </div>
 
@@ -343,13 +332,9 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
                   onChange={e => setFormData({ ...formData, audience: e.target.value })}
                   className="w-full bg-black border border-white/10 p-4 text-[12px] font-black text-white outline-none focus:border-[#3b82f6] shadow-inner appearance-none"
                 >
-                  {userRole === UserRole.ADMIN && (
-                    <>
-                      <option value="ALL">TÜM OKUL (HERKES)</option>
-                      <option value="TEACHERS">SADECE TÜM ÖĞRETMENLER</option>
-                      <option value="ALL_CLASSES">SADECE TÜM SINIFLAR / ÖĞRENCİLER</option>
-                    </>
-                  )}
+                  <option value="ALL">TÜM OKUL (HERKES)</option>
+                  <option value="TEACHERS">SADECE TÜM ÖĞRETMENLER</option>
+                  <option value="ALL_CLASSES">SADECE TÜM SINIFLAR / ÖĞRENCİLER</option>
 
                   {userRole === UserRole.TEACHER && (
                     <option value="MY_CLASSES">TÜM ŞUBELERİM (HEPSİ)</option>
@@ -386,26 +371,14 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">MEVKİ_ETİKETİ (OPSİYONEL)</label>
-                  <input
-                    placeholder="Örn: Konferans Salonu"
-                    className="w-full bg-black border border-white/10 p-3 text-[11px] font-black text-slate-300 outline-none focus:border-[#3b82f6] shadow-inner"
-                    value={formData.location}
-                    onChange={e => setFormData({ ...formData, location: e.target.value })}
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">İLAN_TÜRÜ</label>
-                  <select
-                    value={formData.type}
-                    onChange={e => setFormData({ ...formData, type: e.target.value as CommsType })}
-                    className="w-full bg-black border border-white/10 p-3 text-[11px] font-black text-white outline-none focus:border-[#3b82f6] shadow-inner"
-                  >
-                    {Object.values(CommsType).map(t => <option key={t} value={t}>{t}</option>)}
-                  </select>
-                </div>
+              <div className="space-y-1.5">
+                <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">MEVKİ_ETİKETİ (OPSİYONEL)</label>
+                <input
+                  placeholder="Örn: Konferans Salonu"
+                  className="w-full bg-black border border-white/10 p-3 text-[11px] font-black text-slate-300 outline-none focus:border-[#3b82f6] shadow-inner"
+                  value={formData.location}
+                  onChange={e => setFormData({ ...formData, location: e.target.value })}
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-4">

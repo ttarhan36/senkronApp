@@ -128,7 +128,7 @@ export interface Course {
   capacity: number;
   enrolledCount: number;
   schedule: string;
-  category: 'AKADEMİK' | 'SANAT' | 'SPOR' | 'TEKNOLOJİ';
+  category: string;
   targetGrades?: number[];
   location?: string;
 }
