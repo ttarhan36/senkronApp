@@ -16,7 +16,7 @@ const CredentialsModule: React.FC<CredentialsModuleProps> = ({ onSuccess, school
     const [loading, setLoading] = useState(true);
 
     const [editingUser, setEditingUser] = useState<any>(null);
-    const [editForm, setEditForm] = useState({ username: '', password: '' });
+    const [editForm, setEditForm] = useState({ username: '', password: '', is_blocked: false });
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [saving, setSaving] = useState(false);
 
@@ -40,13 +40,21 @@ const CredentialsModule: React.FC<CredentialsModuleProps> = ({ onSuccess, school
 
     const handleOpenEdit = (user: any) => {
         setEditingUser(user);
-        setEditForm({ username: user.username || '', password: user.password || '' });
+        setEditForm({
+            username: user.username || '',
+            password: user.password || '',
+            is_blocked: user.is_blocked || false
+        });
         setIsEditModalOpen(true);
     };
 
     const handleShareWhatsapp = (user: any) => {
         if (!user.username || !user.password) {
             alert("PAYLAŞIM İÇİN KULLANICI ADI VE ŞİFRE GEREKLİ");
+            return;
+        }
+        if (user.is_blocked) {
+            alert("BU KULLANICI BLOKLANMIŞTIR. PAYLAŞILAMAZ.");
             return;
         }
         const url = `${window.location.origin}/?action=qrlimit&u=${user.username}&p=${user.password}&s=${schoolId}`;
@@ -87,7 +95,12 @@ const CredentialsModule: React.FC<CredentialsModuleProps> = ({ onSuccess, school
 
             const { error } = await supabase
                 .from(currentTable)
-                .update({ username: trimmedUsername, password: newPassword, is_first_login: false })
+                .update({
+                    username: trimmedUsername,
+                    password: newPassword,
+                    is_first_login: false,
+                    is_blocked: editForm.is_blocked
+                })
                 .eq(isTeacher ? 'id' : 'number', isTeacher ? editingUser.id : editingUser.number);
 
             if (error) throw error;
@@ -166,14 +179,21 @@ const CredentialsModule: React.FC<CredentialsModuleProps> = ({ onSuccess, school
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                         {filteredList.map((user: any, index) => (
-                            <div key={user.id || user.number} className="group relative bg-[#1e293b]/60 hover:bg-[#1e293b] border border-white/5 hover:border-[#3b82f6]/50 p-4 transition-all duration-200">
+                            <div key={user.id || user.number} className={`group relative bg-[#1e293b]/60 hover:bg-[#1e293b] border border-white/5 hover:border-[#3b82f6]/50 p-4 transition-all duration-200 ${user.is_blocked ? 'opacity-50 grayscale hover:grayscale-0' : ''}`}>
+
+                                {user.is_blocked && (
+                                    <div className="absolute top-2 right-2 z-10">
+                                        <i className="fa-solid fa-lock text-red-500 text-xs"></i>
+                                    </div>
+                                )}
+
                                 <div className="flex items-center gap-4">
                                     {/* Status Dot (No Avatar) */}
-                                    <div className={`w-2 h-2 shrink-0 ${user.username ? 'bg-[#3b82f6] shadow-[0_0_8px_#3b82f6]' : 'bg-red-500 animate-pulse'}`}></div>
+                                    <div className={`w-2 h-2 shrink-0 ${user.is_blocked ? 'bg-red-500' : (user.username ? 'bg-[#3b82f6] shadow-[0_0_8px_#3b82f6]' : 'bg-red-500 animate-pulse')}`}></div>
 
                                     {/* Info */}
                                     <div className="flex-1 min-w-0">
-                                        <h3 className="text-xs font-black text-white truncate leading-tight mb-1 group-hover:text-[#3b82f6] transition-colors uppercase tracking-wide">
+                                        <h3 className={`text-xs font-black truncate leading-tight mb-1 transition-colors uppercase tracking-wide ${user.is_blocked ? 'text-red-400 line-through' : 'text-white group-hover:text-[#3b82f6]'}`}>
                                             {user.name}
                                         </h3>
 
@@ -183,20 +203,22 @@ const CredentialsModule: React.FC<CredentialsModuleProps> = ({ onSuccess, school
                                             </span>
                                             <span className="text-[9px] text-slate-600">|</span>
                                             <span className="text-[9px] font-mono tracking-wider text-amber-400 truncate">
-                                                {user.password || 'NO_PASS'}
+                                                {user.is_blocked ? 'ENGEL' : (user.password || 'NO_PASS')}
                                             </span>
                                         </div>
                                     </div>
 
                                     {/* Actions */}
                                     <div className="flex justify-end gap-1 shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
-                                        <button
-                                            onClick={() => handleShareWhatsapp(user)}
-                                            className="w-8 h-8 flex items-center justify-center bg-green-500/10 text-green-500 border border-green-500/20 hover:bg-green-500 hover:text-white transition-all"
-                                            title="WhatsApp"
-                                        >
-                                            <i className="fa-brands fa-whatsapp text-xs"></i>
-                                        </button>
+                                        {!user.is_blocked && (
+                                            <button
+                                                onClick={() => handleShareWhatsapp(user)}
+                                                className="w-8 h-8 flex items-center justify-center bg-green-500/10 text-green-500 border border-green-500/20 hover:bg-green-500 hover:text-white transition-all"
+                                                title="WhatsApp"
+                                            >
+                                                <i className="fa-brands fa-whatsapp text-xs"></i>
+                                            </button>
+                                        )}
                                         <button
                                             onClick={() => handleOpenEdit(user)}
                                             className="w-8 h-8 flex items-center justify-center bg-[#3b82f6]/10 text-[#3b82f6] border border-[#3b82f6]/20 hover:bg-[#3b82f6] hover:text-white transition-all"
@@ -225,19 +247,38 @@ const CredentialsModule: React.FC<CredentialsModuleProps> = ({ onSuccess, school
                             <div>
                                 <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest block mb-1">KULLANICI ADI</label>
                                 <input
-                                    className="w-full h-10 bg-black border border-white/10 px-3 text-xs font-bold text-white outline-none focus:border-[#3b82f6] transition-all uppercase"
+                                    className="w-full h-10 bg-black border border-white/10 px-3 text-xs font-bold text-white outline-none focus:border-[#3b82f6] transition-all uppercase disabled:opacity-50"
                                     value={editForm.username}
                                     onChange={e => setEditForm({ ...editForm, username: e.target.value })}
+                                    disabled={editForm.is_blocked}
                                 />
                             </div>
                             <div>
                                 <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest block mb-1">ŞİFRE</label>
                                 <input
-                                    className="w-full h-10 bg-black border border-white/10 px-3 text-xs font-bold text-[#fbbf24] font-mono outline-none focus:border-[#fbbf24] transition-all"
+                                    className="w-full h-10 bg-black border border-white/10 px-3 text-xs font-bold text-[#fbbf24] font-mono outline-none focus:border-[#fbbf24] transition-all disabled:opacity-50"
                                     value={editForm.password}
                                     onChange={e => setEditForm({ ...editForm, password: e.target.value })}
+                                    disabled={editForm.is_blocked}
                                 />
                             </div>
+
+                            {/* Blocking Toggle */}
+                            <div className="flex items-center justify-between bg-red-500/10 border border-red-500/20 p-3">
+                                <span className="text-[9px] font-black text-red-500 uppercase tracking-widest">HESABI ENGELLE (BLOKLA)</span>
+                                <label className="relative inline-flex items-center cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        className="sr-only peer"
+                                        checked={editForm.is_blocked}
+                                        onChange={e => setEditForm({ ...editForm, is_blocked: e.target.checked })}
+                                    />
+                                    <div className="w-9 h-5 bg-slate-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
+                                </label>
+                            </div>
+                            <p className="text-[8px] text-slate-500 italic mt-1">
+                                * Bloklanan kullanıcılar doğru şifre girseler bile sisteme erişemezler.
+                            </p>
                         </div>
 
                         <div className="flex gap-2 mt-8 pt-4 border-t border-white/5">

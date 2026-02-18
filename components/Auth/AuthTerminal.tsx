@@ -55,6 +55,10 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
               throw new Error("QR KOD GEÇERSİZ VEYA SÜRESİ DOLMUŞ");
             }
 
+            if (teacher.is_blocked) {
+              throw new Error("MOTORDAN UYARI: BU HESAP ASKIYA ALINMIŞTIR. YÖNETİCİNİZLE GÖRÜŞÜNÜZ.");
+            }
+
             onAuthSuccess({
               role: UserRole.TEACHER,
               id: teacher.id,
@@ -224,6 +228,10 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
         } else {
           throw new Error("KULLANICI BULUNAMADI VEYA ŞİFRE HATALI");
         }
+
+        if (student && student.is_blocked) {
+          throw new Error("MOTORDAN UYARI: BU HESAP ASKIYA ALINMIŞTIR. YÖNETİCİNİZLE GÖRÜŞÜNÜZ.");
+        }
       }
 
       onAuthSuccess({
@@ -287,6 +295,10 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
           throw new Error("AYNI KULLANICI ADI BAŞKA OKULDA DA VAR. LÜTFEN OKUL KODU GİRİNİZ.");
         } else {
           throw new Error("KULLANICI ADI VEYA ŞİFRE HATALI");
+        }
+
+        if (teacher && teacher.is_blocked) {
+          throw new Error("MOTORDAN UYARI: BU HESAP ASKIYA ALINMIŞTIR. YÖNETİCİNİZLE GÖRÜŞÜNÜZ.");
         }
       }
 

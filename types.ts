@@ -161,6 +161,7 @@ export interface Announcement {
 export interface Student {
   id: string;
   number: string;
+  is_blocked?: boolean;
   name: string;
   gender: Gender;
   grades: GradeRecord[];
@@ -230,6 +231,7 @@ export interface Teacher {
   gender?: Gender;
   branch: string;
   branchShort: string;
+  is_blocked?: boolean;
   branches?: string[];
   branchShorts?: string[];
   lessonCount: number;
