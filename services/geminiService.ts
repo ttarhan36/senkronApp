@@ -65,23 +65,26 @@ export const generateSchedule = async (data: any) => {
 
     SERT KISITLAR (ASLA İHLAL EDİLEMEZ - HARD CONSTRAINTS):
     
-    1. BLOK DERS KURALI (KRİTİK & KESİN):
-       - MAKSİMUM ARDIŞIK DERS: Bir ders aynı gün içinde arka arkaya EN FAZLA 2 SAAT olabilir.
-       - YASAK: Aynı dersi 3 saat peş peşe koymak (Örn: 1, 2, 3) KESİNLİKLE YASAKTIR.
-       - Haftalık saati 2 olan dersler: 2 saat BLOK.
-       - Haftalık saati 3 olan dersler: 2+1 şeklinde (Farklı zamanlarda).
-       - Haftalık saati 4 olan dersler: 2+2 şeklinde (İki ayrı blok).
-       - Haftalık saati 5 ve üzeri dersler: 2+2+1 veya 2+2+2 şeklinde dağıtılmalıdır.
-       - Blok dersler (2 saatlik) aynı gün içinde ardışık saatlere (n ve n+1) denk gelmelidir.
+    1. 2'Lİ BLOK MANTIĞI VE GÜNLÜK LİMİT (HAYATİ & İHLAL EDİLEMEZ):
+       - GÜNLÜK MAKSİMUM KOTA: Bir dersin bir günde alabileceği toplam saat EN FAZLA 2'dir. (İSTİSNA YOK).
+       - YASAK: Aynı dersten, aynı günde 3 veya 4 saat olması (Arka arkaya veya aralıklı) KESİNLİKLE YASAKTIR.
+       - DAĞITIM ŞABLONU:
+         * Haftalık 2 saat -> 1 Blok (2 saat) [1 GÜN]
+         * Haftalık 3 saat -> 1 Blok + 1 Tek (2+1) [2 FARKLI GÜN]
+         * Haftalık 4 saat -> 2 Blok (2+2) [2 FARKLI GÜN] -> ASLA AYNI GÜNE 2+2 KOYMA.
+         * Haftalık 5 saat -> 2 Blok + 1 Tek (2+2+1) [3 FARKLI GÜN]
+         * Haftalık 6 saat -> 3 Blok (2+2+2) [3 FARKLI GÜN]
+       - Blok dersler (2 saatlik) mutlaka ardışık saatlere (n ve n+1) denk gelmelidir.
 
     2. ÖĞRETMEN ÇAKIŞMASI (SIFIR TOLERANS):
        - Bir öğretmen (Name/ID) aynı GÜN ve aynı SAATTE (ders_saati) birden fazla sınıfa ders veremez.
        - Her atama öncesi: "Bu öğretmen, bu gün ve saatte başka bir sınıfa atandı mı?" kontrolü yap. Atandıysa o saati pas geç.
 
-    3. MİKTAR DOĞRULAMASI:
-       - Bir ders için 'hours: 2' denmişse, çıktı listesinde o ders ve öğretmen için tam olarak 2 kayıt olmalıdır. 1 veya 3 olamaz.
-       - Bir sınıfın toplam atanmış saati 33 ise, o sınıf için en fazla 33 schedule entry üretilmelidir. 34 veya 35 OLAMAZ.
-       - ASLA assignments'ta olmayan ders veya öğretmen ekleme. Sadece verilen 'assignments' listesindeki ders-öğretmen ikililerini kullan.
+    3. EKSİKSİZ MİKTAR DOĞRULAMASI (KIRMIZI ÇİZGİ):
+       - HEDEF: Her dersin 'hours' değeri kadar kayıt oluşturmak ZORUNDASIN. (Örn: Matematik 5 saat ise, 5 tane kayıt olmalı. 4 olursa BAŞARISIZsin).
+       - ASLA EKSİK BIRAKMA: Zorlu kombinasyon olsa bile, bir şekilde boşluk bulup tüm dersleri yerleştir.
+       - FAZLA DA OLMAZ: Belirtilen saatten fazla ders koyma.
+       - Sadece verilen 'assignments' listesini kullan. (Dışarıdan ders uydurma).
 
     4. FORMAT VE KODLAR (HAYATİ ÖNEM TAŞIR):
        - Günler: "PZT", "SAL", "ÇAR", "PER", "CUM".
@@ -92,9 +95,13 @@ export const generateSchedule = async (data: any) => {
 
     ALGORİTMA ADIMLARI (CHAIN OF THOUGHT):
     Adım 1: Önce tüm sınıfların BLOK derslerini (2, 4, 5 saatlikler) öğretmen çakışması olmayacak şekilde şablona yerleştir.
-    KRİTİK KURAL: Bir dersi bir güne koyarken sayacı kontrol et. Eğer o gün o dersten 2 saat koyduysan, 3. saati O GÜNE KOYMA. Başka güne geç.
+    KRİTİK KURAL: Bir dersi bir güne koyarken sayacı kontrol et. Eğer o gün o dersten 2 saat (1 blok) koyduysan, o gün o ders için KOTA DOLMUŞTUR. Kesinlikle o güne daha fazla o dersten koyma. Başka güne geç.
     Adım 2: Kalan TEK saatlik dersleri (1 saatlik veya 3'ten artan 1'ler) kalan boşluklara, öğretmenlerin boş saatlerine göre yerleştir.
-    Adım 3: Sonuç listesindeki toplam eleman sayısını say. Eğer ${totalAssignedHours} değerinden azsa, eksik dersleri bul ve boş yerlere (Gerekirse kural esneterek ama çakışma yaratmadan) ekle.
+    Adım 3 (SON KONTROL & ACİL TAMAMLAMA):
+    - Üretilen toplam ders sayısını kontrol et. HEDEF: ${totalAssignedHours}.
+    - Eğer eksik varsa: Hangi sınıfın hangi dersi eksik? Bul ve o sınıfın BOŞ saatlerine (Öğretmen müsaitse) yerleştir.
+    - Kriz Durumu: Eğer yer yoksa, "Günde Max 2 Saat" kuralını ihlal etmen gerekse bile EKSİK DERSİ KOY. (Tek kural: Öğretmen çakışması olmasın).
+    - Hedef sayıya ULAŞMADAN ÇIKTI ÜRETME.
 
     ÇIKTI: Sadece 'schedule' dizisi içeren geçerli bir JSON dön. Yorum yazma.`;
 

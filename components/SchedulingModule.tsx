@@ -52,17 +52,16 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
             if (!saving) setElapsedTime(diff);
 
             // Dinamik İlerleme Mantığı (2-4 dakikalık işlem süresine göre optimize edildi)
-            setProgress(prev => {
-               // İlk 15 saniye: Hızlı (%0 -> %30)
-               if (diff < 15000) return prev + 0.5;
-               // 15-45 saniye: Orta (%30 -> %60)
-               if (diff < 45000) return prev + 0.15;
-               // 45-120 saniye: Yavaş (%60 -> %85)
-               if (diff < 120000) return prev + 0.05;
-               // 120 saniye sonrası: Çok Yavaş (%85 -> %99)
-               if (prev < 99) return prev + 0.01;
-               return prev;
-            });
+            // Zamana dayalı kesin ilerleme hesaplaması (Throttling önlemi)
+            const sec = diff / 1000;
+            let targetProg = 0;
+
+            if (sec < 15) targetProg = (sec / 15) * 30; // 0-15s -> %30
+            else if (sec < 45) targetProg = 30 + ((sec - 15) / 30) * 30; // 15-45s -> %60
+            else if (sec < 120) targetProg = 60 + ((sec - 45) / 75) * 25; // 45-120s -> %85
+            else targetProg = 85 + (1 - Math.exp(-(sec - 120) / 60)) * 14; // 120s+ -> %99'a asimptotik yaklaşım
+
+            setProgress(Math.min(99, targetProg));
 
             if (saving) {
                setStatusMessage('PROGRAM BULUT DNAYA MÜHÜRLENİYOR...');
