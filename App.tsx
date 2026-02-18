@@ -15,6 +15,7 @@ import GuardDutyModule from './components/GuardDutyModule';
 import CommunicationModule from './components/CommunicationModule';
 import CoursesModule from './components/CoursesModule';
 import AuthTerminal from './components/Auth/AuthTerminal';
+import CredentialsModule from './components/CredentialsModule';
 import ForcePasswordChangeModal from './components/ForcePasswordChangeModal';
 import { supabase } from './services/supabaseClient';
 import { standardizeBranchCode, standardizeDayCode } from './utils';
@@ -771,6 +772,7 @@ const App: React.FC = () => {
       case ModuleType.CLASSES: return <ClassesModule classes={classes} setClasses={setClasses} allLessons={lessons} setLessons={setLessons} allTeachers={teachers} setTeachers={setTeachers} schedule={finalSchedule} setSchedule={setFinalSchedule} schoolConfig={schoolConfig} courses={courses} setCourses={setCourses} userRole={session?.role} userId={session?.id} onDeleteStudentDB={(id) => deleteFromSupabase('students', id)} onDeleteClassDB={(id) => deleteFromSupabase('classes', id)} {...commonProps} />;
       case ModuleType.COURSES: return <CoursesModule courses={courses} setCourses={setCourses} teachers={teachers} announcements={announcements} setAnnouncements={setAnnouncements} classes={classes} {...commonProps} />;
       case ModuleType.LESSONS: return <LessonsModule lessons={lessons} setLessons={setLessons} allTeachers={teachers} setTeachers={setTeachers} allClasses={classes} setClasses={setClasses} schedule={finalSchedule} courses={courses} setCourses={setCourses} {...commonProps} />;
+      case ModuleType.CREDENTIALS: return <CredentialsModule onSuccess={triggerSuccess} />;
       case ModuleType.SCHEDULING: return <SchedulingModule teachers={teachers} classes={classes} lessons={lessons} onApprove={async (s) => { setFinalSchedule(s); triggerSuccess("MÜHÜRLENDİ"); setActiveModule(ModuleType.CLASS_SCHEDULES); }} schoolConfig={schoolConfig} />;
       case ModuleType.GUARD_DUTY: return <GuardDutyModule teachers={teachers} setTeachers={setTeachers} schedule={finalSchedule} schoolConfig={schoolConfig} currentUserId={session?.id} {...commonProps} />;
       case ModuleType.CLASS_SCHEDULES: return <ClassSchedulesModule schedule={finalSchedule} setSchedule={setFinalSchedule} onDeleteScheduleEntry={deleteScheduleFromSupabase} classes={classes} lessons={lessons} teachers={teachers} schoolConfig={schoolConfig} editMode={isAdmin && editMode} onSuccess={triggerSuccess} userRole={session?.role} />;

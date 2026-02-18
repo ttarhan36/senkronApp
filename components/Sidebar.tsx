@@ -59,6 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeModule, setActiveModule, userRo
       { id: ModuleType.CLASS_SCHEDULES, label: 'PLANLAR', icon: 'fa-calendar-alt', roles: [UserRole.ADMIN] },
       { id: ModuleType.LESSONS, label: 'ENVANTER', icon: 'fa-layer-group', roles: [UserRole.ADMIN] },
       { id: ModuleType.SCHEDULING, label: 'MOTOR', icon: 'fa-bolt', roles: [UserRole.ADMIN] },
+      { id: ModuleType.CREDENTIALS, label: 'ŞİFRE YÖNETİMİ', icon: 'fa-key', roles: [UserRole.ADMIN] },
       { id: ModuleType.SETTINGS, label: 'AYARLAR', icon: 'fa-gear', roles: [UserRole.ADMIN] },
     ];
   }
