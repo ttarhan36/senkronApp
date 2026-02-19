@@ -131,7 +131,9 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
    // ÖĞRENCİ DETAYLARI
    const [viewingStudentAttendance, setViewingStudentAttendance] = useState<StudentWithContext | null>(null);
-   const [studentModalTab, setStudentModalTab] = useState<'ATTENDANCE' | 'GRADES'>('ATTENDANCE');
+   const [studentModalTab, setStudentModalTab] = useState<'ATTENDANCE' | 'GRADES' | 'OBSERVATIONS'>('ATTENDANCE');
+   const [observationText, setObservationText] = useState('');
+   const [isSavingObservation, setIsSavingObservation] = useState(false);
    const [attendanceMonth, setAttendanceMonth] = useState(new Date());
    const [selectedDayCorrection, setSelectedDayCorrection] = useState<{ date: string, records: AttendanceRecord[] } | null>(null);
    const [proofImageToView, setProofImageToView] = useState<string | null>(null);
@@ -1419,11 +1421,13 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <div className="flex p-1 bg-black/40 border-b border-white/5 shrink-0">
                      <button onClick={() => setStudentModalTab('ATTENDANCE')} className={`flex-1 h-10 text-[9px] font-black uppercase tracking-widest transition-all ${studentModalTab === 'ATTENDANCE' ? 'bg-[#3b82f6] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>DEVAMSIZLIK</button>
                      <button onClick={() => setStudentModalTab('GRADES')} className={`flex-1 h-10 text-[9px] font-black uppercase tracking-widest transition-all ${studentModalTab === 'GRADES' ? 'bg-[#fbbf24] text-black shadow-lg' : 'text-slate-500 hover:text-white'}`}>NOTLAR & ANALİZ</button>
+                     <button onClick={() => setStudentModalTab('OBSERVATIONS')} className={`flex-1 h-10 text-[9px] font-black uppercase tracking-widest transition-all ${studentModalTab === 'OBSERVATIONS' ? 'bg-purple-500 text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>KANAAT & GÖZLEM</button>
                   </div>
 
                   <div className="flex-1 overflow-y-auto no-scrollbar p-4 bg-grid-hatched">
                      {studentModalTab === 'ATTENDANCE' && renderStudentAttendanceCalendar()}
                      {studentModalTab === 'GRADES' && renderStudentGrades()}
+                     {studentModalTab === 'OBSERVATIONS' && renderStudentObservations()}
                   </div>
                </div>
             </div>

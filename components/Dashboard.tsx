@@ -336,9 +336,9 @@ const Dashboard: React.FC<DashboardProps> = ({
                            </div>
                         </div>
                         <div className="bg-slate-900/60 border border-white/5 p-4 shadow-xl relative overflow-hidden rounded-sm flex flex-col h-[140px]">
-                           <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] block mb-3">İDARİ_NOT_DNA</span>
+                           <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] block mb-3">KANAAT_VE_GÖZLEM_DNA</span>
                            <div className="flex-1 overflow-y-auto no-scrollbar space-y-2">
-                              {(student.observations && student.observations.length > 0) ? student.observations.map(obs => (
+                              {(student.observations && student.observations.length > 0) ? student.observations.slice().reverse().map(obs => (
                                  <div key={obs.id} className="bg-black/20 p-2 border-l-2 border-[#3b82f6]">
                                     <p className="text-[10px] font-black text-white italic">"{obs.content}"</p>
                                     <div className="flex justify-between mt-1"><span className="text-[7px] font-black text-[#3b82f6]">{obs.teacherName}</span><span className="text-[6px] text-slate-600">{obs.date}</span></div>
