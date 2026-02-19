@@ -1261,12 +1261,23 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                               <button
                                  key={ctx.uniqueId}
                                  onClick={() => setSelectedContextTab(ctx.uniqueId)}
-                                 className={`px-4 py-2 border text-[9px] font-black uppercase tracking-widest whitespace-nowrap transition-all ${selectedContextTab === ctx.uniqueId ? 'bg-[#3b82f6] text-white border-[#3b82f6] shadow-lg' : 'bg-black/40 border-white/10 text-slate-500 hover:text-white'}`}
+                                 className={`px-3 py-2 border text-[9px] font-black uppercase tracking-widest whitespace-nowrap transition-all ${selectedContextTab === ctx.uniqueId ? 'bg-[#3b82f6] text-white border-[#3b82f6] shadow-lg' : 'bg-black/40 border-white/10 text-slate-500 hover:text-white'}`}
                               >
-                                 {ctx.className} - {standardizeBranchCode(ctx.lessonName)}
+                                 {ctx.className} - {ctx.lessonName}
                               </button>
                            ))}
                         </div>
+
+                        {/* STUDENT LIST HEADER WITH GENDER STATS */}
+                        {studentsInSelectedContext.length > 0 && (
+                           <div className="flex items-center gap-4 px-2 mb-2">
+                              <span className="text-[10px] font-black text-white uppercase tracking-[0.4em]">ÖĞRENCİ LİSTESİ ({studentsInSelectedContext.length})</span>
+                              <div className="flex items-center gap-2">
+                                 <span className="text-[9px] font-bold text-pink-500 flex items-center gap-1 bg-pink-500/5 px-1.5 py-0.5 rounded-sm border border-pink-500/20"><i className="fa-solid fa-venus text-[8px]"></i> {studentsInSelectedContext.filter(s => s.gender === Gender.FEMALE).length}</span>
+                                 <span className="text-[9px] font-bold text-blue-500 flex items-center gap-1 bg-blue-500/5 px-1.5 py-0.5 rounded-sm border border-blue-500/20"><i className="fa-solid fa-mars text-[8px]"></i> {studentsInSelectedContext.filter(s => s.gender === Gender.MALE).length}</span>
+                              </div>
+                           </div>
+                        )}
 
                         <div className="flex-1 overflow-y-auto no-scrollbar pb-24 bg-grid-hatched border-t border-white/5 pt-2">
                            {studentsInSelectedContext.length > 0 ? (
@@ -1279,18 +1290,24 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                        <div
                                           key={s.id}
                                           onClick={() => setViewingStudentAttendance(s)}
-                                          className="bg-[#1e293b]/80 border border-white/5 p-3 flex items-center justify-between hover:bg-slate-800 cursor-pointer group transition-all"
+                                          className="bg-[#1e293b]/80 border border-white/5 p-2 flex items-center justify-between hover:bg-slate-800 cursor-pointer group transition-all"
                                        >
                                           <div className="flex items-center gap-3 min-w-0">
-                                             <div className={`w-8 h-8 rounded-full flex items-center justify-center border font-black text-[10px] ${s.gender === Gender.FEMALE ? 'border-pink-500/30 text-pink-500 bg-pink-500/5' : 'border-blue-500/30 text-blue-500 bg-blue-500/5'}`}>{s.number}</div>
+                                             <div className={`w-8 h-8 rounded-sm flex items-center justify-center border font-black text-[10px] shrink-0 ${s.gender === Gender.FEMALE ? 'border-pink-500/30 text-pink-500 bg-pink-500/5' : 'border-blue-500/30 text-blue-500 bg-blue-500/5'}`}>
+                                                <div className="flex flex-col items-center leading-none gap-0.5">
+                                                   <span>{s.number}</span>
+                                                   <i className={`fa-solid ${s.gender === Gender.FEMALE ? 'fa-venus' : 'fa-mars'} text-[6px] opacity-50`}></i>
+                                                </div>
+                                             </div>
                                              <div className="flex flex-col min-w-0">
-                                                <span className="text-[11px] font-medium text-white/70 uppercase truncate">{s.name}</span>
-                                                <div className="flex items-center gap-2">
-                                                   <span className={`text-[8px] font-bold ${s.displayAbsent && s.displayAbsent > 0 ? 'text-red-500' : 'text-green-500'}`}>{s.displayAbsent || 0} DEVAMSIZ</span>
+                                                <span className="text-[11px] font-bold text-white uppercase truncate leading-tight">{s.name}</span>
+                                                <div className="flex items-center gap-2 mt-0.5">
+                                                   <span className="text-[8px] font-black text-[#fbbf24] bg-[#fbbf24]/10 px-1 border border-[#fbbf24]/20">{myCourseLoad.find(c => c.uniqueId === selectedContextTab)?.className || 'ŞUBE'}</span>
+                                                   <span className={`text-[8px] font-bold ${s.displayAbsent && s.displayAbsent > 0 ? 'text-red-500' : 'text-slate-500'}`}>{s.displayAbsent || 0} DEVAMSIZ</span>
                                                 </div>
                                              </div>
                                           </div>
-                                          <div className="text-right">
+                                          <div className="text-right pl-2">
                                              <span className={`text-[14px] font-black ${statusColor}`}>{avg || '--'}</span>
                                           </div>
                                        </div>
@@ -1390,7 +1407,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                            <h3 className="text-[14px] font-black text-white uppercase tracking-widest leading-none">{viewingStudentAttendance.name}</h3>
                            <div className="flex items-center gap-2 mt-1">
                               <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">NO: {viewingStudentAttendance.number}</span>
-                              <span className="text-[8px] font-black text-[#fbbf24] uppercase tracking-widest">ORT: {viewingStudentAttendance.displayGrade || '--'}</span>
+                              <span className="text-[8px] font-black text-[#fbbf24] uppercase tracking-widest truncate max-w-[150px]">ORT: {viewingStudentAttendance.displayGrade || '--'}</span>
                            </div>
                         </div>
                      </div>
@@ -1611,7 +1628,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
          {/* GRADE TERMINAL MODAL */}
          {/* GRADE TERMINAL MODAL */}
          {isGradeTerminalOpen && gradeTerminalTarget && (<div className="fixed inset-0 z-[9500] flex flex-col bg-[#0f172a] animate-in zoom-in-95 duration-200"> <div className="h-16 bg-[#162431] border-b border-white/10 flex items-center justify-between px-3 md:px-6 shrink-0 shadow-2xl z-10 gap-2">
-            <div className="flex items-center gap-3 shrink-0"> <div className="w-9 h-9 bg-[#fbbf24] text-black flex items-center justify-center font-black text-base shadow-[0_0_20px_rgba(251,191,36,0.4)] md:w-10 md:h-10 md:text-lg"> <i className="fa-solid fa-pen-nib"></i> </div> <div> <h2 className="text-[14px] md:text-[18px] font-black text-white uppercase tracking-tighter leading-none">{gradeTerminalTarget.className}</h2> <div className="flex items-center gap-2 mt-0.5 md:hidden"> <span className="text-[9px] font-bold text-pink-500 flex items-center gap-1"><i className="fa-solid fa-venus text-[8px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.FEMALE).length || 0}</span> <span className="text-[9px] font-bold text-blue-500 flex items-center gap-1"><i className="fa-solid fa-mars text-[8px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.MALE).length || 0}</span> </div> <span className="hidden md:block text-[9px] font-bold text-[#fbbf24] uppercase tracking-widest mt-1 truncate max-w-[200px]" title={gradeTerminalTarget.lessonName}>{gradeTerminalTarget.lessonName} NOT GİRİŞİ</span> </div> </div>
+            <div className="flex items-center gap-3 shrink-0"> <div className="w-9 h-9 bg-[#fbbf24] text-black flex items-center justify-center font-black text-base shadow-[0_0_20px_rgba(251,191,36,0.4)] md:w-10 md:h-10 md:text-lg"> <i className="fa-solid fa-pen-nib"></i> </div> <div> <h2 className="text-[14px] md:text-[18px] font-black text-white uppercase tracking-tighter leading-none">{gradeTerminalTarget.className}</h2> <div className="flex items-center gap-2 mt-0.5 md:hidden"> <span className="text-[9px] font-bold text-pink-500 flex items-center gap-1"><i className="fa-solid fa-venus text-[8px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.FEMALE).length || 0}</span> <span className="text-[9px] font-bold text-blue-500 flex items-center gap-1"><i className="fa-solid fa-mars text-[8px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.MALE).length || 0}</span> </div> <span className="hidden md:block text-[9px] font-bold text-[#fbbf24] uppercase tracking-widest mt-1 truncate max-w-[200px]" title={gradeTerminalTarget.lessonName}>{gradeTerminalTarget.lessonName}</span> </div> </div>
 
             {/* SEARCH BAR ADDED */}
             <div className="flex-1 max-w-[140px] md:max-w-xs mx-2 relative min-w-0">
@@ -1633,9 +1650,12 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   const currentMetadata = gradeRecord.metadata?.[fieldName as string];
 
                   return (<div key={student.id} className={`bg-[#1e293b] border p-2 flex items-center justify-between shadow-sm group hover:bg-slate-800 transition-all ${currentVal ? 'border-[#fbbf24]/40' : 'border-white/5'}`}> <div className="flex items-center gap-3 overflow-hidden">
-                     {/* COMPACT NUMBER - NO CIRCLE */}
-                     <div className="w-8 flex-shrink-0 text-right font-black text-[14px] text-slate-500 border-r border-white/10 pr-2 leading-none"> {student.number} </div>
-                     <div className="min-w-0"> <span className="text-[12px] font-bold text-white uppercase block truncate">{student.name}</span> <div className="flex items-center gap-2 mt-0.5"> <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">ORT: {gradeRecord.average || '-'}</span>
+                     {/* COMPACT NUMBER WITH GENDER INDICATOR */}
+                     <div className={`w-8 flex-shrink-0 text-right font-black text-[12px] border-r border-white/10 pr-2 leading-none flex flex-col items-end gap-0.5 ${student.gender === Gender.FEMALE ? 'text-pink-500' : 'text-blue-500'}`}>
+                        <span>{student.number}</span>
+                        <i className={`fa-solid ${student.gender === Gender.FEMALE ? 'fa-venus' : 'fa-mars'} text-[8px] opacity-60`}></i>
+                     </div>
+                     <div className="min-w-0 flex-1"> <span className="text-[11px] font-bold text-white uppercase block truncate leading-tight" title={student.name}>{student.name}</span> <div className="flex items-center gap-2 mt-0.5"> <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest leading-none">ORT: {gradeRecord.average || '-'}</span>
 
                         {currentMetadata && currentMetadata.proofUrl && (
                            <button
