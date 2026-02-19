@@ -1683,12 +1683,6 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <button onClick={() => { setIsGradeScannerOpen(true); setCapturedImage(null); }} className="px-6 h-10 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 border border-white/10">
                      <i className="fa-solid fa-camera"></i> Tara
                   </button>
-
-                  {/* GALLERY SELECT BUTTON */}
-                  <input type="file" ref={gradeImageInputRef} className="hidden" accept="image/*" onChange={handleGradeImageUpload} />
-                  <button onClick={() => gradeImageInputRef.current?.click()} className="px-6 h-10 bg-[#0ea5e9] text-white font-black text-[10px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 border border-white/10">
-                     <i className="fa-solid fa-image"></i> Galeriden Seç
-                  </button>
                </div>
             </div>
          </div>)}
