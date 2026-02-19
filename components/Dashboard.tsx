@@ -208,33 +208,41 @@ const Dashboard: React.FC<DashboardProps> = ({
       return [...studentData.class.lessonLogs]
          .sort((a, b) => b.timestamp - a.timestamp)
          .map(log => {
-            // Find lesson name from schedule based on date and hour
-            let lessonName = 'DERS';
-            try {
-               const [d, m, y] = log.date.split('.').map(Number);
-               const dateObj = new Date(y, m - 1, d);
-               const dayCode = daysMap[dateObj.getDay()];
+            // 1. Try to resolve via direct lessonId match (Most reliable)
+            let lessonName = lessons.find(l => l.id === log.lessonId || l.name === log.lessonName)?.name;
 
-               const scheduleEntry = schedule.find(s =>
-                  s.sinif === studentData.class.name &&
-                  standardizeDayCode(s.gun) === dayCode &&
-                  Number(s.ders_saati) === Number(log.hour)
-               );
+            // 2. Fallback to Schedule lookup if no direct ID match
+            if (!lessonName) {
+               try {
+                  const [d, m, y] = log.date.split('.').map(Number);
+                  const dateObj = new Date(y, m - 1, d);
+                  const dayCode = daysMap[dateObj.getDay()];
 
-               if (scheduleEntry) lessonName = scheduleEntry.ders;
-            } catch (e) {
-               console.error("Date parse error for log", e);
+                  const scheduleEntry = schedule.find(s =>
+                     s.sinif === studentData.class.name &&
+                     standardizeDayCode(s.gun) === dayCode &&
+                     Number(s.ders_saati) === Number(log.hour)
+                  );
+
+                  if (scheduleEntry) {
+                     // Even in schedule, it might be an ID, so resolve it
+                     const lObj = lessons.find(l => l.id === scheduleEntry.ders || l.name === scheduleEntry.ders);
+                     lessonName = lObj?.name || scheduleEntry.ders;
+                  }
+               } catch (e) {
+                  console.error("Date parse error for log", e);
+               }
             }
 
             const teacher = teachers.find(t => t.id === log.teacherId);
 
             return {
                ...log,
-               displayLesson: lessonName,
+               displayLesson: lessonName || log.lessonName || 'DERS',
                displayTeacher: teacher?.name || 'ÖĞRETMEN'
             };
          });
-   }, [studentData, schedule, teachers]);
+   }, [studentData, schedule, teachers, lessons]);
 
    // STUDENT UPCOMING EXAMS
    const studentUpcomingExams = useMemo(() => {
@@ -464,12 +472,12 @@ const Dashboard: React.FC<DashboardProps> = ({
                            {studentRecentLogs.length > 0 ? studentRecentLogs.map(log => (
                               <div key={log.id} className="bg-[#1e293b] border border-white/10 p-4 rounded-sm shadow-lg hover:border-[#3b82f6]/40 transition-all group">
                                  <div className="flex justify-between items-start mb-3 border-b border-white/5 pb-2">
-                                    <div className="flex flex-col">
+                                    <div className="flex flex-col min-w-0">
                                        <div className="flex items-center gap-2">
-                                          <div className="w-1 h-4" style={{ backgroundColor: getBranchColor(log.displayLesson) }}></div>
-                                          <span className="text-[13px] font-black text-white uppercase tracking-tight">{log.displayLesson}</span>
+                                          <div className="w-1 h-4 shrink-0" style={{ backgroundColor: getBranchColor(log.displayLesson) }}></div>
+                                          <span className="text-[11px] font-medium text-white/80 uppercase tracking-tight truncate" title={log.displayLesson}>{log.displayLesson}</span>
                                        </div>
-                                       <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-1 ml-3">{log.displayTeacher}</span>
+                                       <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-1 ml-3 truncate">{log.displayTeacher}</span>
                                     </div>
                                     <div className="flex flex-col items-end">
                                        <span className="text-[10px] font-black text-[#fbbf24] bg-[#fbbf24]/10 px-2 py-0.5 border border-[#fbbf24]/20 rounded-sm">{log.date}</span>
