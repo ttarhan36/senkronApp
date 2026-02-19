@@ -308,7 +308,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
       return (cls.students || []).map(s => {
          const g = s.grades?.find(gr => gr.lessonId === ctx.lessonId);
-         const attendance = s.attendanceHistory?.filter(h => h.lessonName === ctx.lessonName && h.status === 'ABSENT').length || 0;
+         const attendance = s.attendanceHistory?.filter(h => (h.lessonName === ctx.lessonName || h.lessonName === ctx.lessonId) && h.status === 'ABSENT').length || 0;
          return {
             ...s,
             displayGrade: g?.average,
