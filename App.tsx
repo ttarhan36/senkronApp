@@ -17,6 +17,7 @@ import CoursesModule from './components/CoursesModule';
 import AuthTerminal from './components/Auth/AuthTerminal';
 import CredentialsModule from './components/CredentialsModule';
 import ForcePasswordChangeModal from './components/ForcePasswordChangeModal';
+import AbsenceReportModule from './components/AbsenceReportModule';
 import { supabase } from './services/supabaseClient';
 import { standardizeBranchCode, standardizeDayCode } from './utils';
 
@@ -783,6 +784,7 @@ const App: React.FC = () => {
       case ModuleType.SCHEDULING: return <SchedulingModule teachers={teachers} classes={classes} lessons={lessons} onApprove={async (s) => { setFinalSchedule(s); triggerSuccess("MÜHÜRLENDİ"); setActiveModule(ModuleType.CLASS_SCHEDULES); }} schoolConfig={schoolConfig} />;
       case ModuleType.GUARD_DUTY: return <GuardDutyModule teachers={teachers} setTeachers={setTeachers} schedule={finalSchedule} schoolConfig={schoolConfig} currentUserId={session?.id} {...commonProps} />;
       case ModuleType.CLASS_SCHEDULES: return <ClassSchedulesModule schedule={finalSchedule} setSchedule={setFinalSchedule} onDeleteScheduleEntry={deleteScheduleFromSupabase} classes={classes} lessons={lessons} teachers={teachers} schoolConfig={schoolConfig} editMode={isAdmin && editMode} onSuccess={triggerSuccess} userRole={session?.role} />;
+      case ModuleType.ABSENCE_REPORT: return <AbsenceReportModule classes={classes} allLessons={lessons} />;
       case ModuleType.COMMUNICATION: return <CommunicationModule announcements={announcements} setAnnouncements={setAnnouncements} classes={classes} userRole={session.role} currentUserId={session.id} onDeleteAnnouncementDB={(id) => deleteFromSupabase('announcements', id)} {...commonProps} />;
       case ModuleType.SETTINGS: return <SettingsModule config={schoolConfig} setConfig={setSchoolConfig} theme={theme} setTheme={setTheme} teachers={teachers} setTeachers={setTeachers} lessons={lessons} setLessons={setLessons} classes={classes} setClasses={setClasses} announcements={announcements} setAnnouncements={setAnnouncements} courses={courses} setCourses={setCourses} schedule={finalSchedule} setSchedule={setFinalSchedule} onRestoreDNA={handleRestoreDNA} onImportData={handleImportStudents} onClearAll={handleHardReset} onSuccess={triggerSuccess} schoolId={session.schoolId} />;
       default: return <Dashboard teachers={teachers} classes={classes} setClasses={setClasses} lessons={lessons} schedule={finalSchedule} setActiveModule={setActiveModule} announcements={announcements} courses={courses} setCourses={setCourses} onSuccess={triggerSuccess} />;
