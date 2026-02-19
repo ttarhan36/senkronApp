@@ -411,14 +411,30 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
       return (cls.students || []).map(s => {
          const g = s.grades?.find(gr => gr.lessonId === ctx.lessonId);
-         const attendance = s.attendanceHistory?.filter(h => (h.lessonName === ctx.lessonName || h.lessonName === ctx.lessonId) && h.status === 'ABSENT').length || 0;
+
+         const attendance = s.attendanceHistory?.filter(h => {
+            if (h.status !== 'ABSENT') return false;
+
+            // 1. Doğrudan ID Eşleşmesi
+            if (h.lessonName === ctx.lessonId) return true;
+
+            // 2. İsim Eşleşmesi (Tam)
+            if (h.lessonName === ctx.lessonName) return true;
+
+            // 3. Lesson ID Çözümleme ve Eşleştirme
+            const lessonObj = allLessons.find(l => l.name === h.lessonName || l.id === h.lessonName);
+            if (lessonObj && lessonObj.id === ctx.lessonId) return true;
+
+            return false;
+         }).length || 0;
+
          return {
             ...s,
             displayGrade: g?.average,
             displayAbsent: attendance
          };
       });
-   }, [selectedContextTab, myCourseLoad, allClasses]);
+   }, [selectedContextTab, myCourseLoad, allClasses, allLessons]);
 
    const handleUpdateGradeTerminal = (classId: string, studentId: string, lessonId: string, field: string, value: number | undefined, metadata?: GradeMetadata) => {
       setClasses((prev: ClassSection[]) => prev.map(c => {
