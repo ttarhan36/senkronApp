@@ -435,7 +435,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                                     <div key={lesson} className="h-10 bg-[#1e293b] border border-white/5 px-3 flex items-center justify-between hover:bg-slate-800 transition-all rounded-sm">
                                        <div className="flex items-center gap-3 overflow-hidden">
                                           <div className="w-1 h-5 shrink-0" style={{ backgroundColor: getBranchColor(lesson) }}></div>
-                                          <span className="text-[11px] font-black text-white uppercase truncate">{lesson}</span>
+                                          <span className="text-[11px] font-bold text-white/90 uppercase truncate">{lesson}</span>
                                        </div>
                                        <span className="text-[12px] font-black text-red-500 shrink-0">{count} DERS</span>
                                     </div>
@@ -456,7 +456,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                               <div className="flex items-center gap-3 overflow-hidden">
                                  <div className={`w-6 h-6 rounded-sm flex items-center justify-center border shrink-0 ${rec.status === 'ABSENT' ? 'bg-red-600/20 border-red-500/40 text-red-500' : 'bg-green-600/20 border-green-500/40 text-green-500'}`}><i className={`fa-solid ${rec.status === 'ABSENT' ? 'fa-xmark' : 'fa-check'} text-[9px]`}></i></div>
                                  <div className="flex flex-col min-w-0">
-                                    <span className="text-[10px] font-black text-white uppercase truncate">{resolvedLessonName}</span>
+                                    <span className="text-[10px] font-bold text-white/90 uppercase truncate">{resolvedLessonName}</span>
                                     <span className="text-[6px] font-bold text-slate-500 uppercase">{rec.date} | {rec.period}. DERS</span>
                                  </div>
                               </div>
@@ -476,7 +476,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                            <div key={assign.lessonId} className="bg-[#1e293b] border border-white/5 p-2 flex flex-col gap-1 relative overflow-hidden group hover:bg-[#253447] transition-all">
                               <div className="absolute left-0 top-1 bottom-1 w-1" style={{ backgroundColor: getBranchColor(lesson?.branch || '') }}></div>
                               <div className="flex justify-between items-center pl-1.5 h-6">
-                                 <span className="text-[12px] font-bold text-white uppercase truncate">{lesson?.name}</span>
+                                 <span className="text-[12px] font-bold text-white/90 uppercase truncate">{lesson?.name}</span>
                                  <span className={`text-[14px] font-black ${(grade.average || 0) < 50 ? 'text-red-500' : 'text-[#fbbf24]'}`}>{grade.average || '--'}</span>
                               </div>
                               <div className="grid grid-cols-2 gap-1.5 pl-1.5">
