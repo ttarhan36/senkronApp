@@ -505,15 +505,19 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                </span>
                <div className="space-y-2 max-h-[200px] overflow-y-auto custom-scrollbar">
                   {(viewingStudentAttendance.attendanceHistory?.filter(h => h.status === 'ABSENT') || []).length > 0 ? (
-                     viewingStudentAttendance.attendanceHistory?.filter(h => h.status === 'ABSENT').slice().reverse().map(rec => (
-                        <div key={rec.id} className="bg-black/20 border-l-2 border-red-500 p-2 flex justify-between items-center group hover:bg-black/40 transition-all">
-                           <div>
-                              <span className="text-[10px] font-bold text-white block uppercase">{rec.lessonName}</span>
-                              <span className="text-[8px] text-slate-500 font-bold uppercase">{rec.date} | {rec.period}. DERS</span>
+                     viewingStudentAttendance.attendanceHistory?.filter(h => h.status === 'ABSENT').slice().reverse().map(rec => {
+                        const lessonObj = allLessons.find(l => l.id === rec.lessonName || l.name === rec.lessonName);
+                        const displayLessonName = lessonObj ? (lessonObj.name || rec.lessonName) : rec.lessonName;
+                        return (
+                           <div key={rec.id} className="bg-black/20 border-l-2 border-red-500 p-2 flex justify-between items-center group hover:bg-black/40 transition-all">
+                              <div>
+                                 <span className="text-[10px] font-bold text-white block uppercase">{standardizeBranchCode(displayLessonName)}</span>
+                                 <span className="text-[8px] text-slate-500 font-bold uppercase">{rec.date} | {rec.period}. DERS</span>
+                              </div>
+                              <span className="text-[8px] font-black text-slate-600 uppercase group-hover:text-slate-400 transition-colors">{rec.teacherName}</span>
                            </div>
-                           <span className="text-[8px] font-black text-slate-600 uppercase group-hover:text-slate-400 transition-colors">{rec.teacherName}</span>
-                        </div>
-                     ))
+                        );
+                     })
                   ) : (
                      <div className="text-center opacity-30 py-4 text-[9px] uppercase tracking-widest border border-dashed border-white/10">KAYIT YOK</div>
                   )}
