@@ -489,9 +489,16 @@ const App: React.FC = () => {
 
       // 2. AŞAMA: ARKA PLAN DETAY YÜKLEMESİ (Heavy Fetch)
       setIsBackgroundLoading(true);
-      const sResHeavy = await supabase.from('students')
+      let heavyQuery = supabase.from('students')
         .select('id, class_id, grades, attendance_history, observations')
         .eq('school_id', schoolId);
+
+      // OPTIMIZASYON: Eğer öğrenci ise sadece kendi verisini çeksin
+      if (session?.role === UserRole.STUDENT) {
+        heavyQuery = heavyQuery.eq('id', session.id);
+      }
+
+      const sResHeavy = await heavyQuery;
 
       if (sResHeavy.data && sResHeavy.data.length > 0) {
         const heavyDataMap: Record<string, any> = {};

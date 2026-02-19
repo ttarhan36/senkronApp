@@ -26,6 +26,8 @@ const Dashboard: React.FC<DashboardProps> = ({
    announcements, userRole, userName, userId, courses, setCourses, onSuccess, studentTab
 }) => {
    const [activeTab, setActiveTab] = useState<'GENEL' | 'DEVAMSIZLIK' | 'KONULAR' | 'SINAVLAR' | 'NOTLARIM' | 'KURSLAR'>('GENEL');
+   const [attendanceMonth, setAttendanceMonth] = useState(new Date());
+   const [selectedAbsenceDate, setSelectedAbsenceDate] = useState<string | null>(null);
    const [viewingStudentsId, setViewingStudentsId] = useState<string | null>(null);
    const [credentials, setCredentials] = useState({ username: '', password: '' });
 
@@ -38,6 +40,13 @@ const Dashboard: React.FC<DashboardProps> = ({
       });
       return found;
    }, [userRole, userId, classes]);
+
+   // DEBUG: Check if attendance history is present
+   useEffect(() => {
+      if (userRole === UserRole.STUDENT && studentData) {
+         console.log('DASHBOARD STUDENT DATA:', studentData.student.name, 'History:', studentData.student.attendanceHistory?.length, studentData.student.attendanceHistory);
+      }
+   }, [studentData]);
 
    useEffect(() => {
       if (studentData?.student) {
@@ -520,23 +529,109 @@ const Dashboard: React.FC<DashboardProps> = ({
                )}
 
                {activeTab === 'DEVAMSIZLIK' && (
-                  <div className="space-y-3 animate-in slide-in-from-bottom-2">
-                     {(student.attendanceHistory || []).length > 0 ? (student.attendanceHistory || []).slice().reverse().map(rec => {
-                        const resolvedLessonName = lessons.find(l => l.id === rec.lessonName)?.name || rec.lessonName;
-                        return (
-                           <div key={rec.id} className="bg-[#1e293b] border border-white/5 p-2 flex items-center justify-between hover:bg-slate-800 transition-all">
-                              <div className="flex items-center gap-3 overflow-hidden">
-                                 <div className={`w-6 h-6 rounded-sm flex items-center justify-center border shrink-0 ${rec.status === 'ABSENT' ? 'bg-red-600/20 border-red-500/40 text-red-500' : 'bg-green-600/20 border-green-500/40 text-green-500'}`}><i className={`fa-solid ${rec.status === 'ABSENT' ? 'fa-xmark' : 'fa-check'} text-[9px]`}></i></div>
-                                 <div className="flex flex-col min-w-0">
-                                    <span className="text-[10px] font-bold text-white/90 uppercase truncate">{resolvedLessonName}</span>
-                                    <span className="text-[6px] font-bold text-slate-500 uppercase">{rec.date} | {rec.period}. DERS</span>
+                  <div className="space-y-4 animate-in slide-in-from-bottom-2">
+                     {/* CALENDAR VIEW */}
+                     <div className="bg-[#1e293b] border border-white/5 p-4 rounded-sm">
+                        <div className="flex items-center justify-between mb-4 bg-black/20 p-2 rounded-sm border border-white/5">
+                           <button onClick={() => setAttendanceMonth(new Date(attendanceMonth.setMonth(attendanceMonth.getMonth() - 1)))} className="text-white w-8 h-8 flex items-center justify-center hover:bg-white/5 rounded-full transition-colors"><i className="fa-solid fa-chevron-left"></i></button>
+                           <span className="text-[12px] font-black text-[#fbbf24] uppercase tracking-widest">{attendanceMonth.toLocaleString('tr-TR', { month: 'long', year: 'numeric' })}</span>
+                           <button onClick={() => setAttendanceMonth(new Date(attendanceMonth.setMonth(attendanceMonth.getMonth() + 1)))} className="text-white w-8 h-8 flex items-center justify-center hover:bg-white/5 rounded-full transition-colors"><i className="fa-solid fa-chevron-right"></i></button>
+                        </div>
+
+                        <div className="grid grid-cols-7 gap-1 mb-1">
+                           {['PZT', 'SAL', 'ÇAR', 'PER', 'CUM', 'CTS', 'PAZ'].map(day => <div key={day} className="text-center text-[9px] font-black text-slate-500 py-1">{day}</div>)}
+                        </div>
+
+                        <div className="grid grid-cols-7 gap-1">
+                           {(() => {
+                              const daysInMonth = new Date(attendanceMonth.getFullYear(), attendanceMonth.getMonth() + 1, 0).getDate();
+                              const startDay = new Date(attendanceMonth.getFullYear(), attendanceMonth.getMonth(), 1).getDay() || 7; // 1 (Mon) - 7 (Sun)
+                              const days = [];
+
+                              // Empty slots
+                              for (let i = 1; i < startDay; i++) {
+                                 days.push(<div key={`empty-${i}`} className="h-10 sm:h-14 bg-black/20 border border-white/5 rounded-sm"></div>);
+                              }
+
+                              // Days
+                              for (let d = 1; d <= daysInMonth; d++) {
+                                 const dateStr = `${d < 10 ? '0' + d : d}.${(attendanceMonth.getMonth() + 1) < 10 ? '0' + (attendanceMonth.getMonth() + 1) : (attendanceMonth.getMonth() + 1)}.${attendanceMonth.getFullYear()}`;
+                                 const records = student.attendanceHistory?.filter(h => h.date === dateStr && h.status === 'ABSENT');
+                                 const hasAbsent = records && records.length > 0;
+                                 const isSelected = selectedAbsenceDate === dateStr;
+
+                                 days.push(
+                                    <div
+                                       key={d}
+                                       onClick={() => hasAbsent ? setSelectedAbsenceDate(isSelected ? null : dateStr) : null}
+                                       className={`h-10 sm:h-14 border p-1 relative flex flex-col items-center justify-center transition-all cursor-pointer ${isSelected
+                                          ? 'bg-red-900/40 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)] z-10'
+                                          : hasAbsent
+                                             ? 'bg-red-900/20 hover:bg-red-900/30 border-red-500/30'
+                                             : 'bg-[#1e293b]/40 border-white/5 opacity-50'
+                                          }`}
+                                    >
+                                       <span className={`text-[10px] font-black absolute top-1 left-1 ${hasAbsent ? 'text-red-400' : 'text-slate-500'}`}>{d}</span>
+                                       {hasAbsent && (
+                                          <div className="mt-3 flex flex-col items-center">
+                                             <span className="text-[12px] font-black text-red-500">{records?.length}</span>
+                                             <span className="text-[6px] font-bold text-red-400/70 uppercase">DERS</span>
+                                          </div>
+                                       )}
+                                    </div>
+                                 );
+                              }
+                              return days;
+                           })()}
+                        </div>
+                     </div>
+
+                     {/* LIST VIEW TITLE */}
+                     <div className="flex items-center justify-between mt-6 mb-2">
+                        <div className="flex items-center gap-2">
+                           <i className="fa-solid fa-list-ul text-[#3b82f6]"></i>
+                           <h3 className="text-[10px] font-black text-[#3b82f6] uppercase tracking-[0.4em]">
+                              {selectedAbsenceDate ? `${selectedAbsenceDate} - DEVAMSIZLIK DETAYI` : 'DETAYLI DEVAMSIZLIK GEÇMİŞİ'}
+                           </h3>
+                        </div>
+                        {selectedAbsenceDate && (
+                           <button onClick={() => setSelectedAbsenceDate(null)} className="text-[9px] text-slate-400 hover:text-white uppercase font-bold flex items-center gap-1">
+                              <i className="fa-solid fa-times"></i> FİLTREYİ KALDIR
+                           </button>
+                        )}
+                     </div>
+
+                     {(() => {
+                        let filteredHistory = (student.attendanceHistory || []).filter((h: any) => h.status === 'ABSENT');
+                        if (selectedAbsenceDate) {
+                           filteredHistory = filteredHistory.filter((h: any) => h.date === selectedAbsenceDate);
+                        }
+
+                        return filteredHistory.length > 0 ? filteredHistory.slice().reverse().map((rec: any) => {
+                           const resolvedLessonName = lessons.find(l => l.id === rec.lessonName)?.name || rec.lessonName;
+                           return (
+                              <div key={rec.id} className="bg-[#1e293b] border border-white/5 p-3 flex items-center justify-between hover:bg-slate-800 transition-all rounded-sm group animate-in slide-in-from-left-2">
+                                 <div className="flex items-center gap-3 overflow-hidden">
+                                    <div className={`w-8 h-8 rounded-sm flex items-center justify-center border shrink-0 ${rec.status === 'ABSENT' ? 'bg-red-600/20 border-red-500/40 text-red-500' : 'bg-green-600/20 border-green-500/40 text-green-500'}`}><i className={`fa-solid ${rec.status === 'ABSENT' ? 'fa-xmark' : 'fa-check'} text-[10px]`}></i></div>
+                                    <div className="flex flex-col min-w-0">
+                                       <span className="text-[11px] font-black text-white/90 uppercase truncate group-hover:text-[#3b82f6] transition-colors">{resolvedLessonName}</span>
+                                       <span className="text-[8px] font-bold text-slate-500 uppercase flex items-center gap-2">
+                                          <span>{rec.date}</span>
+                                          <span className="w-1 h-1 rounded-full bg-slate-600"></span>
+                                          <span>{rec.period}. DERS</span>
+                                       </span>
+                                    </div>
+                                 </div>
+                                 <div className="flex flex-col items-end">
+                                    <span className="text-[8px] font-black text-slate-500 uppercase shrink-0">{rec.teacherName.split(' ').pop()}</span>
+                                    {rec.status === 'ABSENT' && <span className="text-[7px] font-bold text-red-500 bg-red-500/10 px-1.5 py-0.5 rounded-sm mt-1">YOK</span>}
                                  </div>
                               </div>
-                              <span className="text-[9px] font-black text-slate-500 uppercase shrink-0">{rec.teacherName.split(' ').pop()}</span>
-                           </div>
-                        );
-                     }) : <div className="py-24 text-center opacity-20 italic">DEVAMSIZLIK KAYDI BULUNAMADI</div>}
+                           );
+                        }) : <div className="py-24 text-center opacity-20 italic border-2 border-dashed border-white/10 rounded-sm">KAYIT YOK</div>;
+                     })()}
                   </div>
+
                )}
 
                {activeTab === 'NOTLARIM' && (

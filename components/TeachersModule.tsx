@@ -497,6 +497,28 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                {['PZT', 'SAL', 'ÇAR', 'PER', 'CUM', 'CTS', 'PAZ'].map(day => <div key={day} className="text-center text-[9px] font-black text-slate-500 py-1">{day}</div>)}
                {days}
             </div>
+
+            {/* PAST ABSENCES LIST */}
+            <div className="bg-[#1e293b]/60 border border-white/5 p-4 rounded-sm mt-4">
+               <span className="text-[10px] font-black text-red-500 uppercase tracking-[0.4em] block mb-3">
+                  DEVAMSIZLIK LİSTESİ ({(viewingStudentAttendance.attendanceHistory?.filter(h => h.status === 'ABSENT') || []).length})
+               </span>
+               <div className="space-y-2 max-h-[200px] overflow-y-auto custom-scrollbar">
+                  {(viewingStudentAttendance.attendanceHistory?.filter(h => h.status === 'ABSENT') || []).length > 0 ? (
+                     viewingStudentAttendance.attendanceHistory?.filter(h => h.status === 'ABSENT').slice().reverse().map(rec => (
+                        <div key={rec.id} className="bg-black/20 border-l-2 border-red-500 p-2 flex justify-between items-center group hover:bg-black/40 transition-all">
+                           <div>
+                              <span className="text-[10px] font-bold text-white block uppercase">{rec.lessonName}</span>
+                              <span className="text-[8px] text-slate-500 font-bold uppercase">{rec.date} | {rec.period}. DERS</span>
+                           </div>
+                           <span className="text-[8px] font-black text-slate-600 uppercase group-hover:text-slate-400 transition-colors">{rec.teacherName}</span>
+                        </div>
+                     ))
+                  ) : (
+                     <div className="text-center opacity-30 py-4 text-[9px] uppercase tracking-widest border border-dashed border-white/10">KAYIT YOK</div>
+                  )}
+               </div>
+            </div>
          </div>
       );
    };
