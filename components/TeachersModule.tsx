@@ -1390,7 +1390,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                  onClick={() => setSelectedContextTab(ctx.uniqueId)}
                                  className={`px-3 py-2 border text-[9px] font-black uppercase tracking-widest whitespace-nowrap transition-all ${selectedContextTab === ctx.uniqueId ? 'bg-[#3b82f6] text-white border-[#3b82f6] shadow-lg' : 'bg-black/40 border-white/10 text-slate-500 hover:text-white'}`}
                               >
-                                 {ctx.className} - {ctx.lessonName}
+                                 {ctx.className} - {standardizeBranchCode(ctx.lessonName)}
                               </button>
                            ))}
                         </div>
