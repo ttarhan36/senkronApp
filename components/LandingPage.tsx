@@ -24,7 +24,8 @@ import {
     Check,
     FileDown,
     Edit3,
-    UploadCloud
+    UploadCloud,
+    Instagram
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -43,7 +44,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
     const [scrolled, setScrolled] = useState(false);
 
     // Calculator State
-    const [studentCount, setStudentCount] = useState(10);
+    const [studentCount, setStudentCount] = useState<number | string>(10);
 
     // Slider State
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -238,7 +239,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
     ];
 
     // Calculator Logic
-    const estimatedPrice = studentCount * 1.80;
+    const estimatedPrice = Number(studentCount) * 1.80;
+    const monthlyPrice = estimatedPrice / 12;
 
     return (
         <div className="min-h-screen bg-slate-50 text-slate-900 font-mono selection:bg-cyan-100 selection:text-cyan-900">
@@ -257,8 +259,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
 
                     <div className="hidden md:flex items-center gap-8">
                         <a href="#ozellikler" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">Özellikler</a>
+                        <a href="#sss" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">SSS</a>
                         <a href="#nasil-calisir" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">Nasıl Çalışır</a>
                         <a href="#hesaplayici" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">Hesaplayıcı</a>
+                        <a href="#taslaklar" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">Taslaklar</a>
                         <a href="#katalog" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">Katalog</a>
                         <button
                             onClick={onLoginClick}
@@ -285,8 +289,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                     >
                         <div className="flex flex-col gap-6 text-center">
                             <a href="#ozellikler" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-800">Özellikler</a>
+                            <a href="#sss" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-800">SSS</a>
                             <a href="#nasil-calisir" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-800">Nasıl Çalışır</a>
                             <a href="#hesaplayici" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-800">Hesaplayıcı</a>
+                            <a href="#taslaklar" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-800">Taslaklar</a>
                             <button
                                 onClick={() => { setIsMenuOpen(false); onLoginClick(); }}
                                 className="w-full py-4 bg-cyan-500 text-white font-bold rounded-none"
@@ -407,7 +413,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
                         {/* Step 1 */}
-                        <div className="flex flex-col items-center text-center group">
+                        <div id="taslaklar" className="flex flex-col items-center text-center group scroll-mt-40">
                             <div className="w-20 h-20 bg-slate-100 flex items-center justify-center text-slate-900 mb-6 group-hover:bg-cyan-500 group-hover:text-white transition-all border-2 border-slate-900/5">
                                 <FileDown className="w-10 h-10" />
                             </div>
@@ -478,7 +484,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                     <div className="max-w-3xl mx-auto text-center mb-20">
                         <h2 className="text-sm font-black text-cyan-600 uppercase tracking-widest mb-4">Üstün Teknoloji</h2>
                         <h3 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-6">Senkron ile Yönetim Artık Bir Sanat</h3>
-                        <p className="text-lg text-slate-600 font-medium leading-relaxed mb-8">Excel tablolarıyla boğuşmaya son veriyoruz. Yapay zeka ile her şey senkronize, her şey şeffaf.</p>
+                        <p className="text-lg text-slate-600 font-medium leading-relaxed mb-8">Ekipler arası veri kopukluğunu ve operasyonel karmaşayı ortadan kaldırıyoruz. Yapay zeka tabanlı bütünleşik ekosistemimizle okulunuzun akademik başarısını, idari verimliliğini ve kurumsal hafızasını tek bir merkezden, 360 derece yönetin.</p>
                         <a
                             href="https://drive.google.com/file/d/1L69KD7n84de0wc2lu4hmO8FSEW_1DOTI/view?usp=drive_link"
                             target="_blank"
@@ -515,7 +521,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
             </section>
 
             {/* FAQ Section */}
-            <section className="bg-slate-900 py-24 relative overflow-hidden">
+            <section id="sss" className="bg-slate-900 py-24 relative overflow-hidden scroll-mt-20">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full" />
                 <div className="container mx-auto px-6 max-w-4xl relative z-10">
                     <div className="text-center mb-16">
@@ -570,7 +576,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                         <input
                                             type="number"
                                             value={studentCount}
-                                            onChange={(e) => setStudentCount(Math.max(0, Number(e.target.value)))}
+                                            onChange={(e) => setStudentCount(e.target.value === '' ? '' : Math.max(0, Number(e.target.value)))}
+                                            onFocus={() => setStudentCount('')}
                                             className="text-center sm:text-right text-3xl font-black text-cyan-600 bg-slate-50 border-2 border-slate-100 rounded-none px-6 py-3 focus:border-cyan-500 focus:bg-white outline-none w-full sm:w-48 transition-all"
                                         />
                                         <div className="absolute -top-2 -right-2 w-6 h-6 bg-cyan-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform">
@@ -592,8 +599,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                         <span className="text-cyan-900 font-black text-xs uppercase tracking-[0.2em] mb-1">Yıllık Lisans Bedeli</span>
                                         <span className="text-slate-500 text-[11px] font-bold">Öğrenci başı $1.80 (Tüm özellikler dahil)</span>
                                     </div>
-                                    <div className="text-cyan-600 font-black text-5xl tracking-tighter">
-                                        ${estimatedPrice.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                    <div className="flex flex-col items-center sm:items-end">
+                                        <div className="text-cyan-600 font-black text-5xl tracking-tighter">
+                                            ${estimatedPrice.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                        </div>
+                                        <div className="text-cyan-600/60 font-bold text-[13px] mt-1">
+                                            aylık: ${monthlyPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="mt-8">
@@ -657,17 +669,27 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                             <p className="text-slate-500 text-sm font-medium leading-relaxed mb-8">
                                 Geleceğin okul yönetim sistemi. Yapay zeka ile her şey kontrolünüz altında.
                             </p>
-                            {/* Social Links Mockup */}
                             <div className="flex gap-4">
-                                {[1, 2, 3, 4].map(i => <div key={i} className="w-8 h-8 bg-white border border-slate-200 rounded-none" />)}
+                                <a
+                                    href="https://instagram.com/senkronai"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="w-10 h-10 bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-pink-600 hover:border-pink-200 transition-all"
+                                    title="Instagram'da bizi takip edin"
+                                >
+                                    <Instagram className="w-5 h-5" />
+                                </a>
                             </div>
                         </div>
 
                         <div className="flex flex-col gap-4">
                             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2">HIZLI MENÜ</span>
                             <a href="#ozellikler" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">Özellikler</a>
+                            <a href="#sss" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">SSS</a>
                             <a href="#nasil-calisir" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">Nasıl Çalışır</a>
+                            <a href="#taslaklar" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">Taslaklar</a>
                             <a href="#hesaplayici" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">Hesaplayıcı</a>
+                            <a href="#katalog" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">Katalog</a>
                         </div>
 
                         <div className="flex flex-col gap-4">
