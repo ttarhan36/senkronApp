@@ -21,7 +21,10 @@ import {
     Layers,
     Users,
     Building2,
-    Check
+    Check,
+    FileDown,
+    Edit3,
+    UploadCloud
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -40,7 +43,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
     const [scrolled, setScrolled] = useState(false);
 
     // Calculator State
-    const [studentCount, setStudentCount] = useState(500);
+    const [studentCount, setStudentCount] = useState(10);
 
     // Slider State
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -149,9 +152,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
         },
         {
             title: "Saniyelik Mobil Yoklama",
-            description: "Ders başında kağıt kalem karmaşasına son. Mobil uygulama üzerinden tek tıkla yoklama alın, velilere anında SMS gönderin.",
+            description: "Ders başında kağıt kalem karmaşasına son. Mobil uygulama üzerinden tek tıkla yoklama alın, veriler anında öğrenci/veli paneline işlensin.",
             icon: <CheckCircle2 className="w-6 h-6" />,
-            items: ["Hızlı yoklama alma", "Veli bilgilendirme SMS", "Devamsızlık istatistikleri"]
+            items: ["Hızlı yoklama alma", "Anlık panel bildirimi", "Devamsızlık istatistikleri"]
         },
         {
             title: "Yapay Zeka Ders Motoru",
@@ -170,6 +173,18 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
             description: "Öğretmenlerinizin yetkinliklerini, mesai yüklerini ve verimlilik grafiklerini tek bakışta görün.",
             icon: <Database className="w-6 h-6" />,
             items: ["Yük dengeleme", "Performans grafikleri", "Yetkinlik eşleştirme"]
+        },
+        {
+            title: "Öğrenci & Öğretmen Etkileşimi",
+            description: "Öğretmenler her şubeye özel ödev ve duyurular gönderebilir. Öğrenciler ise kendilerine özel panellerinden ödevlerini, notlarını, devamsızlıklarını ve öğretmen görüşlerini anlık takip edebilir.",
+            icon: <MessageSquare className="w-6 h-6" />,
+            items: ["Şube özelinde duyuru", "Öğrenci gelişim paneli", "Akademik görüş takibi"]
+        },
+        {
+            title: "Akıllı Kurs Yönetimi",
+            description: "İdareciler, öğretmen ve öğrencileri hedefleyerek kurslar tanımlayabilir. Kurs talepleri tüm öğrenci panellerine anında düşer ve öğrenciler 'Online Katıl' butonuyla talep oluşturabilir.",
+            icon: <Calendar className="w-6 h-6" />,
+            items: ["Hedefli kurs tanımı", "Anlık panel bildirimi", "Online başvuru"]
         },
         {
             title: "Anahtar Teslim Kurulum",
@@ -226,7 +241,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
     const estimatedPrice = studentCount * 1.80;
 
     return (
-        <div className="min-h-screen bg-white text-slate-900 font-mono selection:bg-cyan-100 selection:text-cyan-900">
+        <div className="min-h-screen bg-slate-50 text-slate-900 font-mono selection:bg-cyan-100 selection:text-cyan-900">
             {/* Navigation */}
             <nav className={cn(
                 "fixed top-0 w-full z-50 transition-all duration-300 border-b",
@@ -234,7 +249,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
             )}>
                 <div className="container mx-auto px-6 flex justify-between items-center">
                     <div className="flex items-center gap-2 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden">
+                        <div className="w-10 h-10 rounded-none flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden">
                             <img src="/senkron_logo.png" alt="Senkron Logo" className="w-full h-full object-contain" />
                         </div>
                         <span className="text-2xl font-black tracking-tighter text-slate-900 uppercase">Senkron</span>
@@ -247,7 +262,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                         <a href="#katalog" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">Katalog</a>
                         <button
                             onClick={onLoginClick}
-                            className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-bold rounded-full shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all active:scale-95"
+                            className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-bold rounded-none shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all active:scale-95"
                         >
                             14 Gün Ücretsiz Dene
                         </button>
@@ -274,7 +289,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                             <a href="#hesaplayici" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-800">Hesaplayıcı</a>
                             <button
                                 onClick={() => { setIsMenuOpen(false); onLoginClick(); }}
-                                className="w-full py-4 bg-cyan-500 text-white font-bold rounded-xl"
+                                className="w-full py-4 bg-cyan-500 text-white font-bold rounded-none"
                             >
                                 14 Gün Ücretsiz Dene
                             </button>
@@ -293,7 +308,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs font-bold uppercase tracking-wider mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs font-bold uppercase tracking-wider mb-6">
                             <ShieldCheck className="w-4 h-4" /> MEB Müfredatı ile %100 Uyumlu
                         </div>
                         <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.95] text-slate-900 mb-8 uppercase">
@@ -309,13 +324,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
                             <button
                                 onClick={onLoginClick}
-                                className="w-full sm:w-auto px-10 py-5 bg-slate-900 text-white rounded-2xl font-black text-lg shadow-2xl shadow-slate-900/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3"
+                                className="w-full sm:w-auto px-10 py-5 bg-slate-900 text-white rounded-none font-black text-lg shadow-2xl shadow-slate-900/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3"
                             >
                                 ÜCRETSİZ KAYDOL <ArrowRight className="w-5 h-5" />
                             </button>
                             <a
                                 href="#nasil-calisir"
-                                className="w-full sm:w-auto px-10 py-5 bg-white border-2 border-slate-200 text-slate-900 rounded-2xl font-black text-lg hover:border-cyan-500 hover:text-cyan-600 transition-all flex items-center justify-center gap-3"
+                                className="w-full sm:w-auto px-10 py-5 bg-white border-2 border-slate-200 text-slate-900 rounded-none font-black text-lg hover:border-cyan-500 hover:text-cyan-600 transition-all flex items-center justify-center gap-3"
                             >
                                 NASIL ÇALIŞIR? <PlayCircle className="w-5 h-5" />
                             </a>
@@ -341,9 +356,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                 initial={{ opacity: 0, y: 40 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.8 }}
-                                className="relative rounded-2xl md:rounded-[3rem] p-2 bg-gradient-to-b from-white to-slate-200/50 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border border-white/40 ring-1 ring-slate-900/5 overflow-hidden"
+                                className="relative rounded-none p-2 bg-gradient-to-b from-white to-slate-200/50 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border-2 border-slate-900/10 ring-1 ring-slate-900/5 overflow-hidden"
                             >
-                                <div className="aspect-[4/3] md:aspect-[16/11] bg-[#f8fafc] rounded-2xl overflow-hidden relative">
+                                <div className="aspect-[4/3] md:aspect-[16/11] bg-[#f8fafc] rounded-none overflow-hidden relative">
                                     <AnimatePresence mode="wait">
                                         <motion.div
                                             key={currentSlide}
@@ -381,7 +396,125 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                 </div>
             </section>
 
-            {/* FAQ Section (Moved here from below) */}
+
+            {/* How It Works Section */}
+            <section id="nasil-calisir" className="py-24 md:py-32 bg-white">
+                <div className="container mx-auto px-6">
+                    <div className="max-w-3xl mx-auto text-center mb-16">
+                        <h2 className="text-sm font-black text-cyan-600 uppercase tracking-widest mb-4">Süreç Nasıl İlerler?</h2>
+                        <h3 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-6 uppercase">3 ADIMDA OKULUNUZU DİJİTALLEŞTİRİN</h3>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+                        {/* Step 1 */}
+                        <div className="flex flex-col items-center text-center group">
+                            <div className="w-20 h-20 bg-slate-100 flex items-center justify-center text-slate-900 mb-6 group-hover:bg-cyan-500 group-hover:text-white transition-all border-2 border-slate-900/5">
+                                <FileDown className="w-10 h-10" />
+                            </div>
+                            <span className="text-xs font-black text-cyan-600 uppercase tracking-widest mb-2">ADIM 1</span>
+                            <h4 className="text-xl font-bold text-slate-900 mb-4 uppercase">TASLAKLARI İNDİRİN</h4>
+                            <p className="text-slate-600 text-sm font-medium leading-relaxed mb-8">
+                                Sisteme veri girişi yapmak için hazırladığımız standart Excel taslaklarını bilgisayarınıza indirin.
+                            </p>
+
+                            <div className="flex flex-col gap-3 w-full">
+                                <a
+                                    href="https://docs.google.com/spreadsheets/d/1oXtMAcUM4MA14C5vBGecf_vUVhNWGEml/export?format=xlsx"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="flex items-center justify-between px-4 py-3 bg-slate-50 border border-slate-200 text-xs font-black text-slate-700 hover:border-cyan-500 hover:bg-white transition-all uppercase tracking-tighter"
+                                >
+                                    ÖĞRENCİ LİSTESİ TASLAĞI <FileDown className="w-4 h-4 text-cyan-500" />
+                                </a>
+                                <a
+                                    href="https://docs.google.com/spreadsheets/d/1KmAwIYC-XkB7HNTqaGP5r-VF4V_7rCUj/export?format=xlsx"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="flex items-center justify-between px-4 py-3 bg-slate-50 border border-slate-200 text-xs font-black text-slate-700 hover:border-cyan-500 hover:bg-white transition-all uppercase tracking-tighter"
+                                >
+                                    ÖĞRETMEN LİSTESİ TASLAĞI <FileDown className="w-4 h-4 text-cyan-500" />
+                                </a>
+                                <a
+                                    href="https://docs.google.com/spreadsheets/d/18w96kP-GBStFqsjfPC4f_III5N0NV9SB/export?format=xlsx"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="flex items-center justify-between px-4 py-3 bg-slate-50 border border-slate-200 text-xs font-black text-slate-700 hover:border-cyan-500 hover:bg-white transition-all uppercase tracking-tighter"
+                                >
+                                    DERS/BRANŞ TASLAĞI <FileDown className="w-4 h-4 text-cyan-500" />
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Step 2 */}
+                        <div className="flex flex-col items-center text-center group">
+                            <div className="w-20 h-20 bg-slate-100 flex items-center justify-center text-slate-900 mb-6 group-hover:bg-cyan-500 group-hover:text-white transition-all border-2 border-slate-900/5">
+                                <Edit3 className="w-10 h-10" />
+                            </div>
+                            <span className="text-xs font-black text-cyan-600 uppercase tracking-widest mb-2">ADIM 2</span>
+                            <h4 className="text-xl font-bold text-slate-900 mb-4 uppercase">BİLGİLERİ DOLDURUN</h4>
+                            <p className="text-slate-600 text-sm font-medium leading-relaxed">
+                                Okulunuzdaki mevcut verileri (öğrenci, öğretmen, ders programı) indirdiğiniz Excel dosyalarına kopyalayın.
+                            </p>
+                        </div>
+
+                        {/* Step 3 */}
+                        <div className="flex flex-col items-center text-center group">
+                            <div className="w-20 h-20 bg-slate-100 flex items-center justify-center text-slate-900 mb-6 group-hover:bg-cyan-500 group-hover:text-white transition-all border-2 border-slate-900/5">
+                                <UploadCloud className="w-10 h-10" />
+                            </div>
+                            <span className="text-xs font-black text-cyan-600 uppercase tracking-widest mb-2">ADIM 3</span>
+                            <h4 className="text-xl font-bold text-slate-900 mb-4 uppercase">SİSTEME YÜKLEYİN</h4>
+                            <p className="text-slate-600 text-sm font-medium leading-relaxed">
+                                Hazırladığınız dosyaları Senkron paneline sürükleyip bırakın. Tüm okulunuz saniyeler içinde dijitalleşsin.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Features Section */}
+            <section id="ozellikler" className="py-24 md:py-32 bg-slate-100/80">
+                <div className="container mx-auto px-6">
+                    <div className="max-w-3xl mx-auto text-center mb-20">
+                        <h2 className="text-sm font-black text-cyan-600 uppercase tracking-widest mb-4">Üstün Teknoloji</h2>
+                        <h3 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-6">Senkron ile Yönetim Artık Bir Sanat</h3>
+                        <p className="text-lg text-slate-600 font-medium leading-relaxed mb-8">Excel tablolarıyla boğuşmaya son veriyoruz. Yapay zeka ile her şey senkronize, her şey şeffaf.</p>
+                        <a
+                            href="https://drive.google.com/file/d/1L69KD7n84de0wc2lu4hmO8FSEW_1DOTI/view?usp=drive_link"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-none text-sm font-bold text-slate-600 hover:border-cyan-500 hover:text-cyan-600 transition-all shadow-sm shadow-slate-100"
+                        >
+                            <Database className="w-4 h-4" /> Detaylı Kataloğu İndirin (PDF)
+                        </a>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {features.map((f, idx) => (
+                            <motion.div
+                                whileHover={{ y: -5 }}
+                                key={idx}
+                                className="bg-white p-8 rounded-none border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-cyan-500/5 transition-all group"
+                            >
+                                <div className="w-14 h-14 bg-cyan-50 rounded-none flex items-center justify-center text-cyan-600 mb-6 group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300">
+                                    {f.icon}
+                                </div>
+                                <h4 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">{f.title}</h4>
+                                <p className="text-slate-600 text-sm leading-relaxed mb-6 font-medium">{f.description}</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {f.items.map((item, i) => (
+                                        <span key={i} className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 bg-slate-50 text-slate-500 rounded-none border border-slate-100">
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ Section */}
             <section className="bg-slate-900 py-24 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full" />
                 <div className="container mx-auto px-6 max-w-4xl relative z-10">
@@ -419,50 +552,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                 </div>
             </section>
 
-            {/* Features Section */}
-            <section id="ozellikler" className="py-24 md:py-32 bg-slate-50/50">
-                <div className="container mx-auto px-6">
-                    <div className="max-w-3xl mx-auto text-center mb-20">
-                        <h2 className="text-sm font-black text-cyan-600 uppercase tracking-widest mb-4">Üstün Teknoloji</h2>
-                        <h3 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-6">Senkron ile Yönetim Artık Bir Sanat</h3>
-                        <p className="text-lg text-slate-600 font-medium leading-relaxed mb-8">Excel tablolarıyla boğuşmaya son veriyoruz. Yapay zeka ile her şey senkronize, her şey şeffaf.</p>
-                        <a
-                            href="https://www.genspark.ai/api/files/s/wb6K2zMh"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-2xl text-sm font-bold text-slate-600 hover:border-cyan-500 hover:text-cyan-600 transition-all shadow-sm shadow-slate-100"
-                        >
-                            <Database className="w-4 h-4" /> Detaylı Kataloğu İndirin (PDF)
-                        </a>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {features.map((f, idx) => (
-                            <motion.div
-                                whileHover={{ y: -5 }}
-                                key={idx}
-                                className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-cyan-500/5 transition-all group"
-                            >
-                                <div className="w-14 h-14 bg-cyan-50 rounded-2xl flex items-center justify-center text-cyan-600 mb-6 group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300">
-                                    {f.icon}
-                                </div>
-                                <h4 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">{f.title}</h4>
-                                <p className="text-slate-600 text-sm leading-relaxed mb-6 font-medium">{f.description}</p>
-                                <div className="flex flex-wrap gap-2">
-                                    {f.items.map((item, i) => (
-                                        <span key={i} className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 bg-slate-50 text-slate-500 rounded-md border border-slate-100">
-                                            {item}
-                                        </span>
-                                    ))}
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
             {/* Pricing Calculator Section */}
-            <section id="hesaplayici" className="py-24 md:py-32 overflow-hidden relative">
+            <section id="hesaplayici" className="py-24 md:py-32 overflow-hidden relative bg-slate-100/80">
                 <div className="container mx-auto px-6">
                     <div className="max-w-3xl mx-auto text-center mb-16">
                         <h2 className="text-sm font-black text-cyan-600 uppercase tracking-widest mb-4">Şeffaf Fiyatlandırma</h2>
@@ -470,7 +561,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                         <p className="text-lg text-slate-600 font-medium leading-relaxed">Senkron, okulunuzun büyüklüğüne göre ölçeklenir. Gizli ücretler yok, karmaşık paketler yok. Sadece öğrenci sayısı kadar ödeyin.</p>
                     </div>
 
-                    <div className="max-w-2xl mx-auto bg-white rounded-[3rem] p-8 md:p-12 border border-slate-100 shadow-2xl relative">
+                    <div className="max-w-2xl mx-auto bg-white rounded-none p-8 md:p-12 border-2 border-slate-200 shadow-2xl relative">
                         <div className="flex flex-col gap-10">
                             <div className="space-y-8">
                                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -480,7 +571,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                             type="number"
                                             value={studentCount}
                                             onChange={(e) => setStudentCount(Math.max(0, Number(e.target.value)))}
-                                            className="text-center sm:text-right text-3xl font-black text-cyan-600 bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 focus:border-cyan-500 focus:bg-white outline-none w-full sm:w-48 transition-all"
+                                            className="text-center sm:text-right text-3xl font-black text-cyan-600 bg-slate-50 border-2 border-slate-100 rounded-none px-6 py-3 focus:border-cyan-500 focus:bg-white outline-none w-full sm:w-48 transition-all"
                                         />
                                         <div className="absolute -top-2 -right-2 w-6 h-6 bg-cyan-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform">
                                             <Check className="w-3 h-3" />
@@ -488,15 +579,15 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                     </div>
                                 </div>
                                 <input
-                                    type="range" min="100" max="5000" step="50"
+                                    type="range" min="1" max="5000" step="50"
                                     value={studentCount}
                                     onChange={(e) => setStudentCount(Number(e.target.value))}
-                                    className="w-full h-3 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-cyan-600"
+                                    className="w-full h-3 bg-slate-100 rounded-none appearance-none cursor-pointer accent-cyan-600"
                                 />
                             </div>
 
                             <div className="pt-8 border-t border-slate-100 mt-4">
-                                <div className="flex flex-col sm:flex-row justify-between items-center gap-6 py-8 bg-gradient-to-br from-cyan-50 to-blue-50 px-8 rounded-[2rem] border border-cyan-100/50">
+                                <div className="flex flex-col sm:flex-row justify-between items-center gap-6 py-8 bg-gradient-to-br from-cyan-50 to-blue-50 px-8 rounded-none border border-cyan-100/50">
                                     <div className="flex flex-col text-center sm:text-left">
                                         <span className="text-cyan-900 font-black text-xs uppercase tracking-[0.2em] mb-1">Yıllık Lisans Bedeli</span>
                                         <span className="text-slate-500 text-[11px] font-bold">Öğrenci başı $1.80 (Tüm özellikler dahil)</span>
@@ -504,6 +595,17 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                     <div className="text-cyan-600 font-black text-5xl tracking-tighter">
                                         ${estimatedPrice.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                     </div>
+                                </div>
+                                <div className="mt-8">
+                                    <button
+                                        onClick={onLoginClick}
+                                        className="w-full py-5 bg-slate-900 text-white rounded-none font-black text-xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-slate-900/20 mb-4"
+                                    >
+                                        ÜCRETSİZ KAYDOL
+                                    </button>
+                                    <p className="text-center text-slate-500 text-sm font-medium">
+                                        * Kayıt için kredi kartı bilgisi gerekmez. 14 gün boyunca tüm özellikleri çekinmeden deneyebilirsiniz.
+                                    </p>
                                 </div>
                             </div>
 
@@ -518,43 +620,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                 </div>
             </section>
 
-            {/* Testimonials */}
-            <section className="py-24 md:py-32 bg-slate-900 relative overflow-hidden">
-                <div className="container mx-auto px-6">
-                    <div className="max-w-3xl mx-auto text-center mb-20">
-                        <h2 className="text-4xl md:text-5xl font-black tracking-tight text-white mb-6 uppercase">İdareciler Ne Diyor?</h2>
-                        <p className="text-slate-400 font-medium">Türkiye'nin dört bir yanındaki okullardan geri bildirimler.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {[
-                            { name: "Ahmet Y.", role: "Kampüs Müdürü", text: "Sabahlara kadar süren ders programı hazırlama dönemi bitti. 10 dakikada her şey hazır!" },
-                            { name: "Zeynep K.", role: "Okul Müdürü", text: "Öğretmen yükü dengelemesi muhteşem çalışıyor. Artık kimse 'ben çok ders giriyorum' demiyor." },
-                            { name: "Mustafa S.", role: "Müdür Yardımcısı", text: "e-Okul entegrasyonu sayesinde veri girişi için saatler harcamıyoruz. Tek tıkla tüm raporlar hazır." }
-                        ].map((t, idx) => (
-                            <div key={idx} className="bg-white/5 border border-white/10 p-8 rounded-3xl relative">
-                                <div className="text-6xl text-cyan-500 opacity-20 absolute top-4 left-4 font-serif">"</div>
-                                <p className="text-lg text-slate-300 font-medium italic mb-8 relative z-10">
-                                    {t.text}
-                                </p>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-full" />
-                                    <div className="flex flex-col">
-                                        <span className="text-white font-bold">{t.name}</span>
-                                        <span className="text-slate-500 text-xs uppercase tracking-widest font-bold">{t.role}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
 
             {/* CTA Section */}
             <section className="pb-24 pt-12">
                 <div className="container mx-auto px-6">
-                    <div className="bg-gradient-to-r from-cyan-600 to-blue-700 rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl shadow-cyan-500/30">
+                    <div className="bg-gradient-to-r from-cyan-600 to-blue-700 rounded-none p-12 md:p-24 text-center relative overflow-hidden shadow-2xl shadow-cyan-500/30">
                         <div className="absolute inset-0 bg-grid-white/[0.05] -z-0" />
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white opacity-10 blur-[100px] rounded-full -z-0" />
 
@@ -563,7 +634,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                             <p className="text-cyan-100 text-xl font-medium mb-12">Karmaşayı durdurun, yönetimi sanat haline getirin. Senkron ile yarının okulunu bugün yönetin.</p>
                             <button
                                 onClick={onLoginClick}
-                                className="px-12 py-6 bg-white text-slate-900 rounded-2xl font-black text-xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-cyan-900/40"
+                                className="px-12 py-6 bg-white text-slate-900 rounded-none font-black text-xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-cyan-900/40"
                             >
                                 ÜCRETSİZ KAYDOL
                             </button>
@@ -588,7 +659,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                             </p>
                             {/* Social Links Mockup */}
                             <div className="flex gap-4">
-                                {[1, 2, 3, 4].map(i => <div key={i} className="w-8 h-8 bg-white border border-slate-200 rounded-lg" />)}
+                                {[1, 2, 3, 4].map(i => <div key={i} className="w-8 h-8 bg-white border border-slate-200 rounded-none" />)}
                             </div>
                         </div>
 
@@ -630,7 +701,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="fixed bottom-8 right-8 w-14 h-14 bg-white border border-slate-100 shadow-2xl rounded-2xl flex items-center justify-center text-slate-900 z-50 hover:bg-slate-50 transition-colors"
+                    className="fixed bottom-8 right-8 w-14 h-14 bg-white border border-slate-100 shadow-2xl rounded-none flex items-center justify-center text-slate-900 z-50 hover:bg-slate-50 transition-colors"
                 >
                     <ChevronRight className="w-6 h-6 -rotate-90" />
                 </motion.button>
@@ -641,7 +712,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                 href="https://wa.me/905458858577"
                 target="_blank"
                 rel="noreferrer"
-                className="fixed bottom-8 left-8 w-14 h-14 bg-green-500 shadow-2xl shadow-green-500/30 rounded-full flex items-center justify-center text-white z-50 cursor-pointer hover:scale-110 active:scale-95 transition-all"
+                className="fixed bottom-8 left-8 w-14 h-14 bg-green-500 shadow-2xl shadow-green-500/30 rounded-none flex items-center justify-center text-white z-50 cursor-pointer hover:scale-110 active:scale-95 transition-all"
             >
                 <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.672 1.433 5.66 1.434h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
@@ -663,7 +734,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                             initial={{ opacity: 0, scale: 0.9, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]"
+                            className="relative w-full max-w-2xl bg-white rounded-none shadow-2xl overflow-hidden flex flex-col max-h-[80vh]"
                         >
                             <div className="p-8 border-b border-slate-100 flex justify-between items-center">
                                 <h3 className="text-2xl font-black text-slate-900 tracking-tighter">{legalModal.title}</h3>
@@ -677,7 +748,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                             <div className="p-6 bg-slate-50 border-t border-slate-100 text-center">
                                 <button
                                     onClick={() => setLegalModal(null)}
-                                    className="px-8 py-3 bg-slate-900 text-white rounded-xl font-bold hover:scale-105 active:scale-95 transition-all"
+                                    className="px-8 py-3 bg-slate-900 text-white rounded-none font-bold hover:scale-105 active:scale-95 transition-all"
                                 >
                                     ANLADIM, KAPAT
                                 </button>
