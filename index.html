@@ -1,192 +1,177 @@
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>Senkron 2.2.0 - Theme Engine v13</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;700;900&family=Montserrat:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap');
-      
-      :root {
-        --bg-deep: #000000;
-        --bg-panel: #0f172a;
-        --bg-card: #1e293b;
-        --bg-surface: #334155;
-        --accent: #3b82f6;
-        --border: #64748b;
-        --text-secondary: #f1f5f9;
-        --text-vivid: #fbbf24;
-        --grid-opacity: 0.1;
-        --font-scale: 1.0;
-        --glow-opacity: 1;
-        --border-width: 1px;
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO: Title & Description -->
+  <title>Senkron Akıllı Okul Yönetimi | Yapay Zeka ile Sınav Puanlama, Yoklama Tarama ve Ders Programı</title>
+  <meta name="description"
+    content="Senkron ile sınav kağıdını fotoğrafla, yapay zeka anında puanlasın. MMA teknolojisiyle yoklama tarayın, saniyeler içinde derse girmeyen öğrenciyi tespit edin. Otomatik ders programı, kadro yönetimi, nöbet çizelgesi ve duyuru sistemi tek platformda. Türkiye'nin en gelişmiş AI destekli okul yönetim yazılımı." />
+  <meta name="keywords"
+    content="sınav kağıdı fotoğraf puanlama, yapay zeka sınav değerlendirme, AI yoklama sistemi, yoklama tarama, otomatik devamsızlık takibi, MMA öğrenci tespit, okul yönetim sistemi, ders programı oluşturma, öğretmen kadro yönetimi, öğrenci takip, nöbet çizelgesi, eğitim teknolojisi, senkron, akıllı okul, AI eğitim" />
+  <meta name="author" content="Senkron" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://senkron.vercel.app/" />
+
+  <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Senkron | Fotoğrafla Sınav Puanla, AI ile Yoklama Tara, Akıllı Okul Yönetimi" />
+  <meta property="og:description"
+    content="📸 Sınav kağıdını çek, yapay zeka anında puanlasın. 👁️ MMA ile yoklama tarayın, derse girmeyen öğrenciyi saniyede tespit edin. Ders programı, kadro ve öğrenci yönetimi tek platformda." />
+  <meta property="og:url" content="https://senkron.vercel.app/" />
+  <meta property="og:site_name" content="Senkron" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:image" content="https://senkron.vercel.app/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Senkron | Fotoğrafla Sınav Puanla, AI Yoklama Tarama" />
+  <meta name="twitter:description"
+    content="📸 Sınav kağıdını çek, yapay zeka anında puanlasın. 👁️ MMA ile yoklama tarayın, derse girmeyen öğrenciyi saniyede tespit edin. Akıllı okul yönetim sistemi." />
+  <meta name="twitter:image" content="https://senkron.vercel.app/og-image.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" href="/senkron_logo.png">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Senkron" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Senkron Akıllı Okul Yönetimi",
+    "url": "https://senkron.vercel.app",
+    "description": "Yapay zeka destekli okul yönetim sistemi. Sınav kağıdını fotoğrafla, AI anında puanlasın. MMA teknolojisiyle yoklama tarayın, derse girmeyen öğrenciyi saniyede tespit edin. Otomatik ders programı, kadro yönetimi ve duyuru sistemi.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web",
+    "featureList": "Yapay Zeka Sınav Puanlama, Fotoğrafla Anında Not Verme, MMA Yoklama Tarama, Devamsızlık Tespit, Otomatik Ders Programı, Öğretmen Kadro Yönetimi, Nöbet Çizelgesi, Duyuru Sistemi",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "TRY"
+    },
+    "inLanguage": "tr"
+  }
+  </script>
+
+  <!-- External Resources -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;700;900&family=Montserrat:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap');
+
+    :root {
+      --bg-deep: #000000;
+      --bg-panel: #0f172a;
+      --bg-card: #1e293b;
+      --bg-surface: #334155;
+      --accent: #3b82f6;
+      --border: #64748b;
+      --text-secondary: #f1f5f9;
+      --text-vivid: #fbbf24;
+      --grid-opacity: 0.03;
+      --font-scale: 1.0;
+      --glow-opacity: 1;
+      --border-width: 1px;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-deep);
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: -0.02em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .bg-grid-hatched {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, var(--grid-opacity)) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, var(--grid-opacity)) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .print-layout {
+      display: none !important;
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 1cm;
       }
 
-      html, body {
-        margin: 0;
-        padding: 0;
-        background-color: var(--bg-deep);
-        color: var(--text-secondary);
-        font-family: 'JetBrains Mono', monospace;
-        letter-spacing: -0.02em;
-        -webkit-font-smoothing: antialiased;
+      body * {
+        visibility: hidden !important;
       }
 
-      .bg-grid-hatched {
-        background-image: 
-          linear-gradient(rgba(255, 255, 255, var(--grid-opacity)) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, var(--grid-opacity)) 1px, transparent 1px);
-        background-size: 20px 20px;
+      .print-layout,
+      .print-layout * {
+        visibility: visible !important;
+        display: block !important;
       }
 
       .print-layout {
-        display: none !important;
+        display: block !important;
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        background: white !important;
+        color: black !important;
+        padding: 0 !important;
+        margin: 0 !important;
       }
 
-      @media print {
-        @page {
-          size: A4;
-          margin: 1cm;
-        }
-        body * {
-          visibility: hidden !important;
-        }
-        .print-layout, .print-layout * {
-          visibility: visible !important;
-          display: block !important;
-        }
-        .print-layout {
-          display: block !important;
-          position: absolute !important;
-          left: 0 !important;
-          top: 0 !important;
-          width: 100% !important;
-          background: white !important;
-          color: black !important;
-          padding: 0 !important;
-          margin: 0 !important;
-        }
-        .print-layout table {
-          display: table !important;
-          width: 100% !important;
-          border-collapse: collapse !important;
-          border: 2px solid black !important;
-        }
-        .print-layout tr {
-          display: table-row !important;
-        }
-        .print-layout th, .print-layout td {
-          display: table-cell !important;
-          border: 1px solid black !important;
-          padding: 8px !important;
-          text-transform: uppercase !important;
-          font-family: Arial, sans-serif !important;
-          color: black !important;
-        }
-        * {
-          -webkit-print-color-adjust: exact !important;
-          print-color-adjust: exact !important;
-        }
+      .print-layout table {
+        display: table !important;
+        width: 100% !important;
+        border-collapse: collapse !important;
+        border: 2px solid black !important;
       }
 
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
+      .print-layout tr {
+        display: table-row !important;
       }
 
-      /* Mobil Optimizasyonlar */
-      @media (max-width: 768px) {
-        /* Touch-friendly tıklama alanları */
-        button, a, [role="button"] {
-          min-height: 44px;
-          min-width: 44px;
-        }
-
-        /* Modal'lar tam ekran */
-        .fixed.z-\[9999\] > div {
-          max-width: 100vw !important;
-          max-height: 100vh !important;
-          margin: 0 !important;
-          border-radius: 0 !important;
-        }
-
-        /* Sidebar gizle veya küçült */
-        aside {
-          width: 0;
-          overflow: hidden;
-        }
-
-        /* Font boyutları mobilde biraz daha büyük */
-        html {
-          font-size: 16px;
-        }
-
-        /* Input'lar daha büyük */
-        input, textarea, select {
-          min-height: 48px;
-          font-size: 16px !important;
-        }
+      .print-layout th,
+      .print-layout td {
+        display: table-cell !important;
+        border: 1px solid black !important;
+        padding: 8px !important;
+        text-transform: uppercase !important;
+        font-family: Arial, sans-serif !important;
+        color: black !important;
       }
 
-      /* Küçük mobil cihazlar */
-      @media (max-width: 480px) {
-        /* Grid'leri tek sütun yap */
-        .grid {
-          grid-template-columns: 1fr !important;
-        }
-
-        /* Padding'leri azalt */
-        .p-6 {
-          padding: 1rem !important;
-        }
-        .p-8 {
-          padding: 1.5rem !important;
-        }
-
-        /* Gap'leri azalt */
-        .gap-6 {
-          gap: 1rem !important;
-        }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
+    }
 
-      /* Landscape mobil */
-      @media (max-height: 500px) and (orientation: landscape) {
-        /* Modal'ları scroll yapılabilir yap */
-        .fixed.z-\[9999\] > div {
-          max-height: 90vh !important;
-          overflow-y: auto !important;
-        }
-      }
-
-      /* Touch feedback */
-      @media (hover: none) and (pointer: coarse) {
-        button:active, a:active, [role="button"]:active {
-          transform: scale(0.98);
-          opacity: 0.9;
-        }
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
-    "xlsx": "https://esm.sh/xlsx@0.18.5",
-    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.45.1"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
 </head>
-  <body>
-    <div id="root"></div>
-  <script type="module" src="/src/index.tsx"></script>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>
