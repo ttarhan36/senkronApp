@@ -1,8 +1,8 @@
-
 import React, { useMemo, useState, useEffect } from 'react';
 import { Teacher, ClassSection, Lesson, ModuleType, ShiftType, ScheduleEntry, CommsCategory, CommsType, Announcement, UserRole, Course, GradeRecord, Gender, Student, CompensationAlert, TrafficLightStatus } from '../types';
-import { getBranchColor, getSectionColor, standardizeDayCode } from '../utils';
+import { getBranchColor, getSectionColor, standardizeDayCode, calculateNetScore, getLGSDaysLeft } from '../utils';
 import { supabase } from '../services/supabaseClient';
+import StudentAnalysisPanel from './StudentAnalysisPanel';
 
 const TRAFFIC_LIGHT_DEMO: CompensationAlert[] = [
    { objectiveId: '1', objectiveDescription: 'Türkçe - Söz Sanatları', subject: 'Türkçe', status: 'RED', successRate: 25, lostPoints: 8.88, wrongCount: 3, totalQuestions: 12 },
@@ -79,7 +79,7 @@ interface DashboardProps {
    courses: Course[];
    setCourses?: (c: Course[]) => void;
    onSuccess?: (msg?: string) => void;
-   studentTab?: 'GENEL' | 'DEVAMSIZLIK' | 'KONULAR' | 'SINAVLAR' | 'NOTLARIM' | 'KURSLAR';
+   studentTab?: 'GENEL' | 'DEVAMSIZLIK' | 'KONULAR' | 'SINAVLAR' | 'NOTLARIM' | 'KURSLAR' | 'ANALIZ';
    subscriptionStatus?: string;
    trialEndsAt?: number;
 }
@@ -89,11 +89,12 @@ const Dashboard: React.FC<DashboardProps> = ({
    announcements, userRole, userName, userId, courses, setCourses, onSuccess, studentTab,
    subscriptionStatus, trialEndsAt
 }) => {
-   const [activeTab, setActiveTab] = useState<'GENEL' | 'DEVAMSIZLIK' | 'KONULAR' | 'SINAVLAR' | 'NOTLARIM' | 'KURSLAR'>('GENEL');
+   const [activeTab, setActiveTab] = useState<'GENEL' | 'DEVAMSIZLIK' | 'KONULAR' | 'SINAVLAR' | 'NOTLARIM' | 'KURSLAR' | 'ANALIZ'>('GENEL');
    const [attendanceMonth, setAttendanceMonth] = useState(new Date());
    const [selectedAbsenceDate, setSelectedAbsenceDate] = useState<string | null>(null);
    const [viewingStudentsId, setViewingStudentsId] = useState<string | null>(null);
    const [credentials, setCredentials] = useState({ username: '', password: '' });
+   const [goals, setGoals] = useState({ targetSchool: '', scoreGoal: '' });
 
    const studentData = useMemo(() => {
       if (userRole !== UserRole.STUDENT) return null;
@@ -115,6 +116,10 @@ const Dashboard: React.FC<DashboardProps> = ({
    useEffect(() => {
       if (studentData?.student) {
          setCredentials({ username: studentData.student.username || '', password: studentData.student.password || '' });
+         setGoals({
+            targetSchool: studentData.student.targetSchool || '',
+            scoreGoal: (studentData.student.scoreGoal || '').toString()
+         });
       }
    }, [studentData]);
 
@@ -123,7 +128,9 @@ const Dashboard: React.FC<DashboardProps> = ({
       try {
          const { error } = await supabase.from('students').update({
             username: credentials.username,
-            password: credentials.password
+            password: credentials.password,
+            target_school: goals.targetSchool,
+            score_goal: goals.scoreGoal ? parseFloat(goals.scoreGoal) : null
          }).eq('id', studentData.student.id);
 
          if (error) throw error;
@@ -399,6 +406,51 @@ const Dashboard: React.FC<DashboardProps> = ({
             <div className="bg-[#080c10] border border-white/5 rounded-sm relative bg-grid-hatched p-3 min-h-[500px]">
                {activeTab === 'GENEL' && (
                   <div className="space-y-4 animate-in slide-in-from-bottom-2 pb-12">
+                     {/* LGS COUNTDOWN SECTION (Grade 8 Only) */}
+                     {studentClass.grade === 8 && (
+                        <div className="bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border border-blue-500/30 p-4 rounded-sm shadow-xl relative overflow-hidden group">
+                           <div className="absolute inset-0 bg-grid-hatched opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                           <div className="flex items-center justify-between z-10 relative">
+                              <div className="flex items-center gap-4">
+                                 <div className="w-12 h-12 rounded-sm bg-blue-500/20 flex items-center justify-center border border-blue-500/40">
+                                    <i className="fa-solid fa-graduation-cap text-blue-400"></i>
+                                 </div>
+                                 <div className="min-w-0">
+                                    <h4 className="text-[12px] font-black text-white uppercase tracking-widest leading-none">LGS HEDEFİNE ODAKLAN</h4>
+                                    <p className="text-[9px] font-bold text-blue-200/60 uppercase mt-1 tracking-widest truncate">{goals.targetSchool || 'HAYALİNDEKİ LİSE İÇİN ÇALIŞMAYA DEVAM ET'}</p>
+                                 </div>
+                              </div>
+                              <div className="flex flex-col items-end">
+                                 <span className="text-[28px] font-black text-white leading-none">{getLGSDaysLeft()}</span>
+                                 <span className="text-[8px] font-bold text-blue-400 uppercase tracking-widest">GÜN KALDI</span>
+                              </div>
+                           </div>
+                        </div>
+                     )}
+
+                     {/* YKS COUNTDOWN SECTION (Grade 11-12 Only) */}
+                     {(studentClass.grade === 11 || studentClass.grade === 12) && (
+                        <div className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 border border-purple-500/30 p-4 rounded-sm shadow-xl relative overflow-hidden group">
+                           <div className="absolute inset-0 bg-grid-hatched opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                           <div className="flex items-center justify-between z-10 relative">
+                              <div className="flex items-center gap-4">
+                                 <div className="w-12 h-12 rounded-sm bg-purple-500/20 flex items-center justify-center border border-purple-500/40">
+                                    <i className="fa-solid fa-university text-purple-400"></i>
+                                 </div>
+                                 <div className="min-w-0">
+                                    <h4 className="text-[12px] font-black text-white uppercase tracking-widest leading-none">YKS YOLCULUĞU</h4>
+                                    <p className="text-[9px] font-bold text-purple-200/60 uppercase mt-1 tracking-widest truncate">{goals.targetSchool || 'ÜNİVERSİTE HEDEFİN İÇİN TEMPOYU ARTIR'}</p>
+                                 </div>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                 <div className="px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-sm">
+                                    <span className="text-[10px] font-black text-white uppercase">TYT/AYT</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     )}
+
                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <div className="bg-slate-900/60 border border-white/5 p-4 shadow-xl relative overflow-hidden rounded-sm">
                            <span className="text-[10px] font-black text-[#3b82f6] uppercase tracking-[0.4em] block mb-3">VELİ_DNA_VE_İLETİŞİM</span>
@@ -456,8 +508,33 @@ const Dashboard: React.FC<DashboardProps> = ({
                                  </div>
                               </div>
 
-                              <div className="mt-2">
-                                 <button onClick={handleUpdateStudentCredentials} className="w-full h-10 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all shadow-lg">GÜNCELLE</button>
+                              <div className="mt-2 space-y-3">
+                                 {/* GOAL SETTINGS FOR EXAM GRADES */}
+                                 {(studentClass.grade === 8 || studentClass.grade >= 11) && (
+                                    <div className="grid grid-cols-2 gap-2 border-t border-white/5 pt-3 mt-1">
+                                       <div className="flex flex-col gap-1">
+                                          <span className="text-[8px] font-bold text-slate-500 uppercase ml-1">{studentClass.grade === 8 ? 'HEDEF LİSE' : 'HEDEF ÜNİVERSİTE'}</span>
+                                          <input
+                                             className="bg-black border border-white/10 p-2 text-[11px] font-black text-indigo-400 outline-none focus:border-indigo-500 transition-all uppercase"
+                                             placeholder="..."
+                                             value={goals.targetSchool}
+                                             onChange={(e) => setGoals(prev => ({ ...prev, targetSchool: e.target.value }))}
+                                          />
+                                       </div>
+                                       <div className="flex flex-col gap-1">
+                                          <span className="text-[8px] font-bold text-slate-500 uppercase ml-1">PUAN HEDEFİ</span>
+                                          <input
+                                             type="number"
+                                             className="bg-black border border-white/10 p-2 text-[11px] font-black text-emerald-400 outline-none focus:border-emerald-500 transition-all"
+                                             placeholder="500"
+                                             value={goals.scoreGoal}
+                                             onChange={(e) => setGoals(prev => ({ ...prev, scoreGoal: e.target.value }))}
+                                          />
+                                       </div>
+                                    </div>
+                                 )}
+
+                                 <button onClick={handleUpdateStudentCredentials} className="w-full h-10 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all shadow-lg">BİLGİLERİ GÜNCELLEN VE KAYDET</button>
                               </div>
                            </div>
                         </div>
@@ -808,6 +885,16 @@ const Dashboard: React.FC<DashboardProps> = ({
                         </div>
                      </div>
                   </div>
+               )}
+
+               {activeTab === 'ANALIZ' && (
+                  <StudentAnalysisPanel
+                     student={student}
+                     studentClass={studentClass}
+                     lessons={lessons}
+                     responses={[]} // Gelecekte yeni tablolardan dolacak
+                     objectives={[]}  // Gelecekte yeni tablolardan dolacak
+                  />
                )}
             </div>
 

@@ -12,6 +12,10 @@ ALTER TABLE user_profiles
 ADD COLUMN IF NOT EXISTS role TEXT DEFAULT 'İDARECİ',
 ADD COLUMN IF NOT EXISTS school_id TEXT;
 
+ALTER TABLE students
+ADD COLUMN IF NOT EXISTS target_school TEXT,
+ADD COLUMN IF NOT EXISTS score_goal DECIMAL(5,2);
+
 -- 3. Ödeme Geçmişi İçin Opsiyonel Tablo (İleride lazım olabilir)
 CREATE TABLE IF NOT EXISTS payment_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

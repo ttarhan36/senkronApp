@@ -45,6 +45,7 @@ export enum ModuleType {
   STUDENT_EXAMS = 'STUDENT_EXAMS',   // New: Sınavlar
   STUDENT_GRADES = 'STUDENT_GRADES',
   STUDENT_COURSES = 'STUDENT_COURSES',
+  STUDENT_ANALYSIS = 'STUDENT_ANALYSIS',
   // Teacher Specific Modules
   TEACHER_OVERVIEW = 'TEACHER_OVERVIEW',
   TEACHER_AGENDA = 'TEACHER_AGENDA',
@@ -110,6 +111,8 @@ export interface Exam {
   date: string;
   status: 'PLANNED' | 'DONE';
   answerKey?: Record<'A' | 'B', Record<string, { key: string, points: number }>>;
+  type?: string; // SÖZEL, SAYISAL, TYT, AYT vb.
+  isMultiSession?: boolean;
 }
 
 export interface LessonLog {
@@ -194,6 +197,8 @@ export interface Student {
   classId?: string;
   username?: string;
   password?: string;
+  targetSchool?: string;
+  scoreGoal?: number;
 }
 
 export interface ThemeConfig {
@@ -451,4 +456,15 @@ export interface SessionResult {
   totalNet: number;
   totalScore: number;
   lostPoints: number;
+}
+
+export interface StudentTask {
+  id: string;
+  studentId: string;
+  objectiveId: string;
+  title: string;
+  description?: string;
+  status: 'PENDING' | 'COMPLETED';
+  dueDate?: string;
+}
 }

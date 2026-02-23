@@ -30,6 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeModule, setActiveModule, userRo
       { id: ModuleType.STUDENT_TOPICS, label: 'KONULAR', icon: 'fa-book-open', roles: [UserRole.STUDENT] },
       { id: ModuleType.STUDENT_EXAMS, label: 'SINAVLAR', icon: 'fa-calendar-check', roles: [UserRole.STUDENT] },
       { id: ModuleType.STUDENT_GRADES, label: 'NOTLARIM', icon: 'fa-file-signature', roles: [UserRole.STUDENT] },
+      { id: ModuleType.STUDENT_ANALYSIS, label: 'ANALİZ', icon: 'fa-chart-line', roles: [UserRole.STUDENT] },
       { id: ModuleType.STUDENT_COURSES, label: 'KURSLAR', icon: 'fa-graduation-cap', roles: [UserRole.STUDENT] },
       { id: ModuleType.COMMUNICATION, label: 'İLETİŞİM', icon: 'fa-bullhorn', roles: [UserRole.STUDENT] },
       { id: ModuleType.CLASS_SCHEDULES, label: 'DERS PROGRAMI', icon: 'fa-calendar-alt', roles: [UserRole.STUDENT] },

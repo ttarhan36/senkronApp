@@ -852,12 +852,13 @@ const App: React.FC = () => {
     const commonProps = { editMode: isAdmin ? editMode : false, onWatchModeAttempt: () => triggerSuccess("YETKİ_SINIRI"), onSuccess: triggerSuccess };
 
     if (session.role === UserRole.STUDENT) {
-      let studentTab: 'GENEL' | 'DEVAMSIZLIK' | 'KONULAR' | 'SINAVLAR' | 'NOTLARIM' | 'KURSLAR' = 'GENEL';
+      let studentTab: 'GENEL' | 'DEVAMSIZLIK' | 'KONULAR' | 'SINAVLAR' | 'NOTLARIM' | 'KURSLAR' | 'ANALIZ' = 'GENEL';
       if (activeModule === ModuleType.STUDENT_ATTENDANCE) studentTab = 'DEVAMSIZLIK';
       if (activeModule === ModuleType.STUDENT_TOPICS) studentTab = 'KONULAR';
       if (activeModule === ModuleType.STUDENT_EXAMS) studentTab = 'SINAVLAR';
       if (activeModule === ModuleType.STUDENT_GRADES) studentTab = 'NOTLARIM';
       if (activeModule === ModuleType.STUDENT_COURSES) studentTab = 'KURSLAR';
+      if (activeModule === ModuleType.STUDENT_ANALYSIS) studentTab = 'ANALIZ';
 
       if (activeModule === ModuleType.COMMUNICATION) {
         return <CommunicationModule announcements={announcements} setAnnouncements={setAnnouncements} classes={classes} userRole={session.role} currentUserId={session.id} {...commonProps} />;

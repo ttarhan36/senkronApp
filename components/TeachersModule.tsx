@@ -105,14 +105,19 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
    // SINAV PLANLAMA STATE
    const [isExamSchedulerOpen, setIsExamSchedulerOpen] = useState(false);
    const [examSchedulerTarget, setExamSchedulerTarget] = useState<{ classId: string, className: string, lessonId: string, lessonName: string } | null>(null);
-   const [examSchedulerForm, setExamSchedulerForm] = useState<{ date: string, slot: string }>({ date: '', slot: 'exam1' });
+   const [examSchedulerForm, setExamSchedulerForm] = useState<{ date: string, slot: string, type: string }>({ date: '', slot: 'exam1', type: '' });
 
    // SINAV DÜZENLEME VE SİLME STATE
    const [isEditExamModalOpen, setIsEditExamModalOpen] = useState(false);
    const [examToEdit, setExamToEdit] = useState<Exam & { classId: string, className: string, lessonName: string } | null>(null);
-   const [editExamForm, setEditExamForm] = useState<{ date: string, slot: string }>({ date: '', slot: '' });
+   const [editExamForm, setEditExamForm] = useState<{ date: string, slot: string, type: string }>({ date: '', slot: '', type: '' });
    const [activeExamMenuId, setActiveExamMenuId] = useState<string | null>(null);
    const [examToDelete, setExamToDelete] = useState<Exam & { classId: string, lessonName: string, date: string } | null>(null);
+
+   // AI QUESTION TAGGING STATE
+   const [isQuestionTaggingModalOpen, setIsQuestionTaggingModalOpen] = useState(false);
+   const [taggingExam, setTaggingExam] = useState<any>(null);
+   const [isTaggingActive, setIsTaggingActive] = useState(false);
 
    // CEVAP ANAHTARI STATE
    const [lessonAnswerKeys, setLessonAnswerKeys] = useState<Record<string, Record<string, Record<'A' | 'B', Record<string, { key: string, points: number }>>>>>({});
@@ -707,7 +712,11 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
          dateVal = `${y}-${m}-${d}`;
       }
       setExamToEdit(exam);
-      setEditExamForm({ date: dateVal, slot: exam.slot });
+      setEditExamForm({
+         date: dateVal,
+         slot: exam.slot,
+         type: exam.type || ''
+      });
       setIsEditExamModalOpen(true);
       setActiveExamMenuId(null); // Close menu
    };
@@ -723,7 +732,12 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
          if (c.id === examToEdit.classId) {
             return {
                ...c,
-               exams: (c.exams || []).map(e => e.id === examToEdit.id ? { ...e, date: formattedDate, slot: editExamForm.slot as any } : e)
+               exams: (c.exams || []).map(e => e.id === examToEdit.id ? {
+                  ...e,
+                  date: formattedDate,
+                  slot: editExamForm.slot as any,
+                  type: editExamForm.type
+               } : e)
             };
          }
          return c;
@@ -734,7 +748,28 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
    const handleOpenClassLogManager = (classId: string, className: string, lessonName: string) => { setClassLogManagerTarget({ classId, className, lessonName }); setManualLogForm({ date: new Date().toISOString().split('T')[0], hour: 1, subject: '', homework: '' }); setIsClassLogManagerOpen(true); };
    const handleSaveManualLog = () => { if (!classLogManagerTarget || !teacher || !manualLogForm.subject) return; const parts = manualLogForm.date.split('-'); const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`; setClasses((currentClasses: ClassSection[]) => { return currentClasses.map(c => { if (c.id === classLogManagerTarget.classId) { const newLog: LessonLog = { id: `LOG-MAN-${Date.now()}`, date: formattedDate, hour: manualLogForm.hour, subject: manualLogForm.subject, homework: manualLogForm.homework, teacherId: teacher.id, timestamp: Date.now() }; return { ...c, lessonLogs: [...(c.lessonLogs || []), newLog] }; } return c; }); }); setManualLogForm(prev => ({ ...prev, subject: '', homework: '' })); onSuccess("GİRİŞ DEFTERE EKLENDİ"); };
-   const handleSaveExamSchedule = () => { if (!examSchedulerTarget || !examSchedulerForm.date) return; const parts = examSchedulerForm.date.split('-'); const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`; const newExam: Exam = { id: `EX-${Date.now()}`, lessonId: examSchedulerTarget.lessonId, slot: examSchedulerForm.slot as any, date: formattedDate, status: 'PLANNED' }; setClasses(prev => prev.map(c => { if (c.id === examSchedulerTarget.classId) { return { ...c, exams: [...(c.exams || []), newExam] }; } return c; })); setIsExamSchedulerOpen(false); setExamSchedulerForm({ date: '', slot: 'exam1' }); onSuccess(`SINAV TARİHİ KAYDEDİLDİ: ${formattedDate}`); };
+   const handleSaveExamSchedule = () => {
+      if (!examSchedulerTarget || !examSchedulerForm.date) return;
+      const parts = examSchedulerForm.date.split('-');
+      const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;
+      const newExam: Exam = {
+         id: `EX-${Date.now()}`,
+         lessonId: examSchedulerTarget.lessonId,
+         slot: examSchedulerForm.slot as any,
+         date: formattedDate,
+         status: 'PLANNED',
+         type: examSchedulerForm.type
+      };
+      setClasses(prev => prev.map(c => {
+         if (c.id === examSchedulerTarget.classId) {
+            return { ...c, exams: [...(c.exams || []), newExam] };
+         }
+         return c;
+      }));
+      setIsExamSchedulerOpen(false);
+      setExamSchedulerForm({ date: '', slot: 'exam1', type: '' });
+      onSuccess(`SINAV TARİHİ KAYDEDİLDİ: ${formattedDate}`);
+   };
 
    const executeDeleteExam = () => {
       if (!examToDelete) return;
@@ -1344,7 +1379,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                        <div className="flex items-center gap-1 pl-2 w-full mt-auto">
                                           {!isAdmin && (
                                              <>
-                                                <button onClick={(e) => { e.stopPropagation(); setExamSchedulerTarget({ classId: a.classId, className: a.className, lessonId: a.lessonId, lessonName: a.lesson?.name || 'DERS' }); setExamSchedulerForm({ date: '', slot: 'exam1' }); setIsExamSchedulerOpen(true); }} className="h-6 w-6 flex items-center justify-center bg-orange-600/10 border border-orange-500/40 text-orange-500 hover:bg-orange-600 hover:text-white transition-all rounded-sm shrink-0" title="Sınav"> <i className="fa-solid fa-calendar-plus text-[9px]"></i> </button>
+                                                <button onClick={(e) => { e.stopPropagation(); setExamSchedulerTarget({ classId: a.classId, className: a.className, lessonId: a.lessonId, lessonName: a.lesson?.name || 'DERS' }); setExamSchedulerForm({ date: '', slot: 'exam1', type: '' }); setIsExamSchedulerOpen(true); }} className="h-6 w-6 flex items-center justify-center bg-orange-600/10 border border-orange-500/40 text-orange-500 hover:bg-orange-600 hover:text-white transition-all rounded-sm shrink-0" title="Sınav"> <i className="fa-solid fa-calendar-plus text-[9px]"></i> </button>
                                                 <button onClick={(e) => { e.stopPropagation(); handleOpenClassLogManager(a.classId, a.className, a.lesson?.name || 'DERS'); }} className="h-6 w-6 flex items-center justify-center bg-[#22d3ee]/10 border border-[#22d3ee]/40 text-[#22d3ee] hover:bg-[#22d3ee] hover:text-black transition-all rounded-sm shrink-0" title="Defter"> <i className="fa-solid fa-book text-[9px]"></i> </button>
                                                 <button onClick={(e) => { e.stopPropagation(); setGradeTerminalTarget({ classId: a.classId, className: a.className, lessonId: a.lessonId, lessonName: a.lesson?.name || '' }); setIsGradeTerminalOpen(true); }} className="h-6 flex-1 border border-[#fbbf24] text-[#fbbf24] bg-[#fbbf24]/5 font-black text-[8px] uppercase tracking-widest hover:bg-[#fbbf24] hover:text-black active:scale-95 transition-all rounded-sm flex items-center justify-center gap-1" >
                                                    <i className="fa-solid fa-pen-nib text-[9px]"></i> NOT
@@ -1432,6 +1467,11 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                              <div className="flex items-center gap-2 mt-1">
                                                 <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{exam.className}</span>
                                                 <span className="text-[7px] font-black text-[#fbbf24] bg-[#fbbf24]/10 px-1.5 py-0.5 border border-[#fbbf24]/20 uppercase">{exam.slot.replace('exam', '').toUpperCase()}. YAZILI</span>
+                                                 {exam.type && (
+                                                    <span className={	ext-[7px] font-black uppercase px-1.5 py-0.5 border rounded-sm ml-2 }>
+                                                       {exam.type}
+                                                    </span>
+                                                 )}
 
                                                 {/* STATUS BADGE */}
                                                 {isPast ? (

@@ -311,9 +311,19 @@ export const calculateYKSNet = (correct: number, wrong: number): number => {
 };
 
 /**
+ * Dinamik Net Hesaplama Motoru (Legacy/Helper)
+ * Grade 8 (LGS) -> 3 Yanlış 1 Doğru
+ * Grade 11-12 (YKS) -> 4 Yanlış 1 Doğru
+ */
+export const calculateNetScore = (corrects: number, wrongs: number, grade: number): number => {
+  const penaltyFactor = (grade === 8) ? 3 : 4;
+  const net = corrects - (wrongs / penaltyFactor);
+  return Math.max(0, parseFloat(net.toFixed(2)));
+};
+
+/**
  * Mikro-Kayıp hesabı.
  * Yanlış yapılan soruların öğrenciye kaç puana mal olduğunu hesaplar.
- * lostPoints = wrongCount * penaltyRatio * pointWeight * subjectCoefficient
  */
 export const calculateLostPoints = (
   wrong: number,
@@ -326,7 +336,6 @@ export const calculateLostPoints = (
 
 /**
  * Oturum bazlı ders özeti üretir.
- * Responses + questions birleştirilerek ders bazlı doğru/yanlış/boş sayısı çıkarılır.
  */
 export const buildSubjectSummaries = (
   responses: StudentResponse[],
@@ -379,23 +388,19 @@ export const buildSubjectSummaries = (
 
 /**
  * Alan bazlı YKS filtreleme.
- * Bir öğrencinin alanına göre hangi derslerin telafi uyarısı alacağını belirler.
  */
 export const getRelevantSubjectsForField = (
   studentField: StudentField | null,
   examType: ExamType
 ): string[] | null => {
   if (!studentField || examType === 'LGS') return null;
-
   const TYT_COMMON = ['Türkçe', 'Sosyal Bilimler', 'Temel Matematik', 'Fen Bilimleri'];
-
   const AYT_SUBJECTS: Record<StudentField, string[]> = {
     SAY: ['Matematik', 'Fizik', 'Kimya', 'Biyoloji'],
-    EA:  ['Matematik', 'Türk Dili ve Edebiyatı', 'Tarih-1', 'Coğrafya-1'],
+    EA: ['Matematik', 'Türk Dili ve Edebiyatı', 'Tarih-1', 'Coğrafya-1'],
     SÖZ: ['Türk Dili ve Edebiyatı', 'Tarih-1', 'Coğrafya-1', 'Felsefe Grubu', 'Din Kültürü'],
     DİL: ['Yabancı Dil']
   };
-
   if (examType === 'TYT') return TYT_COMMON;
   if (examType === 'AYT') return AYT_SUBJECTS[studentField] ?? null;
   return null;
@@ -403,7 +408,6 @@ export const getRelevantSubjectsForField = (
 
 /**
  * Trafik ışığı uyarıları üretir.
- * Başarı oranına göre RED/YELLOW/GREEN atar ve alan bazlı filtreler.
  */
 export const generateCompensationAlerts = (
   summaries: SubjectSummary[],
@@ -411,7 +415,6 @@ export const generateCompensationAlerts = (
   examType: ExamType
 ): CompensationAlert[] => {
   const relevantSubjects = getRelevantSubjectsForField(studentField, examType);
-
   const filtered = relevantSubjects
     ? summaries.filter(s => relevantSubjects.some(rs => s.subject.toUpperCase().includes(rs.toUpperCase())))
     : summaries;
@@ -437,7 +440,6 @@ export const generateCompensationAlerts = (
 
 /**
  * Yüzdelik dilim projeksiyonu.
- * Verilen puan için geçmiş yıl tablolarından en yakın yüzdelik dilimi döner.
  */
 export const getPercentileProjection = (
   score: number,
@@ -445,13 +447,8 @@ export const getPercentileProjection = (
   year?: number
 ): { year: number; percentile: number } | null => {
   const allData: PercentileData[] = examType === 'LGS' ? LGS_PERCENTILE_DATA : YKS_TYT_PERCENTILE_DATA;
-
-  const dataset = year
-    ? allData.find(d => d.year === year)
-    : allData[allData.length - 1];
-
+  const dataset = year ? allData.find(d => d.year === year) : allData[allData.length - 1];
   if (!dataset) return null;
-
   const sorted = [...dataset.table].sort((a, b) => a.score - b.score);
   let closest = sorted[0];
   for (const entry of sorted) {
@@ -460,4 +457,14 @@ export const getPercentileProjection = (
     }
   }
   return { year: dataset.year, percentile: closest.percentile };
+};
+
+/**
+ * LGS Geri Sayım Hesaplayıcı (Tahmini 2026 Tarihi: 7 Haziran)
+ */
+export const getLGSDaysLeft = (): number => {
+  const lgsDate = new Date('2026-06-07');
+  const now = new Date();
+  const diffTime = lgsDate.getTime() - now.getTime();
+  return Math.max(0, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
 };
