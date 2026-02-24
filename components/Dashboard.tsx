@@ -410,19 +410,19 @@ const Dashboard: React.FC<DashboardProps> = ({
                      {studentClass.grade === 8 && (
                         <div className="bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border border-blue-500/30 p-4 rounded-sm shadow-xl relative overflow-hidden group">
                            <div className="absolute inset-0 bg-grid-hatched opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                           <div className="flex items-center justify-between z-10 relative">
-                              <div className="flex items-center gap-4">
-                                 <div className="w-12 h-12 rounded-sm bg-blue-500/20 flex items-center justify-center border border-blue-500/40">
-                                    <i className="fa-solid fa-graduation-cap text-blue-400"></i>
+                           <div className="flex items-center justify-between z-10 relative gap-3">
+                              <div className="flex items-center gap-2 md:gap-4 flex-1 min-w-0">
+                                 <div className="shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-sm bg-blue-500/20 flex items-center justify-center border border-blue-500/40">
+                                    <i className="fa-solid fa-graduation-cap text-blue-400 text-sm md:text-base"></i>
                                  </div>
-                                 <div className="min-w-0">
-                                    <h4 className="text-[12px] font-black text-white uppercase tracking-widest leading-none">LGS HEDEFİNE ODAKLAN</h4>
-                                    <p className="text-[9px] font-bold text-blue-200/60 uppercase mt-1 tracking-widest truncate">{goals.targetSchool || 'HAYALİNDEKİ LİSE İÇİN ÇALIŞMAYA DEVAM ET'}</p>
+                                 <div className="flex-1 min-w-0">
+                                    <h4 className="text-[10px] md:text-[12px] font-black text-white uppercase tracking-widest leading-none truncate block w-full">LGS HEDEFİNE ODAKLAN</h4>
+                                    <p className="text-[7px] md:text-[9px] font-bold text-blue-200/60 uppercase mt-0.5 md:mt-1 tracking-widest truncate block w-full">{goals.targetSchool || 'HAYALİNDEKİ LİSE İÇİN ÇALIŞMAYA DEVAM ET'}</p>
                                  </div>
                               </div>
-                              <div className="flex flex-col items-end">
-                                 <span className="text-[28px] font-black text-white leading-none">{getLGSDaysLeft()}</span>
-                                 <span className="text-[8px] font-bold text-blue-400 uppercase tracking-widest">GÜN KALDI</span>
+                              <div className="flex flex-col items-end shrink-0 pl-2">
+                                 <span className="text-[20px] md:text-[28px] font-black text-white leading-none">{getLGSDaysLeft()}</span>
+                                 <span className="text-[6px] md:text-[8px] font-bold text-blue-400 uppercase tracking-widest">GÜN KALDI</span>
                               </div>
                            </div>
                         </div>
@@ -432,19 +432,19 @@ const Dashboard: React.FC<DashboardProps> = ({
                      {(studentClass.grade === 11 || studentClass.grade === 12) && (
                         <div className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 border border-purple-500/30 p-4 rounded-sm shadow-xl relative overflow-hidden group">
                            <div className="absolute inset-0 bg-grid-hatched opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                           <div className="flex items-center justify-between z-10 relative">
-                              <div className="flex items-center gap-4">
-                                 <div className="w-12 h-12 rounded-sm bg-purple-500/20 flex items-center justify-center border border-purple-500/40">
-                                    <i className="fa-solid fa-university text-purple-400"></i>
+                           <div className="flex items-center justify-between z-10 relative gap-3">
+                              <div className="flex items-center gap-2 md:gap-4 flex-1 min-w-0">
+                                 <div className="shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-sm bg-purple-500/20 flex items-center justify-center border border-purple-500/40">
+                                    <i className="fa-solid fa-university text-purple-400 text-sm md:text-base"></i>
                                  </div>
-                                 <div className="min-w-0">
-                                    <h4 className="text-[12px] font-black text-white uppercase tracking-widest leading-none">YKS YOLCULUĞU</h4>
-                                    <p className="text-[9px] font-bold text-purple-200/60 uppercase mt-1 tracking-widest truncate">{goals.targetSchool || 'ÜNİVERSİTE HEDEFİN İÇİN TEMPOYU ARTIR'}</p>
+                                 <div className="flex-1 min-w-0">
+                                    <h4 className="text-[10px] md:text-[12px] font-black text-white uppercase tracking-widest leading-none truncate block w-full">YKS YOLCULUĞU</h4>
+                                    <p className="text-[7px] md:text-[9px] font-bold text-purple-200/60 uppercase mt-0.5 md:mt-1 tracking-widest truncate block w-full">{goals.targetSchool || 'ÜNİVERSİTE HEDEFİN İÇİN TEMPOYU ARTIR'}</p>
                                  </div>
                               </div>
-                              <div className="flex items-center gap-2">
-                                 <div className="px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-sm">
-                                    <span className="text-[10px] font-black text-white uppercase">TYT/AYT</span>
+                              <div className="flex items-center gap-2 shrink-0 pl-2">
+                                 <div className="px-2 md:px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-sm">
+                                    <span className="text-[8px] md:text-[10px] font-black text-white uppercase">TYT/AYT</span>
                                  </div>
                               </div>
                            </div>
