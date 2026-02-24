@@ -24,6 +24,91 @@ import StudentExamView from './components/StudentExamView';
 import { supabase } from './services/supabaseClient';
 import { standardizeBranchCode, standardizeDayCode } from './utils';
 
+const SubscriptionRequiredView = ({ studentCount, session }: { studentCount: number, session: UserSession }) => {
+  const [isCalculating, setIsCalculating] = useState(false);
+  const [showFinalPay, setShowFinalPay] = useState(false);
+  const [totalAmount, setTotalAmount] = useState((studentCount * 2.00).toFixed(2));
+
+  const handleCalculate = () => {
+    setIsCalculating(true);
+    setTimeout(() => {
+      setIsCalculating(false);
+      setShowFinalPay(true);
+    }, 1500);
+  };
+
+  const handleProceedToPayment = () => {
+    const paymentUrl = `https://checkout.senkron.ai/pay?amount=${totalAmount}&schoolId=${session.schoolId}`;
+    window.open(paymentUrl, '_blank');
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center h-full bg-[#0d141b] text-white p-8 text-center animate-in fade-in duration-500 font-mono">
+      <div className="w-24 h-24 bg-red-500/10 border border-red-500/20 rounded-full flex items-center justify-center mb-6 shadow-[0_0_50px_rgba(239,68,68,0.2)]">
+        <i className="fa-solid fa-clock-rotate-left text-4xl text-red-500 animate-pulse"></i>
+      </div>
+      <h2 className="text-3xl font-normal tracking-tighter mb-4 uppercase">DENEME SÜRESİ DOLDU</h2>
+      <p className="text-slate-400 max-w-md mb-8 font-normal leading-relaxed">
+        14 günlük ücretsiz kullanım hakkınız sona ermiştir. <br />
+        Sistemin tüm özelliklerine erişmeye devam etmek için yıllık aboneliğinizi başlatmanız gerekmektedir.
+      </p>
+
+      <div className="bg-[#1a242e] border border-white/5 p-8 rounded-xl mb-8 w-full max-w-md shadow-2xl">
+        <div className="flex justify-between items-center mb-6">
+          <span className="text-[10px] font-normal text-slate-500 uppercase tracking-widest">YILLIK ÜCRET (ÖĞRENCİ BAŞI)</span>
+          <span className="text-xl font-normal text-[#fbbf24]">$2.00</span>
+        </div>
+        <div className="flex justify-between items-center pb-6 border-b border-white/5">
+          <span className="text-[10px] font-normal text-slate-500 uppercase tracking-widest">AKTİF ÖĞRENCİ SAYISI</span>
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-xl font-normal text-white">{studentCount}</span>
+          </div>
+        </div>
+
+        {!showFinalPay ? (
+          <button
+            onClick={handleCalculate}
+            disabled={isCalculating}
+            className="w-full mt-6 py-4 bg-slate-800 border border-white/10 text-white font-normal text-xs uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center justify-center gap-2"
+          >
+            {isCalculating ? (
+              <>
+                <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                HESAPLANIYOR...
+              </>
+            ) : (
+              "ÖDEME TUTARINI HESAPLA"
+            )}
+          </button>
+        ) : (
+          <div className="mt-6 animate-in zoom-in duration-300">
+            <div className="flex justify-between items-center p-4 bg-green-500/5 border border-green-500/20 rounded-lg mb-6">
+              <span className="text-[12px] font-normal text-green-500 uppercase tracking-widest">TOPLAM TAHSİLAT</span>
+              <span className="text-2xl font-normal text-green-500 animate-pulse">${totalAmount} <span className="text-xs">/ YIL</span></span>
+            </div>
+            <button
+              onClick={handleProceedToPayment}
+              className="w-full py-5 bg-green-600 text-white font-normal text-sm uppercase tracking-[0.2em] shadow-[0_0_30px_rgba(22,163,74,0.3)] hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-3"
+            >
+              <i className="fa-solid fa-credit-card"></i> ÖDEME SAYFASINA GİT
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <button
+          onClick={() => { localStorage.removeItem('senkron_session'); window.location.reload(); }}
+          className="text-[10px] font-normal text-slate-600 hover:text-white uppercase tracking-widest border-b border-transparent hover:border-white/20 transition-all"
+        >
+          FARKLI HESAPLA GİRİŞ YAP
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const App: React.FC = () => {
   const [session, setSession] = useState<UserSession | null>(() => {
     // QR kod ile giriş yapılıyorsa mevcut oturumu temizle
@@ -913,89 +998,7 @@ const App: React.FC = () => {
       case ModuleType.SETTINGS: return <SettingsModule config={schoolConfig} setConfig={setSchoolConfig} theme={theme} setTheme={setTheme} teachers={teachers} setTeachers={setTeachers} lessons={lessons} setLessons={setLessons} classes={classes} setClasses={setClasses} announcements={announcements} setAnnouncements={setAnnouncements} courses={courses} setCourses={setCourses} schedule={finalSchedule} setSchedule={setFinalSchedule} onRestoreDNA={handleRestoreDNA} onImportData={handleImportStudents} onClearAll={handleHardReset} onSuccess={triggerSuccess} schoolId={session.schoolId} />;
       case ModuleType.SUBSCRIPTION_REQUIRED: {
         const studentCount = classes.reduce((acc, c) => acc + (c.students?.length || 0), 0);
-        const [isCalculating, setIsCalculating] = useState(false);
-        const [showFinalPay, setShowFinalPay] = useState(false);
-        const [totalAmount, setTotalAmount] = useState((studentCount * 1.80).toFixed(2));
-
-        const handleCalculate = () => {
-          setIsCalculating(true);
-          setTimeout(() => {
-            setIsCalculating(false);
-            setShowFinalPay(true);
-          }, 1500);
-        };
-
-        const handleProceedToPayment = () => {
-          // Bu kısım gerçek bir ödeme sistemine (Stripe/PayPal vb.) yönlendirme yapabilir
-          const paymentUrl = `https://checkout.senkron.ai/pay?amount=${totalAmount}&schoolId=${session.schoolId}`;
-          window.open(paymentUrl, '_blank');
-        };
-
-        return (
-          <div className="flex flex-col items-center justify-center h-full bg-[#0d141b] text-white p-8 text-center animate-in fade-in duration-500 font-mono">
-            <div className="w-24 h-24 bg-red-500/10 border border-red-500/20 rounded-full flex items-center justify-center mb-6 shadow-[0_0_50px_rgba(239,68,68,0.2)]">
-              <i className="fa-solid fa-clock-rotate-left text-4xl text-red-500 animate-pulse"></i>
-            </div>
-            <h2 className="text-3xl font-normal tracking-tighter mb-4 uppercase">DENEME SÜRESİ DOLDU</h2>
-            <p className="text-slate-400 max-w-md mb-8 font-normal leading-relaxed">
-              14 günlük ücretsiz kullanım hakkınız sona ermiştir. <br />
-              Sistemin tüm özelliklerine erişmeye devam etmek için yıllık aboneliğinizi başlatmanız gerekmektedir.
-            </p>
-
-            <div className="bg-[#1a242e] border border-white/5 p-8 rounded-xl mb-8 w-full max-w-md shadow-2xl">
-              <div className="flex justify-between items-center mb-6">
-                <span className="text-[10px] font-normal text-slate-500 uppercase tracking-widest">YILLIK ÜCRET (ÖĞRENCİ BAŞI)</span>
-                <span className="text-xl font-normal text-[#fbbf24]">$1.80</span>
-              </div>
-              <div className="flex justify-between items-center pb-6 border-b border-white/5">
-                <span className="text-[10px] font-normal text-slate-500 uppercase tracking-widest">AKTİF ÖĞRENCİ SAYISI</span>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-xl font-normal text-white">{studentCount}</span>
-                </div>
-              </div>
-
-              {!showFinalPay ? (
-                <button
-                  onClick={handleCalculate}
-                  disabled={isCalculating}
-                  className="w-full mt-6 py-4 bg-slate-800 border border-white/10 text-white font-normal text-xs uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center justify-center gap-2"
-                >
-                  {isCalculating ? (
-                    <>
-                      <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      HESAPLANIYOR...
-                    </>
-                  ) : (
-                    "ÖDEME TUTARINI HESAPLA"
-                  )}
-                </button>
-              ) : (
-                <div className="mt-6 animate-in zoom-in duration-300">
-                  <div className="flex justify-between items-center p-4 bg-green-500/5 border border-green-500/20 rounded-lg mb-6">
-                    <span className="text-[12px] font-normal text-green-500 uppercase tracking-widest">TOPLAM TAHSİLAT</span>
-                    <span className="text-2xl font-normal text-green-500 animate-pulse">${totalAmount} <span className="text-xs">/ YIL</span></span>
-                  </div>
-                  <button
-                    onClick={handleProceedToPayment}
-                    className="w-full py-5 bg-green-600 text-white font-normal text-sm uppercase tracking-[0.2em] shadow-[0_0_30px_rgba(22,163,74,0.3)] hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-3"
-                  >
-                    <i className="fa-solid fa-credit-card"></i> ÖDEME SAYFASINA GİT
-                  </button>
-                </div>
-              )}
-            </div>
-
-            <div className="flex flex-col gap-4">
-              <button
-                onClick={() => { localStorage.removeItem('senkron_session'); window.location.reload(); }}
-                className="text-[10px] font-normal text-slate-600 hover:text-white uppercase tracking-widest border-b border-transparent hover:border-white/20 transition-all"
-              >
-                FARKLI HESAPLA GİRİŞ YAP
-              </button>
-            </div>
-          </div>
-        );
+        return <SubscriptionRequiredView studentCount={studentCount} session={session} />;
       }
       default: return <Dashboard teachers={teachers} classes={classes} setClasses={setClasses} lessons={lessons} schedule={finalSchedule} setActiveModule={setActiveModule} announcements={announcements} userRole={session?.role} userName={session?.name} userId={session?.id} courses={courses} setCourses={setCourses} onSuccess={triggerSuccess} subscriptionStatus={session?.subscriptionStatus} trialEndsAt={session?.trialEndsAt} />;
     }

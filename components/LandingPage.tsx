@@ -234,12 +234,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
         },
         {
             q: "Fiyatlandırma modeliniz nedir?",
-            a: "Senkron, öğrenci başı yıllık lisanslama modeliyle çalışır. Yıllık öğrenci başı ücretimiz $1.80'dır. Bu ücrete tüm güncellemeler ve teknik destek dahildir."
+            a: "Senkron, öğrenci başı yıllık lisanslama modeliyle çalışır. Yıllık öğrenci başı ücretimiz $2.00'dır. Bu ücrete tüm güncellemeler ve teknik destek dahildir."
         }
     ];
 
     // Calculator Logic
-    const estimatedPrice = Number(studentCount) * 1.80;
+    const estimatedPrice = Number(studentCount) * 2.00;
     const monthlyPrice = estimatedPrice / 12;
 
     return (
@@ -597,7 +597,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                 <div className="flex flex-col sm:flex-row justify-between items-center gap-6 py-8 bg-gradient-to-br from-cyan-50 to-blue-50 px-8 rounded-none border border-cyan-100/50">
                                     <div className="flex flex-col text-center sm:text-left">
                                         <span className="text-cyan-900 font-normal text-xs uppercase tracking-[0.2em] mb-1">Yıllık Lisans Bedeli</span>
-                                        <span className="text-slate-500 text-[11px] font-normal">Öğrenci başı $1.80 (Tüm özellikler dahil)</span>
+                                        <span className="text-slate-500 text-[11px] font-normal">Öğrenci başı $2.00 (Tüm özellikler dahil)</span>
                                     </div>
                                     <div className="flex flex-col items-center sm:items-end">
                                         <div className="text-cyan-600 font-normal text-5xl tracking-tighter">
