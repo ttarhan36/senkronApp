@@ -102,8 +102,8 @@ const ForcePasswordChangeModal: React.FC<Props> = ({ userId, userType, currentUs
             <div className="bg-[#0f172a] border-2 border-red-500 w-full max-w-md shadow-[0_0_50px_rgba(239,68,68,0.5)] animate-in zoom-in-95">
                 <div className="bg-red-500/10 p-6 border-b border-red-500/30 text-center">
                     <i className="fa-solid fa-lock text-4xl text-red-500 mb-4 animate-pulse"></i>
-                    <h2 className="text-xl font-black text-white uppercase tracking-widest">GÜVENLİK UYARISI</h2>
-                    <p className="text-[10px] font-bold text-red-400 mt-2 uppercase tracking-wide">
+                    <h2 className="text-xl font-normal text-white uppercase tracking-widest">GÜVENLİK UYARISI</h2>
+                    <p className="text-[10px] font-normal text-red-400 mt-2 uppercase tracking-wide">
                         BU HESAP İLE İLK KEZ GİRİŞ YAPIYORSUNUZ.<br />
                         DEVAM ETMEK İÇİN KENDİ KULLANICI ADINIZI VE ŞİFRENİZİ BELİRLEMENİZ ZORUNLUDUR.
                     </p>
@@ -111,10 +111,10 @@ const ForcePasswordChangeModal: React.FC<Props> = ({ userId, userType, currentUs
 
                 <form onSubmit={handleSubmit} className="p-8 space-y-4">
                     <div className="space-y-1">
-                        <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">YENİ KULLANICI ADI</label>
+                        <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">YENİ KULLANICI ADI</label>
                         <input
                             type="text"
-                            className="w-full h-12 bg-black border border-red-900/50 focus:border-red-500 text-white px-4 font-bold outline-none transition-colors"
+                            className="w-full h-12 bg-black border border-red-900/50 focus:border-red-500 text-white px-4 font-normal outline-none transition-colors"
                             placeholder="EN AZ 3 KARAKTER"
                             value={newUsername}
                             onChange={e => setNewUsername(e.target.value)}
@@ -123,10 +123,10 @@ const ForcePasswordChangeModal: React.FC<Props> = ({ userId, userType, currentUs
                     </div>
 
                     <div className="space-y-1">
-                        <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">YENİ ŞİFRE</label>
+                        <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">YENİ ŞİFRE</label>
                         <input
                             type="text"
-                            className="w-full h-12 bg-black border border-red-900/50 focus:border-red-500 text-white px-4 font-bold outline-none transition-colors"
+                            className="w-full h-12 bg-black border border-red-900/50 focus:border-red-500 text-white px-4 font-normal outline-none transition-colors"
                             placeholder="EN AZ 6 KARAKTER"
                             value={newPassword}
                             onChange={e => setNewPassword(e.target.value)}
@@ -135,10 +135,10 @@ const ForcePasswordChangeModal: React.FC<Props> = ({ userId, userType, currentUs
                     </div>
 
                     <div className="space-y-1">
-                        <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">ŞİFRE TEKRAR</label>
+                        <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">ŞİFRE TEKRAR</label>
                         <input
                             type="text"
-                            className="w-full h-12 bg-black border border-red-900/50 focus:border-red-500 text-white px-4 font-bold outline-none transition-colors"
+                            className="w-full h-12 bg-black border border-red-900/50 focus:border-red-500 text-white px-4 font-normal outline-none transition-colors"
                             placeholder="ŞİFREYİ TEKRAR GİRİN"
                             value={confirmPassword}
                             onChange={e => setConfirmPassword(e.target.value)}
@@ -147,14 +147,14 @@ const ForcePasswordChangeModal: React.FC<Props> = ({ userId, userType, currentUs
                     </div>
 
                     {error && (
-                        <div className="p-3 bg-red-900/20 text-red-500 text-[9px] font-black uppercase text-center border border-red-500/20">
+                        <div className="p-3 bg-red-900/20 text-red-500 text-[9px] font-normal uppercase text-center border border-red-500/20">
                             {error}
                         </div>
                     )}
 
                     <button
                         disabled={loading}
-                        className="w-full h-14 bg-red-600 hover:bg-red-500 text-white font-black text-[11px] uppercase tracking-[0.3em] shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full h-14 bg-red-600 hover:bg-red-500 text-white font-normal text-[11px] uppercase tracking-[0.3em] shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {loading ? 'GÜNCELLENİYOR...' : 'KAYDET VE GİRİŞ YAP'}
                     </button>

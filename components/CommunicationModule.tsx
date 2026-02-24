@@ -217,7 +217,7 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
               setIsEditorOpen(true);
             }
           }}
-          className="h-10 sm:h-11 px-5 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-widest shadow-lg flex items-center justify-center gap-3 hover:brightness-110 active:scale-95 transition-all border border-white/10 shrink-0"
+          className="h-10 sm:h-11 px-5 bg-[#3b82f6] text-white font-normal text-[10px] uppercase tracking-widest shadow-lg flex items-center justify-center gap-3 hover:brightness-110 active:scale-95 transition-all border border-white/10 shrink-0"
         >
           <i className="fa-solid fa-tower-broadcast animate-pulse"></i>
           <span className="inline">+ YENİ_YAYIN</span>
@@ -236,7 +236,7 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
                 <div className="absolute left-0 top-0 bottom-0 w-1 shadow-[0_0_15px_currentColor]" style={{ backgroundColor: audienceColor, color: audienceColor }}></div>
 
                 {item.isPinned && (
-                  <div className="absolute top-2 right-12 text-[#fbbf24] text-[8px] font-black uppercase tracking-widest flex items-center gap-1.5 opacity-60">
+                  <div className="absolute top-2 right-12 text-[#fbbf24] text-[8px] font-normal uppercase tracking-widest flex items-center gap-1.5 opacity-60">
                     <i className="fa-solid fa-thumbtack"></i> SABİTLENDİ
                   </div>
                 )}
@@ -245,15 +245,15 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
                   <div className="flex flex-col min-w-0 flex-1 pr-4">
                     <div className="flex items-center gap-3">
                       <i className="fa-solid fa-users text-[12px]" style={{ color: audienceColor }}></i>
-                      <span className="text-[13px] font-medium text-white/80 uppercase tracking-tighter group-hover:text-[#3b82f6] truncate">{item.title}</span>
+                      <span className="text-[13px] font-normal text-white/80 uppercase tracking-tighter group-hover:text-[#3b82f6] truncate">{item.title}</span>
                     </div>
                     <div className="flex wrap items-center gap-x-4 gap-y-2 mt-2">
-                      <span className="text-[7px] font-bold text-slate-500 uppercase tracking-widest">{new Date(item.timestamp).toLocaleString('tr-TR')}</span>
+                      <span className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">{new Date(item.timestamp).toLocaleString('tr-TR')}</span>
                       <div className="flex items-center gap-1.5 bg-black/40 px-2 py-0.5 border border-white/5 rounded-sm">
-                        <span className="text-[6px] font-black text-slate-500 uppercase tracking-tighter">SLOT:</span>
-                        <span className="text-[7px] font-black text-[#fbbf24] uppercase tracking-widest">DUYURU</span>
+                        <span className="text-[6px] font-normal text-slate-500 uppercase tracking-tighter">SLOT:</span>
+                        <span className="text-[7px] font-normal text-[#fbbf24] uppercase tracking-widest">DUYURU</span>
                       </div>
-                      <span className="text-[6px] font-black px-1.5 py-0.5 rounded-sm border uppercase" style={{ borderColor: `${audienceColor}40`, color: audienceColor, backgroundColor: `${audienceColor}10` }}>
+                      <span className="text-[6px] font-normal px-1.5 py-0.5 rounded-sm border uppercase" style={{ borderColor: `${audienceColor}40`, color: audienceColor, backgroundColor: `${audienceColor}10` }}>
                         {getAudienceLabel(item.audience)}
                       </span>
                     </div>
@@ -261,8 +261,8 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
 
                   <div className="flex items-center gap-4 shrink-0 border-l border-white/5 pl-4">
                     <div className="flex flex-col items-end opacity-40">
-                      <span className="text-[14px] font-black text-white">{item.readCount}</span>
-                      <span className="text-[6px] font-black text-slate-500 uppercase tracking-widest">OKUNDU_DNA</span>
+                      <span className="text-[14px] font-normal text-white">{item.readCount}</span>
+                      <span className="text-[6px] font-normal text-slate-500 uppercase tracking-widest">OKUNDU_DNA</span>
                     </div>
                     {hasPermission && (
                       <button
@@ -275,11 +275,11 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
                   </div>
                 </div>
 
-                <p className="text-[11px] font-bold text-slate-300 leading-relaxed italic border-l-2 border-white/5 pl-4 py-1">{item.content}</p>
+                <p className="text-[11px] font-normal text-slate-300 leading-relaxed italic border-l-2 border-white/5 pl-4 py-1">{item.content}</p>
 
                 {item.location && (
                   <div className="mt-4 pt-3 border-t border-white/5">
-                    <div className="flex items-center gap-2 text-[8px] font-black text-slate-500 uppercase italic">
+                    <div className="flex items-center gap-2 text-[8px] font-normal text-slate-500 uppercase italic">
                       <i className="fa-solid fa-location-dot text-[#3b82f6]"></i>
                       KONUM: {item.location}
                     </div>
@@ -293,11 +293,11 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
                   className="w-16 h-full bg-[#3b82f6] text-white flex flex-col items-center justify-center border-l border-white/10 active:brightness-90 transition-all"
                 >
                   <i className="fa-solid fa-pen text-xs mb-1"></i>
-                  <span className="text-[6px] font-black uppercase">DÜZENLE</span>
+                  <span className="text-[6px] font-normal uppercase">DÜZENLE</span>
                 </button>
                 <button onClick={(e) => { e.stopPropagation(); deleteAnnouncement(item.id); }} className="w-16 h-full bg-red-600 text-white flex flex-col items-center justify-center border-l border-white/10 active:brightness-90 transition-all">
                   <i className="fa-solid fa-trash-can text-xs mb-1"></i>
-                  <span className="text-[6px] font-black uppercase">SİL</span>
+                  <span className="text-[6px] font-normal uppercase">SİL</span>
                 </button>
               </div>
             </div>
@@ -315,10 +315,10 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
                   <i className={`fa-solid ${editingId ? 'fa-pen-to-square' : 'fa-tower-broadcast'} text-[#3b82f6] text-lg`}></i>
                 </div>
                 <div>
-                  <h3 className="text-[13px] sm:text-[14px] font-black text-white uppercase tracking-widest leading-none">
+                  <h3 className="text-[13px] sm:text-[14px] font-normal text-white uppercase tracking-widest leading-none">
                     {editingId ? 'YAYIN_DÜZENLEME' : 'YAYIN_SİHİRBAZI'}
                   </h3>
-                  <span className="text-[8px] font-black text-[#3b82f6] uppercase tracking-[0.3em] mt-1.5 block">HABERLEŞME_DNA_GİRİŞİ</span>
+                  <span className="text-[8px] font-normal text-[#3b82f6] uppercase tracking-[0.3em] mt-1.5 block">HABERLEŞME_DNA_GİRİŞİ</span>
                 </div>
               </div>
               <button onClick={() => { setIsEditorOpen(false); setEditingId(null); }} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all active:scale-90"><i className="fa-solid fa-xmark text-lg"></i></button>
@@ -326,11 +326,11 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
 
             <div className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 space-y-6">
               <div className="space-y-1.5">
-                <label className="text-[8px] font-black text-[#fbbf24] uppercase tracking-widest ml-1">HEDEF_KİTLE_DNA (GÖNDERİLECEK BİRİMLER)</label>
+                <label className="text-[8px] font-normal text-[#fbbf24] uppercase tracking-widest ml-1">HEDEF_KİTLE_DNA (GÖNDERİLECEK BİRİMLER)</label>
                 <select
                   value={formData.audience}
                   onChange={e => setFormData({ ...formData, audience: e.target.value })}
-                  className="w-full bg-black border border-white/10 p-4 text-[12px] font-black text-white outline-none focus:border-[#3b82f6] shadow-inner appearance-none"
+                  className="w-full bg-black border border-white/10 p-4 text-[12px] font-normal text-white outline-none focus:border-[#3b82f6] shadow-inner appearance-none"
                 >
                   <option value="ALL">TÜM OKUL (HERKES)</option>
                   <option value="TEACHERS">SADECE TÜM ÖĞRETMENLER</option>
@@ -351,31 +351,31 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">YAYIN_BAŞLIĞI</label>
+                <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">YAYIN_BAŞLIĞI</label>
                 <input
                   placeholder="DUYURU_METNİ_BAŞLIĞI..."
-                  className="w-full bg-black border border-white/10 p-3.5 text-[12px] sm:text-[13px] font-black text-white uppercase outline-none focus:border-[#3b82f6] shadow-inner"
+                  className="w-full bg-black border border-white/10 p-3.5 text-[12px] sm:text-[13px] font-normal text-white uppercase outline-none focus:border-[#3b82f6] shadow-inner"
                   value={formData.title}
                   onChange={e => setFormData({ ...formData, title: e.target.value })}
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">İÇERİK_DNA_NAKIŞI</label>
+                <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">İÇERİK_DNA_NAKIŞI</label>
                 <textarea
                   rows={5}
                   placeholder="YAYINLANACAK MESAJI BURAYA NAKŞEDİN..."
-                  className="w-full bg-black border border-white/10 p-3.5 text-[11px] sm:text-[12px] font-bold text-slate-300 outline-none focus:border-[#3b82f6] resize-none shadow-inner leading-relaxed"
+                  className="w-full bg-black border border-white/10 p-3.5 text-[11px] sm:text-[12px] font-normal text-slate-300 outline-none focus:border-[#3b82f6] resize-none shadow-inner leading-relaxed"
                   value={formData.content}
                   onChange={e => setFormData({ ...formData, content: e.target.value })}
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">MEVKİ_ETİKETİ (OPSİYONEL)</label>
+                <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">MEVKİ_ETİKETİ (OPSİYONEL)</label>
                 <input
                   placeholder="Örn: Konferans Salonu"
-                  className="w-full bg-black border border-white/10 p-3 text-[11px] font-black text-slate-300 outline-none focus:border-[#3b82f6] shadow-inner"
+                  className="w-full bg-black border border-white/10 p-3 text-[11px] font-normal text-slate-300 outline-none focus:border-[#3b82f6] shadow-inner"
                   value={formData.location}
                   onChange={e => setFormData({ ...formData, location: e.target.value })}
                 />
@@ -387,8 +387,8 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
                   className={`h-12 sm:h-14 border transition-all flex items-center justify-between px-3 sm:px-4 group ${formData.isPinned ? 'bg-[#fbbf24] border-[#fbbf24] text-black shadow-lg' : 'bg-black border-white/10 text-slate-600'}`}
                 >
                   <div className="flex flex-col items-start">
-                    <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest">SABİTLE</span>
-                    <span className="text-[5px] font-bold uppercase opacity-60">ÜST_DNA</span>
+                    <span className="text-[8px] sm:text-[9px] font-normal uppercase tracking-widest">SABİTLE</span>
+                    <span className="text-[5px] font-normal uppercase opacity-60">ÜST_DNA</span>
                   </div>
                   <i className={`fa-solid fa-thumbtack ${formData.isPinned ? 'animate-bounce' : ''}`}></i>
                 </button>
@@ -399,8 +399,8 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
                     className={`h-12 sm:h-14 border transition-all flex items-center justify-between px-3 sm:px-4 group ${socialSync ? 'bg-[#22c55e] border-[#22c55e] text-white shadow-lg' : 'bg-black border-white/10 text-slate-600'}`}
                   >
                     <div className="flex flex-col items-start">
-                      <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest">SOSYAL_SYNC</span>
-                      <span className="text-[5px] font-bold uppercase opacity-60">DNA_DAĞITIM</span>
+                      <span className="text-[8px] sm:text-[9px] font-normal uppercase tracking-widest">SOSYAL_SYNC</span>
+                      <span className="text-[5px] font-normal uppercase opacity-60">DNA_DAĞITIM</span>
                     </div>
                     <i className="fa-solid fa-share-nodes"></i>
                   </button>
@@ -412,7 +412,7 @@ const CommunicationModule: React.FC<CommunicationModuleProps> = ({
               <button
                 onClick={handleSave}
                 disabled={!formData.title || !formData.content}
-                className="w-full h-14 sm:h-16 bg-[#3b82f6] text-white font-black text-[12px] uppercase tracking-[0.4em] shadow-[0_10px_40px_rgba(59,130,246,0.4)] hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-20 disabled:grayscale"
+                className="w-full h-14 sm:h-16 bg-[#3b82f6] text-white font-normal text-[12px] uppercase tracking-[0.4em] shadow-[0_10px_40px_rgba(59,130,246,0.4)] hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-20 disabled:grayscale"
               >
                 {editingId ? 'DEĞİŞİKLİKLERİ_MÜHÜRLLE' : 'YAYINI_BAŞLAT'}
               </button>

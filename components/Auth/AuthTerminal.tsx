@@ -333,15 +333,15 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
 
         {/* HEADER */}
         <div className="p-8 pb-4 text-center">
-          <h1 className="text-3xl font-black text-white uppercase tracking-[0.4em] mb-2">SENKRON</h1>
-          <p className="text-[9px] font-bold text-[#3b82f6] uppercase tracking-[0.3em]">BULUT TERMİNALİ v2.5.0</p>
+          <h1 className="text-3xl font-normal text-white uppercase tracking-[0.4em] mb-2">SENKRON</h1>
+          <p className="text-[9px] font-normal text-[#3b82f6] uppercase tracking-[0.3em]">BULUT TERMİNALİ v2.5.0</p>
         </div>
 
         {/* TABS */}
         <div className="flex px-8 gap-2 mb-6">
-          <button onClick={() => { setActiveTab('ADMIN'); resetForms(); }} className={`flex-1 h-10 text-[9px] font-black uppercase tracking-widest border-b-2 transition-all ${activeTab === 'ADMIN' ? 'text-white border-[#3b82f6]' : 'text-slate-600 border-transparent hover:text-slate-400'}`}>İDARECİ</button>
-          <button onClick={() => { setActiveTab('TEACHER'); resetForms(); }} className={`flex-1 h-10 text-[9px] font-black uppercase tracking-widest border-b-2 transition-all ${activeTab === 'TEACHER' ? 'text-white border-[#3b82f6]' : 'text-slate-600 border-transparent hover:text-slate-400'}`}>ÖĞRETMEN</button>
-          <button onClick={() => { setActiveTab('STUDENT'); resetForms(); }} className={`flex-1 h-10 text-[9px] font-black uppercase tracking-widest border-b-2 transition-all ${activeTab === 'STUDENT' ? 'text-white border-[#3b82f6]' : 'text-slate-600 border-transparent hover:text-slate-400'}`}>ÖĞRENCİ</button>
+          <button onClick={() => { setActiveTab('ADMIN'); resetForms(); }} className={`flex-1 h-10 text-[9px] font-normal uppercase tracking-widest border-b-2 transition-all ${activeTab === 'ADMIN' ? 'text-white border-[#3b82f6]' : 'text-slate-600 border-transparent hover:text-slate-400'}`}>İDARECİ</button>
+          <button onClick={() => { setActiveTab('TEACHER'); resetForms(); }} className={`flex-1 h-10 text-[9px] font-normal uppercase tracking-widest border-b-2 transition-all ${activeTab === 'TEACHER' ? 'text-white border-[#3b82f6]' : 'text-slate-600 border-transparent hover:text-slate-400'}`}>ÖĞRETMEN</button>
+          <button onClick={() => { setActiveTab('STUDENT'); resetForms(); }} className={`flex-1 h-10 text-[9px] font-normal uppercase tracking-widest border-b-2 transition-all ${activeTab === 'STUDENT' ? 'text-white border-[#3b82f6]' : 'text-slate-600 border-transparent hover:text-slate-400'}`}>ÖĞRENCİ</button>
         </div>
 
         {/* Back to Home Button */}
@@ -362,53 +362,53 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
             mode === 'LOGIN' ? (
               <form onSubmit={handleAdminLogin} className="space-y-5 animate-in fade-in slide-in-from-right-4">
                 <div className="space-y-1">
-                  <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">E-POSTA</label>
-                  <input autoFocus required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-black text-[12px] outline-none focus:border-[#3b82f6] uppercase placeholder:text-slate-700" placeholder="YÖNETİCİ E-POSTASI..." value={email} onChange={e => setEmail(e.target.value)} />
+                  <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">E-POSTA</label>
+                  <input autoFocus required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-normal text-[12px] outline-none focus:border-[#3b82f6] uppercase placeholder:text-slate-700" placeholder="YÖNETİCİ E-POSTASI..." value={email} onChange={e => setEmail(e.target.value)} />
                 </div>
                 <div className="space-y-1">
-                  <div className="flex justify-between"><label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">ŞİFRE</label><button type="button" onClick={() => setMode('RESET')} className="text-[7px] text-[#3b82f6]">UNUTTUM</button></div>
+                  <div className="flex justify-between"><label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">ŞİFRE</label><button type="button" onClick={() => setMode('RESET')} className="text-[7px] text-[#3b82f6]">UNUTTUM</button></div>
                   <div className="relative">
-                    <input type={showPassword ? "text" : "password"} required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-black text-[12px] outline-none focus:border-[#3b82f6]" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
+                    <input type={showPassword ? "text" : "password"} required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-normal text-[12px] outline-none focus:border-[#3b82f6]" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
                     <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"><i className={`fa-solid ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i></button>
                   </div>
                 </div>
-                {error && <div className="p-3 bg-red-900/20 border border-red-500/20 text-red-500 text-[9px] font-black uppercase text-center">{error}</div>}
-                <button disabled={loading} className="w-full h-14 bg-[#3b82f6] text-white font-black text-[11px] uppercase tracking-[0.3em] hover:brightness-110 shadow-xl transition-all">{loading ? 'DOĞRULANIYOR...' : 'YÖNETİM_PANELİNE_GİR'}</button>
+                {error && <div className="p-3 bg-red-900/20 border border-red-500/20 text-red-500 text-[9px] font-normal uppercase text-center">{error}</div>}
+                <button disabled={loading} className="w-full h-14 bg-[#3b82f6] text-white font-normal text-[11px] uppercase tracking-[0.3em] hover:brightness-110 shadow-xl transition-all">{loading ? 'DOĞRULANIYOR...' : 'YÖNETİM_PANELİNE_GİR'}</button>
 
                 <div className="relative flex items-center gap-2 py-2">
                   <div className="h-[1px] bg-[#354a5f] flex-1"></div>
-                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">VEYA</span>
+                  <span className="text-[9px] font-normal text-slate-500 uppercase tracking-widest">VEYA</span>
                   <div className="h-[1px] bg-[#354a5f] flex-1"></div>
                 </div>
 
-                <button type="button" onClick={handleGoogleLogin} disabled={loading} className="w-full h-14 bg-white text-black font-black text-[11px] uppercase tracking-[0.3em] hover:bg-slate-200 shadow-xl transition-all flex items-center justify-center gap-3">
+                <button type="button" onClick={handleGoogleLogin} disabled={loading} className="w-full h-14 bg-white text-black font-normal text-[11px] uppercase tracking-[0.3em] hover:bg-slate-200 shadow-xl transition-all flex items-center justify-center gap-3">
                   <i className="fa-brands fa-google text-lg"></i>
                   <span>GOOGLE İLE GİRİŞ</span>
                 </button>
 
-                <div className="text-center pt-2"><button type="button" onClick={() => setMode('REGISTER')} className="text-[8px] font-black text-slate-500 hover:text-white uppercase tracking-widest">YENİ OKUL KAYDI OLUŞTUR</button></div>
+                <div className="text-center pt-2"><button type="button" onClick={() => setMode('REGISTER')} className="text-[8px] font-normal text-slate-500 hover:text-white uppercase tracking-widest">YENİ OKUL KAYDI OLUŞTUR</button></div>
               </form>
             ) : mode === 'REGISTER' ? (
               <form onSubmit={handleAdminRegister} className="space-y-4 animate-in fade-in slide-in-from-left-4">
-                <div className="space-y-1"><label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">OKUL ADI</label><input required className="w-full h-11 bg-black border border-[#354a5f] px-4 text-white font-black text-[11px] uppercase outline-none focus:border-[#fbbf24]" placeholder="KURUM ADI..." value={schoolName} onChange={e => setSchoolName(e.target.value)} /></div>
-                <div className="space-y-1"><label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">YÖNETİCİ AD SOYAD</label><input required className="w-full h-11 bg-black border border-[#354a5f] px-4 text-white font-black text-[11px] uppercase outline-none focus:border-[#fbbf24]" placeholder="TAM AD..." value={fullName} onChange={e => setFullName(e.target.value)} /></div>
-                <div className="space-y-1"><label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">E-POSTA</label><input type="email" required className="w-full h-11 bg-black border border-[#354a5f] px-4 text-white font-black text-[11px] uppercase outline-none focus:border-[#fbbf24]" placeholder="E-POSTA..." value={email} onChange={e => setEmail(e.target.value)} /></div>
+                <div className="space-y-1"><label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">OKUL ADI</label><input required className="w-full h-11 bg-black border border-[#354a5f] px-4 text-white font-normal text-[11px] uppercase outline-none focus:border-[#fbbf24]" placeholder="KURUM ADI..." value={schoolName} onChange={e => setSchoolName(e.target.value)} /></div>
+                <div className="space-y-1"><label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">YÖNETİCİ AD SOYAD</label><input required className="w-full h-11 bg-black border border-[#354a5f] px-4 text-white font-normal text-[11px] uppercase outline-none focus:border-[#fbbf24]" placeholder="TAM AD..." value={fullName} onChange={e => setFullName(e.target.value)} /></div>
+                <div className="space-y-1"><label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">E-POSTA</label><input type="email" required className="w-full h-11 bg-black border border-[#354a5f] px-4 text-white font-normal text-[11px] uppercase outline-none focus:border-[#fbbf24]" placeholder="E-POSTA..." value={email} onChange={e => setEmail(e.target.value)} /></div>
                 <div className="space-y-1">
-                  <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">ŞİFRE</label>
+                  <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">ŞİFRE</label>
                   <div className="relative">
-                    <input type={showPassword ? "text" : "password"} required className="w-full h-11 bg-black border border-[#354a5f] px-4 text-white font-black text-[11px] outline-none focus:border-[#fbbf24]" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
+                    <input type={showPassword ? "text" : "password"} required className="w-full h-11 bg-black border border-[#354a5f] px-4 text-white font-normal text-[11px] outline-none focus:border-[#fbbf24]" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
                     <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"><i className={`fa-solid ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i></button>
                   </div>
                 </div>
-                {error && <div className="p-3 bg-red-900/20 border border-red-500/20 text-red-500 text-[9px] font-black uppercase text-center">{error}</div>}
-                <button disabled={loading} className="w-full h-14 bg-[#fbbf24] text-black font-black text-[11px] uppercase tracking-[0.3em] hover:brightness-110 shadow-xl transition-all">{loading ? 'KAYDEDİLİYOR...' : 'OKULU_KAYDET'}</button>
-                <div className="text-center pt-2"><button type="button" onClick={() => setMode('LOGIN')} className="text-[8px] font-black text-slate-500 hover:text-white uppercase tracking-widest">GİRİŞ EKRANINA DÖN</button></div>
+                {error && <div className="p-3 bg-red-900/20 border border-red-500/20 text-red-500 text-[9px] font-normal uppercase text-center">{error}</div>}
+                <button disabled={loading} className="w-full h-14 bg-[#fbbf24] text-black font-normal text-[11px] uppercase tracking-[0.3em] hover:brightness-110 shadow-xl transition-all">{loading ? 'KAYDEDİLİYOR...' : 'OKULU_KAYDET'}</button>
+                <div className="text-center pt-2"><button type="button" onClick={() => setMode('LOGIN')} className="text-[8px] font-normal text-slate-500 hover:text-white uppercase tracking-widest">GİRİŞ EKRANINA DÖN</button></div>
               </form>
             ) : (
               <form onSubmit={async (e) => { e.preventDefault(); setLoading(true); try { await supabase.auth.resetPasswordForEmail(email); triggerSuccess("LİNK GÖNDERİLDİ"); setMode('LOGIN'); } catch (err: any) { setError(err.message); } finally { setLoading(false); } }} className="space-y-5 animate-in fade-in">
-                <div className="space-y-1"><label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">E-POSTA</label><input type="email" required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-black text-[12px] outline-none focus:border-[#3b82f6]" placeholder="E-POSTA..." value={email} onChange={e => setEmail(e.target.value)} /></div>
-                <button disabled={loading} className="w-full h-14 bg-white text-black font-black text-[11px] uppercase tracking-[0.3em] hover:brightness-110 shadow-xl transition-all">SIFIRLAMA LİNKİ GÖNDER</button>
-                <div className="text-center pt-2"><button type="button" onClick={() => setMode('LOGIN')} className="text-[8px] font-black text-slate-500 hover:text-white uppercase tracking-widest">VAZGEÇ</button></div>
+                <div className="space-y-1"><label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">E-POSTA</label><input type="email" required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-normal text-[12px] outline-none focus:border-[#3b82f6]" placeholder="E-POSTA..." value={email} onChange={e => setEmail(e.target.value)} /></div>
+                <button disabled={loading} className="w-full h-14 bg-white text-black font-normal text-[11px] uppercase tracking-[0.3em] hover:brightness-110 shadow-xl transition-all">SIFIRLAMA LİNKİ GÖNDER</button>
+                <div className="text-center pt-2"><button type="button" onClick={() => setMode('LOGIN')} className="text-[8px] font-normal text-slate-500 hover:text-white uppercase tracking-widest">VAZGEÇ</button></div>
               </form>
             )
           )}
@@ -417,27 +417,27 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
           {activeTab === 'TEACHER' && (
             <form onSubmit={handleTeacherLogin} className="space-y-5 animate-in fade-in slide-in-from-right-4">
               <div className="p-4 bg-[#3b82f6]/5 border border-[#3b82f6]/20 mb-2">
-                <p className="text-[9px] text-slate-400 font-bold text-center leading-relaxed">
+                <p className="text-[9px] text-slate-400 font-normal text-center leading-relaxed">
                   ÖĞRETMEN GİRİŞİ İÇİN OKUL KODU ALANI <span className="text-[#3b82f6]">OPSİYONELDİR.</span> SİSTEM HESABINIZI OTOMATİK ALGILAR.
                 </p>
               </div>
               <div className="space-y-1">
-                <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">OKUL KODU (OPSİYONEL)</label>
-                <input className="w-full h-12 bg-black border border-[#354a5f] px-4 text-[#fbbf24] font-black text-[14px] outline-none focus:border-[#3b82f6] uppercase placeholder:text-slate-800 tracking-widest" placeholder="OTOMATİK ALGILA (BOŞ BIRAKILABİLİR)" value={schoolIdInput} onChange={e => setSchoolIdInput(e.target.value)} />
+                <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">OKUL KODU (OPSİYONEL)</label>
+                <input className="w-full h-12 bg-black border border-[#354a5f] px-4 text-[#fbbf24] font-normal text-[14px] outline-none focus:border-[#3b82f6] uppercase placeholder:text-slate-800 tracking-widest" placeholder="OTOMATİK ALGILA (BOŞ BIRAKILABİLİR)" value={schoolIdInput} onChange={e => setSchoolIdInput(e.target.value)} />
               </div>
               <div className="space-y-1">
-                <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">KULLANICI ADI</label>
-                <input required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-black text-[12px] outline-none focus:border-[#3b82f6] placeholder:text-slate-700" placeholder="KULLANICI ADINIZ" value={usernameInput} onChange={e => setUsernameInput(e.target.value)} />
+                <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">KULLANICI ADI</label>
+                <input required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-normal text-[12px] outline-none focus:border-[#3b82f6] placeholder:text-slate-700" placeholder="KULLANICI ADINIZ" value={usernameInput} onChange={e => setUsernameInput(e.target.value)} />
               </div>
               <div className="space-y-1">
-                <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">ŞİFRE</label>
+                <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">ŞİFRE</label>
                 <div className="relative">
-                  <input type={showPassword ? "text" : "password"} required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-black text-[12px] outline-none focus:border-[#3b82f6] placeholder:text-slate-700" placeholder="******" value={userPasswordInput} onChange={e => setUserPasswordInput(e.target.value)} />
+                  <input type={showPassword ? "text" : "password"} required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-normal text-[12px] outline-none focus:border-[#3b82f6] placeholder:text-slate-700" placeholder="******" value={userPasswordInput} onChange={e => setUserPasswordInput(e.target.value)} />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"><i className={`fa-solid ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i></button>
                 </div>
               </div>
-              {error && <div className="p-3 bg-red-900/20 border border-red-500/20 text-red-500 text-[9px] font-black uppercase text-center">{error}</div>}
-              <button disabled={loading} className="w-full h-14 bg-[#3b82f6] text-white font-black text-[11px] uppercase tracking-[0.3em] hover:brightness-110 shadow-xl transition-all">
+              {error && <div className="p-3 bg-red-900/20 border border-red-500/20 text-red-500 text-[9px] font-normal uppercase text-center">{error}</div>}
+              <button disabled={loading} className="w-full h-14 bg-[#3b82f6] text-white font-normal text-[11px] uppercase tracking-[0.3em] hover:brightness-110 shadow-xl transition-all">
                 {loading ? 'DOĞRULANIYOR...' : 'KADRO_GİRİŞİ'}
               </button>
             </form>
@@ -447,27 +447,27 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
           {activeTab === 'STUDENT' && (
             <form onSubmit={handleStudentLogin} className="space-y-5 animate-in fade-in slide-in-from-right-4">
               <div className="p-4 bg-[#3b82f6]/5 border border-[#3b82f6]/20 mb-2">
-                <p className="text-[9px] text-slate-400 font-bold text-center leading-relaxed">
+                <p className="text-[9px] text-slate-400 font-normal text-center leading-relaxed">
                   ÖĞRENCİ PANELİ İÇİN OKUL KODU ALANI <span className="text-[#3b82f6]">OPSİYONELDİR.</span> SİSTEM HESABINIZI OTOMATİK ALGILAR.
                 </p>
               </div>
               <div className="space-y-1">
-                <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">OKUL KODU (OPSİYONEL)</label>
-                <input className="w-full h-12 bg-black border border-[#354a5f] px-4 text-[#fbbf24] font-black text-[14px] outline-none focus:border-[#3b82f6] uppercase placeholder:text-slate-800 tracking-widest" placeholder="OTOMATİK ALGILA (BOŞ BIRAKILABİLİR)" value={schoolIdInput} onChange={e => setSchoolIdInput(e.target.value)} />
+                <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">OKUL KODU (OPSİYONEL)</label>
+                <input className="w-full h-12 bg-black border border-[#354a5f] px-4 text-[#fbbf24] font-normal text-[14px] outline-none focus:border-[#3b82f6] uppercase placeholder:text-slate-800 tracking-widest" placeholder="OTOMATİK ALGILA (BOŞ BIRAKILABİLİR)" value={schoolIdInput} onChange={e => setSchoolIdInput(e.target.value)} />
               </div>
               <div className="space-y-1">
-                <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">KULLANICI ADI</label>
-                <input required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-black text-[14px] outline-none focus:border-[#3b82f6] placeholder:text-slate-700 tracking-widest" placeholder="NUMARANIZ VEYA KULLANICI ADI" value={usernameInput} onChange={e => setUsernameInput(e.target.value)} />
+                <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">KULLANICI ADI</label>
+                <input required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-normal text-[14px] outline-none focus:border-[#3b82f6] placeholder:text-slate-700 tracking-widest" placeholder="NUMARANIZ VEYA KULLANICI ADI" value={usernameInput} onChange={e => setUsernameInput(e.target.value)} />
               </div>
               <div className="space-y-1">
-                <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest">ŞİFRE</label>
+                <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">ŞİFRE</label>
                 <div className="relative">
-                  <input type={showPassword ? "text" : "password"} required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-black text-[14px] outline-none focus:border-[#3b82f6] placeholder:text-slate-700 tracking-widest" placeholder="******" value={userPasswordInput} onChange={e => setUserPasswordInput(e.target.value)} />
+                  <input type={showPassword ? "text" : "password"} required className="w-full h-12 bg-black border border-[#354a5f] px-4 text-white font-normal text-[14px] outline-none focus:border-[#3b82f6] placeholder:text-slate-700 tracking-widest" placeholder="******" value={userPasswordInput} onChange={e => setUserPasswordInput(e.target.value)} />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"><i className={`fa-solid ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i></button>
                 </div>
               </div>
-              {error && <div className="p-3 bg-red-900/20 border border-red-500/20 text-red-500 text-[9px] font-black uppercase text-center">{error}</div>}
-              <button disabled={loading} className="w-full h-14 bg-[#3b82f6] text-white font-black text-[11px] uppercase tracking-[0.3em] hover:brightness-110 shadow-xl transition-all">
+              {error && <div className="p-3 bg-red-900/20 border border-red-500/20 text-red-500 text-[9px] font-normal uppercase text-center">{error}</div>}
+              <button disabled={loading} className="w-full h-14 bg-[#3b82f6] text-white font-normal text-[11px] uppercase tracking-[0.3em] hover:brightness-110 shadow-xl transition-all">
                 {loading ? 'KİMLİK DOĞRULANIYOR...' : 'ÖĞRENCİ_GİRİŞİ'}
               </button>
             </form>

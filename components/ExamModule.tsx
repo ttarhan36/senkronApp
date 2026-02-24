@@ -108,7 +108,7 @@ const BackButton: React.FC<{ onClick: () => void }> = ({ onClick }) => (
     className="flex items-center gap-2 mb-4 px-3 py-1.5 bg-[#1a2535] border border-[#354a5f]/60 hover:bg-[#243040] hover:border-[#4a6a8a] transition-all"
   >
     <span className="text-slate-200 text-[11px]">←</span>
-    <span className="text-[9px] font-black text-slate-200 uppercase tracking-widest">GERİ</span>
+    <span className="text-[9px] font-normal text-slate-200 uppercase tracking-widest">GERİ</span>
   </button>
 );
 
@@ -425,7 +425,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
     return (
       <div key={summary.subject} className="mb-2">
         <div className="flex justify-between items-center mb-0.5">
-          <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">{summary.subject}</span>
+          <span className="text-[10px] font-normal text-slate-300 uppercase tracking-widest">{summary.subject}</span>
           <span className="text-[9px] text-slate-400 font-mono">
             {summary.correct}D·{summary.wrong}Y·{summary.empty}B &nbsp;NET: <span className="text-white">{summary.net.toFixed(2)}</span>
           </span>
@@ -459,7 +459,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
 
         <div className="flex flex-wrap items-start justify-between gap-2 mb-4 border-b border-[#354a5f]/40 pb-3">
           <div>
-            <p className="text-[13px] font-black text-white uppercase tracking-[0.2em]">{selectedExam.name}</p>
+            <p className="text-[13px] font-normal text-white uppercase tracking-[0.2em]">{selectedExam.name}</p>
             <p className="text-[9px] text-slate-400 mt-0.5 uppercase tracking-widest">{EXAM_TYPE_LABELS[selectedExam.examType]} · {selectedExam.appliedDate ?? '—'}</p>
           </div>
           {['TYT', 'AYT', 'YDT'].includes(selectedExam.examType) && (
@@ -467,7 +467,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
               {FIELD_OPTIONS.map(f => (
                 <button key={f.value}
                   onClick={() => setStudentField(f.value === studentField ? null : f.value)}
-                  className={`px-2 py-1 text-[8px] font-black uppercase border transition-colors ${studentField === f.value ? 'bg-blue-600 border-blue-600 text-white' : 'bg-transparent border-[#354a5f]/50 text-slate-400 hover:text-white'}`}>
+                  className={`px-2 py-1 text-[8px] font-normal uppercase border transition-colors ${studentField === f.value ? 'bg-blue-600 border-blue-600 text-white' : 'bg-transparent border-[#354a5f]/50 text-slate-400 hover:text-white'}`}>
                   {f.label}
                 </button>
               ))}
@@ -480,7 +480,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
           {sessions.map(s => (
             <button key={s.id}
               onClick={() => setSelectedSessionId(s.id)}
-              className={`px-3 py-1.5 text-[9px] font-black uppercase tracking-wider border transition-colors ${selectedSessionId === s.id || (!selectedSessionId && s === sessions[0]) ? 'bg-[#1a2535] border-[#354a5f] text-white' : 'bg-transparent border-[#354a5f]/30 text-slate-500 hover:text-slate-300'}`}>
+              className={`px-3 py-1.5 text-[9px] font-normal uppercase tracking-wider border transition-colors ${selectedSessionId === s.id || (!selectedSessionId && s === sessions[0]) ? 'bg-[#1a2535] border-[#354a5f] text-white' : 'bg-transparent border-[#354a5f]/30 text-slate-500 hover:text-slate-300'}`}>
               {s.sessionName} <span className="text-slate-600 ml-1 font-normal">{s.questionCount}S</span>
             </button>
           ))}
@@ -489,7 +489,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
         {/* Aktif oturum: Soru listesi */}
         <div className="bg-[#0d141b]/60 border border-[#354a5f]/30 p-3 mb-3">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-[9px] font-black text-slate-300 uppercase tracking-[0.3em]">
+            <p className="text-[9px] font-normal text-slate-300 uppercase tracking-[0.3em]">
               {activeSession?.sessionName} SORULARI
               <span className="text-slate-500 font-normal ml-2">{questions.length} soru yüklü · {answeredCount} cevap girildi</span>
             </p>
@@ -509,7 +509,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
                   <span className="text-[8px] text-slate-600 font-mono w-6 shrink-0">{q.questionNumber}.</span>
                   <span className="text-[8px] text-slate-500 uppercase tracking-wider w-20 shrink-0">{q.subject}</span>
                   <span className="text-[8px] text-slate-400 flex-1 truncate font-mono">{q.questionText?.slice(0, 60) ?? '—'}</span>
-                  <span className={`text-[9px] font-black w-6 text-right shrink-0 ${q.correctAnswer ? 'text-green-400' : 'text-slate-700'}`}>
+                  <span className={`text-[9px] font-normal w-6 text-right shrink-0 ${q.correctAnswer ? 'text-green-400' : 'text-slate-700'}`}>
                     {q.correctAnswer ?? '—'}
                   </span>
                 </div>
@@ -523,12 +523,12 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
           <div className="flex gap-1 mb-3">
             <button
               onClick={() => setUploadSection(uploadSection === 'BOOKLET' ? null : 'BOOKLET')}
-              className={`px-3 py-1.5 text-[8px] font-black uppercase tracking-wider border transition-colors ${uploadSection === 'BOOKLET' ? 'bg-blue-600 border-blue-600 text-white' : 'bg-transparent border-[#354a5f]/50 text-slate-300 hover:text-white'}`}>
+              className={`px-3 py-1.5 text-[8px] font-normal uppercase tracking-wider border transition-colors ${uploadSection === 'BOOKLET' ? 'bg-blue-600 border-blue-600 text-white' : 'bg-transparent border-[#354a5f]/50 text-slate-300 hover:text-white'}`}>
               + KİTAPÇIK YÜKLE
             </button>
             <button
               onClick={() => setUploadSection(uploadSection === 'ANSWERS' ? null : 'ANSWERS')}
-              className={`px-3 py-1.5 text-[8px] font-black uppercase tracking-wider border transition-colors ${uploadSection === 'ANSWERS' ? 'bg-green-600 border-green-600 text-white' : 'bg-transparent border-[#354a5f]/50 text-slate-300 hover:text-white'}`}>
+              className={`px-3 py-1.5 text-[8px] font-normal uppercase tracking-wider border transition-colors ${uploadSection === 'ANSWERS' ? 'bg-green-600 border-green-600 text-white' : 'bg-transparent border-[#354a5f]/50 text-slate-300 hover:text-white'}`}>
               + CEVAP ANAHTARI
             </button>
           </div>
@@ -568,7 +568,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
                   <button
                     onClick={handleSaveQuestions}
                     disabled={savingQuestions}
-                    className="w-full h-8 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-[9px] font-black text-white uppercase tracking-wider transition-colors"
+                    className="w-full h-8 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-[9px] font-normal text-white uppercase tracking-wider transition-colors"
                   >
                     {savingQuestions ? 'KAYDEDİLİYOR...' : `${parsedQuestions.length} SORUYU KAYDET`}
                   </button>
@@ -596,14 +596,14 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
                   <button
                     onClick={handleParseAnswerKey}
                     disabled={!answerText.trim()}
-                    className="px-3 py-1 text-[8px] font-black uppercase border border-[#354a5f]/50 text-slate-300 hover:text-white disabled:opacity-40 transition-colors"
+                    className="px-3 py-1 text-[8px] font-normal uppercase border border-[#354a5f]/50 text-slate-300 hover:text-white disabled:opacity-40 transition-colors"
                   >
                     ÖNZLE
                   </button>
                   <button
                     onClick={handleSaveAnswers}
                     disabled={Object.keys(answerPreview).length === 0 || savingAnswers}
-                    className="px-3 py-1 text-[8px] font-black uppercase bg-green-600/20 border border-green-600/40 text-green-300 hover:bg-green-600 hover:text-white disabled:opacity-40 transition-colors"
+                    className="px-3 py-1 text-[8px] font-normal uppercase bg-green-600/20 border border-green-600/40 text-green-300 hover:bg-green-600 hover:text-white disabled:opacity-40 transition-colors"
                   >
                     {answersSaved ? 'KAYDEDILDI ✓' : savingAnswers ? 'UYGULANYOR...' : `${Object.keys(answerPreview).length} CEVABI UYGULA`}
                   </button>
@@ -628,17 +628,17 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
         {/* Net Özet */}
         <div className="grid grid-cols-3 gap-2 mb-3">
           <div className="bg-[#0d141b]/60 border border-[#354a5f]/30 p-3">
-            <p className="text-[7px] font-black text-slate-400 uppercase tracking-widest mb-1">TOPLAM NET</p>
-            <p className="text-[18px] font-black text-white font-mono">{totalNet.toFixed(2)}</p>
+            <p className="text-[7px] font-normal text-slate-400 uppercase tracking-widest mb-1">TOPLAM NET</p>
+            <p className="text-[18px] font-normal text-white font-mono">{totalNet.toFixed(2)}</p>
           </div>
           <div className="bg-[#0d141b]/60 border border-[#354a5f]/30 p-3">
-            <p className="text-[7px] font-black text-slate-400 uppercase tracking-widest mb-1">KAYIP PUAN</p>
-            <p className="text-[18px] font-black text-red-400 font-mono">-{totalLost.toFixed(2)}</p>
+            <p className="text-[7px] font-normal text-slate-400 uppercase tracking-widest mb-1">KAYIP PUAN</p>
+            <p className="text-[18px] font-normal text-red-400 font-mono">-{totalLost.toFixed(2)}</p>
           </div>
           {percentile ? (
             <div className="bg-[#0d141b]/60 border border-[#354a5f]/30 p-3">
-              <p className="text-[7px] font-black text-slate-400 uppercase tracking-widest mb-1">{percentile.year} DİLİM</p>
-              <p className="text-[18px] font-black text-blue-400 font-mono">%{percentile.percentile.toFixed(1)}</p>
+              <p className="text-[7px] font-normal text-slate-400 uppercase tracking-widest mb-1">{percentile.year} DİLİM</p>
+              <p className="text-[18px] font-normal text-blue-400 font-mono">%{percentile.percentile.toFixed(1)}</p>
             </div>
           ) : (
             <div className="bg-[#0d141b]/60 border border-[#354a5f]/30 p-3 flex items-center justify-center">
@@ -650,7 +650,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
         {/* Trafik Işığı */}
         {alerts.length > 0 && (
           <div className="bg-[#0d141b]/60 border border-[#354a5f]/30 p-3">
-            <p className="text-[8px] font-black text-slate-400 uppercase tracking-[0.3em] mb-2">TRAFİK IŞIĞI · RİSK HARİTASI</p>
+            <p className="text-[8px] font-normal text-slate-400 uppercase tracking-[0.3em] mb-2">TRAFİK IŞIĞI · RİSK HARİTASI</p>
             <div className="space-y-1">
               {alerts.map((a, i) => {
                 const c = TRAFFIC_COLORS[a.status];
@@ -658,10 +658,10 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
                   <div key={i} className={`flex items-center gap-2 px-3 py-1.5 border ${c.bg}`}>
                     <span className={`w-2 h-2 rounded-full shrink-0 ${a.status === 'RED' ? 'bg-red-500' : a.status === 'YELLOW' ? 'bg-yellow-400' : 'bg-green-500'}`} />
                     <div className="flex-1 min-w-0">
-                      <p className={`text-[9px] font-black ${c.text} uppercase`}>{a.subject}</p>
+                      <p className={`text-[9px] font-normal ${c.text} uppercase`}>{a.subject}</p>
                       <p className="text-[8px] text-slate-500 font-mono">%{a.successRate.toFixed(0)} · -{a.lostPoints.toFixed(2)} puan</p>
                     </div>
-                    <span className={`text-[8px] font-black ${c.text} shrink-0`}>{c.label}</span>
+                    <span className={`text-[8px] font-normal ${c.text} shrink-0`}>{c.label}</span>
                   </div>
                 );
               })}
@@ -676,24 +676,24 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
     return (
       <div className="p-3 md:p-5 max-w-lg mx-auto">
         <BackButton onClick={() => setView('LIST')} />
-        <p className="text-[11px] font-black text-white uppercase tracking-[0.3em] mb-4">YENİ SINAV OLUŞTUR</p>
+        <p className="text-[11px] font-normal text-white uppercase tracking-[0.3em] mb-4">YENİ SINAV OLUŞTUR</p>
         {error && <p className="text-red-400 text-[9px] mb-3 uppercase">{error}</p>}
 
         <div className="space-y-3">
           <div>
-            <p className="text-[8px] font-black text-slate-300 uppercase tracking-widest mb-1">SINAV ADI *</p>
+            <p className="text-[8px] font-normal text-slate-300 uppercase tracking-widest mb-1">SINAV ADI *</p>
             <input value={formName} onChange={e => setFormName(e.target.value)}
               placeholder="LGS Deneme 1"
               className="w-full bg-[#0d141b] border border-[#354a5f]/50 px-3 py-2 text-white text-[11px] focus:outline-none focus:border-blue-500/70 placeholder-slate-600" />
           </div>
 
           <div>
-            <p className="text-[8px] font-black text-slate-300 uppercase tracking-widest mb-1">SINAV TİPİ</p>
+            <p className="text-[8px] font-normal text-slate-300 uppercase tracking-widest mb-1">SINAV TİPİ</p>
             <div className="grid grid-cols-2 gap-1 md:grid-cols-3">
               {(Object.entries(EXAM_TYPE_LABELS) as [ExamType, string][]).map(([val, label]) => (
                 <button key={val}
                   onClick={() => { setFormType(val); setFormGrade(val === 'LGS' ? 8 : val === 'TARAMA_11' ? 11 : 12); }}
-                  className={`px-2 py-2 text-[9px] font-black uppercase tracking-wider text-left border transition-colors ${formType === val ? 'bg-blue-600 border-blue-600 text-white' : 'bg-transparent border-[#354a5f]/40 text-slate-400 hover:text-white hover:border-[#354a5f]'}`}>
+                  className={`px-2 py-2 text-[9px] font-normal uppercase tracking-wider text-left border transition-colors ${formType === val ? 'bg-blue-600 border-blue-600 text-white' : 'bg-transparent border-[#354a5f]/40 text-slate-400 hover:text-white hover:border-[#354a5f]'}`}>
                   {label}
                 </button>
               ))}
@@ -701,19 +701,19 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
           </div>
 
           <div>
-            <p className="text-[8px] font-black text-slate-300 uppercase tracking-widest mb-1">UYGULAMA TARİHİ</p>
+            <p className="text-[8px] font-normal text-slate-300 uppercase tracking-widest mb-1">UYGULAMA TARİHİ</p>
             <input type="date" value={formDate} onChange={e => setFormDate(e.target.value)}
               className="w-full bg-[#0d141b] border border-[#354a5f]/50 px-3 py-2 text-white text-[11px] focus:outline-none focus:border-blue-500/70" />
           </div>
 
           {classes.length > 0 && (
             <div>
-              <p className="text-[8px] font-black text-slate-300 uppercase tracking-widest mb-1">SINIF ATAMALARI (opsiyonel)</p>
+              <p className="text-[8px] font-normal text-slate-300 uppercase tracking-widest mb-1">SINIF ATAMALARI (opsiyonel)</p>
               <div className="flex flex-wrap gap-1">
                 {classes.map(cls => (
                   <button key={cls.id}
                     onClick={() => setFormClassIds(prev => prev.includes(cls.id) ? prev.filter(x => x !== cls.id) : [...prev, cls.id])}
-                    className={`px-2 py-1 text-[8px] font-black uppercase border transition-colors ${formClassIds.includes(cls.id) ? 'bg-blue-600/30 border-blue-500/60 text-blue-300' : 'bg-transparent border-[#354a5f]/40 text-slate-500 hover:text-slate-300'}`}>
+                    className={`px-2 py-1 text-[8px] font-normal uppercase border transition-colors ${formClassIds.includes(cls.id) ? 'bg-blue-600/30 border-blue-500/60 text-blue-300' : 'bg-transparent border-[#354a5f]/40 text-slate-500 hover:text-slate-300'}`}>
                     {cls.name}
                   </button>
                 ))}
@@ -722,10 +722,10 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
           )}
 
           <div className="bg-[#0d141b]/60 border border-[#354a5f]/30 p-3">
-            <p className="text-[7px] font-black text-slate-400 uppercase tracking-[0.3em] mb-2">OTOMATİK OTURUM YAPISI</p>
+            <p className="text-[7px] font-normal text-slate-400 uppercase tracking-[0.3em] mb-2">OTOMATİK OTURUM YAPISI</p>
             {getDefaultSessions(formType).map((s, i) => (
               <div key={i} className="flex justify-between text-[9px] py-1 border-b border-[#354a5f]/20 last:border-0">
-                <span className="text-slate-300 font-black uppercase tracking-widest">{s.sessionName}</span>
+                <span className="text-slate-300 font-normal uppercase tracking-widest">{s.sessionName}</span>
                 <span className="text-slate-400 font-mono">{s.durationMinutes} dk · {s.questionCount} soru</span>
               </div>
             ))}
@@ -735,7 +735,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
           </div>
 
           <button onClick={handleCreate} disabled={loading}
-            className="w-full h-9 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-black text-[9px] uppercase tracking-[0.3em] transition-colors">
+            className="w-full h-9 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-normal text-[9px] uppercase tracking-[0.3em] transition-colors">
             {loading ? 'KAYDEDİLİYOR...' : 'SINAVI OLUŞTUR'}
           </button>
         </div>
@@ -747,11 +747,11 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
     <div className="p-3 md:p-5">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <p className="text-[13px] font-black text-white uppercase tracking-[0.3em]">SINAVLAR</p>
+          <p className="text-[13px] font-normal text-white uppercase tracking-[0.3em]">SINAVLAR</p>
           <p className="text-[7px] text-slate-500 uppercase tracking-widest mt-0.5">LGS · YKS · TARAMA · DENEME ANALİZİ</p>
         </div>
         <button onClick={() => setView('CREATE')}
-          className="h-8 px-4 bg-blue-600/10 border border-blue-600/30 hover:bg-blue-600 text-blue-400 hover:text-white text-[9px] font-black uppercase tracking-widest transition-all">
+          className="h-8 px-4 bg-blue-600/10 border border-blue-600/30 hover:bg-blue-600 text-blue-400 hover:text-white text-[9px] font-normal uppercase tracking-widest transition-all">
           + YENİ SINAV
         </button>
       </div>
@@ -762,7 +762,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
         <p className="text-[9px] uppercase tracking-widest text-slate-600 animate-pulse py-16 text-center">YÜKLENIYOR...</p>
       ) : exams.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-slate-600">
-          <p className="text-[10px] font-black uppercase tracking-widest mb-1">SINAV YOK</p>
+          <p className="text-[10px] font-normal uppercase tracking-widest mb-1">SINAV YOK</p>
           <p className="text-[8px] uppercase tracking-wider">LGS ve YKS denemelerinizi buradan yönetin.</p>
         </div>
       ) : (
@@ -781,10 +781,10 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
                   className="w-full bg-[#0d141b]/60 hover:bg-[#0d141b] border border-[#354a5f]/30 hover:border-[#354a5f]/60 p-3 pr-10 text-left transition-all">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-[10px] font-black text-white uppercase tracking-wider">{exam.name}</p>
+                      <p className="text-[10px] font-normal text-white uppercase tracking-wider">{exam.name}</p>
                       <p className="text-[8px] text-slate-500 mt-0.5 font-mono">{EXAM_TYPE_LABELS[exam.examType]} · {exam.sessions?.length ?? 0} OTURUM · {totalQ} SORU</p>
                     </div>
-                    <span className={`shrink-0 text-[7px] font-black uppercase px-2 py-0.5 border ${exam.status === 'DONE' ? 'border-green-500/30 text-green-400 bg-green-500/10' : 'border-[#354a5f]/40 text-slate-500'}`}>
+                    <span className={`shrink-0 text-[7px] font-normal uppercase px-2 py-0.5 border ${exam.status === 'DONE' ? 'border-green-500/30 text-green-400 bg-green-500/10' : 'border-[#354a5f]/40 text-slate-500'}`}>
                       {exam.status === 'DONE' ? 'TAMAMLANDI' : 'PLANLI'}
                     </span>
                   </div>

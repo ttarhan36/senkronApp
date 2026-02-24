@@ -189,8 +189,8 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
          <div className="h-full w-full bg-[#080c10] flex flex-col items-center justify-center p-8 bg-grid-hatched animate-in fade-in duration-500">
             <div className="w-24 h-24 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin mb-12 shadow-[0_0_50px_rgba(59,130,246,0.3)]"></div>
             <div className="text-center space-y-4">
-               <h2 className="text-2xl font-black text-white uppercase tracking-[0.4em]">{statusMessage}</h2>
-               <p className="text-[10px] font-bold text-[#3b82f6] uppercase tracking-[0.2em] animate-pulse">Bulut senkronizasyonu yapılıyor...</p>
+               <h2 className="text-2xl font-normal text-white uppercase tracking-[0.4em]">{statusMessage}</h2>
+               <p className="text-[10px] font-normal text-[#3b82f6] uppercase tracking-[0.2em] animate-pulse">Bulut senkronizasyonu yapılıyor...</p>
             </div>
          </div>
       );
@@ -208,21 +208,21 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
 
                      <div className="w-full space-y-8">
                         <div className="flex flex-col items-center">
-                           <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.5em] mb-1">PRO_MOTOR_MODU_AKTİF</span>
-                           <span className="text-3xl font-black tracking-widest font-mono text-white">
+                           <span className="text-[10px] font-normal text-slate-500 uppercase tracking-[0.5em] mb-1">PRO_MOTOR_MODU_AKTİF</span>
+                           <span className="text-3xl font-normal tracking-widest font-mono text-white">
                               {formatTime(elapsedTime)}
                            </span>
                         </div>
 
                         <div className="bg-black/60 border border-white/5 p-4 relative overflow-hidden shadow-inner">
                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#fbbf24]"></div>
-                           <span className="text-[10px] font-black text-[#fbbf24] uppercase tracking-[0.3em] animate-pulse block">{statusMessage}</span>
+                           <span className="text-[10px] font-normal text-[#fbbf24] uppercase tracking-[0.3em] animate-pulse block">{statusMessage}</span>
                         </div>
 
                         <div className="space-y-3">
                            <div className="flex justify-between items-end px-1">
-                              <span className="text-[8px] font-bold text-slate-600 uppercase tracking-widest">DNA_İŞLEME_KAPASİTESİ</span>
-                              <span className="text-[14px] font-black text-white">%{Math.round(progress)}</span>
+                              <span className="text-[8px] font-normal text-slate-600 uppercase tracking-widest">DNA_İŞLEME_KAPASİTESİ</span>
+                              <span className="text-[14px] font-normal text-white">%{Math.round(progress)}</span>
                            </div>
                            <div className="h-3 w-full bg-black/40 border border-white/5 rounded-full overflow-hidden p-0.5">
                               <div className="h-full bg-[#fbbf24] shadow-[0_0_20px_#fbbf24] transition-all duration-300" style={{ width: `${progress}%` }}></div>
@@ -230,7 +230,7 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
                         </div>
                      </div>
 
-                     <p className="mt-12 text-[7px] font-black text-slate-500 uppercase tracking-[0.2em] italic">
+                     <p className="mt-12 text-[7px] font-normal text-slate-500 uppercase tracking-[0.2em] italic">
                         Zeka motoru dersleri günlere dengeli dağıtıyor. Lütfen bekleyin.
                      </p>
                   </div>
@@ -239,28 +239,28 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
                      <div className="w-16 h-16 bg-red-600/10 border-2 border-red-600 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(220,38,38,0.2)]">
                         <i className="fa-solid fa-triangle-exclamation text-2xl text-red-600"></i>
                      </div>
-                     <h2 className="text-xl font-black text-red-600 tracking-widest uppercase mb-4">MOTOR_DURDURULDU</h2>
-                     <p className="text-[11px] font-bold text-slate-400 uppercase italic mb-8">{failureReason}</p>
-                     <button onClick={handleRunAI} className="w-full py-5 bg-red-600 text-white font-black text-[10px] uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all">YENİDEN DENE</button>
+                     <h2 className="text-xl font-normal text-red-600 tracking-widest uppercase mb-4">MOTOR_DURDURULDU</h2>
+                     <p className="text-[11px] font-normal text-slate-400 uppercase italic mb-8">{failureReason}</p>
+                     <button onClick={handleRunAI} className="w-full py-5 bg-red-600 text-white font-normal text-[10px] uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all">YENİDEN DENE</button>
                   </div>
                ) : (
                   <div className="max-w-2xl w-full flex flex-col items-center animate-in fade-in duration-700">
                      <div className="w-24 h-24 flex items-center justify-center mb-10 drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-transform hover:scale-110">
                         <LogoSVG className="w-full h-full text-[#3b82f6]" />
                      </div>
-                     <h2 className="text-4xl font-black text-white tracking-[0.4em] uppercase mb-4">ZEKA MOTORU</h2>
-                     <p className="text-[11px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-12">STRATEJİK_DAĞITIM_v3.0 (PRO)</p>
+                     <h2 className="text-4xl font-normal text-white tracking-[0.4em] uppercase mb-4">ZEKA MOTORU</h2>
+                     <p className="text-[11px] font-normal text-slate-500 uppercase tracking-[0.2em] mb-12">STRATEJİK_DAĞITIM_v3.0 (PRO)</p>
                      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                         <div className="bg-black/40 border border-white/5 p-4 flex items-center gap-4">
                            <i className="fa-solid fa-brain text-[#3b82f6]"></i>
-                           <div className="text-left"><span className="text-[10px] font-black text-white block uppercase">DERİN ANALİZ</span><span className="text-[7px] text-slate-500 uppercase">GÜNLÜK YÜK DENGELEME</span></div>
+                           <div className="text-left"><span className="text-[10px] font-normal text-white block uppercase">DERİN ANALİZ</span><span className="text-[7px] text-slate-500 uppercase">GÜNLÜK YÜK DENGELEME</span></div>
                         </div>
                         <div className="bg-black/40 border border-white/5 p-4 flex items-center gap-4">
                            <i className="fa-solid fa-square-check text-[#fbbf24]"></i>
-                           <div className="text-left"><span className="text-[10px] font-black text-white block uppercase">KUSURSUZ_SAAT</span><span className="text-[7px] text-slate-500 uppercase">TAM SAAT DOĞRULAMA</span></div>
+                           <div className="text-left"><span className="text-[10px] font-normal text-white block uppercase">KUSURSUZ_SAAT</span><span className="text-[7px] text-slate-500 uppercase">TAM SAAT DOĞRULAMA</span></div>
                         </div>
                      </div>
-                     <button onClick={handleRunAI} className="w-full py-4 bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold text-xs uppercase tracking-widest shadow-lg hover:shadow-blue-500/50 transition-all active:scale-[0.98] rounded-lg border border-white/10 flex items-center justify-center gap-3">
+                     <button onClick={handleRunAI} className="w-full py-4 bg-[#3b82f6] hover:bg-[#2563eb] text-white font-normal text-xs uppercase tracking-widest shadow-lg hover:shadow-blue-500/50 transition-all active:scale-[0.98] rounded-lg border border-white/10 flex items-center justify-center gap-3">
                         <i className="fa-solid fa-wand-magic-sparkles"></i>
                         PROGRAMI OLUŞTUR
                      </button>
@@ -273,16 +273,16 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
                   <div className="flex items-center gap-4">
                      <button onClick={() => setAppliedSchedule(null)} className="w-10 h-10 bg-black border border-[#354a5f] text-white hover:bg-[#3b82f6]/20 transition-all flex items-center justify-center shadow-lg"><i className="fa-solid fa-arrow-left text-sm"></i></button>
                      <div>
-                        <h2 className="text-[13px] font-black text-white uppercase tracking-[0.2em]">{selectedClass} ÖNİZLEME</h2>
-                        <span className="text-[7px] font-bold text-[#3b82f6] uppercase tracking-widest">STRATEJİK DAĞITIM ÇIKTISI</span>
+                        <h2 className="text-[13px] font-normal text-white uppercase tracking-[0.2em]">{selectedClass} ÖNİZLEME</h2>
+                        <span className="text-[7px] font-normal text-[#3b82f6] uppercase tracking-widest">STRATEJİK DAĞITIM ÇIKTISI</span>
                      </div>
                   </div>
                   <div className="flex items-center gap-3">
                      <div className="flex flex-col items-end mr-4">
-                        <span className="text-[14px] font-black text-[#fbbf24]">{appliedSchedule.filter(s => s.sinif === selectedClass).length} s</span>
-                        <span className="text-[6px] font-bold text-slate-500 uppercase">PLANLANAN DERS</span>
+                        <span className="text-[14px] font-normal text-[#fbbf24]">{appliedSchedule.filter(s => s.sinif === selectedClass).length} s</span>
+                        <span className="text-[6px] font-normal text-slate-500 uppercase">PLANLANAN DERS</span>
                      </div>
-                     <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)} className="bg-black border border-[#354a5f] text-white text-[11px] font-black px-4 py-2 outline-none focus:border-[#3b82f6] rounded-sm">
+                     <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)} className="bg-black border border-[#354a5f] text-white text-[11px] font-normal px-4 py-2 outline-none focus:border-[#3b82f6] rounded-sm">
                         {Array.from(new Set(appliedSchedule.map(s => s.sinif))).sort().map(c => <option key={c} value={c}>{c}</option>)}
                      </select>
                   </div>
@@ -290,7 +290,7 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
                <div className="flex-1 overflow-auto bg-[#0d141b] bg-grid-hatched p-2">
                   <table className="w-full border-collapse table-fixed">
                      <thead>
-                        <tr className="bg-slate-900 text-white text-[9px] font-black border-b border-white/10">
+                        <tr className="bg-slate-900 text-white text-[9px] font-normal border-b border-white/10">
                            <th className="w-12 py-4 border-r border-white/5 uppercase">H</th>
                            {DAYS_SHORT.map(d => <th key={d} className="border-r border-white/5 tracking-[0.4em]">{d}</th>)}
                         </tr>
@@ -298,7 +298,7 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
                      <tbody>
                         {HOURS.map(h => (
                            <tr key={h} className="h-20 border-b border-white/5">
-                              <td className="text-center text-[12px] font-black text-slate-500 border-r border-white/5 bg-black/20">{h}</td>
+                              <td className="text-center text-[12px] font-normal text-slate-500 border-r border-white/5 bg-black/20">{h}</td>
                               {DAYS_SHORT.map(d => {
                                  const entry = appliedSchedule.find(s => s.sinif === selectedClass && s.ders_saati === h && s.gun.toUpperCase().startsWith(d));
                                  const lessonObj = entry ? lessons.find(l => l.id === entry.ders || l.name === entry.ders) : null;
@@ -337,8 +337,8 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
                                     <td key={`${d}-${h}`} className="border-r border-white/5 p-1 relative">
                                        {entry ? (
                                           <div className="h-full w-full flex flex-col items-center justify-center bg-[#1e293b] transition-all hover:bg-slate-800 shadow-lg border-l-[4px]" style={{ borderLeftColor: branchColor }} title={displayLesson}>
-                                             <span className="text-[10px] font-medium text-white/80 leading-none uppercase truncate w-full text-center px-1 tracking-tight">{displayBranchShort}</span>
-                                             <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1.5 truncate w-full text-center px-1">{displayTeacher}</span>
+                                             <span className="text-[10px] font-normal text-white/80 leading-none uppercase truncate w-full text-center px-1 tracking-tight">{displayBranchShort}</span>
+                                             <span className="text-[9px] font-normal text-slate-500 uppercase tracking-widest mt-1.5 truncate w-full text-center px-1">{displayTeacher}</span>
                                           </div>
                                        ) : (<div className="h-full w-full opacity-5 border border-dashed border-white/10"></div>)}
                                     </td>
@@ -350,7 +350,7 @@ const SchedulingModule: React.FC<SchedulingModuleProps> = ({ teachers, classes, 
                   </table>
                </div>
                <div className="p-5 bg-black/80 border-t border-[#354a5f] shrink-0 flex justify-center">
-                  <button onClick={handleFinalApprove} className="px-12 py-4 bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold text-xs uppercase tracking-widest shadow-lg hover:shadow-blue-500/50 transition-all rounded-lg border border-white/10 flex items-center gap-3 active:scale-[0.98]">
+                  <button onClick={handleFinalApprove} className="px-12 py-4 bg-[#3b82f6] hover:bg-[#2563eb] text-white font-normal text-xs uppercase tracking-widest shadow-lg hover:shadow-blue-500/50 transition-all rounded-lg border border-white/10 flex items-center gap-3 active:scale-[0.98]">
                      <i className="fa-solid fa-check-double"></i>
                      KUSURSUZ_PLANI_MÜHÜRLLE
                   </button>

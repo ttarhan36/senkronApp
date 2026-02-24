@@ -186,31 +186,31 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
             <div className="w-6 h-6 rounded bg-[#1a2535] flex items-center justify-center">
               <span className="text-blue-400 text-[10px]">📖</span>
             </div>
-            <span className="text-[12px] font-bold text-white uppercase">{summary.subject}</span>
+            <span className="text-[12px] font-normal text-white uppercase">{summary.subject}</span>
           </div>
-          <span className="text-[18px] font-black font-mono text-white">{summary.net.toFixed(2)}<span className="text-[9px] text-slate-500 ml-1">NET</span></span>
+          <span className="text-[18px] font-normal font-mono text-white">{summary.net.toFixed(2)}<span className="text-[9px] text-slate-500 ml-1">NET</span></span>
         </div>
 
         <div className="flex justify-between mt-2">
           <div className="flex flex-col">
             <span className="text-[9px] text-slate-500 uppercase">Soru</span>
-            <span className="text-[11px] font-mono font-bold text-slate-300">{summary.correct + summary.wrong + summary.empty}</span>
+            <span className="text-[11px] font-mono font-normal text-slate-300">{summary.correct + summary.wrong + summary.empty}</span>
           </div>
           <div className="flex flex-col">
             <span className="text-[9px] text-slate-500 uppercase">Doğru</span>
-            <span className="text-[11px] font-mono font-bold text-green-400">{summary.correct}</span>
+            <span className="text-[11px] font-mono font-normal text-green-400">{summary.correct}</span>
           </div>
           <div className="flex flex-col">
             <span className="text-[9px] text-slate-500 uppercase">Yanlış</span>
-            <span className="text-[11px] font-mono font-bold text-red-400">{summary.wrong}</span>
+            <span className="text-[11px] font-mono font-normal text-red-400">{summary.wrong}</span>
           </div>
           <div className="flex flex-col">
             <span className="text-[9px] text-slate-500 uppercase">Boş</span>
-            <span className="text-[11px] font-mono font-bold text-slate-400">{summary.empty}</span>
+            <span className="text-[11px] font-mono font-normal text-slate-400">{summary.empty}</span>
           </div>
           <div className="flex flex-col border-l border-[#354a5f]/20 pl-3">
             <span className="text-[9px] text-red-500/80 uppercase">Kayıp P.</span>
-            <span className="text-[11px] font-mono font-black text-red-400">-{summary.lostPoints.toFixed(2)}</span>
+            <span className="text-[11px] font-mono font-normal text-red-400">-{summary.lostPoints.toFixed(2)}</span>
           </div>
         </div>
       </div>
@@ -231,7 +231,7 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
 
           return (
             <div key={subject}>
-              <h3 className="text-[11px] font-black text-blue-400 uppercase tracking-widest mb-3 border-b border-blue-500/20 pb-1">{subject}</h3>
+              <h3 className="text-[11px] font-normal text-blue-400 uppercase tracking-widest mb-3 border-b border-blue-500/20 pb-1">{subject}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {subjectResponses.map(resp => {
                   const isCorrect = resp.isCorrect;
@@ -256,22 +256,22 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
                   return (
                     <div key={resp.id} className={`p-3 border rounded ${borderColor} flex flex-col`}>
                       <div className="flex justify-between mb-2">
-                        <span className="text-[10px] font-bold text-white">Soru No: {resp.question?.questionNumber}</span>
+                        <span className="text-[10px] font-normal text-white">Soru No: {resp.question?.questionNumber}</span>
                       </div>
 
                       <div className="flex justify-between items-center py-1 border-b border-[#354a5f]/10 mb-1">
                         <span className="text-[9px] text-slate-500">Konu Adı</span>
-                        <span className={`text-[9px] text-right font-medium max-w-[200px] truncate ${textColor}`}>
+                        <span className={`text-[9px] text-right font-normal max-w-[200px] truncate ${textColor}`}>
                           {resp.question?.objective?.description || 'Konu Tanımsız'}
                         </span>
                       </div>
                       <div className="flex justify-between items-center py-1 border-b border-[#354a5f]/10 mb-1">
                         <span className="text-[9px] text-slate-500">Doğru Cevap</span>
-                        <span className="text-[10px] font-black text-green-400">{finalCorrectAnswer}</span>
+                        <span className="text-[10px] font-normal text-green-400">{finalCorrectAnswer}</span>
                       </div>
                       <div className="flex justify-between items-center py-1">
                         <span className="text-[9px] text-slate-500">Öğrenci Cevabı</span>
-                        <span className={`text-[10px] font-black ${textColor}`}>
+                        <span className={`text-[10px] font-normal ${textColor}`}>
                           {isEmpty ? 'BOŞ' : resp.givenAnswer}
                         </span>
                       </div>
@@ -331,7 +331,7 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
             <div key={i} className="bg-[#121a23] border border-[#354a5f]/40 p-4 rounded">
               <div className="flex gap-2 items-start mb-3">
                 <span className="text-[#354a5f] mt-1 text-[8px]">●</span>
-                <span className="text-[11px] text-slate-200 font-medium leading-tight">{t.desc}</span>
+                <span className="text-[11px] text-slate-200 font-normal leading-tight">{t.desc}</span>
               </div>
 
               <div className="flex justify-between mb-3 bg-[#0d141b] py-2 px-3 rounded border border-[#354a5f]/20">
@@ -353,14 +353,14 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
                 </div>
                 <div className="flex flex-col items-center pl-3 border-l border-[#354a5f]/20">
                   <span className="text-[8px] text-blue-400 uppercase">LGS Kayıp P.</span>
-                  <span className="text-[11px] font-mono text-red-400 font-bold">{t.lostPoints.toFixed(3)}</span>
+                  <span className="text-[11px] font-mono text-red-400 font-normal">{t.lostPoints.toFixed(3)}</span>
                 </div>
               </div>
 
               <div className="w-full h-4 bg-red-500/30 rounded overflow-hidden relative border border-[#354a5f]/40">
                 <div className="h-full bg-[#10b981] transition-all absolute left-0" style={{ width: `${successRate}%` }}></div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-[9px] font-black text-white mix-blend-difference">%{(successRate).toFixed(2)}</span>
+                  <span className="text-[9px] font-normal text-white mix-blend-difference">%{(successRate).toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -390,11 +390,11 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
             ←
           </button>
           <div className="flex-1">
-            <h2 className="text-[14px] font-bold tracking-wider">{selectedExam.name}</h2>
+            <h2 className="text-[14px] font-normal tracking-wider">{selectedExam.name}</h2>
             <div className="flex items-center gap-2 mt-1">
               <p className="text-[10px] text-slate-400 uppercase tracking-widest">{selectedExam.publisher || 'Kurum Yok'} · {EXAM_TYPE_LABELS[selectedExam.examType]}</p>
               {result.bookletType && (
-                <span className="text-[9px] px-1.5 py-0.5 bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded uppercase font-black">
+                <span className="text-[9px] px-1.5 py-0.5 bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded uppercase font-normal">
                   {result.bookletType} KİTAPÇIĞI
                 </span>
               )}
@@ -408,13 +408,13 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
         {/* Double Tabs */}
         <div className="flex border-b border-[#354a5f]/40">
           <button
-            className={`flex-1 py-3 text-[11px] font-bold uppercase tracking-widest ${activeTab === 'PUANLAR' ? 'text-white border-b-2 border-white' : 'text-slate-500 hover:text-slate-300'}`}
+            className={`flex-1 py-3 text-[11px] font-normal uppercase tracking-widest ${activeTab === 'PUANLAR' ? 'text-white border-b-2 border-white' : 'text-slate-500 hover:text-slate-300'}`}
             onClick={() => setActiveTab('PUANLAR')}
           >
             📈 Puanlar
           </button>
           <button
-            className={`flex-1 py-3 text-[11px] font-bold uppercase tracking-widest ${activeTab === 'DERSLER' ? 'text-white border-b-2 border-red-500' : 'text-slate-500 hover:text-slate-300'}`}
+            className={`flex-1 py-3 text-[11px] font-normal uppercase tracking-widest ${activeTab === 'DERSLER' ? 'text-white border-b-2 border-red-500' : 'text-slate-500 hover:text-slate-300'}`}
             onClick={() => setActiveTab('DERSLER')}
           >
             ≡ Dersler
@@ -441,12 +441,12 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
                     <span className="text-[11px] font-mono text-red-400">{totalWrong}</span>
                   </div>
                   <div className="flex justify-between col-span-2 border-b border-[#354a5f]/20 pb-2">
-                    <span className="text-[12px] font-bold text-slate-300">Net</span>
-                    <span className="text-[14px] font-black font-mono text-white">{totalNet.toFixed(2)}</span>
+                    <span className="text-[12px] font-normal text-slate-300">Net</span>
+                    <span className="text-[14px] font-normal font-mono text-white">{totalNet.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between col-span-2 border-b border-[#354a5f]/20 pb-2">
                     <span className="text-[11px] text-slate-400">Puan Türü Kayıp Puan</span>
-                    <span className="text-[13px] font-black font-mono text-red-400">-{totalLost.toFixed(3)}</span>
+                    <span className="text-[13px] font-normal font-mono text-red-400">-{totalLost.toFixed(3)}</span>
                   </div>
                 </div>
               </div>
@@ -456,8 +456,8 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
                 <div className="bg-[#121a23] border border-[#354a5f]/30 p-4 rounded-md">
                   <div className="flex items-center gap-2 mb-4 border-b border-yellow-500/20 pb-2">
                     <span className="bg-yellow-500/20 text-yellow-500 p-1 rounded">2K</span>
-                    <span className="text-[14px] font-bold text-yellow-500">{EXAM_TYPE_LABELS[selectedExam.examType]} BAREMİ</span>
-                    <span className="ml-auto text-[18px] font-black text-yellow-500">
+                    <span className="text-[14px] font-normal text-yellow-500">{EXAM_TYPE_LABELS[selectedExam.examType]} BAREMİ</span>
+                    <span className="ml-auto text-[18px] font-normal text-yellow-500">
                       Simülasyon
                     </span>
                   </div>
@@ -482,13 +482,13 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
               {/* Sub Tabs */}
               <div className="flex bg-[#121a23] border border-[#354a5f]/30 rounded-md overflow-hidden mb-4">
                 <button
-                  className={`flex-1 py-2 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 ${lessonSubTab === 'SORU_ANALIZI' ? 'bg-[#354a5f]/20 text-white border-b-2 border-red-500' : 'text-slate-500 hover:text-slate-300'}`}
+                  className={`flex-1 py-2 text-[10px] font-normal uppercase tracking-widest flex items-center justify-center gap-2 ${lessonSubTab === 'SORU_ANALIZI' ? 'bg-[#354a5f]/20 text-white border-b-2 border-red-500' : 'text-slate-500 hover:text-slate-300'}`}
                   onClick={() => setLessonSubTab('SORU_ANALIZI')}
                 >
                   <span className="text-[14px]">☍</span> Soru Analizi
                 </button>
                 <button
-                  className={`flex-1 py-2 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 ${lessonSubTab === 'KONU_ANALIZI' ? 'bg-[#354a5f]/20 text-white border-b-2 border-red-500' : 'text-slate-500 hover:text-slate-300'}`}
+                  className={`flex-1 py-2 text-[10px] font-normal uppercase tracking-widest flex items-center justify-center gap-2 ${lessonSubTab === 'KONU_ANALIZI' ? 'bg-[#354a5f]/20 text-white border-b-2 border-red-500' : 'text-slate-500 hover:text-slate-300'}`}
                   onClick={() => setLessonSubTab('KONU_ANALIZI')}
                 >
                   <span className="text-[14px]">⧉</span> Konu Analizi
@@ -506,8 +506,8 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
                       <span className="text-xl">✨</span>
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-[11px] font-black text-blue-400 uppercase tracking-widest mb-1">Senkron AI Koçu</h4>
-                      <p className="text-[11px] text-slate-300 leading-relaxed font-medium">
+                      <h4 className="text-[11px] font-normal text-blue-400 uppercase tracking-widest mb-1">Senkron AI Koçu</h4>
+                      <p className="text-[11px] text-slate-300 leading-relaxed font-normal">
                         {aiMessage}
                       </p>
                     </div>
@@ -525,7 +525,7 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
   return (
     <div className="p-3 md:p-5">
       <div className="mb-4">
-        <p className="text-[13px] font-black text-white uppercase tracking-[0.3em]">SINAV RAPORLARI</p>
+        <p className="text-[13px] font-normal text-white uppercase tracking-[0.3em]">SINAV RAPORLARI</p>
         <p className="text-[7px] text-slate-500 uppercase tracking-widest mt-0.5">YÜKLENEN SINAVLAR · OPTİK SONUÇLARI</p>
       </div>
 
@@ -533,7 +533,7 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
         <p className="text-[9px] uppercase tracking-widest text-slate-600 animate-pulse py-16 text-center">YÜKLENIYOR...</p>
       ) : exams.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-slate-600">
-          <p className="text-[10px] font-black uppercase tracking-widest mb-1">SONUÇ BULUNAMADI</p>
+          <p className="text-[10px] font-normal uppercase tracking-widest mb-1">SONUÇ BULUNAMADI</p>
           <p className="text-[8px] uppercase tracking-wider text-center max-w-[200px]">Optik formunuz henüz okunmamış veya adınıza kayıtlı sonuç yok.</p>
         </div>
       ) : (
@@ -547,7 +547,7 @@ const StudentExamView: React.FC<Props> = ({ session }) => {
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-[11px] font-black text-white uppercase tracking-wider">{exam.name}</p>
+                  <p className="text-[11px] font-normal text-white uppercase tracking-wider">{exam.name}</p>
                   <p className="text-[9px] text-slate-500 mt-1 font-mono">
                     {exam.publisher || 'Kurum Yok'} · {EXAM_TYPE_LABELS[exam.examType]}
                   </p>

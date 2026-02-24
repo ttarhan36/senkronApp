@@ -133,8 +133,8 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ teachers, classes, lessons, userR
                 <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-500 border-2 border-[#161616] animate-pulse"></div>
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] font-black uppercase tracking-widest text-white/90">SENKRON_AI</span>
-                <span className="text-[7px] text-gray-500 font-bold uppercase tracking-widest">TRANSLATION-SEALED v2.5</span>
+                <span className="text-[10px] font-normal uppercase tracking-widest text-white/90">SENKRON_AI</span>
+                <span className="text-[7px] text-gray-500 font-normal uppercase tracking-widest">TRANSLATION-SEALED v2.5</span>
               </div>
             </div>
           </div>
@@ -142,18 +142,18 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ teachers, classes, lessons, userR
           <div ref={scrollRef} className="flex-1 overflow-auto p-5 space-y-6 bg-black/40 custom-scrollbar">
             {messages.map((m, i) => (
               <div key={i} className={`flex flex-col ${m.role === 'user' ? 'items-end' : 'items-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
-                <div className={`max-w-[85%] p-3.5 text-[11px] leading-relaxed relative ${m.role === 'user' ? 'bg-[#007BFF] text-white font-medium border border-white/10 shadow-lg' : 'bg-[#222] border border-[#333] text-gray-300 shadow-xl'}`}>
+                <div className={`max-w-[85%] p-3.5 text-[11px] leading-relaxed relative ${m.role === 'user' ? 'bg-[#007BFF] text-white font-normal border border-white/10 shadow-lg' : 'bg-[#222] border border-[#333] text-gray-300 shadow-xl'}`}>
                    <div className={`absolute top-0 w-2 h-2 ${m.role === 'user' ? '-right-1 bg-[#007BFF]' : '-left-1 bg-[#222]'} rotate-45`}></div>
                    {m.content}
                 </div>
                 {m.role === 'model' && (
-                  <button onClick={() => handleToggleAudio(m.content, i)} disabled={isAudioLoading && activePlaybackId !== i} className="mt-2 text-[8px] font-black text-[#3b82f6] uppercase tracking-widest hover:text-white transition-all">
+                  <button onClick={() => handleToggleAudio(m.content, i)} disabled={isAudioLoading && activePlaybackId !== i} className="mt-2 text-[8px] font-normal text-[#3b82f6] uppercase tracking-widest hover:text-white transition-all">
                     {activePlaybackId === i ? '■ SESİ DURDUR' : '▶ SESLİ DİNLE'}
                   </button>
                 )}
               </div>
             ))}
-            {isTyping && <div className="flex items-center gap-2 ml-1 animate-pulse"><i className="fa-solid fa-spinner animate-spin text-[8px] text-[#007BFF]"></i><span className="text-[8px] font-black text-gray-700 uppercase tracking-widest">DNA_İŞLENİYOR...</span></div>}
+            {isTyping && <div className="flex items-center gap-2 ml-1 animate-pulse"><i className="fa-solid fa-spinner animate-spin text-[8px] text-[#007BFF]"></i><span className="text-[8px] font-normal text-gray-700 uppercase tracking-widest">DNA_İŞLENİYOR...</span></div>}
           </div>
 
           <div className="p-4 bg-[#0c0c0c] border-t border-[#2a2a2a] space-y-4">
@@ -161,7 +161,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ teachers, classes, lessons, userR
               <button onClick={toggleListening} className={`w-12 h-12 flex items-center justify-center transition-all border ${isListening ? 'bg-red-600 border-red-400 animate-pulse text-white shadow-[0_0_15px_#ef4444]' : 'bg-[#222] border-[#333] text-gray-500 hover:text-white'}`}>
                 <i className={`fa-solid ${isListening ? 'fa-microphone' : 'fa-microphone-lines'} text-lg`}></i>
               </button>
-              <input type="text" placeholder={isListening ? "Dinleniyor..." : "Her dilde sorabilirsin..."} className="flex-1 bg-black/60 border border-[#2a2a2a] px-5 py-4 text-[10px] font-bold uppercase tracking-widest focus:border-[#007BFF] outline-none text-white" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSend()} />
+              <input type="text" placeholder={isListening ? "Dinleniyor..." : "Her dilde sorabilirsin..."} className="flex-1 bg-black/60 border border-[#2a2a2a] px-5 py-4 text-[10px] font-normal uppercase tracking-widest focus:border-[#007BFF] outline-none text-white" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSend()} />
               <button onClick={handleSend} disabled={!input.trim() || isTyping} className={`w-12 h-12 flex items-center justify-center transition-all ${!input.trim() ? 'bg-gray-800 text-gray-600' : 'bg-[#007BFF] text-white hover:brightness-110 active:scale-95'}`}><i className="fa-solid fa-paper-plane text-sm"></i></button>
             </div>
           </div>

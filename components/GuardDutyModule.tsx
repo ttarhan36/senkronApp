@@ -280,8 +280,8 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
           <div className="bg-[#0d141b] border-t-4 border-[#3b82f6] p-6 max-w-lg w-full shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col rounded-sm my-auto bg-grid-hatched">
             <div className="flex justify-between items-center mb-6">
               <div>
-                <h3 className="text-[13px] font-black text-white uppercase tracking-widest">NÖBET MEVKİ EDİTÖRÜ</h3>
-                <span className="text-[8px] font-black text-[#3b82f6] uppercase tracking-[0.2em] mt-1.5 block">MEVKİ YÖNETİM PANELİ</span>
+                <h3 className="text-[13px] font-normal text-white uppercase tracking-widest">NÖBET MEVKİ EDİTÖRÜ</h3>
+                <span className="text-[8px] font-normal text-[#3b82f6] uppercase tracking-[0.2em] mt-1.5 block">MEVKİ YÖNETİM PANELİ</span>
               </div>
               <button onClick={() => { setIsLocationEditorOpen(false); setEditingLocationIdx(null); }} className="w-9 h-9 border border-white/10 text-slate-500 hover:text-white transition-all flex items-center justify-center"><i className="fa-solid fa-xmark text-xl"></i></button>
             </div>
@@ -289,7 +289,7 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
             {/* Yeni Mevki Ekleme */}
             <div className="mb-6 bg-black/40 border border-white/5 p-3 flex gap-2">
               <input
-                className="flex-1 bg-black border border-white/10 px-3 py-2 text-[11px] font-black text-white uppercase outline-none focus:border-[#3b82f6]"
+                className="flex-1 bg-black border border-white/10 px-3 py-2 text-[11px] font-normal text-white uppercase outline-none focus:border-[#3b82f6]"
                 placeholder="YENİ MEVKİ ADI..."
                 value={newLocationName}
                 onChange={(e) => setNewLocationName(e.target.value.toUpperCase())}
@@ -297,7 +297,7 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
               />
               <button
                 onClick={handleAddLocation}
-                className="px-4 bg-[#3b82f6] text-white font-black text-[10px] uppercase shadow-lg active:scale-95"
+                className="px-4 bg-[#3b82f6] text-white font-normal text-[10px] uppercase shadow-lg active:scale-95"
               >EKLE</button>
             </div>
 
@@ -309,7 +309,7 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
                       <div className="flex gap-1">
                         <input
                           autoFocus
-                          className="flex-1 bg-black border border-[#3b82f6] px-2 py-1 text-[11px] font-black text-white uppercase outline-none"
+                          className="flex-1 bg-black border border-[#3b82f6] px-2 py-1 text-[11px] font-normal text-white uppercase outline-none"
                           value={editLocationValue}
                           onChange={(e) => setEditLocationValue(e.target.value.toUpperCase())}
                           onKeyDown={(e) => e.key === 'Enter' && saveEditedLocation()}
@@ -319,8 +319,8 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
                       </div>
                     ) : (
                       <>
-                        <span className={`text-[11px] font-black uppercase tracking-tight truncate ${loc.isActive ? 'text-white' : 'text-slate-600'}`}>{loc.name}</span>
-                        <span className="text-[6px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">{loc.isActive ? 'AKTİF' : 'PASİF'}</span>
+                        <span className={`text-[11px] font-normal uppercase tracking-tight truncate ${loc.isActive ? 'text-white' : 'text-slate-600'}`}>{loc.name}</span>
+                        <span className="text-[6px] font-normal text-slate-500 uppercase tracking-widest mt-0.5">{loc.isActive ? 'AKTİF' : 'PASİF'}</span>
                       </>
                     )}
                   </div>
@@ -341,7 +341,7 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
               ))}
             </div>
 
-            <button onClick={() => setIsLocationEditorOpen(false)} className="mt-8 h-14 bg-[#3b82f6] text-white font-black text-[11px] uppercase tracking-[0.4em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10">KAYDET VE KAPAT</button>
+            <button onClick={() => setIsLocationEditorOpen(false)} className="mt-8 h-14 bg-[#3b82f6] text-white font-normal text-[11px] uppercase tracking-[0.4em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10">KAYDET VE KAPAT</button>
           </div>
         </div>
       )}
@@ -352,7 +352,7 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
           <button
             key={day}
             onClick={() => setActiveDayIdx(idx)}
-            className={`flex-1 min-w-[50px] h-11 text-[10px] font-black uppercase tracking-[0.1em] transition-all relative ${activeDayIdx === idx ? 'bg-[#3b82f6] text-white z-10 shadow-lg' : 'text-slate-500 hover:text-slate-300'
+            className={`flex-1 min-w-[50px] h-11 text-[10px] font-normal uppercase tracking-[0.1em] transition-all relative ${activeDayIdx === idx ? 'bg-[#3b82f6] text-white z-10 shadow-lg' : 'text-slate-500 hover:text-slate-300'
               }`}
           >
             {day}
@@ -365,8 +365,8 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
       <div className="flex justify-between items-center px-1 shrink-0 gap-2">
         <div className="flex items-center gap-2 min-w-0">
           <div className="flex flex-col min-w-0">
-            <h3 className="text-[12px] font-medium text-slate-400 uppercase tracking-tight truncate">{activeDay.toUpperCase()} NÖBETİ</h3>
-            <span className="text-[6px] font-medium text-[#3b82f6] uppercase tracking-[0.1em] block mt-0.5 opacity-80">ADALETLİ_PLANLAMA</span>
+            <h3 className="text-[12px] font-normal text-slate-400 uppercase tracking-tight truncate">{activeDay.toUpperCase()} NÖBETİ</h3>
+            <span className="text-[6px] font-normal text-[#3b82f6] uppercase tracking-[0.1em] block mt-0.5 opacity-80">ADALETLİ_PLANLAMA</span>
           </div>
           {editMode && <button
             onClick={() => setIsLocationEditorOpen(true)}
@@ -379,7 +379,7 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
         <div className="flex items-center gap-1.5">
           {editMode && <button
             onClick={autoAssignDuties}
-            className="h-10 px-4 bg-[#fbbf24] text-black font-black text-[9px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all border border-white/10 shrink-0"
+            className="h-10 px-4 bg-[#fbbf24] text-black font-normal text-[9px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all border border-white/10 shrink-0"
           >
             ADİL DAĞIT
           </button>}
@@ -421,24 +421,24 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
                 <div className={`absolute left-0 top-0 bottom-0 w-1 ${isCurrentUser ? 'bg-[#fbbf24]' : 'bg-[#3b82f6]'}`}></div>
                 <div className="flex flex-col flex-1 min-w-0 mr-4">
                   <div className="flex items-center gap-2 min-w-0">
-                    <span className={`text-[11px] font-black uppercase tracking-tighter truncate ${isCurrentUser ? 'text-[#fbbf24]' : 'text-slate-400'}`}>{t.name}</span>
-                    <span className={`text-[6px] font-medium uppercase px-1.5 py-0.5 border shrink-0 ${isCurrentUser ? 'text-[#fbbf24] border-[#fbbf24]/20 bg-[#fbbf24]/10' : 'text-[#3b82f6] border-[#3b82f6]/20 bg-[#3b82f6]/10'}`}>{t.branchShort}</span>
+                    <span className={`text-[11px] font-normal uppercase tracking-tighter truncate ${isCurrentUser ? 'text-[#fbbf24]' : 'text-slate-400'}`}>{t.name}</span>
+                    <span className={`text-[6px] font-normal uppercase px-1.5 py-0.5 border shrink-0 ${isCurrentUser ? 'text-[#fbbf24] border-[#fbbf24]/20 bg-[#fbbf24]/10' : 'text-[#3b82f6] border-[#3b82f6]/20 bg-[#3b82f6]/10'}`}>{t.branchShort}</span>
                   </div>
                   <div className="flex items-center gap-4 mt-2">
                     <div className="flex flex-col min-w-0">
-                      <span className="text-[5px] font-medium text-slate-600 uppercase tracking-widest mb-0.5 opacity-50">SABAH MEVKİİ</span>
-                      <span className={`text-[8px] font-medium px-2 py-0.5 border truncate ${isCurrentUser ? 'text-[#fbbf24] border-[#fbbf24]/20 bg-[#fbbf24]/10' : 'text-slate-500 border-white/5 bg-black/20'}`}>{duty.morningLocation}</span>
+                      <span className="text-[5px] font-normal text-slate-600 uppercase tracking-widest mb-0.5 opacity-50">SABAH MEVKİİ</span>
+                      <span className={`text-[8px] font-normal px-2 py-0.5 border truncate ${isCurrentUser ? 'text-[#fbbf24] border-[#fbbf24]/20 bg-[#fbbf24]/10' : 'text-slate-500 border-white/5 bg-black/20'}`}>{duty.morningLocation}</span>
                     </div>
                     <div className="flex flex-col min-w-0">
-                      <span className="text-[5px] font-medium text-slate-600 uppercase tracking-widest mb-0.5 opacity-50">ÖĞLE MEVKİİ</span>
-                      <span className={`text-[8px] font-medium px-2 py-0.5 border truncate ${isCurrentUser ? 'text-[#fbbf24] border-[#fbbf24]/20 bg-[#fbbf24]/10' : 'text-slate-500 border-white/5 bg-black/20'}`}>{duty.afternoonLocation}</span>
+                      <span className="text-[5px] font-normal text-slate-600 uppercase tracking-widest mb-0.5 opacity-50">ÖĞLE MEVKİİ</span>
+                      <span className={`text-[8px] font-normal px-2 py-0.5 border truncate ${isCurrentUser ? 'text-[#fbbf24] border-[#fbbf24]/20 bg-[#fbbf24]/10' : 'text-slate-500 border-white/5 bg-black/20'}`}>{duty.afternoonLocation}</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 shrink-0 border-l border-white/5 pl-3">
                   <div className="text-right flex flex-col items-end whitespace-nowrap">
-                    <span className={`text-[11px] font-black leading-none ${isHeavy ? 'text-red-500' : 'text-slate-500'}`}>{load}s</span>
-                    <span className="text-[5px] font-medium text-slate-600 uppercase block tracking-tighter mt-1 opacity-40">YÜK</span>
+                    <span className={`text-[11px] font-normal leading-none ${isHeavy ? 'text-red-500' : 'text-slate-500'}`}>{load}s</span>
+                    <span className="text-[5px] font-normal text-slate-600 uppercase block tracking-tighter mt-1 opacity-40">YÜK</span>
                   </div>
                   {editMode && (
                     <button onClick={() => setDutyToDelete({ teacherId: t.id, teacherName: t.name, day: activeDay })} className="w-8 h-8 flex items-center justify-center text-slate-700 hover:text-red-500 transition-all">
@@ -452,7 +452,7 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
         ) : (
           <div className="py-20 border-2 border-dashed border-[#354a5f] bg-black/20 flex flex-col items-center justify-center group opacity-30">
             <i className="fa-solid fa-shield-halved text-2xl text-slate-700 mb-6"></i>
-            <p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-600 mb-2">GÖREVLENDİRME YOK</p>
+            <p className="text-[11px] font-normal uppercase tracking-[0.3em] text-slate-600 mb-2">GÖREVLENDİRME YOK</p>
           </div>
         )}
       </div>
@@ -464,8 +464,8 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
           <div className="flex items-center gap-4 min-w-0">
             <i className="fa-solid fa-scale-balanced text-[#3b82f6] text-sm shrink-0"></i>
             <div className="flex flex-col min-w-0">
-              <p className="text-[10px] font-medium text-slate-500 uppercase tracking-[0.1em] leading-none truncate">NÖBET_ADALET_DNA</p>
-              <p className="text-[6px] font-medium text-slate-700 uppercase tracking-tighter mt-1.5 truncate">TEKİL GÖREVLENDİRME AKTİF</p>
+              <p className="text-[10px] font-normal text-slate-500 uppercase tracking-[0.1em] leading-none truncate">NÖBET_ADALET_DNA</p>
+              <p className="text-[6px] font-normal text-slate-700 uppercase tracking-tighter mt-1.5 truncate">TEKİL GÖREVLENDİRME AKTİF</p>
             </div>
           </div>
         </div>
@@ -479,14 +479,14 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
               <div className="w-12 h-12 bg-red-600/20 border border-red-600 flex items-center justify-center">
                 <i className="fa-solid fa-triangle-exclamation text-red-500 text-2xl"></i>
               </div>
-              <h3 className="text-[13px] font-black text-white uppercase tracking-widest">DNA SIFIRLA</h3>
+              <h3 className="text-[13px] font-normal text-white uppercase tracking-widest">DNA SIFIRLA</h3>
             </div>
-            <p className="text-[11px] font-medium text-slate-300 uppercase leading-relaxed mb-8">
-              DİKKAT: TÜM HAFTANIN NÖBET PLANI <span className="text-red-500 font-black">TAMAMEN</span> SİLİNECEKTİR.
+            <p className="text-[11px] font-normal text-slate-300 uppercase leading-relaxed mb-8">
+              DİKKAT: TÜM HAFTANIN NÖBET PLANI <span className="text-red-500 font-normal">TAMAMEN</span> SİLİNECEKTİR.
             </p>
             <div className="flex gap-4">
-              <button onClick={() => setIsClearWeekModalOpen(false)} className="flex-1 h-12 border border-[#64748b] text-white font-black text-[10px] uppercase">VAZGEÇ</button>
-              <button onClick={executeClearAll} className="flex-1 bg-red-600 text-white font-black text-[10px] uppercase shadow-xl">PLANI SİL</button>
+              <button onClick={() => setIsClearWeekModalOpen(false)} className="flex-1 h-12 border border-[#64748b] text-white font-normal text-[10px] uppercase">VAZGEÇ</button>
+              <button onClick={executeClearAll} className="flex-1 bg-red-600 text-white font-normal text-[10px] uppercase shadow-xl">PLANI SİL</button>
             </div>
           </div>
         </div>
@@ -496,14 +496,14 @@ const GuardDutyModule: React.FC<GuardDutyModuleProps> = ({
       {dutyToDelete && (
         <div className="fixed inset-0 z-[7000] flex items-center justify-center bg-black/95 backdrop-blur-md px-4">
           <div className="bg-[#0d141b] border-2 border-red-600 p-8 max-sm w-full shadow-2xl animate-in zoom-in-95 duration-200">
-            <h3 className="text-[14px] font-black text-white uppercase tracking-widest mb-4">GÖREV SİL</h3>
-            <p className="text-[11px] font-medium text-slate-300 uppercase leading-relaxed mb-8">
+            <h3 className="text-[14px] font-normal text-white uppercase tracking-widest mb-4">GÖREV SİL</h3>
+            <p className="text-[11px] font-normal text-slate-300 uppercase leading-relaxed mb-8">
               BU PERSONELİN NÖBET KAYDI SİLİNECEKTİR: <br />
-              <span className="text-red-500 text-lg block mt-2 font-black">{dutyToDelete.teacherName}</span>
+              <span className="text-red-500 text-lg block mt-2 font-normal">{dutyToDelete.teacherName}</span>
             </p>
             <div className="flex gap-4">
-              <button onClick={() => setDutyToDelete(null)} className="flex-1 h-12 border border-[#64748b] text-white font-black text-[10px] uppercase">İPTAL</button>
-              <button onClick={executeRemoveDuty} className="flex-1 h-12 bg-red-600 text-white font-black text-[10px] uppercase">SİL</button>
+              <button onClick={() => setDutyToDelete(null)} className="flex-1 h-12 border border-[#64748b] text-white font-normal text-[10px] uppercase">İPTAL</button>
+              <button onClick={executeRemoveDuty} className="flex-1 h-12 bg-red-600 text-white font-normal text-[10px] uppercase">SİL</button>
             </div>
           </div>
         </div>

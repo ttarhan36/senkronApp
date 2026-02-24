@@ -834,7 +834,7 @@ const App: React.FC = () => {
   if (isLoading) return (
     <div className="h-screen w-screen bg-[#080c10] flex flex-col items-center justify-center p-4 bg-grid-hatched">
       <div className="w-16 h-16 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin mb-4 shadow-[0_0_20px_#3b82f6]"></div>
-      <span className="text-[10px] font-black text-white uppercase tracking-[0.4em] animate-pulse">DNA_BULUTTAN_İNDİRİLİYOR...</span>
+      <span className="text-[10px] font-normal text-white uppercase tracking-[0.4em] animate-pulse">DNA_BULUTTAN_İNDİRİLİYOR...</span>
     </div>
   );
 
@@ -936,22 +936,22 @@ const App: React.FC = () => {
             <div className="w-24 h-24 bg-red-500/10 border border-red-500/20 rounded-full flex items-center justify-center mb-6 shadow-[0_0_50px_rgba(239,68,68,0.2)]">
               <i className="fa-solid fa-clock-rotate-left text-4xl text-red-500 animate-pulse"></i>
             </div>
-            <h2 className="text-3xl font-black tracking-tighter mb-4 uppercase">DENEME SÜRESİ DOLDU</h2>
-            <p className="text-slate-400 max-w-md mb-8 font-medium leading-relaxed">
+            <h2 className="text-3xl font-normal tracking-tighter mb-4 uppercase">DENEME SÜRESİ DOLDU</h2>
+            <p className="text-slate-400 max-w-md mb-8 font-normal leading-relaxed">
               14 günlük ücretsiz kullanım hakkınız sona ermiştir. <br />
               Sistemin tüm özelliklerine erişmeye devam etmek için yıllık aboneliğinizi başlatmanız gerekmektedir.
             </p>
 
             <div className="bg-[#1a242e] border border-white/5 p-8 rounded-xl mb-8 w-full max-w-md shadow-2xl">
               <div className="flex justify-between items-center mb-6">
-                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">YILLIK ÜCRET (ÖĞRENCİ BAŞI)</span>
-                <span className="text-xl font-black text-[#fbbf24]">$1.80</span>
+                <span className="text-[10px] font-normal text-slate-500 uppercase tracking-widest">YILLIK ÜCRET (ÖĞRENCİ BAŞI)</span>
+                <span className="text-xl font-normal text-[#fbbf24]">$1.80</span>
               </div>
               <div className="flex justify-between items-center pb-6 border-b border-white/5">
-                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">AKTİF ÖĞRENCİ SAYISI</span>
+                <span className="text-[10px] font-normal text-slate-500 uppercase tracking-widest">AKTİF ÖĞRENCİ SAYISI</span>
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-xl font-black text-white">{studentCount}</span>
+                  <span className="text-xl font-normal text-white">{studentCount}</span>
                 </div>
               </div>
 
@@ -959,7 +959,7 @@ const App: React.FC = () => {
                 <button
                   onClick={handleCalculate}
                   disabled={isCalculating}
-                  className="w-full mt-6 py-4 bg-slate-800 border border-white/10 text-white font-black text-xs uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center justify-center gap-2"
+                  className="w-full mt-6 py-4 bg-slate-800 border border-white/10 text-white font-normal text-xs uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center justify-center gap-2"
                 >
                   {isCalculating ? (
                     <>
@@ -973,12 +973,12 @@ const App: React.FC = () => {
               ) : (
                 <div className="mt-6 animate-in zoom-in duration-300">
                   <div className="flex justify-between items-center p-4 bg-green-500/5 border border-green-500/20 rounded-lg mb-6">
-                    <span className="text-[12px] font-black text-green-500 uppercase tracking-widest">TOPLAM TAHSİLAT</span>
-                    <span className="text-2xl font-black text-green-500 animate-pulse">${totalAmount} <span className="text-xs">/ YIL</span></span>
+                    <span className="text-[12px] font-normal text-green-500 uppercase tracking-widest">TOPLAM TAHSİLAT</span>
+                    <span className="text-2xl font-normal text-green-500 animate-pulse">${totalAmount} <span className="text-xs">/ YIL</span></span>
                   </div>
                   <button
                     onClick={handleProceedToPayment}
-                    className="w-full py-5 bg-green-600 text-white font-black text-sm uppercase tracking-[0.2em] shadow-[0_0_30px_rgba(22,163,74,0.3)] hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-3"
+                    className="w-full py-5 bg-green-600 text-white font-normal text-sm uppercase tracking-[0.2em] shadow-[0_0_30px_rgba(22,163,74,0.3)] hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-3"
                   >
                     <i className="fa-solid fa-credit-card"></i> ÖDEME SAYFASINA GİT
                   </button>
@@ -989,7 +989,7 @@ const App: React.FC = () => {
             <div className="flex flex-col gap-4">
               <button
                 onClick={() => { localStorage.removeItem('senkron_session'); window.location.reload(); }}
-                className="text-[10px] font-bold text-slate-600 hover:text-white uppercase tracking-widest border-b border-transparent hover:border-white/20 transition-all"
+                className="text-[10px] font-normal text-slate-600 hover:text-white uppercase tracking-widest border-b border-transparent hover:border-white/20 transition-all"
               >
                 FARKLI HESAPLA GİRİŞ YAP
               </button>
@@ -1028,15 +1028,15 @@ const App: React.FC = () => {
       <Sidebar activeModule={activeModule} setActiveModule={setActiveModule} editMode={isAdmin ? editMode : false} setEditMode={setEditMode} userRole={session.role} dbError={dbError} />
       <main className="flex-1 flex flex-col overflow-hidden relative bg-grid-hatched">
         <header className="h-10 md:h-10 border-b border-[#354a5f]/40 bg-[#0d141b]/95 backdrop-blur-md z-[60] flex items-center justify-between px-2 md:px-4">
-          <div className="flex items-center gap-2 md:gap-3">{isAdmin && (<button onClick={() => setEditMode(!editMode)} className={`px-2 md:px-3 h-6 text-[7px] md:text-[8px] font-black uppercase tracking-widest border ${editMode ? 'bg-[#3b82f6] text-white' : 'bg-[#fcd34d] text-black'}`}>{editMode ? 'EDİTÖR' : 'İZLEME'}</button>)}
-            <h2 className="text-[8px] md:text-[9px] font-black tracking-widest md:tracking-[0.4em] uppercase text-white truncate max-w-[80px] md:max-w-none">{activeModule.replace('STUDENT_', '').replace('TEACHER_', '').replace('_', ' ')}</h2></div>
+          <div className="flex items-center gap-2 md:gap-3">{isAdmin && (<button onClick={() => setEditMode(!editMode)} className={`px-2 md:px-3 h-6 text-[7px] md:text-[8px] font-normal uppercase tracking-widest border ${editMode ? 'bg-[#3b82f6] text-white' : 'bg-[#fcd34d] text-black'}`}>{editMode ? 'EDİTÖR' : 'İZLEME'}</button>)}
+            <h2 className="text-[8px] md:text-[9px] font-normal tracking-widest md:tracking-[0.4em] uppercase text-white truncate max-w-[80px] md:max-w-none">{activeModule.replace('STUDENT_', '').replace('TEACHER_', '').replace('_', ' ')}</h2></div>
           <div className="flex items-center gap-2 md:gap-4">
-            {isSyncing && <div className="flex items-center gap-1 md:gap-2 mr-1 md:mr-2"><div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></div><span className="hidden md:inline text-[6px] font-black text-green-500 uppercase tracking-widest">DNA_YAZILIYOR...</span></div>}
-            {isBackgroundLoading && <div className="flex items-center gap-1 md:gap-2 mr-1 md:mr-2"><i className="fa-solid fa-cloud-arrow-down text-[#3b82f6] text-[10px] animate-bounce"></i><span className="hidden md:inline text-[6px] font-black text-[#3b82f6] uppercase tracking-widest">DETAYLAR_İNDİRİLİYOR...</span></div>}
-            <div className="text-right flex flex-col justify-center truncate max-w-[100px] md:max-w-[200px]"><span className="text-[8px] md:text-[9px] font-black text-white uppercase block truncate" title={`Role: ${session.role}`}>{session.name}</span><span className="text-[6px] text-[#3b82f6] font-bold uppercase hidden md:block truncate">{session.schoolId}</span></div>
+            {isSyncing && <div className="flex items-center gap-1 md:gap-2 mr-1 md:mr-2"><div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></div><span className="hidden md:inline text-[6px] font-normal text-green-500 uppercase tracking-widest">DNA_YAZILIYOR...</span></div>}
+            {isBackgroundLoading && <div className="flex items-center gap-1 md:gap-2 mr-1 md:mr-2"><i className="fa-solid fa-cloud-arrow-down text-[#3b82f6] text-[10px] animate-bounce"></i><span className="hidden md:inline text-[6px] font-normal text-[#3b82f6] uppercase tracking-widest">DETAYLAR_İNDİRİLİYOR...</span></div>}
+            <div className="text-right flex flex-col justify-center truncate max-w-[100px] md:max-w-[200px]"><span className="text-[8px] md:text-[9px] font-normal text-white uppercase block truncate" title={`Role: ${session.role}`}>{session.name}</span><span className="text-[6px] text-[#3b82f6] font-normal uppercase hidden md:block truncate">{session.schoolId}</span></div>
             <button onClick={async () => { await supabase.auth.signOut(); localStorage.clear(); setSession(null); }} className="text-red-500/50 hover:text-red-500 transition-colors shrink-0"><i className="fa-solid fa-power-off"></i></button></div>
         </header>
-        {successStamp && (<div className="fixed inset-0 pointer-events-none z-[2000] flex items-center justify-center bg-black/10 backdrop-blur-[2px]"><div className="bg-[#3b82f6]/10 border-4 border-[#3b82f6] p-12 shadow-[0_0_100px_rgba(59,130,246,0.4)] animate-in zoom-in duration-300"><span className="text-4xl font-black text-white uppercase tracking-widest leading-none">{successStamp}</span></div></div>)}
+        {successStamp && (<div className="fixed inset-0 pointer-events-none z-[2000] flex items-center justify-center bg-black/10 backdrop-blur-[2px]"><div className="bg-[#3b82f6]/10 border-4 border-[#3b82f6] p-12 shadow-[0_0_100px_rgba(59,130,246,0.4)] animate-in zoom-in duration-300"><span className="text-4xl font-normal text-white uppercase tracking-widest leading-none">{successStamp}</span></div></div>)}
         <div className="flex-1 overflow-auto custom-scrollbar p-2">{renderModule()}</div>
         <ChatPanel teachers={teachers} classes={classes} lessons={lessons} userRole={session.role} />
       </main>

@@ -113,14 +113,14 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
                <i className="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-[#3b82f6] text-[10px]"></i>
                <input
                   placeholder="KURS ARA..."
-                  className="w-full h-11 bg-black border border-white/10 pl-9 pr-4 text-[11px] font-black text-white uppercase outline-none focus:border-[#3b82f6]"
+                  className="w-full h-11 bg-black border border-white/10 pl-9 pr-4 text-[11px] font-normal text-white uppercase outline-none focus:border-[#3b82f6]"
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
                />
             </div>
             <button
                onClick={() => { if (!editMode) onWatchModeAttempt(); else { setEditingId(null); setFormData({ name: '', teacherName: '', capacity: 20, schedule: '', category: 'TÜM OKUL', targetGrades: [] }); setIsDrawerOpen(true); } }}
-               className="h-11 px-6 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-widest shadow-lg active:scale-95 flex items-center gap-2"
+               className="h-11 px-6 bg-[#3b82f6] text-white font-normal text-[10px] uppercase tracking-widest shadow-lg active:scale-95 flex items-center gap-2"
             >
                <i className="fa-solid fa-plus"></i> EKLE
             </button>
@@ -144,14 +144,14 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
                      <div className="flex justify-between items-start mb-4">
                         <div className="flex-1 min-w-0 pr-4">
                            <div className="flex items-center gap-3">
-                              <span className="text-[14px] font-black text-white uppercase tracking-tighter truncate">{c.name}</span>
-                              <span className="text-[6px] font-black px-1.5 py-0.5 border border-[#3b82f6]/30 text-[#3b82f6] bg-[#3b82f6]/5 uppercase">{c.category}</span>
+                              <span className="text-[14px] font-normal text-white uppercase tracking-tighter truncate">{c.name}</span>
+                              <span className="text-[6px] font-normal px-1.5 py-0.5 border border-[#3b82f6]/30 text-[#3b82f6] bg-[#3b82f6]/5 uppercase">{c.category}</span>
                            </div>
                            <div className="flex items-center gap-4 mt-2">
-                              <span className="text-[9px] font-bold text-slate-500 uppercase">{c.teacherName}</span>
+                              <span className="text-[9px] font-normal text-slate-500 uppercase">{c.teacherName}</span>
                               <div className="flex items-center gap-1.5 opacity-60">
                                  <i className="fa-solid fa-clock text-[8px] text-[#fbbf24]"></i>
-                                 <span className="text-[8px] font-black text-white uppercase">{c.schedule}</span>
+                                 <span className="text-[8px] font-normal text-white uppercase">{c.schedule}</span>
                               </div>
                            </div>
                         </div>
@@ -159,10 +159,10 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
                         <div className="flex items-center gap-4 shrink-0 border-l border-white/5 pl-4">
                            <div className="text-right">
                               <div className="flex items-baseline gap-1">
-                                 <span className={`text-[16px] font-black ${isFull ? 'text-red-500' : isCritical ? 'text-orange-500' : 'text-green-500'}`}>{c.enrolledCount}</span>
+                                 <span className={`text-[16px] font-normal ${isFull ? 'text-red-500' : isCritical ? 'text-orange-500' : 'text-green-500'}`}>{c.enrolledCount}</span>
                                  <span className="text-slate-600 text-[10px]">/ {c.capacity}</span>
                               </div>
-                              <span className="text-[6px] font-black text-slate-500 uppercase tracking-widest block">DOLULUK_DNA</span>
+                              <span className="text-[6px] font-normal text-slate-500 uppercase tracking-widest block">DOLULUK_DNA</span>
                            </div>
                            <div className="flex flex-col gap-1">
                               <button onClick={(e) => { e.stopPropagation(); sendInvitation(c); }} className="w-8 h-8 bg-[#3b82f6]/10 border border-[#3b82f6]/40 text-[#3b82f6] hover:bg-[#3b82f6] hover:text-white transition-all flex items-center justify-center shadow-lg" title="Davet Gönder"><i className="fa-solid fa-paper-plane text-[10px]"></i></button>
@@ -187,7 +187,7 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
             }) : (
                <div className="py-32 flex flex-col items-center justify-center opacity-10 border-2 border-dashed border-white/10 rounded-sm">
                   <i className="fa-solid fa-graduation-cap text-6xl mb-6"></i>
-                  <span className="text-[12px] font-black uppercase tracking-[0.5em]">KURS_DNA_BOŞ</span>
+                  <span className="text-[12px] font-normal uppercase tracking-[0.5em]">KURS_DNA_BOŞ</span>
                </div>
             )}
          </div>
@@ -198,8 +198,8 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
                <div className="bg-[#0d141b] border-2 border-[#3b82f6] w-full max-w-lg shadow-[0_0_100px_rgba(0,0,0,1)] flex flex-col animate-in zoom-in-95 duration-300 rounded-sm overflow-hidden h-[80vh] bg-grid-hatched">
                   <div className="p-5 border-b border-white/10 flex justify-between items-center bg-[#162431] shrink-0">
                      <div>
-                        <h3 className="text-[15px] font-black text-white uppercase tracking-[0.1em] leading-tight">{viewingCourse.name}</h3>
-                        <span className="text-[8px] font-black text-[#3b82f6] uppercase mt-2 block tracking-widest">KATILIMCI DNA LİSTESİ ({enrolledStudents.length} KİŞİ)</span>
+                        <h3 className="text-[15px] font-normal text-white uppercase tracking-[0.1em] leading-tight">{viewingCourse.name}</h3>
+                        <span className="text-[8px] font-normal text-[#3b82f6] uppercase mt-2 block tracking-widest">KATILIMCI DNA LİSTESİ ({enrolledStudents.length} KİŞİ)</span>
                      </div>
                      <button onClick={() => setViewingStudentsId(null)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all active:scale-90"><i className="fa-solid fa-xmark text-lg"></i></button>
                   </div>
@@ -212,28 +212,28 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
                                  <i className={`fa-solid ${student.gender === Gender.FEMALE ? 'fa-venus' : 'fa-mars'} text-[10px]`}></i>
                               </div>
                               <div className="flex flex-col">
-                                 <span className="text-[12px] font-black text-white uppercase leading-tight">{student.name}</span>
-                                 <span className="text-[7px] font-bold text-slate-500 uppercase mt-0.5">NO: {student.number}</span>
+                                 <span className="text-[12px] font-normal text-white uppercase leading-tight">{student.name}</span>
+                                 <span className="text-[7px] font-normal text-slate-500 uppercase mt-0.5">NO: {student.number}</span>
                               </div>
                            </div>
                            <div className="text-right">
-                              <span className="text-[9px] font-black text-[#fbbf24] bg-[#fbbf24]/5 px-2 py-0.5 border border-[#fbbf24]/20 uppercase">{className}</span>
+                              <span className="text-[9px] font-normal text-[#fbbf24] bg-[#fbbf24]/5 px-2 py-0.5 border border-[#fbbf24]/20 uppercase">{className}</span>
                            </div>
                         </div>
                      )) : (
                         <div className="h-full flex flex-col items-center justify-center opacity-20 py-20">
                            <i className="fa-solid fa-users-slash text-5xl mb-4"></i>
-                           <p className="text-[10px] font-black uppercase tracking-[0.4em]">KAYITLI ÖĞRENCİ BULUNAMADI</p>
+                           <p className="text-[10px] font-normal uppercase tracking-[0.4em]">KAYITLI ÖĞRENCİ BULUNAMADI</p>
                         </div>
                      )}
                   </div>
 
                   <div className="p-4 bg-[#162431] border-t border-white/10 flex flex-col gap-3 shrink-0">
                      <div className="flex justify-between items-center px-2">
-                        <span className="text-[8px] font-black text-slate-500 uppercase">GÜNCEL_DOLULUK:</span>
-                        <span className="text-[12px] font-black text-white">%{Math.round((enrolledStudents.length / viewingCourse.capacity) * 100)}</span>
+                        <span className="text-[8px] font-normal text-slate-500 uppercase">GÜNCEL_DOLULUK:</span>
+                        <span className="text-[12px] font-normal text-white">%{Math.round((enrolledStudents.length / viewingCourse.capacity) * 100)}</span>
                      </div>
-                     <button onClick={() => setViewingStudentsId(null)} className="w-full h-12 bg-white text-black font-black text-[11px] uppercase tracking-[0.3em] active:scale-95 transition-all">PENCEREYİ_KAPAT</button>
+                     <button onClick={() => setViewingStudentsId(null)} className="w-full h-12 bg-white text-black font-normal text-[11px] uppercase tracking-[0.3em] active:scale-95 transition-all">PENCEREYİ_KAPAT</button>
                   </div>
                </div>
             </div>
@@ -245,18 +245,18 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
                <div className="bg-[#0d141b] border-t-4 border-[#3b82f6] p-6 max-lg w-full shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col bg-grid-hatched rounded-sm">
                   <div className="flex justify-between items-center mb-8 shrink-0">
                      <div>
-                        <h3 className="text-[14px] font-black text-white uppercase tracking-widest">{editingId ? 'KURS_DNA_GÜNCELLEME' : 'YENİ_KURS_DNA_GİRİŞİ'}</h3>
-                        <span className="text-[8px] font-black text-[#3b82f6] uppercase tracking-[0.3em] mt-2 block">DERS DIŞI ETKİNLİK SİSTEMİ</span>
+                        <h3 className="text-[14px] font-normal text-white uppercase tracking-widest">{editingId ? 'KURS_DNA_GÜNCELLEME' : 'YENİ_KURS_DNA_GİRİŞİ'}</h3>
+                        <span className="text-[8px] font-normal text-[#3b82f6] uppercase tracking-[0.3em] mt-2 block">DERS DIŞI ETKİNLİK SİSTEMİ</span>
                      </div>
                      <button onClick={() => { setIsDrawerOpen(false); setEditingId(null); }} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all"><i className="fa-solid fa-xmark text-lg"></i></button>
                   </div>
 
                   <div className="space-y-5">
                      <div className="space-y-1.5">
-                        <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">KURS ADI</label>
+                        <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">KURS ADI</label>
                         <input
                            placeholder="Örn: ROBOTİK KODLAMA"
-                           className="w-full bg-black border border-white/10 p-3 text-[13px] font-black text-white uppercase outline-none focus:border-[#3b82f6] shadow-inner"
+                           className="w-full bg-black border border-white/10 p-3 text-[13px] font-normal text-white uppercase outline-none focus:border-[#3b82f6] shadow-inner"
                            value={formData.name}
                            onFocus={handleInputFocus}
                            onChange={e => setFormData({ ...formData, name: e.target.value.toUpperCase() })}
@@ -265,9 +265,9 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
 
                      <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                           <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">HEDEF KİTLE</label>
+                           <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">HEDEF KİTLE</label>
                            <select
-                              className="w-full bg-black border border-white/10 p-3 text-[11px] font-black text-[#fbbf24] outline-none focus:border-[#3b82f6]"
+                              className="w-full bg-black border border-white/10 p-3 text-[11px] font-normal text-[#fbbf24] outline-none focus:border-[#3b82f6]"
                               value={formData.category}
                               onChange={e => setFormData({ ...formData, category: e.target.value as any })}
                            >
@@ -275,10 +275,10 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
                            </select>
                         </div>
                         <div className="space-y-1.5">
-                           <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">KONTENJAN (KAPASİTE)</label>
+                           <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">KONTENJAN (KAPASİTE)</label>
                            <input
                               type="number"
-                              className="w-full bg-black border border-white/10 p-3 text-[13px] font-black text-white text-center outline-none focus:border-[#3b82f6] shadow-inner"
+                              className="w-full bg-black border border-white/10 p-3 text-[13px] font-normal text-white text-center outline-none focus:border-[#3b82f6] shadow-inner"
                               value={formData.capacity}
                               onChange={e => setFormData({ ...formData, capacity: parseInt(e.target.value) || 0 })}
                            />
@@ -286,9 +286,9 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
                      </div>
 
                      <div className="space-y-1.5">
-                        <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">SORUMLU_PERSONEL (ÖĞRETMEN DEĞİŞTİR)</label>
+                        <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">SORUMLU_PERSONEL (ÖĞRETMEN DEĞİŞTİR)</label>
                         <select
-                           className="w-full bg-black border border-white/10 p-3 text-[11px] font-black text-white outline-none focus:border-[#3b82f6]"
+                           className="w-full bg-black border border-white/10 p-3 text-[11px] font-normal text-white outline-none focus:border-[#3b82f6]"
                            value={formData.teacherName}
                            onChange={e => setFormData({ ...formData, teacherName: e.target.value })}
                         >
@@ -299,19 +299,19 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
 
                      <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                           <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">ZAMAN_SLOTU</label>
+                           <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">ZAMAN_SLOTU</label>
                            <input
                               placeholder="Örn: Cts 09:00"
-                              className="w-full bg-black border border-white/10 p-3 text-[11px] font-black text-slate-300 outline-none focus:border-[#3b82f6] shadow-inner"
+                              className="w-full bg-black border border-white/10 p-3 text-[11px] font-normal text-slate-300 outline-none focus:border-[#3b82f6] shadow-inner"
                               value={formData.schedule}
                               onChange={e => setFormData({ ...formData, schedule: e.target.value })}
                            />
                         </div>
                         <div className="space-y-1.5">
-                           <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">KONUM_ETİKETİ</label>
+                           <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">KONUM_ETİKETİ</label>
                            <input
                               placeholder="Örn: Lab 1"
-                              className="w-full bg-black border border-white/10 p-3 text-[11px] font-black text-slate-300 outline-none focus:border-[#3b82f6] shadow-inner"
+                              className="w-full bg-black border border-white/10 p-3 text-[11px] font-normal text-slate-300 outline-none focus:border-[#3b82f6] shadow-inner"
                               value={formData.location}
                               onChange={e => setFormData({ ...formData, location: e.target.value })}
                            />
@@ -320,7 +320,7 @@ const CoursesModule: React.FC<CoursesModuleProps> = ({
 
                      <button
                         onClick={handleSave}
-                        className="w-full h-11 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-[0.2em] shadow-xl hover:brightness-110 active:scale-95 transition-all mt-4 border border-white/10"
+                        className="w-full h-11 bg-[#3b82f6] text-white font-normal text-[10px] uppercase tracking-[0.2em] shadow-xl hover:brightness-110 active:scale-95 transition-all mt-4 border border-white/10"
                      >{editingId ? 'DEĞİŞİKLİKLERİ_MÜHÜRLLE' : 'DNAYI_MÜHÜRLLE'}</button>
                   </div>
                </div>

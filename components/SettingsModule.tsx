@@ -350,9 +350,9 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
    return (
       <div className="h-full flex flex-col overflow-hidden px-1">
          <div className="flex bg-[#0d141b] border border-white/5 p-1 shrink-0 rounded-sm mb-1 shadow-xl">
-            <button onClick={() => setActiveTab('GENEL')} className={`flex-1 h-9 text-[9px] font-black tracking-[0.2em] transition-all ${activeTab === 'GENEL' ? 'bg-yellow-400 text-black' : 'text-slate-500 hover:text-white'}`}>İZLEME</button>
-            <button onClick={() => setActiveTab('KAYNAK')} className={`flex-1 h-9 text-[9px] font-black tracking-[0.2em] transition-all ${activeTab === 'KAYNAK' ? 'bg-[#334155] text-white' : 'text-slate-500 hover:text-white'}`}>DATA_IMPORT</button>
-            <button onClick={() => setActiveTab('YEDEK')} className={`flex-1 h-9 text-[9px] font-black tracking-[0.2em] transition-all ${activeTab === 'YEDEK' ? 'bg-[#3b82f6] text-white' : 'text-slate-500 hover:text-white'}`}>YEDEKLEME</button>
+            <button onClick={() => setActiveTab('GENEL')} className={`flex-1 h-9 text-[9px] font-normal tracking-[0.2em] transition-all ${activeTab === 'GENEL' ? 'bg-yellow-400 text-black' : 'text-slate-500 hover:text-white'}`}>İZLEME</button>
+            <button onClick={() => setActiveTab('KAYNAK')} className={`flex-1 h-9 text-[9px] font-normal tracking-[0.2em] transition-all ${activeTab === 'KAYNAK' ? 'bg-[#334155] text-white' : 'text-slate-500 hover:text-white'}`}>DATA_IMPORT</button>
+            <button onClick={() => setActiveTab('YEDEK')} className={`flex-1 h-9 text-[9px] font-normal tracking-[0.2em] transition-all ${activeTab === 'YEDEK' ? 'bg-[#3b82f6] text-white' : 'text-slate-500 hover:text-white'}`}>YEDEKLEME</button>
          </div>
 
          <div className="flex-1 overflow-hidden">
@@ -360,36 +360,36 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
                <div className="h-full flex flex-col animate-in slide-in-from-bottom-2">
                   <div className="flex-1 bg-[#0f172a] border border-white/5 p-4 flex flex-col relative overflow-hidden rounded-sm bg-grid-hatched overflow-y-auto no-scrollbar">
                      <div className="flex bg-black/40 border border-white/5 p-1 h-12 mb-8 shrink-0">
-                        <button onClick={() => handleConfigChange('isDualShift', false)} className={`flex-1 text-[9px] font-black uppercase tracking-[0.2em] transition-all ${!config.isDualShift ? 'bg-white/10 text-white' : 'text-slate-700'}`}>TEKLİ</button>
-                        <button onClick={() => handleConfigChange('isDualShift', true)} className={`flex-1 text-[9px] font-black uppercase tracking-[0.2em] transition-all ${config.isDualShift ? 'bg-[#3b82f6] text-white' : 'text-slate-700'}`}>İKİLİ_EĞİTİM</button>
+                        <button onClick={() => handleConfigChange('isDualShift', false)} className={`flex-1 text-[9px] font-normal uppercase tracking-[0.2em] transition-all ${!config.isDualShift ? 'bg-white/10 text-white' : 'text-slate-700'}`}>TEKLİ</button>
+                        <button onClick={() => handleConfigChange('isDualShift', true)} className={`flex-1 text-[9px] font-normal uppercase tracking-[0.2em] transition-all ${config.isDualShift ? 'bg-[#3b82f6] text-white' : 'text-slate-700'}`}>İKİLİ_EĞİTİM</button>
                      </div>
 
                      {/* ... (Time settings and lunch break config - same as before) ... */}
                      <div className="grid grid-cols-2 gap-8 items-start mb-10">
                         <div className="flex flex-col items-center space-y-4">
-                           <span className="text-[11px] font-black text-[#3b82f6] tracking-[0.4em] uppercase">SABAH</span>
+                           <span className="text-[11px] font-normal text-[#3b82f6] tracking-[0.4em] uppercase">SABAH</span>
                            <div className="flex items-center gap-3">
                               <button onClick={() => handleConfigChange('morningPeriodCount', Math.max(1, (parseInt(String(config.morningPeriodCount)) || 0) - 1))} className="w-10 h-10 border border-[#3b82f6]/20 bg-[#3b82f6]/5 text-[#3b82f6] hover:bg-[#3b82f6] hover:text-white flex items-center justify-center rounded-sm transition-all"><i className="fa-solid fa-minus"></i></button>
                               <div className="flex flex-col items-center">
-                                 <span className="text-[64px] font-black text-[#3b82f6] leading-none">{config.morningPeriodCount || 0}</span>
-                                 <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest mt-1">PERİYOT</span>
+                                 <span className="text-[64px] font-normal text-[#3b82f6] leading-none">{config.morningPeriodCount || 0}</span>
+                                 <span className="text-[8px] font-normal text-slate-500 uppercase tracking-widest mt-1">PERİYOT</span>
                               </div>
                               <button onClick={() => handleConfigChange('morningPeriodCount', (parseInt(String(config.morningPeriodCount)) || 0) + 1)} className="w-10 h-10 border border-[#3b82f6]/20 bg-[#3b82f6]/5 text-[#3b82f6] hover:bg-[#3b82f6] hover:text-white flex items-center justify-center rounded-sm transition-all"><i className="fa-solid fa-plus"></i></button>
                            </div>
-                           <input type="text" className="w-24 bg-black border border-white/10 p-2 text-center text-[18px] font-black text-[#3b82f6] outline-none" value={config.morningStartTime} onChange={(e) => handleConfigChange('morningStartTime', e.target.value)} />
+                           <input type="text" className="w-24 bg-black border border-white/10 p-2 text-center text-[18px] font-normal text-[#3b82f6] outline-none" value={config.morningStartTime} onChange={(e) => handleConfigChange('morningStartTime', e.target.value)} />
                         </div>
 
                         <div className={`flex flex-col items-center space-y-4 transition-all ${!config.isDualShift ? 'opacity-10 grayscale pointer-events-none' : ''}`}>
-                           <span className="text-[11px] font-black text-[#fbbf24] tracking-[0.4em] uppercase">ÖĞLE</span>
+                           <span className="text-[11px] font-normal text-[#fbbf24] tracking-[0.4em] uppercase">ÖĞLE</span>
                            <div className="flex items-center gap-3">
                               <button onClick={() => handleConfigChange('afternoonPeriodCount', Math.max(1, (parseInt(String(config.afternoonPeriodCount)) || 0) - 1))} className="w-10 h-10 border border-[#fbbf24]/20 bg-[#fbbf24]/5 text-[#fbbf24] hover:bg-[#fbbf24] hover:text-black flex items-center justify-center rounded-sm transition-all"><i className="fa-solid fa-minus"></i></button>
                               <div className="flex flex-col items-center">
-                                 <span className="text-[64px] font-black text-[#fbbf24] leading-none">{config.afternoonPeriodCount || 0}</span>
-                                 <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest mt-1">PERİYOT</span>
+                                 <span className="text-[64px] font-normal text-[#fbbf24] leading-none">{config.afternoonPeriodCount || 0}</span>
+                                 <span className="text-[8px] font-normal text-slate-500 uppercase tracking-widest mt-1">PERİYOT</span>
                               </div>
                               <button onClick={() => handleConfigChange('afternoonPeriodCount', (parseInt(String(config.afternoonPeriodCount)) || 0) + 1)} className="w-10 h-10 border border-[#fbbf24]/20 bg-[#fbbf24]/5 text-[#fbbf24] hover:bg-[#fbbf24] hover:text-black flex items-center justify-center rounded-sm transition-all"><i className="fa-solid fa-plus"></i></button>
                            </div>
-                           <input type="text" className="w-24 bg-black border border-white/10 p-2 text-center text-[18px] font-black text-[#fbbf24] outline-none" value={config.afternoonStartTime} onChange={(e) => handleConfigChange('afternoonStartTime', e.target.value)} />
+                           <input type="text" className="w-24 bg-black border border-white/10 p-2 text-center text-[18px] font-normal text-[#fbbf24] outline-none" value={config.afternoonStartTime} onChange={(e) => handleConfigChange('afternoonStartTime', e.target.value)} />
                         </div>
                      </div>
 
@@ -397,36 +397,36 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
                         <div className="mb-10 bg-black/40 border border-[#fbbf24]/30 p-5 rounded-sm animate-in zoom-in-95">
                            <div className="flex items-center gap-3 mb-6">
                               <i className="fa-solid fa-utensils text-[#fbbf24] text-lg"></i>
-                              <h3 className="text-[11px] font-black text-white uppercase tracking-widest">ÖĞLE ARASI YAPILANDIRMASI</h3>
+                              <h3 className="text-[11px] font-normal text-white uppercase tracking-widest">ÖĞLE ARASI YAPILANDIRMASI</h3>
                            </div>
 
                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div className="space-y-1.5">
-                                 <label className="text-[8px] font-black text-slate-500 uppercase tracking-widest">ARADAN ÖNCEKİ DERS SAYISI</label>
+                                 <label className="text-[8px] font-normal text-slate-500 uppercase tracking-widest">ARADAN ÖNCEKİ DERS SAYISI</label>
                                  <div className="flex items-center gap-3 bg-black border border-white/10 p-1">
                                     <button onClick={() => handleConfigChange('lunchBreakAfter', Math.max(1, (config.lunchBreakAfter || 4) - 1))} className="w-10 h-10 flex items-center justify-center text-[#fbbf24]"><i className="fa-solid fa-minus"></i></button>
-                                    <span className="flex-1 text-center text-xl font-black text-white">{config.lunchBreakAfter || 4}</span>
+                                    <span className="flex-1 text-center text-xl font-normal text-white">{config.lunchBreakAfter || 4}</span>
                                     <button onClick={() => handleConfigChange('lunchBreakAfter', Math.min(config.morningPeriodCount - 1, (config.lunchBreakAfter || 4) + 1))} className="w-10 h-10 flex items-center justify-center text-[#fbbf24]"><i className="fa-solid fa-plus"></i></button>
                                  </div>
                               </div>
 
                               <div className="grid grid-cols-2 gap-3">
                                  <div className="space-y-1.5">
-                                    <label className="text-[8px] font-black text-slate-500 uppercase tracking-widest">BAŞLANGIÇ</label>
+                                    <label className="text-[8px] font-normal text-slate-500 uppercase tracking-widest">BAŞLANGIÇ</label>
                                     <input
                                        type="text"
                                        placeholder="12:30"
-                                       className="w-full bg-black border border-white/10 p-3 text-[14px] font-black text-[#fbbf24] text-center outline-none focus:border-[#fbbf24]"
+                                       className="w-full bg-black border border-white/10 p-3 text-[14px] font-normal text-[#fbbf24] text-center outline-none focus:border-[#fbbf24]"
                                        value={config.lunchBreakStart || ''}
                                        onChange={(e) => handleConfigChange('lunchBreakStart', e.target.value)}
                                     />
                                  </div>
                                  <div className="space-y-1.5">
-                                    <label className="text-[8px] font-black text-slate-500 uppercase tracking-widest">BİTİŞ</label>
+                                    <label className="text-[8px] font-normal text-slate-500 uppercase tracking-widest">BİTİŞ</label>
                                     <input
                                        type="text"
                                        placeholder="13:30"
-                                       className="w-full bg-black border border-white/10 p-3 text-[14px] font-black text-[#fbbf24] text-center outline-none focus:border-[#fbbf24]"
+                                       className="w-full bg-black border border-white/10 p-3 text-[14px] font-normal text-[#fbbf24] text-center outline-none focus:border-[#fbbf24]"
                                        value={config.lunchBreakEnd || ''}
                                        onChange={(e) => handleConfigChange('lunchBreakEnd', e.target.value)}
                                     />
@@ -439,22 +439,22 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
                      <div className="mt-auto space-y-5 pt-6 border-t border-white/5">
                         <div className="grid grid-cols-2 gap-4">
                            <div className="space-y-1">
-                              <label className="text-[8px] font-black text-slate-600 uppercase tracking-widest ml-1">DERS DK.</label>
-                              <input type="number" className="w-full bg-black border border-white/10 p-3 text-[14px] font-black text-white text-center outline-none focus:border-[#3b82f6]" value={config.lessonDuration} onChange={(e) => handleConfigChange('lessonDuration', parseInt(e.target.value) || 0)} />
+                              <label className="text-[8px] font-normal text-slate-600 uppercase tracking-widest ml-1">DERS DK.</label>
+                              <input type="number" className="w-full bg-black border border-white/10 p-3 text-[14px] font-normal text-white text-center outline-none focus:border-[#3b82f6]" value={config.lessonDuration} onChange={(e) => handleConfigChange('lessonDuration', parseInt(e.target.value) || 0)} />
                            </div>
                            <div className="space-y-1">
-                              <label className="text-[8px] font-black text-slate-600 uppercase tracking-widest ml-1">TENEFÜS DK.</label>
-                              <input type="number" className="w-full bg-black border border-white/10 p-3 text-[14px] font-black text-white text-center outline-none focus:border-[#3b82f6]" value={config.breakDuration} onChange={(e) => handleConfigChange('breakDuration', parseInt(e.target.value) || 0)} />
+                              <label className="text-[8px] font-normal text-slate-600 uppercase tracking-widest ml-1">TENEFÜS DK.</label>
+                              <input type="number" className="w-full bg-black border border-white/10 p-3 text-[14px] font-normal text-white text-center outline-none focus:border-[#3b82f6]" value={config.breakDuration} onChange={(e) => handleConfigChange('breakDuration', parseInt(e.target.value) || 0)} />
                            </div>
                         </div>
                         <div className="space-y-1">
-                           <label className="text-[8px] font-black text-slate-600 uppercase tracking-widest ml-1">OKUL ADI</label>
-                           <input type="text" className="w-full h-12 bg-black border border-white/10 px-4 text-[13px] font-black text-white uppercase outline-none focus:border-[#3b82f6]" value={config.schoolName} onChange={(e) => handleConfigChange('schoolName', e.target.value.toUpperCase())} />
+                           <label className="text-[8px] font-normal text-slate-600 uppercase tracking-widest ml-1">OKUL ADI</label>
+                           <input type="text" className="w-full h-12 bg-black border border-white/10 px-4 text-[13px] font-normal text-white uppercase outline-none focus:border-[#3b82f6]" value={config.schoolName} onChange={(e) => handleConfigChange('schoolName', e.target.value.toUpperCase())} />
                         </div>
                         <div className="flex gap-2">
                            <button onClick={() => setIsResetModalOpen(true)} className="w-12 h-14 bg-red-600/20 border border-red-600/40 text-red-500 flex items-center justify-center hover:bg-red-600 hover:text-white transition-all shadow-lg" title="Fabrika Ayarlarına Dön"><i className="fa-solid fa-trash-can text-xl"></i></button>
                            <button onClick={() => setIsClearScheduleModalOpen(true)} className="w-12 h-14 bg-orange-600/20 border border-orange-600/40 text-orange-500 flex items-center justify-center hover:bg-orange-600 hover:text-white transition-all shadow-lg" title="Sadece Ders Programını Sil"><i className="fa-solid fa-calendar-xmark text-xl"></i></button>
-                           <button onClick={() => onSuccess("DNA_AYARLARI_MÜHÜRLENDİ")} className="flex-1 h-14 bg-[#3b82f6] text-white font-black text-[12px] uppercase tracking-[0.4em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all">DNAYI_MÜHÜRLLE</button>
+                           <button onClick={() => onSuccess("DNA_AYARLARI_MÜHÜRLENDİ")} className="flex-1 h-14 bg-[#3b82f6] text-white font-normal text-[12px] uppercase tracking-[0.4em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all">DNAYI_MÜHÜRLLE</button>
                         </div>
                      </div>
                   </div>
@@ -465,15 +465,15 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
             {activeTab === 'KAYNAK' && (
                <div className="h-full flex flex-col space-y-3 animate-in slide-in-from-bottom-2">
                   <div className="bg-[#1e293b]/60 border border-white/10 p-4 shadow-xl rounded-sm bg-grid-hatched">
-                     <div className="flex items-center gap-3 mb-4"><i className="fa-solid fa-cloud-arrow-up text-[#fbbf24] text-lg"></i><h3 className="text-[12px] font-black text-white uppercase tracking-widest">AKILLI_AKTARIM_KONSOLU</h3></div>
+                     <div className="flex items-center gap-3 mb-4"><i className="fa-solid fa-cloud-arrow-up text-[#fbbf24] text-lg"></i><h3 className="text-[12px] font-normal text-white uppercase tracking-widest">AKILLI_AKTARIM_KONSOLU</h3></div>
                      <div className="grid grid-cols-1 gap-2">
-                        <button onClick={() => studentFileRef.current?.click()} className="h-12 bg-green-600/10 border border-green-600/40 text-green-500 font-black text-[9px] uppercase tracking-widest hover:bg-green-600 hover:text-white transition-all flex items-center gap-4 px-4"><i className="fa-solid fa-graduation-cap"></i> ÖĞRENCİ_AKTAR</button>
+                        <button onClick={() => studentFileRef.current?.click()} className="h-12 bg-green-600/10 border border-green-600/40 text-green-500 font-normal text-[9px] uppercase tracking-widest hover:bg-green-600 hover:text-white transition-all flex items-center gap-4 px-4"><i className="fa-solid fa-graduation-cap"></i> ÖĞRENCİ_AKTAR</button>
                         <input ref={studentFileRef} type="file" className="hidden" accept=".xlsx" onChange={handleProcessStudentsExcel} />
 
-                        <button onClick={() => teacherFileRef.current?.click()} className="h-12 bg-[#3b82f6]/10 border border-[#3b82f6]/40 text-[#3b82f6] font-black text-[9px] uppercase tracking-widest hover:bg-[#3b82f6] hover:text-white transition-all flex items-center gap-4 px-4"><i className="fa-solid fa-user-tie"></i> KADRO_AKTAR</button>
+                        <button onClick={() => teacherFileRef.current?.click()} className="h-12 bg-[#3b82f6]/10 border border-[#3b82f6]/40 text-[#3b82f6] font-normal text-[9px] uppercase tracking-widest hover:bg-[#3b82f6] hover:text-white transition-all flex items-center gap-4 px-4"><i className="fa-solid fa-user-tie"></i> KADRO_AKTAR</button>
                         <input ref={teacherFileRef} type="file" className="hidden" accept=".xlsx" onChange={handleProcessTeachersExcel} />
 
-                        <button onClick={() => lessonFileRef.current?.click()} className="h-12 bg-[#fbbf24]/10 border border-[#fbbf24]/40 text-[#fbbf24] font-black text-[9px] uppercase tracking-widest hover:bg-[#fbbf24] hover:text-black transition-all flex items-center gap-4 px-4"><i className="fa-solid fa-book-open"></i> MÜFREDAT_AKTAR</button>
+                        <button onClick={() => lessonFileRef.current?.click()} className="h-12 bg-[#fbbf24]/10 border border-[#fbbf24]/40 text-[#fbbf24] font-normal text-[9px] uppercase tracking-widest hover:bg-[#fbbf24] hover:text-black transition-all flex items-center gap-4 px-4"><i className="fa-solid fa-book-open"></i> MÜFREDAT_AKTAR</button>
                         <input ref={lessonFileRef} type="file" className="hidden" accept=".xlsx" onChange={handleProcessLessonsExcel} />
                      </div>
                   </div>
@@ -486,29 +486,29 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
                      <div className="flex items-center gap-3 mb-6">
                         <i className="fa-solid fa-database text-[#3b82f6] text-xl"></i>
                         <div>
-                           <h3 className="text-[13px] font-black text-white uppercase tracking-widest leading-none">SİSTEM_YEDEK_MERKEZİ</h3>
-                           <span className="text-[7px] font-black text-slate-500 uppercase tracking-widest mt-1.5 block">DNA_KORUMA_VE_RESTORASYON</span>
+                           <h3 className="text-[13px] font-normal text-white uppercase tracking-widest leading-none">SİSTEM_YEDEK_MERKEZİ</h3>
+                           <span className="text-[7px] font-normal text-slate-500 uppercase tracking-widest mt-1.5 block">DNA_KORUMA_VE_RESTORASYON</span>
                         </div>
                      </div>
 
                      <div className="grid grid-cols-1 gap-4">
                         <div className="bg-black/40 border border-white/5 p-4 space-y-3">
-                           <span className="text-[8px] font-black text-slate-600 uppercase tracking-widest">DIŞA_AKTIR_DNA</span>
-                           <p className="text-[10px] font-medium text-slate-400 leading-relaxed">Mevcut tüm verileri tek bir JSON dosyası olarak bilgisayarınıza indirir. Bu dosya tam okul yedeğidir.</p>
+                           <span className="text-[8px] font-normal text-slate-600 uppercase tracking-widest">DIŞA_AKTIR_DNA</span>
+                           <p className="text-[10px] font-normal text-slate-400 leading-relaxed">Mevcut tüm verileri tek bir JSON dosyası olarak bilgisayarınıza indirir. Bu dosya tam okul yedeğidir.</p>
                            <button
                               onClick={handleExportDNA}
-                              className="w-full h-12 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-3 shadow-lg"
+                              className="w-full h-12 bg-[#3b82f6] text-white font-normal text-[10px] uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-3 shadow-lg"
                            >
                               <i className="fa-solid fa-file-export"></i> OKUL DNA YEDEK AL (.JSON)
                            </button>
                         </div>
 
                         <div className="bg-black/40 border border-white/5 p-4 space-y-3">
-                           <span className="text-[8px] font-black text-[#fbbf24] uppercase tracking-widest">DNA_RESTORASYONU</span>
-                           <p className="text-[10px] font-medium text-slate-400 leading-relaxed">Önceden alınmış bir DNA yedeğini sisteme yükler. Mevcut tüm veriler silinip yedektekiler yüklenir.</p>
+                           <span className="text-[8px] font-normal text-[#fbbf24] uppercase tracking-widest">DNA_RESTORASYONU</span>
+                           <p className="text-[10px] font-normal text-slate-400 leading-relaxed">Önceden alınmış bir DNA yedeğini sisteme yükler. Mevcut tüm veriler silinip yedektekiler yüklenir.</p>
                            <button
                               onClick={() => dnaRestoreRef.current?.click()}
-                              className="w-full h-12 bg-black border border-[#fbbf24]/40 text-[#fbbf24] font-black text-[10px] uppercase tracking-widest hover:bg-[#fbbf24] hover:text-black active:scale-95 transition-all flex items-center justify-center gap-3 shadow-lg"
+                              className="w-full h-12 bg-black border border-[#fbbf24]/40 text-[#fbbf24] font-normal text-[10px] uppercase tracking-widest hover:bg-[#fbbf24] hover:text-black active:scale-95 transition-all flex items-center justify-center gap-3 shadow-lg"
                            >
                               <i className="fa-solid fa-file-import"></i> YEDEKTEN GERİ YÜKLE
                            </button>
@@ -524,7 +524,7 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
             <div className="fixed inset-0 z-[9000] flex items-center justify-center bg-black/98 backdrop-blur-xl px-2 py-4">
                <div className="bg-[#0d141b] border-2 border-[#3b82f6] w-full max-w-lg shadow-[0_0_150px_rgba(0,0,0,1)] flex flex-col animate-in zoom-in-95 duration-300 rounded-sm overflow-hidden h-[80vh]">
                   <div className="p-4 border-b border-white/10 flex justify-between items-center bg-[#162431] shrink-0">
-                     <div><h3 className="text-[14px] font-black text-white uppercase tracking-[0.2em] leading-none">DNA_DOĞRULAMA_MATRİSİ</h3><span className="text-[8px] font-black text-[#3b82f6] uppercase mt-2 block tracking-widest">{importType} AKTARIMI ÖNİZLEME</span></div>
+                     <div><h3 className="text-[14px] font-normal text-white uppercase tracking-[0.2em] leading-none">DNA_DOĞRULAMA_MATRİSİ</h3><span className="text-[8px] font-normal text-[#3b82f6] uppercase mt-2 block tracking-widest">{importType} AKTARIMI ÖNİZLEME</span></div>
                      <button onClick={() => { setPreviewData(null); setImportType(null); }} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all active:scale-90"><i className="fa-solid fa-xmark text-lg"></i></button>
                   </div>
                   <div className="flex-1 overflow-y-auto no-scrollbar bg-grid-hatched p-2">
@@ -533,14 +533,14 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
                            <div key={idx} className="bg-black/60 border border-white/5 flex items-center h-14 relative group hover:bg-[#1e2e3d] transition-all">
                               <div className="w-12 h-full border-r border-white/5 flex items-center justify-center shrink-0">
                                  {importType === 'LESSON' ? (
-                                    <span className="text-[10px] font-black text-[#fbbf24] uppercase drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]">{item.branch}</span>
+                                    <span className="text-[10px] font-normal text-[#fbbf24] uppercase drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]">{item.branch}</span>
                                  ) : (
-                                    <span className={`text-[12px] font-black ${item.gender === Gender.FEMALE ? 'text-pink-500' : 'text-[#3b82f6]'}`}>{item.gender === Gender.FEMALE ? 'K' : 'E'}</span>
+                                    <span className={`text-[12px] font-normal ${item.gender === Gender.FEMALE ? 'text-pink-500' : 'text-[#3b82f6]'}`}>{item.gender === Gender.FEMALE ? 'K' : 'E'}</span>
                                  )}
                               </div>
-                              <div className="flex-1 px-4 flex flex-col justify-center min-w-0"><span className="text-[13px] font-black text-white uppercase truncate">{item.name}</span></div>
+                              <div className="flex-1 px-4 flex flex-col justify-center min-w-0"><span className="text-[13px] font-normal text-white uppercase truncate">{item.name}</span></div>
                               <div className="w-24 h-full border-l border-white/5 flex flex-col items-center justify-center shrink-0 bg-black/20">
-                                 <span className="text-[9px] font-black text-[#3b82f6] uppercase truncate px-2">
+                                 <span className="text-[9px] font-normal text-[#3b82f6] uppercase truncate px-2">
                                     {importType === 'STUDENT' ? item.targetClass : importType === 'LESSON' ? `${item.hours} SAAT` : (item.branchShort || `${item.hours} s`)}
                                  </span>
                               </div>
@@ -549,8 +549,8 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
                      </div>
                   </div>
                   <div className="p-4 bg-black/80 border-t border-white/10 flex gap-3 shrink-0">
-                     <button onClick={() => { setPreviewData(null); setImportType(null); }} className="flex-1 h-14 border border-[#354a5f] text-slate-400 font-black text-[10px] uppercase tracking-widest transition-all">İPTAL</button>
-                     <button onClick={finalizeExcelImport} className="flex-[2] h-14 bg-[#3b82f6] text-white font-black text-[11px] uppercase tracking-[0.3em] shadow-xl transition-all">DNAYI_MÜHÜRLLE</button>
+                     <button onClick={() => { setPreviewData(null); setImportType(null); }} className="flex-1 h-14 border border-[#354a5f] text-slate-400 font-normal text-[10px] uppercase tracking-widest transition-all">İPTAL</button>
+                     <button onClick={finalizeExcelImport} className="flex-[2] h-14 bg-[#3b82f6] text-white font-normal text-[11px] uppercase tracking-[0.3em] shadow-xl transition-all">DNAYI_MÜHÜRLLE</button>
                   </div>
                </div>
             </div>
@@ -564,12 +564,12 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
                      <div className="space-y-6">
                         <div className="flex items-center gap-4">
                            <div className="w-12 h-12 bg-red-600/20 border border-red-600 flex items-center justify-center shadow-lg"><i className="fa-solid fa-triangle-exclamation text-red-600 text-2xl"></i></div>
-                           <h3 className="text-[16px] font-black text-white uppercase tracking-widest">SİSTEM SIFIRLAMA</h3>
+                           <h3 className="text-[16px] font-normal text-white uppercase tracking-widest">SİSTEM SIFIRLAMA</h3>
                         </div>
-                        <p className="text-[11px] font-bold text-slate-400 uppercase leading-relaxed">ÖĞRETMEN, ÖĞRENCİ, DERS VE TÜM PLANLAR KALICI OLARAK SİLİNECEKTİR. YEDEK ALMADIYSANIZ VERİ KAYBI YAŞANIR.</p>
+                        <p className="text-[11px] font-normal text-slate-400 uppercase leading-relaxed">ÖĞRETMEN, ÖĞRENCİ, DERS VE TÜM PLANLAR KALICI OLARAK SİLİNECEKTİR. YEDEK ALMADIYSANIZ VERİ KAYBI YAŞANIR.</p>
                         <div className="flex gap-4">
-                           <button onClick={() => setIsResetModalOpen(false)} className="flex-1 h-12 border border-slate-600 text-white font-black text-[10px] uppercase">İPTAL</button>
-                           <button onClick={startHardReset} className="flex-1 h-12 bg-red-600 text-white font-black text-[10px] uppercase shadow-2xl">EVET_SİL</button>
+                           <button onClick={() => setIsResetModalOpen(false)} className="flex-1 h-12 border border-slate-600 text-white font-normal text-[10px] uppercase">İPTAL</button>
+                           <button onClick={startHardReset} className="flex-1 h-12 bg-red-600 text-white font-normal text-[10px] uppercase shadow-2xl">EVET_SİL</button>
                         </div>
                      </div>
                   )}
@@ -577,7 +577,7 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
                      <div className="flex flex-col items-center py-10 space-y-8">
                         <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
                         <div className="w-full space-y-2">
-                           <div className="flex justify-between items-center text-[10px] font-black text-white uppercase tracking-widest"><span>DNA_TEMİZLENİYOR...</span><span>%{Math.round(resetProgress)}</span></div>
+                           <div className="flex justify-between items-center text-[10px] font-normal text-white uppercase tracking-widest"><span>DNA_TEMİZLENİYOR...</span><span>%{Math.round(resetProgress)}</span></div>
                            <div className="h-1.5 w-full bg-black rounded-full overflow-hidden"><div className="h-full bg-red-600" style={{ width: `${resetProgress}%` }}></div></div>
                         </div>
                      </div>
@@ -585,7 +585,7 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
                   {resetStep === 'FINAL' && (
                      <div className="flex flex-col items-center py-10 space-y-6">
                         <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg"><i className="fa-solid fa-check text-3xl"></i></div>
-                        <h3 className="text-[18px] font-black text-white uppercase tracking-widest">DNA TEMİZLENDİ</h3>
+                        <h3 className="text-[18px] font-normal text-white uppercase tracking-widest">DNA TEMİZLENDİ</h3>
                      </div>
                   )}
                </div>
@@ -600,17 +600,17 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({
                      <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-orange-500/20 border border-orange-500 flex items-center justify-center shadow-lg"><i className="fa-solid fa-calendar-xmark text-orange-500 text-2xl"></i></div>
                         <div>
-                           <h3 className="text-[16px] font-black text-white uppercase tracking-widest">PLAN SIFIRLAMA</h3>
-                           <span className="text-[8px] font-bold text-orange-500 uppercase tracking-widest">SADECE DERS PROGRAMI SİLİNİR</span>
+                           <h3 className="text-[16px] font-normal text-white uppercase tracking-widest">PLAN SIFIRLAMA</h3>
+                           <span className="text-[8px] font-normal text-orange-500 uppercase tracking-widest">SADECE DERS PROGRAMI SİLİNİR</span>
                         </div>
                      </div>
-                     <p className="text-[11px] font-bold text-slate-400 uppercase leading-relaxed">
+                     <p className="text-[11px] font-normal text-slate-400 uppercase leading-relaxed">
                         TÜM SINIFLARIN VE ÖĞRETMENLERİN DERS PROGRAMLARI SİLİNECEKTİR.
                         <br />ÖĞRETMEN, DERS VE ÖĞRENCİ KAYITLARI <span className="text-white">KORUNUR.</span>
                      </p>
                      <div className="flex gap-4">
-                        <button onClick={() => setIsClearScheduleModalOpen(false)} className="flex-1 h-12 border border-slate-600 text-white font-black text-[10px] uppercase hover:bg-white/5 transition-all">VAZGEÇ</button>
-                        <button onClick={executeClearSchedule} className="flex-1 h-12 bg-orange-600 text-white font-black text-[10px] uppercase shadow-xl hover:brightness-110 transition-all">PROGRAMI SİL</button>
+                        <button onClick={() => setIsClearScheduleModalOpen(false)} className="flex-1 h-12 border border-slate-600 text-white font-normal text-[10px] uppercase hover:bg-white/5 transition-all">VAZGEÇ</button>
+                        <button onClick={executeClearSchedule} className="flex-1 h-12 bg-orange-600 text-white font-normal text-[10px] uppercase shadow-xl hover:brightness-110 transition-all">PROGRAMI SİL</button>
                      </div>
                   </div>
                </div>

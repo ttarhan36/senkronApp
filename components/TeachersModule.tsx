@@ -45,7 +45,7 @@ const GradeInput: React.FC<{
    useEffect(() => { setLocalVal(initialValue === undefined ? '' : initialValue.toString()); }, [initialValue]);
    const handleBlur = () => { const numeric = localVal === '' ? undefined : parseInt(localVal); if (numeric !== initialValue) onCommit(numeric); };
    const handleKeyDown = (e: React.KeyboardEvent) => { if (e.key === 'Enter') (e.target as HTMLElement).blur(); };
-   return (<input type="number" placeholder="--" className={`w-14 h-10 bg-black/40 border border-white/5 text-center text-[16px] font-black outline-none transition-all focus:border-[#fbbf24] ${localVal === '' ? 'text-slate-700' : colorClass}`} value={localVal} onChange={e => setLocalVal(e.target.value)} onBlur={handleBlur} onKeyDown={handleKeyDown} onFocus={(e) => e.target.select()} />);
+   return (<input type="number" placeholder="--" className={`w-14 h-10 bg-black/40 border border-white/5 text-center text-[16px] font-normal outline-none transition-all focus:border-[#fbbf24] ${localVal === '' ? 'text-slate-700' : colorClass}`} value={localVal} onChange={e => setLocalVal(e.target.value)} onBlur={handleBlur} onKeyDown={handleKeyDown} onFocus={(e) => e.target.select()} />);
 };
 
 const TeachersModule: React.FC<TeachersModuleProps> = ({
@@ -212,10 +212,10 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
       return (
          <div className="space-y-4 animate-in slide-in-from-bottom-2">
             <div className="bg-[#1e293b]/60 border border-white/5 p-4 rounded-sm">
-               <span className="text-[10px] font-black text-[#a855f7] uppercase tracking-[0.4em] block mb-3">YENİ KANAAT / GÖZLEM EKLE</span>
+               <span className="text-[10px] font-normal text-[#a855f7] uppercase tracking-[0.4em] block mb-3">YENİ KANAAT / GÖZLEM EKLE</span>
                <div className="space-y-3">
                   <textarea
-                     className="w-full bg-black/40 border border-white/10 p-3 text-[11px] font-bold text-white outline-none focus:border-[#a855f7] transition-all min-h-[80px] resize-none rounded-sm"
+                     className="w-full bg-black/40 border border-white/10 p-3 text-[11px] font-normal text-white outline-none focus:border-[#a855f7] transition-all min-h-[80px] resize-none rounded-sm"
                      placeholder="Öğrenci hakkında gözlem veya kanaat notunuzu buraya yazın..."
                      value={observationText}
                      onChange={(e) => setObservationText(e.target.value)}
@@ -224,7 +224,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                      <button
                         onClick={handleAddObservation}
                         disabled={isSavingObservation || !observationText.trim()}
-                        className={`px-6 h-9 bg-[#a855f7] text-white font-black text-[10px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all border border-white/10 ${isSavingObservation || !observationText.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        className={`px-6 h-9 bg-[#a855f7] text-white font-normal text-[10px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all border border-white/10 ${isSavingObservation || !observationText.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
                      >
                         {isSavingObservation ? 'KAYDEDİLİYOR...' : 'KAYDET'}
                      </button>
@@ -235,24 +235,24 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
             <div className="space-y-3">
                <div className="flex items-center gap-2 mb-2">
                   <i className="fa-solid fa-history text-slate-500 text-xs"></i>
-                  <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">GEÇMİŞ GÖZLEMLER ({obsList.length})</span>
+                  <span className="text-[9px] font-normal text-slate-500 uppercase tracking-widest">GEÇMİŞ GÖZLEMLER ({obsList.length})</span>
                </div>
 
                {obsList.length > 0 ? (
                   obsList.map(obs => (
                      <div key={obs.id} className="bg-black/20 border border-white/5 p-3 rounded-sm relative group hover:bg-black/40 transition-all">
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#a855f7]/50"></div>
-                        <p className="text-[11px] font-medium text-white/90 pl-2 leading-relaxed italic">"{obs.content}"</p>
+                        <p className="text-[11px] font-normal text-white/90 pl-2 leading-relaxed italic">"{obs.content}"</p>
                         <div className="flex justify-between items-center mt-2 pl-2 border-t border-white/5 pt-2">
-                           <span className="text-[9px] font-black text-[#a855f7] uppercase tracking-wider">{obs.teacherName}</span>
-                           <span className="text-[8px] font-bold text-slate-600 uppercase">{obs.date}</span>
+                           <span className="text-[9px] font-normal text-[#a855f7] uppercase tracking-wider">{obs.teacherName}</span>
+                           <span className="text-[8px] font-normal text-slate-600 uppercase">{obs.date}</span>
                         </div>
                      </div>
                   ))
                ) : (
                   <div className="py-12 text-center opacity-30 border border-dashed border-white/5">
                      <i className="fa-solid fa-comment-slash text-2xl mb-2 text-slate-600"></i>
-                     <p className="text-[9px] font-black uppercase tracking-widest text-slate-500">HENÜZ GÖZLEM BULUNMUYOR</p>
+                     <p className="text-[9px] font-normal uppercase tracking-widest text-slate-500">HENÜZ GÖZLEM BULUNMUYOR</p>
                   </div>
                )}
             </div>
@@ -533,8 +533,8 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
          days.push(
             <div key={d} className={`h-14 border border-white/5 p-1 relative ${hasAbsent ? 'bg-red-900/20' : 'bg-[#1e293b]/40'}`}>
-               <span className="text-[10px] font-black text-slate-500 absolute top-1 left-1">{d}</span>
-               {hasAbsent && <div className="mt-4 text-[8px] font-black text-red-500 text-center">{records?.length} DERS</div>}
+               <span className="text-[10px] font-normal text-slate-500 absolute top-1 left-1">{d}</span>
+               {hasAbsent && <div className="mt-4 text-[8px] font-normal text-red-500 text-center">{records?.length} DERS</div>}
             </div>
          );
       }
@@ -542,17 +542,17 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
          <div className="space-y-4">
             <div className="flex items-center justify-between bg-black/40 p-2 border border-white/5">
                <button onClick={() => setAttendanceMonth(new Date(attendanceMonth.setMonth(attendanceMonth.getMonth() - 1)))} className="text-white"><i className="fa-solid fa-chevron-left"></i></button>
-               <span className="text-[11px] font-black text-[#fbbf24] uppercase">{attendanceMonth.toLocaleString('tr-TR', { month: 'long', year: 'numeric' })}</span>
+               <span className="text-[11px] font-normal text-[#fbbf24] uppercase">{attendanceMonth.toLocaleString('tr-TR', { month: 'long', year: 'numeric' })}</span>
                <button onClick={() => setAttendanceMonth(new Date(attendanceMonth.setMonth(attendanceMonth.getMonth() + 1)))} className="text-white"><i className="fa-solid fa-chevron-right"></i></button>
             </div>
             <div className="grid grid-cols-7 gap-1">
-               {['PZT', 'SAL', 'ÇAR', 'PER', 'CUM', 'CTS', 'PAZ'].map(day => <div key={day} className="text-center text-[9px] font-black text-slate-500 py-1">{day}</div>)}
+               {['PZT', 'SAL', 'ÇAR', 'PER', 'CUM', 'CTS', 'PAZ'].map(day => <div key={day} className="text-center text-[9px] font-normal text-slate-500 py-1">{day}</div>)}
                {days}
             </div>
 
             {/* PAST ABSENCES LIST */}
             <div className="bg-[#1e293b]/60 border border-white/5 p-4 rounded-sm mt-4">
-               <span className="text-[10px] font-black text-red-500 uppercase tracking-[0.4em] block mb-3">
+               <span className="text-[10px] font-normal text-red-500 uppercase tracking-[0.4em] block mb-3">
                   DEVAMSIZLIK LİSTESİ ({(viewingStudentAttendance.attendanceHistory?.filter(h => h.status === 'ABSENT') || []).length})
                </span>
                <div className="space-y-2 max-h-[200px] overflow-y-auto custom-scrollbar">
@@ -563,10 +563,10 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                         return (
                            <div key={rec.id} className="bg-black/20 border-l-2 border-red-500 p-2 flex justify-between items-center group hover:bg-black/40 transition-all">
                               <div>
-                                 <span className="text-[10px] font-medium text-white/80 block uppercase truncate">{standardizeBranchCode(displayLessonName)}</span>
-                                 <span className="text-[8px] text-slate-500 font-bold uppercase">{rec.date} | {rec.period}. DERS</span>
+                                 <span className="text-[10px] font-normal text-white/80 block uppercase truncate">{standardizeBranchCode(displayLessonName)}</span>
+                                 <span className="text-[8px] text-slate-500 font-normal uppercase">{rec.date} | {rec.period}. DERS</span>
                               </div>
-                              <span className="text-[8px] font-black text-slate-600 uppercase group-hover:text-slate-400 transition-colors">{rec.teacherName}</span>
+                              <span className="text-[8px] font-normal text-slate-600 uppercase group-hover:text-slate-400 transition-colors">{rec.teacherName}</span>
                            </div>
                         );
                      })
@@ -588,12 +588,12 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                return (
                   <div key={g.lessonId} className="bg-[#1e293b] border border-white/5 p-3">
                      <div className="flex justify-between mb-2">
-                        <span className="text-[11px] font-medium text-white/80 truncate">{lesson?.name || 'DERS'}</span>
-                        <span className={`text-[12px] font-black ${(g.average || 0) < 50 ? 'text-red-500' : 'text-white'}`}>{g.average || '-'}</span>
+                        <span className="text-[11px] font-normal text-white/80 truncate">{lesson?.name || 'DERS'}</span>
+                        <span className={`text-[12px] font-normal ${(g.average || 0) < 50 ? 'text-red-500' : 'text-white'}`}>{g.average || '-'}</span>
                      </div>
                      <div className="grid grid-cols-10 gap-1">
                         {[g.exam1, g.exam2, g.exam3, g.exam4, g.oral1, g.exam5, g.exam6, g.exam7, g.exam8, g.oral2].map((v, i) => (
-                           <div key={i} className="h-6 bg-black/40 flex items-center justify-center text-[8px] font-bold text-slate-400 border border-white/5">
+                           <div key={i} className="h-6 bg-black/40 flex items-center justify-center text-[8px] font-normal text-slate-400 border border-white/5">
                               {v || '-'}
                            </div>
                         ))}
@@ -1095,8 +1095,8 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                            <i className="fa-solid fa-clipboard-user text-red-500 text-sm"></i>
                         </div>
                         <div>
-                           <h3 className="text-[11px] font-black text-white uppercase tracking-wider whitespace-nowrap">GÜNLÜK YOKLAMA RAPORU</h3>
-                           <p className="text-[9px] font-bold text-slate-500 uppercase">{new Date().toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                           <h3 className="text-[11px] font-normal text-white uppercase tracking-wider whitespace-nowrap">GÜNLÜK YOKLAMA RAPORU</h3>
+                           <p className="text-[9px] font-normal text-slate-500 uppercase">{new Date().toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                         </div>
                      </div>
                      <button onClick={() => setIsAbsenceReportModalOpen(false)} className="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-white transition-all bg-white/5 hover:bg-red-600 hover:border-red-500 border border-transparent rounded-sm">
@@ -1107,7 +1107,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <div className="p-4 overflow-y-auto custom-scrollbar flex-1">
                      {dailyAbsenceReport.length > 0 ? (
                         <div className="grid grid-cols-1 gap-2">
-                           <div className="grid grid-cols-12 gap-1 pb-2 border-b border-white/10 text-[9px] font-black text-slate-500 uppercase tracking-widest px-2">
+                           <div className="grid grid-cols-12 gap-1 pb-2 border-b border-white/10 text-[9px] font-normal text-slate-500 uppercase tracking-widest px-2">
                               <div className="col-span-2 border-r border-white/5 text-center">DERSLER</div>
                               <div className="col-span-2 border-r border-white/5 pl-2">SINIF</div>
                               <div className="col-span-1 border-r border-white/5 pl-2">NO</div>
@@ -1120,19 +1120,19 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                     {item.records
                                        .sort((a, b) => a.period - b.period)
                                        .map((rec, rIdx) => (
-                                          <span key={rIdx} className="w-5 h-5 flex items-center justify-center bg-black/40 border border-white/10 text-[9px] font-black text-white rounded-sm">
+                                          <span key={rIdx} className="w-5 h-5 flex items-center justify-center bg-black/40 border border-white/10 text-[9px] font-normal text-white rounded-sm">
                                              {rec.period}
                                           </span>
                                        ))}
                                  </div>
                                  <div className="col-span-2 flex items-center">
-                                    <span className="text-[9px] font-black text-[#fbbf24] px-1 py-0 bg-[#fbbf24]/10 border border-[#fbbf24]/20 rounded-sm">{item.className}</span>
+                                    <span className="text-[9px] font-normal text-[#fbbf24] px-1 py-0 bg-[#fbbf24]/10 border border-[#fbbf24]/20 rounded-sm">{item.className}</span>
                                  </div>
                                  <div className="col-span-1 flex items-center">
-                                    <span className="text-[9px] font-bold text-slate-400 font-mono">{item.student.number}</span>
+                                    <span className="text-[9px] font-normal text-slate-400 font-mono">{item.student.number}</span>
                                  </div>
                                  <div className="col-span-3 flex items-center overflow-hidden">
-                                    <span className="text-[10px] font-bold text-white uppercase truncate whitespace-nowrap" title={item.student.name}>{item.student.name}</span>
+                                    <span className="text-[10px] font-normal text-white uppercase truncate whitespace-nowrap" title={item.student.name}>{item.student.name}</span>
                                  </div>
                                  <div className="col-span-4 flex items-center gap-1 overflow-hidden flex-wrap">
                                     {item.records
@@ -1141,7 +1141,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                           const lObj = allLessons.find(l => l.id === rec.lessonName || l.name === rec.lessonName);
                                           const displayName = lObj ? (lObj.name || rec.lessonName) : rec.lessonName;
                                           return (
-                                             <span key={rIdx} className="text-[8px] font-medium text-white/80 uppercase bg-black/80 border border-white/20 px-2 py-0.5 rounded-sm shadow-sm truncate" title={displayName}>
+                                             <span key={rIdx} className="text-[8px] font-normal text-white/80 uppercase bg-black/80 border border-white/20 px-2 py-0.5 rounded-sm shadow-sm truncate" title={displayName}>
                                                 {displayName}
                                              </span>
                                           );
@@ -1153,16 +1153,16 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                      ) : (
                         <div className="flex flex-col items-center justify-center py-20 opacity-30">
                            <i className="fa-solid fa-check-circle text-6xl mb-4 text-green-500"></i>
-                           <span className="text-[12px] font-black uppercase tracking-[0.2em] text-white">BUGÜN DEVAMSIZ ÖĞRENCİ YOK</span>
+                           <span className="text-[12px] font-normal uppercase tracking-[0.2em] text-white">BUGÜN DEVAMSIZ ÖĞRENCİ YOK</span>
                         </div>
                      )}
                   </div>
 
                   <div className="p-4 border-t border-white/10 bg-[#0f172a] flex justify-between items-center">
-                     <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">
-                        TOPLAM: <span className="text-white font-black text-[11px]">{dailyAbsenceReport.length}</span> ÖĞRENCİ
+                     <div className="text-[9px] font-normal text-slate-500 uppercase tracking-widest">
+                        TOPLAM: <span className="text-white font-normal text-[11px]">{dailyAbsenceReport.length}</span> ÖĞRENCİ
                      </div>
-                     <button onClick={() => window.print()} className="px-4 py-2 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 rounded-sm border border-white/10">
+                     <button onClick={() => window.print()} className="px-4 py-2 bg-[#3b82f6] text-white font-normal text-[10px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 rounded-sm border border-white/10">
                         <i className="fa-solid fa-print"></i> YAZDIR
                      </button>
                   </div>
@@ -1182,12 +1182,12 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                            )}
                            <div>
                               <div className="flex items-center gap-2">
-                                 <h2 className="text-[14px] font-black text-white uppercase tracking-tight text-high-contrast">{teacher.name}</h2>
+                                 <h2 className="text-[14px] font-normal text-white uppercase tracking-tight text-high-contrast">{teacher.name}</h2>
                                  <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${teacher.gender === Gender.FEMALE ? 'bg-pink-500 shadow-[0_0_8px_#ec4899]' : 'bg-slate-500 shadow-[0_0_8px_#64748b]'}`}></div>
                               </div>
                               <div className="flex items-center gap-1.5 mt-1 flex-wrap">
-                                 {(teacher.branchShorts || [teacher.branchShort]).map((bs, idx) => bs && (<span key={idx} className="text-[8px] font-black uppercase px-1.5 py-0.5 border border-[#fbbf24]/30 text-[#fbbf24] bg-[#fbbf24]/5">{standardizeBranchCode(bs)}</span>))}
-                                 <button onClick={(e) => { e.stopPropagation(); handleToggleTeacherShift(); }} className={`text-[8px] font-black uppercase px-1.5 py-0.5 border transition-all active:scale-95 ${teacher.preferredShift === ShiftType.SABAH ? 'text-[#3b82f6] border-[#3b82f6]/30 bg-[#3b82f6]/5 hover:bg-[#3b82f6]/10' : 'text-[#fcd34d] border-[#fcd34d]/30 bg-[#fcd34d]/5 hover:bg-[#fcd34d]/10'}`}>{teacher.preferredShift || 'SABAH'}</button>
+                                 {(teacher.branchShorts || [teacher.branchShort]).map((bs, idx) => bs && (<span key={idx} className="text-[8px] font-normal uppercase px-1.5 py-0.5 border border-[#fbbf24]/30 text-[#fbbf24] bg-[#fbbf24]/5">{standardizeBranchCode(bs)}</span>))}
+                                 <button onClick={(e) => { e.stopPropagation(); handleToggleTeacherShift(); }} className={`text-[8px] font-normal uppercase px-1.5 py-0.5 border transition-all active:scale-95 ${teacher.preferredShift === ShiftType.SABAH ? 'text-[#3b82f6] border-[#3b82f6]/30 bg-[#3b82f6]/5 hover:bg-[#3b82f6]/10' : 'text-[#fcd34d] border-[#fcd34d]/30 bg-[#fcd34d]/5 hover:bg-[#fcd34d]/10'}`}>{teacher.preferredShift || 'SABAH'}</button>
                               </div>
                            </div>
                         </div>
@@ -1196,7 +1196,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                      {userRole !== UserRole.TEACHER && (
                         <div className="px-3 py-2 flex gap-1 bg-black/40 border-t border-[#64748b]/20 overflow-x-auto no-scrollbar">
                            {['GENEL', 'AJANDA', 'ŞUBE', 'PLAN', 'SINAV', 'KISIT', 'PERF', 'ÖĞRENCİ'].map(tab => (
-                              <button key={tab} onClick={() => setActiveDetailTab(tab as any)} className={`flex-1 min-w-[70px] h-10 text-[9px] font-black tracking-[0.2em] transition-all flex items-center justify-center relative overflow-hidden ${activeDetailTab === tab ? 'bg-[#334155] text-white' : 'text-slate-500 hover:text-white'}`}>{activeDetailTab === tab && <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#3b82f6] shadow-[0_0_100px_rgba(59,130,246,0.3)]"></div>}{tab}</button>
+                              <button key={tab} onClick={() => setActiveDetailTab(tab as any)} className={`flex-1 min-w-[70px] h-10 text-[9px] font-normal tracking-[0.2em] transition-all flex items-center justify-center relative overflow-hidden ${activeDetailTab === tab ? 'bg-[#334155] text-white' : 'text-slate-500 hover:text-white'}`}>{activeDetailTab === tab && <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#3b82f6] shadow-[0_0_100px_rgba(59,130,246,0.3)]"></div>}{tab}</button>
                            ))}
                         </div>
                      )}
@@ -1206,67 +1206,67 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                      {activeDetailTab === 'GENEL' && (
                         <div className="space-y-4 h-full overflow-y-auto no-scrollbar pb-24 animate-in slide-in-from-bottom-2">
                            <div className="bg-[#1e293b]/60 border border-white/10 p-5 shadow-xl flex flex-col relative overflow-hidden rounded-sm">
-                              <div className="flex justify-between items-center mb-4"><span className="text-[10px] font-black text-[#fbbf24] uppercase tracking-[0.4em] block">PERSONEL_MESİ_KAPASİTESİ</span>{editMode && <span className="text-[6px] font-bold text-[#3b82f6] uppercase tracking-widest animate-pulse">! DÜZENLEME_AÇIK</span>}</div>
+                              <div className="flex justify-between items-center mb-4"><span className="text-[10px] font-normal text-[#fbbf24] uppercase tracking-[0.4em] block">PERSONEL_MESİ_KAPASİTESİ</span>{editMode && <span className="text-[6px] font-normal text-[#3b82f6] uppercase tracking-widest animate-pulse">! DÜZENLEME_AÇIK</span>}</div>
                               <div className="flex items-center gap-4">
                                  <div className="flex items-baseline gap-2">
-                                    <span className={`text-[36px] font-black ${totalHours > teacher.lessonCount ? 'text-red-500' : 'text-white'}`}>{totalHours}</span>
+                                    <span className={`text-[36px] font-normal ${totalHours > teacher.lessonCount ? 'text-red-500' : 'text-white'}`}>{totalHours}</span>
                                     <div className="flex items-center group">
-                                       <span className="text-[14px] font-black text-slate-500">/</span>
+                                       <span className="text-[14px] font-normal text-slate-500">/</span>
                                        {editMode ? (
                                           <div className="flex items-center gap-1.5 ml-2 bg-black/40 p-1 border border-white/10 rounded-sm">
                                              <button onClick={() => updateTeacherQuota(teacher.id, teacher.lessonCount - 1)} className="w-8 h-8 flex items-center justify-center bg-red-600/10 text-red-500 hover:bg-red-600 hover:text-white transition-all"><i className="fa-solid fa-minus text-xs"></i></button>
-                                             <input name="quotaInput" type="number" value={teacher.lessonCount === 0 ? '' : teacher.lessonCount} onFocus={handleInputFocus} onChange={(e) => updateTeacherQuota(teacher.id, parseInt(e.target.value) || 0)} className="w-12 h-8 bg-transparent text-center text-[18px] font-black text-[#fbbf24] outline-none" />
+                                             <input name="quotaInput" type="number" value={teacher.lessonCount === 0 ? '' : teacher.lessonCount} onFocus={handleInputFocus} onChange={(e) => updateTeacherQuota(teacher.id, parseInt(e.target.value) || 0)} className="w-12 h-8 bg-transparent text-center text-[18px] font-normal text-[#fbbf24] outline-none" />
                                              <button onClick={() => updateTeacherQuota(teacher.id, teacher.lessonCount + 1)} className="w-8 h-8 flex items-center justify-center bg-green-600/10 text-green-500 hover:bg-green-600 hover:text-white transition-all"><i className="fa-solid fa-plus text-xs"></i></button>
                                           </div>
-                                       ) : (<span className="text-[20px] font-black text-slate-400 ml-2">{teacher.lessonCount} s</span>)}
+                                       ) : (<span className="text-[20px] font-normal text-slate-400 ml-2">{teacher.lessonCount} s</span>)}
                                     </div>
                                  </div>
                               </div>
                               <div className="mt-6 h-1.5 bg-black/40 w-full overflow-hidden rounded-full"><div className={`h-full transition-all duration-700 ${totalHours > teacher.lessonCount ? 'bg-red-500' : 'bg-[#3b82f6]'}`} style={{ width: `${Math.min(100, (teacher.lessonCount > 0 ? (totalHours / teacher.lessonCount) * 100 : 0))}%` }}></div></div>
-                              <div className="flex justify-between items-center mt-3"><span className="text-[7px] font-black text-slate-600 uppercase tracking-widest">VERİMLİLİK_ANALİZİ</span><span className={`text-[10px] font-black uppercase ${(teacher.lessonCount > 0 ? (totalHours / teacher.lessonCount) * 100 : 0) > 100 ? 'text-red-500' : 'text-[#3b82f6]'}`}>%{Math.round(teacher.lessonCount > 0 ? (totalHours / teacher.lessonCount) * 100 : 0)}</span></div>
+                              <div className="flex justify-between items-center mt-3"><span className="text-[7px] font-normal text-slate-600 uppercase tracking-widest">VERİMLİLİK_ANALİZİ</span><span className={`text-[10px] font-normal uppercase ${(teacher.lessonCount > 0 ? (totalHours / teacher.lessonCount) * 100 : 0) > 100 ? 'text-red-500' : 'text-[#3b82f6]'}`}>%{Math.round(teacher.lessonCount > 0 ? (totalHours / teacher.lessonCount) * 100 : 0)}</span></div>
                            </div>
 
                            {(isAdmin || userRole === UserRole.TEACHER) && (
                               <div className="bg-[#1e293b]/80 border border-white/5 p-4 shadow-lg relative overflow-hidden rounded-sm group hover:border-[#3b82f6]/40 transition-all">
                                  <div className="flex items-center justify-between mb-4">
-                                    <div className="flex items-center gap-2"><i className="fa-solid fa-key text-[#3b82f6] text-xs"></i><span className="text-[9px] font-black text-white/90 uppercase tracking-widest">HESAP_KİMLİK_BİLGİLERİ</span></div>
-                                    {(canEditCredentials || userRole === UserRole.TEACHER) && <span className="text-[7px] font-bold text-green-500 uppercase tracking-widest animate-pulse">DÜZENLEME AKTİF</span>}
+                                    <div className="flex items-center gap-2"><i className="fa-solid fa-key text-[#3b82f6] text-xs"></i><span className="text-[9px] font-normal text-white/90 uppercase tracking-widest">HESAP_KİMLİK_BİLGİLERİ</span></div>
+                                    {(canEditCredentials || userRole === UserRole.TEACHER) && <span className="text-[7px] font-normal text-green-500 uppercase tracking-widest animate-pulse">DÜZENLEME AKTİF</span>}
                                  </div>
                                  <div className="space-y-3">
                                     <div className="grid grid-cols-2 gap-2">
                                        <div className="flex flex-col gap-1">
-                                          <span className="text-[8px] font-bold text-slate-500 uppercase ml-1">KULLANICI ADI</span>
+                                          <span className="text-[8px] font-normal text-slate-500 uppercase ml-1">KULLANICI ADI</span>
                                           {(canEditCredentials || userRole === UserRole.TEACHER) ? (
                                              <input
-                                                className="bg-black border border-white/10 p-2 text-[11px] font-black text-white outline-none focus:border-[#3b82f6] transition-all"
+                                                className="bg-black border border-white/10 p-2 text-[11px] font-normal text-white outline-none focus:border-[#3b82f6] transition-all"
                                                 value={credentials.username}
                                                 onChange={(e) => setCredentials(prev => ({ ...prev, username: e.target.value }))}
                                              />
                                           ) : (
-                                             <div className="bg-black/30 p-2 border border-white/5 text-[9px] font-black text-white">{teacher.username || 'TANIMSIZ'}</div>
+                                             <div className="bg-black/30 p-2 border border-white/5 text-[9px] font-normal text-white">{teacher.username || 'TANIMSIZ'}</div>
                                           )}
                                        </div>
 
                                        <div className="flex flex-col gap-1">
-                                          <span className="text-[8px] font-bold text-slate-500 uppercase ml-1">ŞİFRE</span>
+                                          <span className="text-[8px] font-normal text-slate-500 uppercase ml-1">ŞİFRE</span>
                                           {(canEditCredentials || userRole === UserRole.TEACHER) ? (
                                              <input
                                                 type="text"
-                                                className="bg-black border border-white/10 p-2 text-[11px] font-black text-[#fbbf24] outline-none focus:border-[#fbbf24] transition-all"
+                                                className="bg-black border border-white/10 p-2 text-[11px] font-normal text-[#fbbf24] outline-none focus:border-[#fbbf24] transition-all"
                                                 value={credentials.password}
                                                 onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
                                              />
                                           ) : (
-                                             <div className="bg-black/30 p-2 border border-white/5 text-[9px] font-black text-[#fbbf24] font-mono tracking-wider">{teacher.password || 'BELİRLENMEMİŞ'}</div>
+                                             <div className="bg-black/30 p-2 border border-white/5 text-[9px] font-normal text-[#fbbf24] font-mono tracking-wider">{teacher.password || 'BELİRLENMEMİŞ'}</div>
                                           )}
                                        </div>
                                     </div>
 
                                     <div className="flex gap-2 mt-2">
                                        {(canEditCredentials || userRole === UserRole.TEACHER) && (
-                                          <button onClick={handleUpdateSelfCredentials} className="flex-1 h-10 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all shadow-lg">GÜNCELLE</button>
+                                          <button onClick={handleUpdateSelfCredentials} className="flex-1 h-10 bg-[#3b82f6] text-white font-normal text-[10px] uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all shadow-lg">GÜNCELLE</button>
                                        )}
-                                       <button onClick={() => handleGenerateQR(teacher)} className="h-10 px-4 bg-white text-black font-black text-[10px] uppercase tracking-widest hover:bg-slate-200 active:scale-95 transition-all shadow-lg flex items-center justify-center gap-2" title="Hızlı Giriş QR Kodu">
+                                       <button onClick={() => handleGenerateQR(teacher)} className="h-10 px-4 bg-white text-black font-normal text-[10px] uppercase tracking-widest hover:bg-slate-200 active:scale-95 transition-all shadow-lg flex items-center justify-center gap-2" title="Hızlı Giriş QR Kodu">
                                           <i className="fa-solid fa-qrcode"></i> QR
                                        </button>
                                     </div>
@@ -1276,11 +1276,11 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
                            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                               <div className="bg-[#1e293b]/80 border border-white/5 p-4 shadow-lg relative overflow-hidden rounded-sm group hover:border-[#3b82f6]/40 transition-all">
-                                 <div className="flex items-center gap-2 mb-4"><i className="fa-solid fa-clock text-[#3b82f6] text-xs"></i><span className="text-[9px] font-black text-white/90 uppercase tracking-widest">ZAMANLAMA_VE_PERİYOT</span></div>
+                                 <div className="flex items-center gap-2 mb-4"><i className="fa-solid fa-clock text-[#3b82f6] text-xs"></i><span className="text-[9px] font-normal text-white/90 uppercase tracking-widest">ZAMANLAMA_VE_PERİYOT</span></div>
                                  <div className="space-y-3">
-                                    <div className="flex justify-between items-center bg-black/30 p-2 border border-white/5"><span className="text-[8px] font-bold text-slate-500 uppercase">VARDİYA</span><span className={`text-[9px] font-black uppercase ${teacher.preferredShift === ShiftType.SABAH ? 'text-[#3b82f6]' : 'text-[#fbbf24]'}`}>{teacher.preferredShift || 'SABAH'}</span></div>
-                                    <div className="flex justify-between items-center bg-black/30 p-2 border border-white/5"><span className="text-[8px] font-bold text-slate-500 uppercase">NÖBET_GÜNÜ</span><span className="text-[9px] font-black text-white uppercase truncate ml-2 text-right">{timingStats.dutyDays}</span></div>
-                                    <div className="flex justify-between items-center bg-black/30 p-2 border border-white/5"><span className="text-[8px] font-bold text-slate-500 uppercase">BOŞ_DERS_SAYISI</span><div className="flex items-center gap-1.5"><span className={`text-[11px] font-black ${timingStats.gapsCount > 3 ? 'text-red-500' : 'text-green-500'}`}>{timingStats.gapsCount}</span><span className="text-[6px] font-bold text-slate-700 uppercase">PENCERE</span></div></div>
+                                    <div className="flex justify-between items-center bg-black/30 p-2 border border-white/5"><span className="text-[8px] font-normal text-slate-500 uppercase">VARDİYA</span><span className={`text-[9px] font-normal uppercase ${teacher.preferredShift === ShiftType.SABAH ? 'text-[#3b82f6]' : 'text-[#fbbf24]'}`}>{teacher.preferredShift || 'SABAH'}</span></div>
+                                    <div className="flex justify-between items-center bg-black/30 p-2 border border-white/5"><span className="text-[8px] font-normal text-slate-500 uppercase">NÖBET_GÜNÜ</span><span className="text-[9px] font-normal text-white uppercase truncate ml-2 text-right">{timingStats.dutyDays}</span></div>
+                                    <div className="flex justify-between items-center bg-black/30 p-2 border border-white/5"><span className="text-[8px] font-normal text-slate-500 uppercase">BOŞ_DERS_SAYISI</span><div className="flex items-center gap-1.5"><span className={`text-[11px] font-normal ${timingStats.gapsCount > 3 ? 'text-red-500' : 'text-green-500'}`}>{timingStats.gapsCount}</span><span className="text-[6px] font-normal text-slate-700 uppercase">PENCERE</span></div></div>
                                  </div>
                               </div>
                            </div>
@@ -1290,16 +1290,16 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                      {activeDetailTab === 'AJANDA' && (
                         <div className="space-y-3 h-full overflow-y-auto no-scrollbar pb-24 animate-in slide-in-from-bottom-2">
                            <div className="flex flex-col mb-4 gap-2">
-                              <span className="text-[9px] font-black text-[#fbbf24] uppercase tracking-[0.4em] ml-1">BUGÜNKÜ_DERS_AKIŞI</span>
+                              <span className="text-[9px] font-normal text-[#fbbf24] uppercase tracking-[0.4em] ml-1">BUGÜNKÜ_DERS_AKIŞI</span>
                               <div className="flex items-center justify-end gap-2">
                                  {userRole !== UserRole.TEACHER && (
-                                    <div className="px-3 py-1 bg-white/5 border border-white/10 rounded-sm text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+                                    <div className="px-3 py-1 bg-white/5 border border-white/10 rounded-sm text-[8px] font-normal text-slate-400 uppercase tracking-widest">
                                        YÖNETİCİ GÖRÜNÜMÜ
                                     </div>
                                  )}
                                  <button
                                     onClick={() => setIsAbsenceReportModalOpen(true)}
-                                    className="px-3 py-1 bg-red-600/10 border border-red-500/30 text-red-500 hover:bg-red-600 hover:text-white transition-all rounded-sm text-[9px] font-black uppercase tracking-widest flex items-center gap-2"
+                                    className="px-3 py-1 bg-red-600/10 border border-red-500/30 text-red-500 hover:bg-red-600 hover:text-white transition-all rounded-sm text-[9px] font-normal uppercase tracking-widest flex items-center gap-2"
                                  >
                                     <i className="fa-solid fa-clipboard-list"></i>
                                     GÜNLÜK YOKLAMA RAPORU ({dailyAbsenceReport.length})
@@ -1320,36 +1320,36 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                  <div key={idx} className="bg-[#1e293b] border border-white/5 p-4 flex flex-col gap-4 shadow-xl relative overflow-hidden">
                                     <div className="absolute left-0 top-0 bottom-0 w-1" style={{ backgroundColor: classColor }}></div>
                                     <div className="flex items-center gap-4">
-                                       <div className="w-10 h-10 border border-white/10 flex flex-col items-center justify-center bg-black/20 shrink-0"><span className="text-[14px] font-black text-white">{entry.ders_saati}</span><span className="text-[6px] font-black text-slate-500 uppercase">SAAT</span></div>
+                                       <div className="w-10 h-10 border border-white/10 flex flex-col items-center justify-center bg-black/20 shrink-0"><span className="text-[14px] font-normal text-white">{entry.ders_saati}</span><span className="text-[6px] font-normal text-slate-500 uppercase">SAAT</span></div>
                                        <div className="flex flex-col justify-center min-w-0">
-                                          <div className="text-[13px] font-medium text-white/80 uppercase leading-tight truncate">
+                                          <div className="text-[13px] font-normal text-white/80 uppercase leading-tight truncate">
                                              {lessonName}
                                           </div>
-                                          <div className="text-[9px] font-black text-[#3b82f6] uppercase tracking-widest mt-1">{entry.sinif} ŞUBESİ</div>
+                                          <div className="text-[9px] font-normal text-[#3b82f6] uppercase tracking-widest mt-1">{entry.sinif} ŞUBESİ</div>
                                        </div>
                                        <button onClick={(e) => { e.stopPropagation(); setIsAttendanceTerminalOpen(false); setTimeout(() => setIsAttendanceTerminalOpen(false), 100); }} className="ml-auto w-8 h-8 flex items-center justify-center text-slate-500 hover:text-white transition-all"><i className="fa-solid fa-xmark"></i></button>
                                     </div>
                                     <div className="flex items-center gap-2 pt-2 border-t border-white/5 w-full">
                                        {!isAdmin && (
                                           <>
-                                             <button onClick={(e) => { e.stopPropagation(); handleStartAttendance(entry); }} className="flex-1 h-10 bg-[#3b82f6]/20 border border-[#3b82f6]/40 text-[#3b82f6] font-black text-[9px] uppercase tracking-widest hover:bg-[#3b82f6] hover:text-white transition-all shadow-lg shadow-[#3b82f6]/10 relative group flex items-center justify-center gap-2" >
+                                             <button onClick={(e) => { e.stopPropagation(); handleStartAttendance(entry); }} className="flex-1 h-10 bg-[#3b82f6]/20 border border-[#3b82f6]/40 text-[#3b82f6] font-normal text-[9px] uppercase tracking-widest hover:bg-[#3b82f6] hover:text-white transition-all shadow-lg shadow-[#3b82f6]/10 relative group flex items-center justify-center gap-2" >
                                                 {isUploadingProof ? <i className="fa-solid fa-cloud-arrow-up animate-bounce"></i> : <i className="fa-solid fa-clipboard-check"></i>}
                                                 <span>YOKLAMA AL</span>
                                                 <div className={`absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e] border-2 border-[#1e293b] transition-opacity duration-300 ${isAnalyzing ? 'animate-ping opacity-100' : 'opacity-0'}`}></div>
                                              </button>
-                                             <button onClick={(e) => { e.stopPropagation(); handleOpenLogModal(entry); }} className={`h-10 w-12 flex items-center justify-center border font-black text-[12px] uppercase transition-all shadow-lg ${hasLog ? 'bg-[#fbbf24] text-black border-[#fbbf24]' : 'bg-[#fbbf24]/10 border-[#fbbf24]/40 text-[#fbbf24] hover:bg-[#fbbf24] hover:text-black'}`}> <i className={`fa-solid ${hasLog ? 'fa-book-open' : 'fa-book'}`}></i> </button>
+                                             <button onClick={(e) => { e.stopPropagation(); handleOpenLogModal(entry); }} className={`h-10 w-12 flex items-center justify-center border font-normal text-[12px] uppercase transition-all shadow-lg ${hasLog ? 'bg-[#fbbf24] text-black border-[#fbbf24]' : 'bg-[#fbbf24]/10 border-[#fbbf24]/40 text-[#fbbf24] hover:bg-[#fbbf24] hover:text-black'}`}> <i className={`fa-solid ${hasLog ? 'fa-book-open' : 'fa-book'}`}></i> </button>
                                           </>
                                        )}
                                     </div>
                                  </div>);
-                           }) : (<div className="py-24 text-center border-2 border-dashed border-white/5 opacity-20"><i className="fa-solid fa-calendar-day text-5xl mb-4"></i><p className="text-[10px] font-black uppercase tracking-[0.4em]">BUGÜN İÇİN PLANLI DERS YOK</p></div>)}
+                           }) : (<div className="py-24 text-center border-2 border-dashed border-white/5 opacity-20"><i className="fa-solid fa-calendar-day text-5xl mb-4"></i><p className="text-[10px] font-normal uppercase tracking-[0.4em]">BUGÜN İÇİN PLANLI DERS YOK</p></div>)}
                         </div>
                      )}
 
                      {/* ... Other Tabs Content (ŞUBE, PLAN, ETC.) ... */}
                      {activeDetailTab === 'ŞUBE' && (
                         <div className="h-full overflow-y-auto no-scrollbar pb-24 animate-in slide-in-from-bottom-2">
-                           <div className="flex items-center justify-between mb-4"><span className="text-[9px] font-black text-[#fbbf24] uppercase tracking-[0.4em] ml-1">GİRİLEN_ŞUBELER_MATRİSİ</span></div>
+                           <div className="flex items-center justify-between mb-4"><span className="text-[9px] font-normal text-[#fbbf24] uppercase tracking-[0.4em] ml-1">GİRİLEN_ŞUBELER_MATRİSİ</span></div>
                            <div className="grid grid-cols-2 gap-3">
                               {teacherAssignments.length > 0 ? teacherAssignments.map((a, idx) => {
                                  const classColor = getSectionColor(a.className);
@@ -1362,18 +1362,18 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                        <div className="pl-2 w-full flex justify-between items-start">
                                           <div className="flex flex-col">
                                              <div className="flex items-baseline gap-2">
-                                                <span className="text-[16px] font-black text-white leading-none">{a.className}</span>
-                                                <span className="text-[10px] font-bold text-slate-400">{standardizeBranchCode(a.lesson?.name || '')}</span>
+                                                <span className="text-[16px] font-normal text-white leading-none">{a.className}</span>
+                                                <span className="text-[10px] font-normal text-slate-400">{standardizeBranchCode(a.lesson?.name || '')}</span>
                                              </div>
-                                             <div className="text-[8px] font-medium text-white/80 truncate max-w-[100px] mt-0.5">{a.lesson?.name || 'BELİRSİZ'}</div>
+                                             <div className="text-[8px] font-normal text-white/80 truncate max-w-[100px] mt-0.5">{a.lesson?.name || 'BELİRSİZ'}</div>
                                           </div>
                                           <div className="flex flex-col items-end gap-1">
-                                             <span className={`text-[6px] font-black px-1 py-px border rounded-sm ${a.classShift === ShiftType.SABAH ? 'border-blue-500/30 text-blue-500' : 'border-amber-500/30 text-amber-500'}`}>{a.classShift === ShiftType.SABAH ? 'SAB' : 'ÖĞL'}</span>
-                                             <span className="text-[9px] font-black text-white/50">{a.hours}s</span>
+                                             <span className={`text-[6px] font-normal px-1 py-px border rounded-sm ${a.classShift === ShiftType.SABAH ? 'border-blue-500/30 text-blue-500' : 'border-amber-500/30 text-amber-500'}`}>{a.classShift === ShiftType.SABAH ? 'SAB' : 'ÖĞL'}</span>
+                                             <span className="text-[9px] font-normal text-white/50">{a.hours}s</span>
                                           </div>
                                        </div>
 
-                                       {isShiftMismatch && <span className="text-[6px] font-black text-red-500 uppercase tracking-tighter mt-1 block animate-pulse pl-2">! UYUMSUZ</span>}
+                                       {isShiftMismatch && <span className="text-[6px] font-normal text-red-500 uppercase tracking-tighter mt-1 block animate-pulse pl-2">! UYUMSUZ</span>}
 
                                        {/* Alt Satır: Aksiyon Butonları */}
                                        <div className="flex items-center gap-1 pl-2 w-full mt-auto">
@@ -1381,14 +1381,14 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                              <>
                                                 <button onClick={(e) => { e.stopPropagation(); setExamSchedulerTarget({ classId: a.classId, className: a.className, lessonId: a.lessonId, lessonName: a.lesson?.name || 'DERS' }); setExamSchedulerForm({ date: '', slot: 'exam1', type: '' }); setIsExamSchedulerOpen(true); }} className="h-6 w-6 flex items-center justify-center bg-orange-600/10 border border-orange-500/40 text-orange-500 hover:bg-orange-600 hover:text-white transition-all rounded-sm shrink-0" title="Sınav"> <i className="fa-solid fa-calendar-plus text-[9px]"></i> </button>
                                                 <button onClick={(e) => { e.stopPropagation(); handleOpenClassLogManager(a.classId, a.className, a.lesson?.name || 'DERS'); }} className="h-6 w-6 flex items-center justify-center bg-[#22d3ee]/10 border border-[#22d3ee]/40 text-[#22d3ee] hover:bg-[#22d3ee] hover:text-black transition-all rounded-sm shrink-0" title="Defter"> <i className="fa-solid fa-book text-[9px]"></i> </button>
-                                                <button onClick={(e) => { e.stopPropagation(); setGradeTerminalTarget({ classId: a.classId, className: a.className, lessonId: a.lessonId, lessonName: a.lesson?.name || '' }); setIsGradeTerminalOpen(true); }} className="h-6 flex-1 border border-[#fbbf24] text-[#fbbf24] bg-[#fbbf24]/5 font-black text-[8px] uppercase tracking-widest hover:bg-[#fbbf24] hover:text-black active:scale-95 transition-all rounded-sm flex items-center justify-center gap-1" >
+                                                <button onClick={(e) => { e.stopPropagation(); setGradeTerminalTarget({ classId: a.classId, className: a.className, lessonId: a.lessonId, lessonName: a.lesson?.name || '' }); setIsGradeTerminalOpen(true); }} className="h-6 flex-1 border border-[#fbbf24] text-[#fbbf24] bg-[#fbbf24]/5 font-normal text-[8px] uppercase tracking-widest hover:bg-[#fbbf24] hover:text-black active:scale-95 transition-all rounded-sm flex items-center justify-center gap-1" >
                                                    <i className="fa-solid fa-pen-nib text-[9px]"></i> NOT
                                                 </button>
                                              </>
                                           )}
                                        </div>
                                     </div>);
-                              }) : (<div className="col-span-2 py-24 text-center border-2 border-dashed border-white/5 opacity-20"><i className="fa-solid fa-user-slash text-5xl mb-4"></i><p className="text-[10px] font-black uppercase tracking-[0.4em]">BU HOCAYA ŞUBE ATANMAMIŞ</p></div>)}
+                              }) : (<div className="col-span-2 py-24 text-center border-2 border-dashed border-white/5 opacity-20"><i className="fa-solid fa-user-slash text-5xl mb-4"></i><p className="text-[10px] font-normal uppercase tracking-[0.4em]">BU HOCAYA ŞUBE ATANMAMIŞ</p></div>)}
                            </div>
                         </div>
                      )}
@@ -1397,8 +1397,8 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                      {activeDetailTab === 'PLAN' && (
                         <div className="h-full flex flex-col bg-[#0d141b] border border-white/5 overflow-hidden animate-in slide-in-from-bottom-2 shadow-2xl">
                            <table className="w-full h-full border-collapse table-fixed">
-                              <thead> <tr className="bg-[#1a242e] border-b border-white/10 sticky top-0 z-10"> <th className="w-10 py-3 border-r border-white/5 text-[8px] font-black text-slate-500 uppercase">H</th> {DAYS_SHORT.map(d => <th key={d} className="text-[9px] font-black text-white tracking-[0.2em]">{d}</th>)} </tr> </thead>
-                              <tbody> {HOURS.map(h => (<tr key={h} className="border-b border-white/[0.03]" style={{ height: `${100 / HOURS.length}%` }}> <td className="bg-black/20 border-r border-white/5 text-center text-[10px] font-black text-slate-600">{h}</td> {DAYS_SHORT.map(day => {
+                              <thead> <tr className="bg-[#1a242e] border-b border-white/10 sticky top-0 z-10"> <th className="w-10 py-3 border-r border-white/5 text-[8px] font-normal text-slate-500 uppercase">H</th> {DAYS_SHORT.map(d => <th key={d} className="text-[9px] font-normal text-white tracking-[0.2em]">{d}</th>)} </tr> </thead>
+                              <tbody> {HOURS.map(h => (<tr key={h} className="border-b border-white/[0.03]" style={{ height: `${100 / HOURS.length}%` }}> <td className="bg-black/20 border-r border-white/5 text-center text-[10px] font-normal text-slate-600">{h}</td> {DAYS_SHORT.map(day => {
                                  const entry = schedule.find(s => { if (!s.ogretmen || !teacher.name) return false; if (standardizeDayCode(s.gun) !== day) return false; if (Number(s.ders_saati) !== Number(h)) return false; const og = s.ogretmen.toUpperCase(); const tn = teacher.name.toUpperCase(); const ti = (teacher.id || '').toUpperCase(); if (og === tn) return true; if (og === ti) return true; const parts = teacher.name.trim().split(/\s+/); if (parts.length > 1) { const fmt = `${parts[0][0]}.${parts[parts.length - 1]}`.toUpperCase(); if (og === fmt) return true; } return false; }); const slotKey = `${day}-${h}`; const isBlocked = teacher.blockedSlots?.includes(slotKey); const lessonObj = entry ? allLessons.find(l => l.id === entry.ders || l.name === entry.ders) : null;
                                  const lessonDisplay = lessonObj ? (lessonObj.name || entry.ders) : entry ? entry.ders : '';
                                  const lessonShort = lessonObj ? standardizeBranchCode(lessonObj.branch || lessonObj.name) : entry ? standardizeBranchCode(entry.ders) : '';
@@ -1408,8 +1408,8 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                     <td key={slotKey} className={`p-0.5 relative transition-all ${isBlocked ? 'bg-red-950/20' : ''}`}>
                                        {entry ? (
                                           <div className="h-full w-full flex flex-col items-center justify-center bg-[#1e293b] border-l-[3px] shadow-md hover:brightness-125 cursor-pointer" style={{ borderLeftColor: classColor }} title={lessonDisplay}>
-                                             <span className="text-[11px] font-black text-white leading-none uppercase">{entry.sinif}</span>
-                                             <span className="text-[7px] font-black text-slate-500 uppercase mt-1" style={{ color: lessonColor }}>{lessonShort}</span>
+                                             <span className="text-[11px] font-normal text-white leading-none uppercase">{entry.sinif}</span>
+                                             <span className="text-[7px] font-normal text-slate-500 uppercase mt-1" style={{ color: lessonColor }}>{lessonShort}</span>
                                           </div>
                                        ) : isBlocked ? (
                                           <div className="h-full w-full border border-dashed border-red-500/20 flex items-center justify-center">
@@ -1427,7 +1427,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
                      {activeDetailTab === 'SINAV' && (
                         <div className="space-y-4 h-full overflow-y-auto no-scrollbar pb-24 animate-in slide-in-from-bottom-2" onClick={() => setActiveExamMenuId(null)}>
-                           <div className="flex justify-between items-center mb-4"><span className="text-[10px] font-black text-[#fbbf24] uppercase tracking-[0.4em]">SINAV_TAKVİMİ_MATRİSİ</span></div>
+                           <div className="flex justify-between items-center mb-4"><span className="text-[10px] font-normal text-[#fbbf24] uppercase tracking-[0.4em]">SINAV_TAKVİMİ_MATRİSİ</span></div>
                            {myExams.length > 0 ? myExams.map(exam => {
                               const isMenuOpen = activeExamMenuId === exam.id;
 
@@ -1459,27 +1459,27 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#fbbf24]"></div>
                                        <div className="flex items-center gap-4">
                                           <div className="flex flex-col items-center justify-center w-12 h-12 bg-black/20 border border-white/10 rounded-sm">
-                                             <span className="text-[14px] font-black text-white">{(exam.date || '').split('.')[0]}</span>
-                                             <span className="text-[6px] font-bold text-slate-500 uppercase">{(exam.date || '').split('.')[1] || 'AY'}</span>
+                                             <span className="text-[14px] font-normal text-white">{(exam.date || '').split('.')[0]}</span>
+                                             <span className="text-[6px] font-normal text-slate-500 uppercase">{(exam.date || '').split('.')[1] || 'AY'}</span>
                                           </div>
                                           <div className="flex flex-col">
-                                             <span className="text-[11px] font-medium text-white/80 uppercase truncate">{exam.lessonName}</span>
+                                             <span className="text-[11px] font-normal text-white/80 uppercase truncate">{exam.lessonName}</span>
                                              <div className="flex items-center gap-2 mt-1">
-                                                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{exam.className}</span>
-                                                <span className="text-[7px] font-black text-[#fbbf24] bg-[#fbbf24]/10 px-1.5 py-0.5 border border-[#fbbf24]/20 uppercase">{exam.slot.replace('exam', '').toUpperCase()}. YAZILI</span>
+                                                <span className="text-[9px] font-normal text-slate-400 uppercase tracking-widest">{exam.className}</span>
+                                                <span className="text-[7px] font-normal text-[#fbbf24] bg-[#fbbf24]/10 px-1.5 py-0.5 border border-[#fbbf24]/20 uppercase">{exam.slot.replace('exam', '').toUpperCase()}. YAZILI</span>
                                                 {exam.type && (
-                                                   <span className="text-[7px] font-black uppercase px-1.5 py-0.5 border rounded-sm ml-2">
+                                                   <span className="text-[7px] font-normal uppercase px-1.5 py-0.5 border rounded-sm ml-2">
                                                       {exam.type}
                                                    </span>
                                                 )}
 
                                                 {/* STATUS BADGE */}
                                                 {isPast ? (
-                                                   <span className="text-[7px] font-bold text-green-500 uppercase tracking-widest ml-2 border border-green-500/30 px-1">TAMAMLANDI</span>
+                                                   <span className="text-[7px] font-normal text-green-500 uppercase tracking-widest ml-2 border border-green-500/30 px-1">TAMAMLANDI</span>
                                                 ) : isToday ? (
-                                                   <span className="text-[7px] font-black text-red-500 uppercase tracking-widest ml-2 animate-pulse">BUGÜN</span>
+                                                   <span className="text-[7px] font-normal text-red-500 uppercase tracking-widest ml-2 animate-pulse">BUGÜN</span>
                                                 ) : (
-                                                   <span className="text-[7px] font-bold text-slate-300 uppercase tracking-widest ml-2">{diffDays} GÜN KALDI</span>
+                                                   <span className="text-[7px] font-normal text-slate-300 uppercase tracking-widest ml-2">{diffDays} GÜN KALDI</span>
                                                 )}
                                              </div>
                                           </div>
@@ -1502,11 +1502,11 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                     <div className={`absolute right-0 top-0 bottom-0 flex transition-all duration-300 w-32 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`} style={{ zIndex: 20 }}>
                                        <button onClick={(e) => { e.stopPropagation(); handleOpenEditExam(exam); }} className="w-16 h-full bg-[#3b82f6] text-white flex flex-col items-center justify-center border-l border-white/10 active:brightness-90 transition-all pointer-events-auto shadow-lg">
                                           <i className="fa-solid fa-pen text-xs mb-1"></i>
-                                          <span className="text-[6px] font-black uppercase tracking-widest">DÜZENLE</span>
+                                          <span className="text-[6px] font-normal uppercase tracking-widest">DÜZENLE</span>
                                        </button>
                                        <button onClick={(e) => { e.stopPropagation(); setExamToDelete({ ...exam, classId: exam.classId, lessonName: exam.lessonName || 'DERS', date: exam.date }); setActiveExamMenuId(null); }} className="w-16 h-full bg-red-600 text-white flex flex-col items-center justify-center border-l border-white/10 active:brightness-90 transition-all pointer-events-auto shadow-lg">
                                           <i className="fa-solid fa-trash-can text-xs mb-1"></i>
-                                          <span className="text-[6px] font-black uppercase tracking-widest">SİL</span>
+                                          <span className="text-[6px] font-normal uppercase tracking-widest">SİL</span>
                                        </button>
                                     </div>
                                  </div>
@@ -1514,7 +1514,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                            }) : (
                               <div className="py-24 text-center border-2 border-dashed border-white/5 opacity-20">
                                  <i className="fa-solid fa-calendar-xmark text-5xl mb-4"></i>
-                                 <p className="text-[10px] font-black uppercase tracking-[0.4em]">SINAV TAKVİMİ BOŞ</p>
+                                 <p className="text-[10px] font-normal uppercase tracking-[0.4em]">SINAV TAKVİMİ BOŞ</p>
                               </div>
                            )}
                         </div>
@@ -1531,7 +1531,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                     setTeachers(teachers.map(t => t.id === teacher.id ? { ...t, isExemptFromDuty: newVal } : t));
                                     onSuccess(newVal ? "PERSONEL NÖBETTEN MUAF TUTULDU" : "NÖBET MUAFİYETİ KALDIRILDI");
                                  }}
-                                 className={`px-4 py-1.5 border font-black text-[9px] uppercase tracking-widest transition-all shadow-lg flex items-center gap-2 rounded-sm ${teacher.isExemptFromDuty ? 'bg-orange-600 border-orange-500 text-white shadow-[0_0_15px_rgba(234,88,12,0.4)] animate-pulse' : 'bg-black/40 border-white/10 text-slate-500 hover:text-white hover:border-white/20'}`}
+                                 className={`px-4 py-1.5 border font-normal text-[9px] uppercase tracking-widest transition-all shadow-lg flex items-center gap-2 rounded-sm ${teacher.isExemptFromDuty ? 'bg-orange-600 border-orange-500 text-white shadow-[0_0_15px_rgba(234,88,12,0.4)] animate-pulse' : 'bg-black/40 border-white/10 text-slate-500 hover:text-white hover:border-white/20'}`}
                               >
                                  <i className={`fa-solid ${teacher.isExemptFromDuty ? 'fa-ban' : 'fa-shield-halved'}`}></i>
                                  {teacher.isExemptFromDuty ? 'NÖBET MUAF' : 'NÖBET YAZILABİLİR'}
@@ -1540,8 +1540,8 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
                            {/* Table without legends */}
                            <table className="w-full h-full border-collapse table-fixed">
-                              <thead> <tr className="bg-[#1a242e] border-b border-white/10 sticky top-0 z-10"> <th className="w-10 py-3 border-r border-white/5 text-[8px] font-black text-slate-500 uppercase">H</th> {DAYS_SHORT.map(d => <th key={d} className="text-[9px] font-black text-white tracking-[0.2em]">{d}</th>)} </tr> </thead>
-                              <tbody> {(HOURS && HOURS.length > 0 ? HOURS : [1, 2, 3, 4, 5, 6, 7, 8]).map(h => (<tr key={h} className="border-b border-white/[0.03]" style={{ height: `${100 / (HOURS?.length || 8)}%` }}> <td className="bg-black/20 border-r border-white/5 text-center text-[10px] font-black text-slate-600">{h}</td> {DAYS_SHORT.map(day => {
+                              <thead> <tr className="bg-[#1a242e] border-b border-white/10 sticky top-0 z-10"> <th className="w-10 py-3 border-r border-white/5 text-[8px] font-normal text-slate-500 uppercase">H</th> {DAYS_SHORT.map(d => <th key={d} className="text-[9px] font-normal text-white tracking-[0.2em]">{d}</th>)} </tr> </thead>
+                              <tbody> {(HOURS && HOURS.length > 0 ? HOURS : [1, 2, 3, 4, 5, 6, 7, 8]).map(h => (<tr key={h} className="border-b border-white/[0.03]" style={{ height: `${100 / (HOURS?.length || 8)}%` }}> <td className="bg-black/20 border-r border-white/5 text-center text-[10px] font-normal text-slate-600">{h}</td> {DAYS_SHORT.map(day => {
                                  const slotKey = `${day}-${h}`;
                                  const isBlocked = teacher.blockedSlots?.includes(slotKey);
                                  return (
@@ -1556,21 +1556,21 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
                      {activeDetailTab === 'PERF' && (
                         <div className="space-y-4 h-full overflow-y-auto no-scrollbar pb-24 animate-in slide-in-from-bottom-2">
-                           <span className="text-[10px] font-black text-white uppercase tracking-[0.4em] ml-1">SINIF_BAZLI_BAŞARI_ANALİZİ</span>
+                           <span className="text-[10px] font-normal text-white uppercase tracking-[0.4em] ml-1">SINIF_BAZLI_BAŞARI_ANALİZİ</span>
                            <div className="grid grid-cols-1 gap-3">
                               {performanceStats.length > 0 ? performanceStats.map((stat, idx) => (
                                  <div key={idx} className="bg-[#1e293b] border border-white/5 p-4 shadow-xl relative overflow-hidden group">
                                     <div className="flex justify-between items-center mb-3">
                                        <div className="flex items-center gap-3 min-w-0 flex-1">
-                                          <div className="w-10 h-10 flex items-center justify-center bg-black/20 border border-white/10 font-black text-white text-sm">{stat.className}</div>
+                                          <div className="w-10 h-10 flex items-center justify-center bg-black/20 border border-white/10 font-normal text-white text-sm">{stat.className}</div>
                                           <div className="flex flex-col min-w-0 flex-1">
-                                             <span className="text-[11px] font-medium text-white/80 uppercase truncate">{stat.lessonName}</span>
-                                             <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">{stat.studentCount} ÖĞRENCİ</span>
+                                             <span className="text-[11px] font-normal text-white/80 uppercase truncate">{stat.lessonName}</span>
+                                             <span className="text-[8px] font-normal text-slate-500 uppercase tracking-widest">{stat.studentCount} ÖĞRENCİ</span>
                                           </div>
                                        </div>
                                        <div className="text-right">
-                                          <span className={`text-[20px] font-black leading-none ${stat.average < 50 ? 'text-red-500' : stat.average >= 85 ? 'text-green-500' : 'text-[#fbbf24]'}`}>{stat.average}</span>
-                                          <span className="text-[6px] font-bold text-slate-600 uppercase block tracking-widest">ORTALAMA</span>
+                                          <span className={`text-[20px] font-normal leading-none ${stat.average < 50 ? 'text-red-500' : stat.average >= 85 ? 'text-green-500' : 'text-[#fbbf24]'}`}>{stat.average}</span>
+                                          <span className="text-[6px] font-normal text-slate-600 uppercase block tracking-widest">ORTALAMA</span>
                                        </div>
                                     </div>
                                     <div className="h-1.5 w-full bg-black/40 rounded-full overflow-hidden">
@@ -1580,7 +1580,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                               )) : (
                                  <div className="py-24 text-center border-2 border-dashed border-white/5 opacity-20">
                                     <i className="fa-solid fa-chart-pie text-5xl mb-4"></i>
-                                    <p className="text-[10px] font-black uppercase tracking-[0.4em]">ANALİZ VERİSİ YETERSİZ</p>
+                                    <p className="text-[10px] font-normal uppercase tracking-[0.4em]">ANALİZ VERİSİ YETERSİZ</p>
                                  </div>
                               )}
                            </div>
@@ -1594,7 +1594,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                  <button
                                     key={ctx.uniqueId}
                                     onClick={() => setSelectedContextTab(ctx.uniqueId)}
-                                    className={`px-3 py-2 border text-[9px] font-black uppercase tracking-widest whitespace-nowrap transition-all ${selectedContextTab === ctx.uniqueId ? 'bg-[#3b82f6] text-white border-[#3b82f6] shadow-lg' : 'bg-black/40 border-white/10 text-slate-500 hover:text-white'}`}
+                                    className={`px-3 py-2 border text-[9px] font-normal uppercase tracking-widest whitespace-nowrap transition-all ${selectedContextTab === ctx.uniqueId ? 'bg-[#3b82f6] text-white border-[#3b82f6] shadow-lg' : 'bg-black/40 border-white/10 text-slate-500 hover:text-white'}`}
                                  >
                                     {ctx.className} - {standardizeBranchCode(ctx.lessonName)}
                                  </button>
@@ -1604,10 +1604,10 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                            {/* STUDENT LIST HEADER WITH GENDER STATS */}
                            {studentsInSelectedContext.length > 0 && (
                               <div className="flex items-center gap-4 px-2 mb-2">
-                                 <span className="text-[10px] font-black text-white uppercase tracking-[0.4em]">ÖĞRENCİ LİSTESİ ({studentsInSelectedContext.length})</span>
+                                 <span className="text-[10px] font-normal text-white uppercase tracking-[0.4em]">ÖĞRENCİ LİSTESİ ({studentsInSelectedContext.length})</span>
                                  <div className="flex items-center gap-2">
-                                    <span className="text-[9px] font-bold text-pink-500 flex items-center gap-1 bg-pink-500/5 px-1.5 py-0.5 rounded-sm border border-pink-500/20"><i className="fa-solid fa-venus text-[8px]"></i> {studentsInSelectedContext.filter(s => s.gender === Gender.FEMALE).length}</span>
-                                    <span className="text-[9px] font-bold text-blue-500 flex items-center gap-1 bg-blue-500/5 px-1.5 py-0.5 rounded-sm border border-blue-500/20"><i className="fa-solid fa-mars text-[8px]"></i> {studentsInSelectedContext.filter(s => s.gender === Gender.MALE).length}</span>
+                                    <span className="text-[9px] font-normal text-pink-500 flex items-center gap-1 bg-pink-500/5 px-1.5 py-0.5 rounded-sm border border-pink-500/20"><i className="fa-solid fa-venus text-[8px]"></i> {studentsInSelectedContext.filter(s => s.gender === Gender.FEMALE).length}</span>
+                                    <span className="text-[9px] font-normal text-blue-500 flex items-center gap-1 bg-blue-500/5 px-1.5 py-0.5 rounded-sm border border-blue-500/20"><i className="fa-solid fa-mars text-[8px]"></i> {studentsInSelectedContext.filter(s => s.gender === Gender.MALE).length}</span>
                                  </div>
                               </div>
                            )}
@@ -1626,22 +1626,22 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                              className="bg-[#1e293b]/80 border border-white/5 p-2 flex items-center justify-between hover:bg-slate-800 cursor-pointer group transition-all"
                                           >
                                              <div className="flex items-center gap-3 min-w-0">
-                                                <div className={`w-8 h-8 rounded-sm flex items-center justify-center border font-black text-[10px] shrink-0 ${s.gender === Gender.FEMALE ? 'border-pink-500/30 text-pink-500 bg-pink-500/5' : 'border-blue-500/30 text-blue-500 bg-blue-500/5'}`}>
+                                                <div className={`w-8 h-8 rounded-sm flex items-center justify-center border font-normal text-[10px] shrink-0 ${s.gender === Gender.FEMALE ? 'border-pink-500/30 text-pink-500 bg-pink-500/5' : 'border-blue-500/30 text-blue-500 bg-blue-500/5'}`}>
                                                    <div className="flex flex-col items-center leading-none gap-0.5">
                                                       <span>{s.number}</span>
                                                       <i className={`fa-solid ${s.gender === Gender.FEMALE ? 'fa-venus' : 'fa-mars'} text-[6px] opacity-50`}></i>
                                                    </div>
                                                 </div>
                                                 <div className="flex flex-col min-w-0">
-                                                   <span className="text-[9px] font-medium text-white/80 uppercase truncate leading-tight">{s.name}</span>
+                                                   <span className="text-[9px] font-normal text-white/80 uppercase truncate leading-tight">{s.name}</span>
                                                    <div className="flex items-center gap-2 mt-0.5">
-                                                      <span className="text-[8px] font-black text-[#fbbf24] bg-[#fbbf24]/10 px-1 border border-[#fbbf24]/20">{myCourseLoad.find(c => c.uniqueId === selectedContextTab)?.className || 'ŞUBE'}</span>
-                                                      <span className={`text-[8px] font-bold ${s.displayAbsent && s.displayAbsent > 0 ? 'text-red-500' : 'text-slate-500'}`}>{s.displayAbsent || 0} DEVAMSIZ</span>
+                                                      <span className="text-[8px] font-normal text-[#fbbf24] bg-[#fbbf24]/10 px-1 border border-[#fbbf24]/20">{myCourseLoad.find(c => c.uniqueId === selectedContextTab)?.className || 'ŞUBE'}</span>
+                                                      <span className={`text-[8px] font-normal ${s.displayAbsent && s.displayAbsent > 0 ? 'text-red-500' : 'text-slate-500'}`}>{s.displayAbsent || 0} DEVAMSIZ</span>
                                                    </div>
                                                 </div>
                                              </div>
                                              <div className="text-right pl-2">
-                                                <span className={`text-[14px] font-black ${statusColor}`}>{avg || '--'}</span>
+                                                <span className={`text-[14px] font-normal ${statusColor}`}>{avg || '--'}</span>
                                              </div>
                                           </div>
                                        );
@@ -1650,7 +1650,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                               ) : (
                                  <div className="py-24 text-center opacity-20">
                                     <i className="fa-solid fa-users-slash text-5xl mb-4"></i>
-                                    <p className="text-[10px] font-black uppercase tracking-[0.4em]">BU SINIFTA ÖĞRENCİ YOK</p>
+                                    <p className="text-[10px] font-normal uppercase tracking-[0.4em]">BU SINIFTA ÖĞRENCİ YOK</p>
                                  </div>
                               )}
                            </div>
@@ -1665,20 +1665,20 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                      <div className="flex gap-2 items-center">
                         <div className="flex-1 relative h-11">
                            <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-[#3b82f6] text-[10px]"></i>
-                           <input type="text" placeholder="KADRO ARA..." className="w-full h-full bg-black border border-[#64748b]/40 pl-11 pr-4 text-[11px] font-black uppercase text-white outline-none focus:border-[#3b82f6]" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                           <input type="text" placeholder="KADRO ARA..." className="w-full h-full bg-black border border-[#64748b]/40 pl-11 pr-4 text-[11px] font-normal uppercase text-white outline-none focus:border-[#3b82f6]" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                         </div>
                         <div className="flex gap-1 bg-black/40 border border-[#64748b]/40 h-11 px-3 items-center rounded-sm shrink-0">
-                           <div className="flex items-center gap-1.5 mr-2"><i className="fa-solid fa-mars text-[#3b82f6] text-[10px]"></i><span className="text-[10px] font-black text-white">{teacherStats.male}</span></div>
+                           <div className="flex items-center gap-1.5 mr-2"><i className="fa-solid fa-mars text-[#3b82f6] text-[10px]"></i><span className="text-[10px] font-normal text-white">{teacherStats.male}</span></div>
                            <div className="w-px h-4 bg-white/10"></div>
-                           <div className="flex items-center gap-1.5 ml-2"><i className="fa-solid fa-venus text-pink-500 text-[10px]"></i><span className="text-[10px] font-black text-white">{teacherStats.female}</span></div>
+                           <div className="flex items-center gap-1.5 ml-2"><i className="fa-solid fa-venus text-pink-500 text-[10px]"></i><span className="text-[10px] font-normal text-white">{teacherStats.female}</span></div>
                         </div>
-                        {editMode && <button onClick={handleOpenAdd} className="px-5 h-11 bg-[#3b82f6] text-white font-black text-[10px] uppercase shadow-lg active:scale-95 transition-all hover:brightness-110"><i className="fa-solid fa-plus mr-2"></i> EKLE</button>}
+                        {editMode && <button onClick={handleOpenAdd} className="px-5 h-11 bg-[#3b82f6] text-white font-normal text-[10px] uppercase shadow-lg active:scale-95 transition-all hover:brightness-110"><i className="fa-solid fa-plus mr-2"></i> EKLE</button>}
                      </div>
-                     <div className="flex gap-1.5 px-0.5">{['TÜMÜ', ShiftType.SABAH, ShiftType.OGLE].map(f => (<button key={f} onClick={() => setShiftFilter(f as any)} className={`flex-1 h-9 text-[9px] font-black uppercase tracking-widest border transition-all ${shiftFilter === f ? 'bg-[#3b82f6] border-[#3b82f6] text-white shadow-lg' : 'bg-black/40 border-[#354a5f] text-slate-500 hover:bg-[#1e2e3d]'}`}>{f === 'TÜMÜ' ? 'TÜM' : f}</button>))}</div>
+                     <div className="flex gap-1.5 px-0.5">{['TÜMÜ', ShiftType.SABAH, ShiftType.OGLE].map(f => (<button key={f} onClick={() => setShiftFilter(f as any)} className={`flex-1 h-9 text-[9px] font-normal uppercase tracking-widest border transition-all ${shiftFilter === f ? 'bg-[#3b82f6] border-[#3b82f6] text-white shadow-lg' : 'bg-black/40 border-[#354a5f] text-slate-500 hover:bg-[#1e2e3d]'}`}>{f === 'TÜMÜ' ? 'TÜM' : f}</button>))}</div>
                   </div>
                   <div className="flex-1 overflow-y-auto no-scrollbar space-y-4 pb-32 px-1">
                      {groupedTeachers.length > 0 ? groupedTeachers.map(([branch, members]) => (
-                        <div key={branch} className="space-y-1.5"><span className="text-[9px] font-black text-[#3b82f6] uppercase tracking-[0.4em] px-2">{branch}</span>
+                        <div key={branch} className="space-y-1.5"><span className="text-[9px] font-normal text-[#3b82f6] uppercase tracking-[0.4em] px-2">{branch}</span>
                            {members.map(t => {
                               if (!t) return null;
                               const isMenuOpen = activeListActionId === t.id;
@@ -1693,35 +1693,35 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                           <div className={`w-2 h-2 rounded-full shrink-0 ${t.gender === Gender.FEMALE ? 'bg-pink-500 shadow-[0_0_8px_#ec4899]' : 'bg-slate-500 shadow-[0_0_8px_#64748b]'}`}></div>
                                           <div className="flex flex-col min-w-0 flex-1">
                                              <div className="flex items-center justify-between gap-2">
-                                                <span className="text-[13px] font-black uppercase leading-tight truncate text-high-contrast flex-1">{t.name}</span>
+                                                <span className="text-[13px] font-normal uppercase leading-tight truncate text-high-contrast flex-1">{t.name}</span>
                                                 {t.isExemptFromDuty && <i className="fa-solid fa-shield-halved text-orange-500 text-[10px] shrink-0 drop-shadow-[0_0_6px_rgba(234,88,12,0.5)]" title="NÖBET MUAF"></i>}
                                                 <div className="flex items-center gap-1.5 shrink-0 opacity-80 bg-black/40 px-2 py-0.5 rounded-sm border border-white/5">
-                                                   <div className="flex items-center gap-1"> <span className={`text-[8px] font-black ${teacherSectionCount === 0 ? 'text-red-500' : 'text-[#3b82f6]'}`}>{teacherSectionCount}</span> <span className="text-[5px] font-black text-slate-500 uppercase">Ş</span> </div>
+                                                   <div className="flex items-center gap-1"> <span className={`text-[8px] font-normal ${teacherSectionCount === 0 ? 'text-red-500' : 'text-[#3b82f6]'}`}>{teacherSectionCount}</span> <span className="text-[5px] font-normal text-slate-500 uppercase">Ş</span> </div>
                                                    <div className="w-[1px] h-2 bg-white/10"></div>
-                                                   <div className="flex items-center gap-1"> <span className="text-[8px] font-black text-[#22c55e]">{teacherStudentCount}</span> <span className="text-[5px] font-black text-slate-500 uppercase">Ö</span> </div>
+                                                   <div className="flex items-center gap-1"> <span className="text-[8px] font-normal text-[#22c55e]">{teacherStudentCount}</span> <span className="text-[5px] font-normal text-slate-500 uppercase">Ö</span> </div>
                                                 </div>
                                              </div>
                                              <div className="flex items-center gap-2 mt-1.5 overflow-x-auto no-scrollbar mask-fade-right">
-                                                <span className={`text-[6px] font-black uppercase px-1 border leading-none shrink-0 py-0.5 rounded-sm ${t.preferredShift === ShiftType.OGLE ? 'text-[#fcd34d] border-[#fcd34d]/40' : 'text-[#3b82f6] border-[#3b82f6]/40'}`}>{t.preferredShift || 'SABAH'}</span>
-                                                <div className="flex items-center gap-1"> {currentBranchShorts.map((bs, bi) => bs && (<span key={bi} className="text-[6px] font-black text-[#fbbf24] uppercase border border-[#fbbf24]/20 px-1.5 py-0.5 leading-none bg-[#fbbf24]/5 whitespace-nowrap rounded-sm">{standardizeBranchCode(bs)}</span>))} </div>
+                                                <span className={`text-[6px] font-normal uppercase px-1 border leading-none shrink-0 py-0.5 rounded-sm ${t.preferredShift === ShiftType.OGLE ? 'text-[#fcd34d] border-[#fcd34d]/40' : 'text-[#3b82f6] border-[#3b82f6]/40'}`}>{t.preferredShift || 'SABAH'}</span>
+                                                <div className="flex items-center gap-1"> {currentBranchShorts.map((bs, bi) => bs && (<span key={bi} className="text-[6px] font-normal text-[#fbbf24] uppercase border border-[#fbbf24]/20 px-1.5 py-0.5 leading-none bg-[#fbbf24]/5 whitespace-nowrap rounded-sm">{standardizeBranchCode(bs)}</span>))} </div>
                                              </div>
                                           </div>
                                        </div>
                                        <div className="flex items-center gap-4 shrink-0 border-l border-white/5 pl-4 ml-2">
-                                          <div className="flex flex-col items-end"> <span className="text-[11px] font-black text-slate-400 leading-none">{t.lessonCount}s</span> <span className="text-[5px] font-black text-slate-600 uppercase mt-1 opacity-60">KOTA</span> </div>
+                                          <div className="flex flex-col items-end"> <span className="text-[11px] font-normal text-slate-400 leading-none">{t.lessonCount}s</span> <span className="text-[5px] font-normal text-slate-600 uppercase mt-1 opacity-60">KOTA</span> </div>
                                           {editMode && <button onClick={(e) => { e.stopPropagation(); setActiveListActionId(isMenuOpen ? null : t.id); }} className="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-[#3b82f6] transition-all"><i className="fa-solid fa-ellipsis-vertical text-lg"></i></button>}
                                        </div>
                                     </div>
                                     <div className={`absolute right-0 top-0 bottom-0 flex transition-all duration-300 w-48 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`} style={{ zIndex: 100 }}>
-                                       <button onClick={(e) => { e.stopPropagation(); handleGenerateQR(t); setActiveListActionId(null); }} className="w-16 h-full bg-white text-black flex flex-col items-center justify-center border-l border-white/10 active:brightness-90 transition-all pointer-events-auto shadow-lg"><i className="fa-solid fa-qrcode text-sm mb-1"></i><span className="text-[6px] font-black uppercase">QR</span></button>
-                                       <button onClick={(e) => { e.stopPropagation(); handleEditTeacher(t); }} className="w-16 h-full bg-[#3b82f6] text-white flex flex-col items-center justify-center border-l border-white/10 active:brightness-90 transition-all pointer-events-auto"><i className="fa-solid fa-pen text-sm mb-1"></i><span className="text-[6px] font-black uppercase">DÜZENLE</span></button>
-                                       <button onClick={(e) => { e.stopPropagation(); setTeacherToDelete(t); setActiveListActionId(null); }} className="w-16 h-full bg-red-600 text-white flex flex-col items-center justify-center border-l border-white/10 active:brightness-90 transition-all pointer-events-auto"><i className="fa-solid fa-trash-can text-sm mb-1"></i><span className="text-[6px] font-black uppercase">SİL</span></button>
+                                       <button onClick={(e) => { e.stopPropagation(); handleGenerateQR(t); setActiveListActionId(null); }} className="w-16 h-full bg-white text-black flex flex-col items-center justify-center border-l border-white/10 active:brightness-90 transition-all pointer-events-auto shadow-lg"><i className="fa-solid fa-qrcode text-sm mb-1"></i><span className="text-[6px] font-normal uppercase">QR</span></button>
+                                       <button onClick={(e) => { e.stopPropagation(); handleEditTeacher(t); }} className="w-16 h-full bg-[#3b82f6] text-white flex flex-col items-center justify-center border-l border-white/10 active:brightness-90 transition-all pointer-events-auto"><i className="fa-solid fa-pen text-sm mb-1"></i><span className="text-[6px] font-normal uppercase">DÜZENLE</span></button>
+                                       <button onClick={(e) => { e.stopPropagation(); setTeacherToDelete(t); setActiveListActionId(null); }} className="w-16 h-full bg-red-600 text-white flex flex-col items-center justify-center border-l border-white/10 active:brightness-90 transition-all pointer-events-auto"><i className="fa-solid fa-trash-can text-sm mb-1"></i><span className="text-[6px] font-normal uppercase">SİL</span></button>
                                     </div>
                                  </div>
                               );
                            })}
                         </div>
-                     )) : (<div className="py-20 text-center opacity-20"><i className="fa-solid fa-user-slash text-4xl mb-4"></i><p className="text-[10px] font-black uppercase tracking-[0.4em]">VERİ_BULUNAMADI</p></div>)}
+                     )) : (<div className="py-20 text-center opacity-20"><i className="fa-solid fa-user-slash text-4xl mb-4"></i><p className="text-[10px] font-normal uppercase tracking-[0.4em]">VERİ_BULUNAMADI</p></div>)}
                   </div>
                </div>
             )
@@ -1739,10 +1739,10 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                               <i className="fa-solid fa-user-graduate text-lg"></i>
                            </div>
                            <div>
-                              <h3 className="text-[12px] font-medium text-white/80 uppercase tracking-widest leading-none">{viewingStudentAttendance.name}</h3>
+                              <h3 className="text-[12px] font-normal text-white/80 uppercase tracking-widest leading-none">{viewingStudentAttendance.name}</h3>
                               <div className="flex items-center gap-2 mt-1">
-                                 <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">NO: {viewingStudentAttendance.number}</span>
-                                 <span className="text-[8px] font-black text-[#fbbf24] uppercase tracking-widest truncate max-w-[150px]">ORT: {viewingStudentAttendance.displayGrade || '--'}</span>
+                                 <span className="text-[8px] font-normal text-slate-500 uppercase tracking-widest">NO: {viewingStudentAttendance.number}</span>
+                                 <span className="text-[8px] font-normal text-[#fbbf24] uppercase tracking-widest truncate max-w-[150px]">ORT: {viewingStudentAttendance.displayGrade || '--'}</span>
                               </div>
                            </div>
                         </div>
@@ -1750,9 +1750,9 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                      </div>
 
                      <div className="flex p-1 bg-black/40 border-b border-white/5 shrink-0">
-                        <button onClick={() => setStudentModalTab('ATTENDANCE')} className={`flex-1 h-10 text-[9px] font-black uppercase tracking-widest transition-all ${studentModalTab === 'ATTENDANCE' ? 'bg-[#3b82f6] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>DEVAMSIZLIK</button>
-                        <button onClick={() => setStudentModalTab('GRADES')} className={`flex-1 h-10 text-[9px] font-black uppercase tracking-widest transition-all ${studentModalTab === 'GRADES' ? 'bg-[#fbbf24] text-black shadow-lg' : 'text-slate-500 hover:text-white'}`}>NOTLAR & ANALİZ</button>
-                        <button onClick={() => setStudentModalTab('OBSERVATIONS')} className={`flex-1 h-10 text-[9px] font-black uppercase tracking-widest transition-all ${studentModalTab === 'OBSERVATIONS' ? 'bg-purple-500 text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>KANAAT & GÖZLEM</button>
+                        <button onClick={() => setStudentModalTab('ATTENDANCE')} className={`flex-1 h-10 text-[9px] font-normal uppercase tracking-widest transition-all ${studentModalTab === 'ATTENDANCE' ? 'bg-[#3b82f6] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>DEVAMSIZLIK</button>
+                        <button onClick={() => setStudentModalTab('GRADES')} className={`flex-1 h-10 text-[9px] font-normal uppercase tracking-widest transition-all ${studentModalTab === 'GRADES' ? 'bg-[#fbbf24] text-black shadow-lg' : 'text-slate-500 hover:text-white'}`}>NOTLAR & ANALİZ</button>
+                        <button onClick={() => setStudentModalTab('OBSERVATIONS')} className={`flex-1 h-10 text-[9px] font-normal uppercase tracking-widest transition-all ${studentModalTab === 'OBSERVATIONS' ? 'bg-purple-500 text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>KANAAT & GÖZLEM</button>
                      </div>
 
                      <div className="flex-1 overflow-y-auto no-scrollbar p-4 bg-grid-hatched">
@@ -1774,11 +1774,11 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <div className="bg-[#0d141b] border-t-4 border-orange-500 p-6 max-w-md w-full shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col rounded-sm">
                      <div className="flex justify-between items-center mb-6">
                         <div>
-                           <h3 className="text-[14px] font-black text-white uppercase tracking-widest">SINAV PLANLA</h3>
+                           <h3 className="text-[14px] font-normal text-white uppercase tracking-widest">SINAV PLANLA</h3>
                            <div className="flex items-center gap-2 mt-2">
-                              <span className="text-[8px] font-black text-orange-500 uppercase tracking-[0.4em]">{examSchedulerTarget.lessonName} | {examSchedulerTarget.className}</span>
-                              <span className="text-[8px] font-bold text-pink-500 flex items-center gap-1 border-l border-white/10 pl-2 ml-1"><i className="fa-solid fa-venus text-[7px]"></i> {allClasses.find(c => c.name === examSchedulerTarget.className)?.students?.filter(s => s.gender === Gender.FEMALE).length || 0}</span>
-                              <span className="text-[8px] font-bold text-blue-500 flex items-center gap-1"><i className="fa-solid fa-mars text-[7px]"></i> {allClasses.find(c => c.name === examSchedulerTarget.className)?.students?.filter(s => s.gender === Gender.MALE).length || 0}</span>
+                              <span className="text-[8px] font-normal text-orange-500 uppercase tracking-[0.4em]">{examSchedulerTarget.lessonName} | {examSchedulerTarget.className}</span>
+                              <span className="text-[8px] font-normal text-pink-500 flex items-center gap-1 border-l border-white/10 pl-2 ml-1"><i className="fa-solid fa-venus text-[7px]"></i> {allClasses.find(c => c.name === examSchedulerTarget.className)?.students?.filter(s => s.gender === Gender.FEMALE).length || 0}</span>
+                              <span className="text-[8px] font-normal text-blue-500 flex items-center gap-1"><i className="fa-solid fa-mars text-[7px]"></i> {allClasses.find(c => c.name === examSchedulerTarget.className)?.students?.filter(s => s.gender === Gender.MALE).length || 0}</span>
                            </div>
                         </div>
                         <button onClick={() => setIsExamSchedulerOpen(false)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all"><i className="fa-solid fa-xmark text-lg"></i></button>
@@ -1786,13 +1786,13 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
                      <div className="space-y-6">
                         <div className="space-y-2">
-                           <label className="text-[8px] font-black text-slate-500 uppercase tracking-widest block mb-2">SINAV NO</label>
+                           <label className="text-[8px] font-normal text-slate-500 uppercase tracking-widest block mb-2">SINAV NO</label>
                            <div className="grid grid-cols-4 gap-2">
                               {['exam1', 'exam2', 'exam3', 'exam4'].map((slot, idx) => (
                                  <button
                                     key={slot}
                                     onClick={() => setExamSchedulerForm({ ...examSchedulerForm, slot })}
-                                    className={`h-10 border text-[10px] font-black uppercase transition-all ${examSchedulerForm.slot === slot ? 'bg-orange-500 text-white border-orange-500 shadow-lg' : 'bg-black border-white/10 text-slate-500 hover:text-white'}`}
+                                    className={`h-10 border text-[10px] font-normal uppercase transition-all ${examSchedulerForm.slot === slot ? 'bg-orange-500 text-white border-orange-500 shadow-lg' : 'bg-black border-white/10 text-slate-500 hover:text-white'}`}
                                  >
                                     {idx + 1}. YAZILI
                                  </button>
@@ -1801,10 +1801,10 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                         </div>
 
                         <div className="space-y-1.5">
-                           <label className="text-[8px] font-black text-slate-500 uppercase tracking-widest ml-1">TARİH SEÇİNİZ</label>
+                           <label className="text-[8px] font-normal text-slate-500 uppercase tracking-widest ml-1">TARİH SEÇİNİZ</label>
                            <input
                               type="date"
-                              className="w-full bg-black border border-white/10 p-3 text-[12px] font-bold text-white outline-none focus:border-orange-500 uppercase"
+                              className="w-full bg-black border border-white/10 p-3 text-[12px] font-normal text-white outline-none focus:border-orange-500 uppercase"
                               value={examSchedulerForm.date}
                               onChange={(e) => setExamSchedulerForm({ ...examSchedulerForm, date: e.target.value })}
                            />
@@ -1813,7 +1813,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                         <button
                            onClick={handleSaveExamSchedule}
                            disabled={!examSchedulerForm.date}
-                           className="w-full h-14 bg-orange-600 text-white font-black text-[11px] uppercase tracking-[0.3em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-50 disabled:grayscale"
+                           className="w-full h-14 bg-orange-600 text-white font-normal text-[11px] uppercase tracking-[0.3em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-50 disabled:grayscale"
                         >
                            SINAV TARİHİNİ KAYDET
                         </button>
@@ -1830,21 +1830,21 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <div className="bg-[#0d141b] border-t-4 border-[#3b82f6] p-6 max-w-md w-full shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col rounded-sm">
                      <div className="flex justify-between items-center mb-6">
                         <div>
-                           <h3 className="text-[14px] font-black text-white uppercase tracking-widest">SINAV DÜZENLE</h3>
-                           <span className="text-[8px] font-black text-[#3b82f6] uppercase tracking-[0.4em] mt-2 block">{examToEdit.lessonName} | {examToEdit.className}</span>
+                           <h3 className="text-[14px] font-normal text-white uppercase tracking-widest">SINAV DÜZENLE</h3>
+                           <span className="text-[8px] font-normal text-[#3b82f6] uppercase tracking-[0.4em] mt-2 block">{examToEdit.lessonName} | {examToEdit.className}</span>
                         </div>
                         <button onClick={() => setIsEditExamModalOpen(false)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all"><i className="fa-solid fa-xmark text-lg"></i></button>
                      </div>
 
                      <div className="space-y-6">
                         <div className="space-y-2">
-                           <label className="text-[8px] font-black text-slate-500 uppercase tracking-widest block mb-2">SINAV NO</label>
+                           <label className="text-[8px] font-normal text-slate-500 uppercase tracking-widest block mb-2">SINAV NO</label>
                            <div className="grid grid-cols-4 gap-2">
                               {['exam1', 'exam2', 'exam3', 'exam4'].map((slot, idx) => (
                                  <button
                                     key={slot}
                                     onClick={() => setEditExamForm({ ...editExamForm, slot })}
-                                    className={`h-10 border text-[10px] font-black uppercase transition-all ${editExamForm.slot === slot ? 'bg-[#3b82f6] text-white border-[#3b82f6] shadow-lg' : 'bg-black border-white/10 text-slate-500 hover:text-white'}`}
+                                    className={`h-10 border text-[10px] font-normal uppercase transition-all ${editExamForm.slot === slot ? 'bg-[#3b82f6] text-white border-[#3b82f6] shadow-lg' : 'bg-black border-white/10 text-slate-500 hover:text-white'}`}
                                  >
                                     {idx + 1}. YAZILI
                                  </button>
@@ -1853,10 +1853,10 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                         </div>
 
                         <div className="space-y-1.5">
-                           <label className="text-[8px] font-black text-slate-500 uppercase tracking-widest ml-1">TARİH SEÇİNİZ</label>
+                           <label className="text-[8px] font-normal text-slate-500 uppercase tracking-widest ml-1">TARİH SEÇİNİZ</label>
                            <input
                               type="date"
-                              className="w-full bg-black border border-white/10 p-3 text-[12px] font-bold text-white outline-none focus:border-[#3b82f6] uppercase"
+                              className="w-full bg-black border border-white/10 p-3 text-[12px] font-normal text-white outline-none focus:border-[#3b82f6] uppercase"
                               value={editExamForm.date}
                               onChange={(e) => setEditExamForm({ ...editExamForm, date: e.target.value })}
                            />
@@ -1865,7 +1865,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                         <button
                            onClick={handleUpdateExam}
                            disabled={!editExamForm.date}
-                           className="w-full h-14 bg-[#3b82f6] text-white font-black text-[11px] uppercase tracking-[0.3em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-50 disabled:grayscale"
+                           className="w-full h-14 bg-[#3b82f6] text-white font-normal text-[11px] uppercase tracking-[0.3em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-50 disabled:grayscale"
                         >
                            GÜNCELLEMEYİ KAYDET
                         </button>
@@ -1880,14 +1880,14 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
             examToDelete && (
                <div className="fixed inset-0 z-[9000] flex items-center justify-center bg-black/95 backdrop-blur-md px-4">
                   <div className="bg-[#0d141b] border-2 border-red-600 p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 rounded-sm">
-                     <h3 className="text-[14px] font-black text-white uppercase tracking-widest mb-4">SINAV_SİLME_ONAYI</h3>
-                     <p className="text-[11px] font-bold text-slate-400 uppercase leading-relaxed mb-8">
+                     <h3 className="text-[14px] font-normal text-white uppercase tracking-widest mb-4">SINAV_SİLME_ONAYI</h3>
+                     <p className="text-[11px] font-normal text-slate-400 uppercase leading-relaxed mb-8">
                         BU SINAV KAYDI SİSTEMDEN KALICI OLARAK SİLİNECEKTİR: <br />
-                        <span className="text-red-500 text-lg block mt-2 font-black">{examToDelete.lessonName} - {examToDelete.date}</span>
+                        <span className="text-red-500 text-lg block mt-2 font-normal">{examToDelete.lessonName} - {examToDelete.date}</span>
                      </p>
                      <div className="flex gap-4">
-                        <button onClick={() => setExamToDelete(null)} className="flex-1 h-12 border border-[#64748b] text-[#f1f5f9] font-black text-[10px] uppercase hover:bg-white/5 transition-all">İPTAL</button>
-                        <button onClick={executeDeleteExam} className="flex-1 h-12 bg-red-600 text-white font-black text-[10px] uppercase shadow-xl hover:brightness-110 transition-all">EVET_SİL</button>
+                        <button onClick={() => setExamToDelete(null)} className="flex-1 h-12 border border-[#64748b] text-[#f1f5f9] font-normal text-[10px] uppercase hover:bg-white/5 transition-all">İPTAL</button>
+                        <button onClick={executeDeleteExam} className="flex-1 h-12 bg-red-600 text-white font-normal text-[10px] uppercase shadow-xl hover:brightness-110 transition-all">EVET_SİL</button>
                      </div>
                   </div>
                </div>
@@ -1905,15 +1905,15 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                               <i className="fa-solid fa-clipboard-user text-xl"></i>
                            </div>
                            <div className="min-w-0">
-                              <h2 className="text-[13px] font-black text-white uppercase tracking-tighter leading-none truncate">{attendanceTarget.sinif} - {allLessons.find(l => l.id === attendanceTarget.ders || l.name === attendanceTarget.ders)?.name || attendanceTarget.ders}</h2>
-                              <span className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1 block">{attendanceTarget.ders_saati}. DERS YOKLAMASI</span>
+                              <h2 className="text-[13px] font-normal text-white uppercase tracking-tighter leading-none truncate">{attendanceTarget.sinif} - {allLessons.find(l => l.id === attendanceTarget.ders || l.name === attendanceTarget.ders)?.name || attendanceTarget.ders}</h2>
+                              <span className="text-[9px] font-normal text-slate-400 uppercase tracking-[0.2em] mt-1 block">{attendanceTarget.ders_saati}. DERS YOKLAMASI</span>
                            </div>
                         </div>
                         <button onClick={() => setIsAttendanceTerminalOpen(false)} className="w-10 h-10 flex items-center justify-center border border-white/10 text-slate-400 hover:text-white transition-all rounded-full bg-black/20 shrink-0"><i className="fa-solid fa-xmark text-lg"></i></button>
                      </div>
                      <div className="flex items-center gap-2 w-full">
-                        <button onClick={() => setAttendanceViewMode(attendanceViewMode === 'LIST' ? 'SCANNER' : 'LIST')} className="flex-1 h-12 bg-white/5 border border-white/10 text-white font-black text-[10px] uppercase hover:bg-white/10 transition-all flex items-center justify-center gap-2 rounded-sm"> <i className={`fa-solid ${attendanceViewMode === 'LIST' ? 'fa-camera' : 'fa-list'}`}></i> {attendanceViewMode === 'LIST' ? 'KAMERA' : 'LİSTE'} </button>
-                        <button onClick={() => { if (showSummary) finalizeAttendanceCommit(); else setShowSummary(true); }} className="flex-[2] h-12 bg-[#3b82f6] text-white font-black text-[10px] uppercase shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 rounded-sm"> {isUploadingProof ? <i className="fa-solid fa-cloud-arrow-up animate-bounce"></i> : <i className="fa-solid fa-check-double"></i>} {showSummary ? 'ONAYLA' : 'TAMAMLA'} </button>
+                        <button onClick={() => setAttendanceViewMode(attendanceViewMode === 'LIST' ? 'SCANNER' : 'LIST')} className="flex-1 h-12 bg-white/5 border border-white/10 text-white font-normal text-[10px] uppercase hover:bg-white/10 transition-all flex items-center justify-center gap-2 rounded-sm"> <i className={`fa-solid ${attendanceViewMode === 'LIST' ? 'fa-camera' : 'fa-list'}`}></i> {attendanceViewMode === 'LIST' ? 'KAMERA' : 'LİSTE'} </button>
+                        <button onClick={() => { if (showSummary) finalizeAttendanceCommit(); else setShowSummary(true); }} className="flex-[2] h-12 bg-[#3b82f6] text-white font-normal text-[10px] uppercase shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 rounded-sm"> {isUploadingProof ? <i className="fa-solid fa-cloud-arrow-up animate-bounce"></i> : <i className="fa-solid fa-check-double"></i>} {showSummary ? 'ONAYLA' : 'TAMAMLA'} </button>
                      </div>
                      {attendanceViewMode === 'LIST' && (
                         <div className="relative">
@@ -1921,18 +1921,18 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                            <input
                               type="text"
                               placeholder="ÖĞRENCİ ARA..."
-                              className="w-full h-10 bg-black/40 border border-white/10 pl-9 pr-4 text-[11px] font-bold text-white uppercase outline-none focus:border-[#3b82f6] transition-all"
+                              className="w-full h-10 bg-black/40 border border-white/10 pl-9 pr-4 text-[11px] font-normal text-white uppercase outline-none focus:border-[#3b82f6] transition-all"
                               value={attendanceSearchTerm}
                               onChange={(e) => setAttendanceSearchTerm(e.target.value)}
                            />
                         </div>
                      )}
                   </div>
-                  <div className="flex-1 overflow-hidden relative"> {attendanceViewMode === 'SCANNER' ? (<div className="h-full relative bg-black"> <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover opacity-60" /> <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"> <div className="w-[80%] h-[60%] border-2 border-[#3b82f6] shadow-[0_0_100px_rgba(59,130,246,0.3)] relative animate-pulse"> <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-[#3b82f6] -mt-1 -ml-1"></div> <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-[#3b82f6] -mt-1 -mr-1"></div> <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-[#3b82f6] -mb-1 -ml-1"></div> <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-[#3b82f6] -mb-1 -mr-1"></div> </div> <p className="mt-8 text-[12px] font-black text-white bg-black/60 px-4 py-2 uppercase tracking-widest border border-white/10">YOKLAMA KAĞIDINI HİZALAYIN</p> </div> <div className="absolute bottom-10 left-0 right-0 flex justify-center pointer-events-auto"> <button onClick={() => { if (videoRef.current) { const canvas = document.createElement('canvas'); canvas.width = videoRef.current.videoWidth; canvas.height = videoRef.current.videoHeight; canvas.getContext('2d')?.drawImage(videoRef.current, 0, 0); const img = canvas.toDataURL('image/jpeg'); setCapturedImage(img); processOpticalData(img); } }} className="w-20 h-20 bg-white rounded-full border-4 border-[#3b82f6] shadow-[0_0_50px_rgba(59,130,246,0.5)] flex items-center justify-center active:scale-90 transition-all group"> <div className="w-16 h-16 bg-[#3b82f6] rounded-full group-hover:scale-90 transition-transform"></div> </button> </div> {isAnalyzing && (<div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center z-50"> <div className="w-24 h-24 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin mb-8"></div> <div className="space-y-2 text-center"> {analysisLogs.map((log, i) => (<p key={i} className="text-[10px] font-mono text-[#3b82f6] uppercase tracking-widest animate-pulse">{log}</p>))} </div> </div>)} </div>) : (<div className="h-full overflow-y-auto p-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 content-start"> {allClasses.find(c => c.name === attendanceTarget.sinif)?.students?.filter(s => s.name.includes(attendanceSearchTerm.toUpperCase()) || s.number.includes(attendanceSearchTerm)).map(s => { const isAbsent = selectedStudentNumbers.includes(s.number); return (<div key={s.number} onClick={() => setSelectedStudentNumbers(prev => prev.includes(s.number) ? prev.filter(n => n !== s.number) : [...prev, s.number])} className={`px-3 py-2 border transition-all cursor-pointer relative overflow-hidden group flex items-center ${isAbsent ? 'bg-red-600 border-red-500 shadow-[0_0_20px_rgba(220,38,38,0.3)] z-10 scale-[1.02]' : 'bg-[#1e293b] border-white/5 hover:border-white/20'}`} > <div className="flex items-center gap-2 relative z-10 min-w-0 w-full"> <div className={`text-[11px] font-bold min-w-[24px] text-right border-r pr-2 mr-2 transition-all ${isAbsent ? 'text-white border-white/30' : 'text-slate-500 border-white/10'}`}> {s.number} </div> <div className="flex flex-col min-w-0 flex-1"> <span className={`text-[10px] font-bold uppercase truncate leading-tight ${isAbsent ? 'text-white' : 'text-slate-300'}`}>{s.name}</span> <span className={`text-[8px] font-bold uppercase tracking-widest mt-0.5 ${isAbsent ? 'text-white/80' : 'text-slate-600'}`}>{isAbsent ? 'YOK' : 'VAR'}</span> </div> </div> {isAbsent && <div className="absolute right-2 top-1/2 -translate-y-1/2 text-xl text-black/20"><i className="fa-solid fa-user-xmark"></i></div>} </div>); })} </div>)} </div> {showSummary && (<div className="absolute inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-8 animate-in zoom-in-95"> <div className="w-24 h-24 bg-[#3b82f6]/10 border-2 border-[#3b82f6] rounded-full flex items-center justify-center mb-8 shadow-[0_0_50px_rgba(59,130,246,0.3)]"> <span className="text-4xl font-black text-[#3b82f6]">{selectedStudentNumbers.length}</span> </div> <h3 className="text-2xl font-black text-white uppercase tracking-[0.2em] mb-2">YOKLAMA ÖZETİ</h3> <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-12">SEÇİLEN ÖĞRENCİLER "YOK" OLARAK İŞLENECEKTİR.</p> <div className="flex gap-4 w-full max-w-md"> <button onClick={() => setShowSummary(false)} className="flex-1 h-14 border border-slate-600 text-slate-400 font-black text-[12px] uppercase tracking-widest hover:text-white hover:border-white transition-all">GERİ DÖN</button> <button onClick={finalizeAttendanceCommit} className="flex-1 h-14 bg-[#3b82f6] text-white font-black text-[12px] uppercase tracking-widest shadow-xl hover:brightness-110 active:scale-95 transition-all">ONAYLA VE BİTİR</button> </div> </div>)} </div>)
+                  <div className="flex-1 overflow-hidden relative"> {attendanceViewMode === 'SCANNER' ? (<div className="h-full relative bg-black"> <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover opacity-60" /> <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"> <div className="w-[80%] h-[60%] border-2 border-[#3b82f6] shadow-[0_0_100px_rgba(59,130,246,0.3)] relative animate-pulse"> <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-[#3b82f6] -mt-1 -ml-1"></div> <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-[#3b82f6] -mt-1 -mr-1"></div> <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-[#3b82f6] -mb-1 -ml-1"></div> <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-[#3b82f6] -mb-1 -mr-1"></div> </div> <p className="mt-8 text-[12px] font-normal text-white bg-black/60 px-4 py-2 uppercase tracking-widest border border-white/10">YOKLAMA KAĞIDINI HİZALAYIN</p> </div> <div className="absolute bottom-10 left-0 right-0 flex justify-center pointer-events-auto"> <button onClick={() => { if (videoRef.current) { const canvas = document.createElement('canvas'); canvas.width = videoRef.current.videoWidth; canvas.height = videoRef.current.videoHeight; canvas.getContext('2d')?.drawImage(videoRef.current, 0, 0); const img = canvas.toDataURL('image/jpeg'); setCapturedImage(img); processOpticalData(img); } }} className="w-20 h-20 bg-white rounded-full border-4 border-[#3b82f6] shadow-[0_0_50px_rgba(59,130,246,0.5)] flex items-center justify-center active:scale-90 transition-all group"> <div className="w-16 h-16 bg-[#3b82f6] rounded-full group-hover:scale-90 transition-transform"></div> </button> </div> {isAnalyzing && (<div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center z-50"> <div className="w-24 h-24 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin mb-8"></div> <div className="space-y-2 text-center"> {analysisLogs.map((log, i) => (<p key={i} className="text-[10px] font-mono text-[#3b82f6] uppercase tracking-widest animate-pulse">{log}</p>))} </div> </div>)} </div>) : (<div className="h-full overflow-y-auto p-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 content-start"> {allClasses.find(c => c.name === attendanceTarget.sinif)?.students?.filter(s => s.name.includes(attendanceSearchTerm.toUpperCase()) || s.number.includes(attendanceSearchTerm)).map(s => { const isAbsent = selectedStudentNumbers.includes(s.number); return (<div key={s.number} onClick={() => setSelectedStudentNumbers(prev => prev.includes(s.number) ? prev.filter(n => n !== s.number) : [...prev, s.number])} className={`px-3 py-2 border transition-all cursor-pointer relative overflow-hidden group flex items-center ${isAbsent ? 'bg-red-600 border-red-500 shadow-[0_0_20px_rgba(220,38,38,0.3)] z-10 scale-[1.02]' : 'bg-[#1e293b] border-white/5 hover:border-white/20'}`} > <div className="flex items-center gap-2 relative z-10 min-w-0 w-full"> <div className={`text-[11px] font-normal min-w-[24px] text-right border-r pr-2 mr-2 transition-all ${isAbsent ? 'text-white border-white/30' : 'text-slate-500 border-white/10'}`}> {s.number} </div> <div className="flex flex-col min-w-0 flex-1"> <span className={`text-[10px] font-normal uppercase truncate leading-tight ${isAbsent ? 'text-white' : 'text-slate-300'}`}>{s.name}</span> <span className={`text-[8px] font-normal uppercase tracking-widest mt-0.5 ${isAbsent ? 'text-white/80' : 'text-slate-600'}`}>{isAbsent ? 'YOK' : 'VAR'}</span> </div> </div> {isAbsent && <div className="absolute right-2 top-1/2 -translate-y-1/2 text-xl text-black/20"><i className="fa-solid fa-user-xmark"></i></div>} </div>); })} </div>)} </div> {showSummary && (<div className="absolute inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-8 animate-in zoom-in-95"> <div className="w-24 h-24 bg-[#3b82f6]/10 border-2 border-[#3b82f6] rounded-full flex items-center justify-center mb-8 shadow-[0_0_50px_rgba(59,130,246,0.3)]"> <span className="text-4xl font-normal text-[#3b82f6]">{selectedStudentNumbers.length}</span> </div> <h3 className="text-2xl font-normal text-white uppercase tracking-[0.2em] mb-2">YOKLAMA ÖZETİ</h3> <p className="text-[11px] font-normal text-slate-400 uppercase tracking-widest mb-12">SEÇİLEN ÖĞRENCİLER "YOK" OLARAK İŞLENECEKTİR.</p> <div className="flex gap-4 w-full max-w-md"> <button onClick={() => setShowSummary(false)} className="flex-1 h-14 border border-slate-600 text-slate-400 font-normal text-[12px] uppercase tracking-widest hover:text-white hover:border-white transition-all">GERİ DÖN</button> <button onClick={finalizeAttendanceCommit} className="flex-1 h-14 bg-[#3b82f6] text-white font-normal text-[12px] uppercase tracking-widest shadow-xl hover:brightness-110 active:scale-95 transition-all">ONAYLA VE BİTİR</button> </div> </div>)} </div>)
          }
 
-         {isLogModalOpen && logTarget && (<div className="fixed inset-0 z-[9000] flex items-center justify-center bg-black/95 backdrop-blur-md px-4"> <div className="bg-[#0d141b] border-t-4 border-[#fbbf24] p-6 max-w-lg w-full shadow-2xl animate-in zoom-in-95 duration-200"> <div className="flex justify-between items-center mb-6"> <div> <h3 className="text-[14px] font-black text-white uppercase tracking-widest">DİJİTAL SINIF DEFTERİ</h3> <span className="text-[8px] font-black text-[#fbbf24] uppercase tracking-[0.4em] mt-2 block">{logTarget.sinif} - {allLessons.find(l => l.id === logTarget.ders || l.name === logTarget.ders)?.name || logTarget.ders} ({logTarget.ders_saati}. DERS)</span>
-         </div> <button onClick={() => setIsLogModalOpen(false)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all"><i className="fa-solid fa-xmark text-lg"></i></button> </div> <div className="space-y-4"> <div className="space-y-1.5"> <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">İŞLENEN KONU / KAZANIM</label> <textarea rows={3} className="w-full bg-black border border-white/10 p-4 text-[12px] font-bold text-white outline-none focus:border-[#fbbf24] resize-none" placeholder="Bugün neler işlendi?" value={logForm.subject} onChange={e => setLogForm({ ...logForm, subject: e.target.value })} autoFocus /> </div> <div className="space-y-1.5"> <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">ÖDEV / PROJE</label> <textarea rows={2} className="w-full bg-black border border-white/10 p-4 text-[12px] font-bold text-white outline-none focus:border-[#fbbf24] resize-none" placeholder="Varsa ödev notu..." value={logForm.homework} onChange={e => setLogForm({ ...logForm, homework: e.target.value })} /> </div> <button onClick={handleSaveLog} disabled={!logForm.subject} className="w-full h-14 bg-[#fbbf24] text-black font-black text-[11px] uppercase tracking-[0.3em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-50 disabled:grayscale"> DEFTERİ İMZALA </button> </div> </div> </div>)}
+         {isLogModalOpen && logTarget && (<div className="fixed inset-0 z-[9000] flex items-center justify-center bg-black/95 backdrop-blur-md px-4"> <div className="bg-[#0d141b] border-t-4 border-[#fbbf24] p-6 max-w-lg w-full shadow-2xl animate-in zoom-in-95 duration-200"> <div className="flex justify-between items-center mb-6"> <div> <h3 className="text-[14px] font-normal text-white uppercase tracking-widest">DİJİTAL SINIF DEFTERİ</h3> <span className="text-[8px] font-normal text-[#fbbf24] uppercase tracking-[0.4em] mt-2 block">{logTarget.sinif} - {allLessons.find(l => l.id === logTarget.ders || l.name === logTarget.ders)?.name || logTarget.ders} ({logTarget.ders_saati}. DERS)</span>
+         </div> <button onClick={() => setIsLogModalOpen(false)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all"><i className="fa-solid fa-xmark text-lg"></i></button> </div> <div className="space-y-4"> <div className="space-y-1.5"> <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">İŞLENEN KONU / KAZANIM</label> <textarea rows={3} className="w-full bg-black border border-white/10 p-4 text-[12px] font-normal text-white outline-none focus:border-[#fbbf24] resize-none" placeholder="Bugün neler işlendi?" value={logForm.subject} onChange={e => setLogForm({ ...logForm, subject: e.target.value })} autoFocus /> </div> <div className="space-y-1.5"> <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">ÖDEV / PROJE</label> <textarea rows={2} className="w-full bg-black border border-white/10 p-4 text-[12px] font-normal text-white outline-none focus:border-[#fbbf24] resize-none" placeholder="Varsa ödev notu..." value={logForm.homework} onChange={e => setLogForm({ ...logForm, homework: e.target.value })} /> </div> <button onClick={handleSaveLog} disabled={!logForm.subject} className="w-full h-14 bg-[#fbbf24] text-black font-normal text-[11px] uppercase tracking-[0.3em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-50 disabled:grayscale"> DEFTERİ İMZALA </button> </div> </div> </div>)}
 
          {
             isClassLogManagerOpen && classLogManagerTarget && (
@@ -1940,8 +1940,8 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <div className="bg-[#0d141b] border-2 border-[#22d3ee] w-full max-w-2xl h-[80vh] flex flex-col shadow-2xl animate-in zoom-in-95 duration-200 rounded-sm">
                      <div className="p-5 border-b border-white/10 flex justify-between items-center bg-[#162431] shrink-0">
                         <div>
-                           <h3 className="text-[14px] font-black text-white uppercase tracking-widest">DEFTER YÖNETİCİSİ</h3>
-                           <span className="text-[8px] font-black text-[#22d3ee] uppercase tracking-[0.4em] mt-2 block">{classLogManagerTarget.className} | {classLogManagerTarget.lessonName}</span>
+                           <h3 className="text-[14px] font-normal text-white uppercase tracking-widest">DEFTER YÖNETİCİSİ</h3>
+                           <span className="text-[8px] font-normal text-[#22d3ee] uppercase tracking-[0.4em] mt-2 block">{classLogManagerTarget.className} | {classLogManagerTarget.lessonName}</span>
                         </div>
                         <button onClick={() => setIsClassLogManagerOpen(false)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all"><i className="fa-solid fa-xmark text-lg"></i></button>
                      </div>
@@ -1950,23 +1950,23 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                            {allClasses.find(c => c.id === classLogManagerTarget.classId)?.lessonLogs?.sort((a, b) => b.timestamp - a.timestamp).map(log => (
                               <div key={log.id} className="bg-[#1e293b] border border-white/5 p-3 hover:border-[#22d3ee]/40 transition-all group cursor-pointer">
                                  <div className="flex justify-between items-center mb-2">
-                                    <span className="text-[10px] font-black text-white">{log.date}</span>
-                                    <span className="text-[8px] font-bold text-[#22d3ee]">{log.hour}. DERS</span>
+                                    <span className="text-[10px] font-normal text-white">{log.date}</span>
+                                    <span className="text-[8px] font-normal text-[#22d3ee]">{log.hour}. DERS</span>
                                  </div>
-                                 <p className="text-[9px] font-medium text-slate-400 line-clamp-2 italic">{log.subject}</p>
+                                 <p className="text-[9px] font-normal text-slate-400 line-clamp-2 italic">{log.subject}</p>
                               </div>
                            ))}
                            {(!allClasses.find(c => c.id === classLogManagerTarget.classId)?.lessonLogs?.length) && <div className="text-center py-10 opacity-30 text-[9px]">KAYIT YOK</div>}
                         </div>
                         <div className="flex-1 p-6 space-y-6 overflow-y-auto no-scrollbar bg-grid-hatched">
-                           <h4 className="text-[10px] font-black text-white uppercase tracking-[0.2em] border-b border-white/10 pb-2 mb-4">MANUEL KAYIT EKLE</h4>
+                           <h4 className="text-[10px] font-normal text-white uppercase tracking-[0.2em] border-b border-white/10 pb-2 mb-4">MANUEL KAYIT EKLE</h4>
                            <div className="grid grid-cols-2 gap-4">
-                              <div className="space-y-1"><label className="text-[7px] font-black text-slate-500 uppercase">TARİH</label><input type="date" className="w-full bg-black border border-white/10 p-3 text-[11px] text-white outline-none focus:border-[#22d3ee]" value={manualLogForm.date} onChange={e => setManualLogForm({ ...manualLogForm, date: e.target.value })} /></div>
-                              <div className="space-y-1"><label className="text-[7px] font-black text-slate-500 uppercase">DERS SAATİ</label><div className="flex items-center gap-2 bg-black border border-white/10 p-1"><button onClick={() => setManualLogForm(prev => ({ ...prev, hour: Math.max(1, prev.hour - 1) }))} className="w-8 h-8 flex items-center justify-center text-[#22d3ee]"><i className="fa-solid fa-minus"></i></button><span className="flex-1 text-center text-white font-black">{manualLogForm.hour}</span><button onClick={() => setManualLogForm(prev => ({ ...prev, hour: Math.min(10, prev.hour + 1) }))} className="w-8 h-8 flex items-center justify-center text-[#22d3ee]"><i className="fa-solid fa-plus"></i></button></div></div>
+                              <div className="space-y-1"><label className="text-[7px] font-normal text-slate-500 uppercase">TARİH</label><input type="date" className="w-full bg-black border border-white/10 p-3 text-[11px] text-white outline-none focus:border-[#22d3ee]" value={manualLogForm.date} onChange={e => setManualLogForm({ ...manualLogForm, date: e.target.value })} /></div>
+                              <div className="space-y-1"><label className="text-[7px] font-normal text-slate-500 uppercase">DERS SAATİ</label><div className="flex items-center gap-2 bg-black border border-white/10 p-1"><button onClick={() => setManualLogForm(prev => ({ ...prev, hour: Math.max(1, prev.hour - 1) }))} className="w-8 h-8 flex items-center justify-center text-[#22d3ee]"><i className="fa-solid fa-minus"></i></button><span className="flex-1 text-center text-white font-normal">{manualLogForm.hour}</span><button onClick={() => setManualLogForm(prev => ({ ...prev, hour: Math.min(10, prev.hour + 1) }))} className="w-8 h-8 flex items-center justify-center text-[#22d3ee]"><i className="fa-solid fa-plus"></i></button></div></div>
                            </div>
-                           <div className="space-y-1"><label className="text-[7px] font-black text-slate-500 uppercase">KONU</label><textarea rows={3} className="w-full bg-black border border-white/10 p-3 text-[11px] text-white outline-none focus:border-[#22d3ee]" value={manualLogForm.subject} onChange={e => setManualLogForm({ ...manualLogForm, subject: e.target.value })} /></div>
-                           <div className="space-y-1"><label className="text-[7px] font-black text-slate-500 uppercase">ÖDEV</label><textarea rows={2} className="w-full bg-black border border-white/10 p-3 text-[11px] text-white outline-none focus:border-[#22d3ee]" value={manualLogForm.homework} onChange={e => setManualLogForm({ ...manualLogForm, homework: e.target.value })} /></div>
-                           <button onClick={handleSaveManualLog} disabled={!manualLogForm.subject} className="w-full h-12 bg-[#22d3ee] text-black font-black text-[10px] uppercase tracking-[0.2em] hover:brightness-110 transition-all disabled:opacity-50">KAYDET</button>
+                           <div className="space-y-1"><label className="text-[7px] font-normal text-slate-500 uppercase">KONU</label><textarea rows={3} className="w-full bg-black border border-white/10 p-3 text-[11px] text-white outline-none focus:border-[#22d3ee]" value={manualLogForm.subject} onChange={e => setManualLogForm({ ...manualLogForm, subject: e.target.value })} /></div>
+                           <div className="space-y-1"><label className="text-[7px] font-normal text-slate-500 uppercase">ÖDEV</label><textarea rows={2} className="w-full bg-black border border-white/10 p-3 text-[11px] text-white outline-none focus:border-[#22d3ee]" value={manualLogForm.homework} onChange={e => setManualLogForm({ ...manualLogForm, homework: e.target.value })} /></div>
+                           <button onClick={handleSaveManualLog} disabled={!manualLogForm.subject} className="w-full h-12 bg-[#22d3ee] text-black font-normal text-[10px] uppercase tracking-[0.2em] hover:brightness-110 transition-all disabled:opacity-50">KAYDET</button>
                         </div>
                      </div>
                   </div>
@@ -1978,7 +1978,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
          {/* GRADE TERMINAL MODAL */}
          {
             isGradeTerminalOpen && gradeTerminalTarget && (<div className="fixed inset-0 z-[9500] flex flex-col bg-[#0f172a] animate-in zoom-in-95 duration-200"> <div className="h-16 bg-[#162431] border-b border-white/10 flex items-center justify-between px-3 md:px-6 shrink-0 shadow-2xl z-10 gap-2">
-               <div className="flex items-center gap-3 shrink-0"> <div className="w-9 h-9 bg-[#fbbf24] text-black flex items-center justify-center font-black text-base shadow-[0_0_20px_rgba(251,191,36,0.4)] md:w-10 md:h-10 md:text-lg"> <i className="fa-solid fa-pen-nib"></i> </div> <div> <h2 className="text-[14px] md:text-[18px] font-black text-white uppercase tracking-tighter leading-none">{gradeTerminalTarget.className}</h2> <div className="flex items-center gap-2 mt-0.5 md:hidden"> <span className="text-[9px] font-bold text-pink-500 flex items-center gap-1"><i className="fa-solid fa-venus text-[8px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.FEMALE).length || 0}</span> <span className="text-[9px] font-bold text-blue-500 flex items-center gap-1"><i className="fa-solid fa-mars text-[8px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.MALE).length || 0}</span> </div> <span className="hidden md:block text-[9px] font-bold text-[#fbbf24] uppercase tracking-widest mt-1 truncate max-w-[200px]" title={gradeTerminalTarget.lessonName}>{gradeTerminalTarget.lessonName}</span> </div> </div>
+               <div className="flex items-center gap-3 shrink-0"> <div className="w-9 h-9 bg-[#fbbf24] text-black flex items-center justify-center font-normal text-base shadow-[0_0_20px_rgba(251,191,36,0.4)] md:w-10 md:h-10 md:text-lg"> <i className="fa-solid fa-pen-nib"></i> </div> <div> <h2 className="text-[14px] md:text-[18px] font-normal text-white uppercase tracking-tighter leading-none">{gradeTerminalTarget.className}</h2> <div className="flex items-center gap-2 mt-0.5 md:hidden"> <span className="text-[9px] font-normal text-pink-500 flex items-center gap-1"><i className="fa-solid fa-venus text-[8px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.FEMALE).length || 0}</span> <span className="text-[9px] font-normal text-blue-500 flex items-center gap-1"><i className="fa-solid fa-mars text-[8px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.MALE).length || 0}</span> </div> <span className="hidden md:block text-[9px] font-normal text-[#fbbf24] uppercase tracking-widest mt-1 truncate max-w-[200px]" title={gradeTerminalTarget.lessonName}>{gradeTerminalTarget.lessonName}</span> </div> </div>
 
                {/* SEARCH BAR ADDED */}
                <div className="flex-1 max-w-[140px] md:max-w-xs mx-2 relative min-w-0">
@@ -1986,13 +1986,13 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <input
                      type="text"
                      placeholder="ARA..."
-                     className="w-full h-8 md:h-9 bg-black/40 border border-white/10 pl-8 pr-2 text-[10px] font-bold text-white uppercase outline-none focus:border-[#fbbf24] transition-all rounded-sm"
+                     className="w-full h-8 md:h-9 bg-black/40 border border-white/10 pl-8 pr-2 text-[10px] font-normal text-white uppercase outline-none focus:border-[#fbbf24] transition-all rounded-sm"
                      value={gradeSearchTerm}
                      onChange={(e) => setGradeSearchTerm(e.target.value)}
                   />
                </div>
 
-               <div className="flex items-center gap-2 shrink-0"> <div className="flex bg-black/40 p-0.5 border border-white/10 rounded-sm"> <button onClick={() => setActiveSemester(1)} className={`px-2 py-1.5 text-[8px] md:text-[9px] font-black uppercase tracking-widest transition-all ${activeSemester === 1 ? 'bg-[#3b82f6] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>1.DÖN</button> <button onClick={() => setActiveSemester(2)} className={`px-2 py-1.5 text-[8px] md:text-[9px] font-black uppercase tracking-widest transition-all ${activeSemester === 2 ? 'bg-[#3b82f6] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>2.DÖN</button> </div> <button onClick={() => setIsGradeTerminalOpen(false)} className="w-9 h-9 border border-white/10 text-white/40 hover:text-white transition-all ml-1"><i className="fa-solid fa-xmark text-lg"></i></button> </div> </div> <div className="flex bg-[#0a0a0a] border-b border-white/5 p-2 gap-2 overflow-x-auto no-scrollbar shrink-0"> {['exam1', 'exam2', 'exam3', 'exam4', 'oral'].map((col, idx) => { const label = col === 'oral' ? 'SZL' : `${idx + 1}. YZ`; const isActive = activeExamSlot === (col === 'oral' ? 5 : idx + 1); return (<button key={col} onClick={() => setActiveExamSlot(col === 'oral' ? 5 : idx + 1)} className={`flex-1 h-12 flex flex-col items-center justify-center border transition-all ${isActive ? 'bg-[#fbbf24]/10 border-[#fbbf24] text-[#fbbf24]' : 'bg-black border-white/10 text-slate-500 hover:bg-white/5'}`} > <span className="text-[10px] font-black uppercase">{label}</span> {isActive && <div className="w-1.5 h-1.5 bg-[#fbbf24] rounded-full mt-1 shadow-[0_0_10px_#fbbf24]"></div>} </button>); })} </div> <div className="flex-1 overflow-auto bg-grid-hatched p-4"> <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+               <div className="flex items-center gap-2 shrink-0"> <div className="flex bg-black/40 p-0.5 border border-white/10 rounded-sm"> <button onClick={() => setActiveSemester(1)} className={`px-2 py-1.5 text-[8px] md:text-[9px] font-normal uppercase tracking-widest transition-all ${activeSemester === 1 ? 'bg-[#3b82f6] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>1.DÖN</button> <button onClick={() => setActiveSemester(2)} className={`px-2 py-1.5 text-[8px] md:text-[9px] font-normal uppercase tracking-widest transition-all ${activeSemester === 2 ? 'bg-[#3b82f6] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>2.DÖN</button> </div> <button onClick={() => setIsGradeTerminalOpen(false)} className="w-9 h-9 border border-white/10 text-white/40 hover:text-white transition-all ml-1"><i className="fa-solid fa-xmark text-lg"></i></button> </div> </div> <div className="flex bg-[#0a0a0a] border-b border-white/5 p-2 gap-2 overflow-x-auto no-scrollbar shrink-0"> {['exam1', 'exam2', 'exam3', 'exam4', 'oral'].map((col, idx) => { const label = col === 'oral' ? 'SZL' : `${idx + 1}. YZ`; const isActive = activeExamSlot === (col === 'oral' ? 5 : idx + 1); return (<button key={col} onClick={() => setActiveExamSlot(col === 'oral' ? 5 : idx + 1)} className={`flex-1 h-12 flex flex-col items-center justify-center border transition-all ${isActive ? 'bg-[#fbbf24]/10 border-[#fbbf24] text-[#fbbf24]' : 'bg-black border-white/10 text-slate-500 hover:bg-white/5'}`} > <span className="text-[10px] font-normal uppercase">{label}</span> {isActive && <div className="w-1.5 h-1.5 bg-[#fbbf24] rounded-full mt-1 shadow-[0_0_10px_#fbbf24]"></div>} </button>); })} </div> <div className="flex-1 overflow-auto bg-grid-hatched p-4"> <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
 
                   {/* STUDENT LIST FILTERED */}
                   {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.name.toUpperCase().includes(gradeSearchTerm.toUpperCase()) || s.number.includes(gradeSearchTerm)).map(student => {
@@ -2001,11 +2001,11 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
                      return (<div key={student.id} className={`bg-[#1e293b] border p-2 flex items-center justify-between shadow-sm group hover:bg-slate-800 transition-all ${currentVal ? 'border-[#fbbf24]/40' : 'border-white/5'}`}> <div className="flex items-center gap-3 overflow-hidden">
                         {/* COMPACT NUMBER WITH GENDER INDICATOR */}
-                        <div className={`w-8 flex-shrink-0 text-right font-black text-[12px] border-r border-white/10 pr-2 leading-none flex flex-col items-end gap-0.5 ${student.gender === Gender.FEMALE ? 'text-pink-500' : 'text-blue-500'}`}>
+                        <div className={`w-8 flex-shrink-0 text-right font-normal text-[12px] border-r border-white/10 pr-2 leading-none flex flex-col items-end gap-0.5 ${student.gender === Gender.FEMALE ? 'text-pink-500' : 'text-blue-500'}`}>
                            <span>{student.number}</span>
                            <i className={`fa-solid ${student.gender === Gender.FEMALE ? 'fa-venus' : 'fa-mars'} text-[8px] opacity-60`}></i>
                         </div>
-                        <div className="min-w-0 flex-1"> <span className="text-[11px] font-bold text-white uppercase block truncate leading-tight" title={student.name}>{student.name}</span> <div className="flex items-center gap-2 mt-0.5"> <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest leading-none">ORT: {gradeRecord.average || '-'}</span>
+                        <div className="min-w-0 flex-1"> <span className="text-[11px] font-normal text-white uppercase block truncate leading-tight" title={student.name}>{student.name}</span> <div className="flex items-center gap-2 mt-0.5"> <span className="text-[8px] font-normal text-slate-500 uppercase tracking-widest leading-none">ORT: {gradeRecord.average || '-'}</span>
 
                            {currentMetadata && currentMetadata.proofUrl && (
                               <button
@@ -2021,10 +2021,10 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                <div className="h-16 bg-[#162431] border-t border-white/10 flex items-center justify-end px-6 shrink-0">
                   <div className="flex gap-3">
                      {/* CEVAP ANAHTARI BUTTON */}
-                     <button onClick={() => setIsAnswerKeyModalOpen(true)} className="px-6 h-10 bg-[#a855f7] text-white font-black text-[10px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 border border-white/10"> <i className="fa-solid fa-key"></i> CEVAP ANAHTARI </button>
+                     <button onClick={() => setIsAnswerKeyModalOpen(true)} className="px-6 h-10 bg-[#a855f7] text-white font-normal text-[10px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 border border-white/10"> <i className="fa-solid fa-key"></i> CEVAP ANAHTARI </button>
 
                      {/* SCANNER BUTTON (Trigger AI Camera) */}
-                     <button onClick={() => { setIsGradeScannerOpen(true); setCapturedImage(null); }} className="px-6 h-10 bg-[#3b82f6] text-white font-black text-[10px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 border border-white/10">
+                     <button onClick={() => { setIsGradeScannerOpen(true); setCapturedImage(null); }} className="px-6 h-10 bg-[#3b82f6] text-white font-normal text-[10px] uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 border border-white/10">
                         <i className="fa-solid fa-camera"></i> Tara
                      </button>
                   </div>
@@ -2038,11 +2038,11 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <div className="bg-[#0d141b] border-2 border-[#a855f7] w-full max-w-3xl h-[80vh] flex flex-col shadow-[0_0_100px_rgba(168,85,247,0.3)] animate-in zoom-in-95 duration-200 rounded-sm">
                      <div className="p-5 border-b border-white/10 flex justify-between items-center bg-[#162431] shrink-0">
                         <div>
-                           <h3 className="text-[14px] font-black text-white uppercase tracking-widest">OPTİK CEVAP ANAHTARI</h3>
+                           <h3 className="text-[14px] font-normal text-white uppercase tracking-widest">OPTİK CEVAP ANAHTARI</h3>
                            <div className="flex items-center gap-2 mt-2">
-                              <span className="text-[8px] font-black text-[#a855f7] uppercase tracking-[0.2em]">{gradeTerminalTarget.lessonName} | {activeExamSlot === 5 ? 'SÖZLÜ' : activeExamSlot + '. YAZILI'}</span>
-                              <span className="text-[8px] font-bold text-pink-500 flex items-center gap-1 border-l border-white/10 pl-2 ml-1"><i className="fa-solid fa-venus text-[7px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.FEMALE).length || 0}</span>
-                              <span className="text-[8px] font-bold text-blue-500 flex items-center gap-1"><i className="fa-solid fa-mars text-[7px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.MALE).length || 0}</span>
+                              <span className="text-[8px] font-normal text-[#a855f7] uppercase tracking-[0.2em]">{gradeTerminalTarget.lessonName} | {activeExamSlot === 5 ? 'SÖZLÜ' : activeExamSlot + '. YAZILI'}</span>
+                              <span className="text-[8px] font-normal text-pink-500 flex items-center gap-1 border-l border-white/10 pl-2 ml-1"><i className="fa-solid fa-venus text-[7px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.FEMALE).length || 0}</span>
+                              <span className="text-[8px] font-normal text-blue-500 flex items-center gap-1"><i className="fa-solid fa-mars text-[7px]"></i> {allClasses.find(c => c.id === gradeTerminalTarget.classId)?.students?.filter(s => s.gender === Gender.MALE).length || 0}</span>
                            </div>
                         </div>
                         <button onClick={() => setIsAnswerKeyModalOpen(false)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all"><i className="fa-solid fa-xmark text-lg"></i></button>
@@ -2050,13 +2050,13 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
                      <div className="p-2 bg-black/40 border-b border-white/5 flex flex-col gap-2 shrink-0">
                         <div className="flex items-center justify-between px-1 border-b border-white/5 pb-2">
-                           <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">SORU SAYISI SEÇİMİ:</span>
+                           <span className="text-[9px] font-normal text-slate-400 uppercase tracking-widest">SORU SAYISI SEÇİMİ:</span>
                            <div className="flex gap-1">
                               {[10, 20, 25, 30, 40, 50, 100].map(n => (
                                  <button
                                     key={n}
                                     onClick={() => setQuestionCount(n)}
-                                    className={`px-3 py-1 text-[9px] font-black border transition-all ${questionCount === n ? 'bg-[#a855f7] text-white border-[#a855f7]' : 'bg-[#0f172a] text-slate-500 border-white/10 hover:text-white'}`}
+                                    className={`px-3 py-1 text-[9px] font-normal border transition-all ${questionCount === n ? 'bg-[#a855f7] text-white border-[#a855f7]' : 'bg-[#0f172a] text-slate-500 border-white/10 hover:text-white'}`}
                                  >
                                     {n}
                                  </button>
@@ -2064,8 +2064,8 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                            </div>
                         </div>
                         <div className="flex gap-2">
-                           <button onClick={() => setActiveKeyGroup('A')} className={`flex-1 h-10 font-black text-[10px] uppercase tracking-widest border transition-all ${activeKeyGroup === 'A' ? 'bg-[#a855f7] text-white border-[#a855f7]' : 'bg-transparent text-slate-500 border-white/10 hover:text-white'}`}>A GRUBU KİTAPÇIĞI</button>
-                           <button onClick={() => setActiveKeyGroup('B')} className={`flex-1 h-10 font-black text-[10px] uppercase tracking-widest border transition-all ${activeKeyGroup === 'B' ? 'bg-[#a855f7] text-white border-[#a855f7]' : 'bg-transparent text-slate-500 border-white/10 hover:text-white'}`}>B GRUBU KİTAPÇIĞI</button>
+                           <button onClick={() => setActiveKeyGroup('A')} className={`flex-1 h-10 font-normal text-[10px] uppercase tracking-widest border transition-all ${activeKeyGroup === 'A' ? 'bg-[#a855f7] text-white border-[#a855f7]' : 'bg-transparent text-slate-500 border-white/10 hover:text-white'}`}>A GRUBU KİTAPÇIĞI</button>
+                           <button onClick={() => setActiveKeyGroup('B')} className={`flex-1 h-10 font-normal text-[10px] uppercase tracking-widest border transition-all ${activeKeyGroup === 'B' ? 'bg-[#a855f7] text-white border-[#a855f7]' : 'bg-transparent text-slate-500 border-white/10 hover:text-white'}`}>B GRUBU KİTAPÇIĞI</button>
                         </div>
                      </div>
 
@@ -2078,24 +2078,24 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
                               return (
                                  <div key={qIdx} className="bg-[#1e293b] border border-white/5 p-2 flex items-center justify-between shadow-sm hover:border-[#a855f7]/50 transition-all group">
-                                    <div className="w-8 h-8 bg-black/40 flex items-center justify-center font-black text-white border border-white/10 text-sm">{qIdx}</div>
+                                    <div className="w-8 h-8 bg-black/40 flex items-center justify-center font-normal text-white border border-white/10 text-sm">{qIdx}</div>
                                     <div className="flex gap-1">
                                        {['A', 'B', 'C', 'D', 'E'].map(opt => (
                                           <button
                                              key={opt}
                                              onClick={() => updateAnswerKey(qIdx, opt, existingKey.points)}
-                                             className={`w-7 h-7 text-[10px] font-black border transition-all ${existingKey.key === opt ? 'bg-[#a855f7] text-white border-[#a855f7] shadow-lg' : 'bg-transparent text-slate-500 border-white/10 hover:bg-white/5'}`}
+                                             className={`w-7 h-7 text-[10px] font-normal border transition-all ${existingKey.key === opt ? 'bg-[#a855f7] text-white border-[#a855f7] shadow-lg' : 'bg-transparent text-slate-500 border-white/10 hover:bg-white/5'}`}
                                           >{opt}</button>
                                        ))}
                                     </div>
                                     <div className="flex items-center gap-1">
                                        <input
                                           type="number"
-                                          className="w-10 h-7 bg-black/40 border border-white/10 text-center text-[11px] font-black text-[#fbbf24] outline-none focus:border-[#a855f7]"
+                                          className="w-10 h-7 bg-black/40 border border-white/10 text-center text-[11px] font-normal text-[#fbbf24] outline-none focus:border-[#a855f7]"
                                           value={existingKey.points}
                                           onChange={(e) => updateAnswerKey(qIdx, existingKey.key, parseInt(e.target.value) || 0)}
                                        />
-                                       <span className="text-[6px] font-bold text-slate-500 uppercase">PN</span>
+                                       <span className="text-[6px] font-normal text-slate-500 uppercase">PN</span>
                                     </div>
                                  </div>
                               );
@@ -2106,28 +2106,28 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                         <div className="flex items-center gap-3">
                            <div className="flex items-center gap-2">
                               <i className="fa-solid fa-circle-info text-[#a855f7]"></i>
-                              <span className="text-[9px] font-bold text-slate-400 uppercase">BU ANAHTAR AI TARAMALARINDA KULLANILACAK</span>
+                              <span className="text-[9px] font-normal text-slate-400 uppercase">BU ANAHTAR AI TARAMALARINDA KULLANILACAK</span>
                            </div>
-                           <button onClick={printOpticalForm} className="px-4 h-8 bg-[#3b82f6]/20 text-[#3b82f6] border border-[#3b82f6]/50 font-black text-[9px] uppercase tracking-widest hover:bg-[#3b82f6] hover:text-white transition-all flex items-center gap-2 rounded-sm ml-4">
+                           <button onClick={printOpticalForm} className="px-4 h-8 bg-[#3b82f6]/20 text-[#3b82f6] border border-[#3b82f6]/50 font-normal text-[9px] uppercase tracking-widest hover:bg-[#3b82f6] hover:text-white transition-all flex items-center gap-2 rounded-sm ml-4">
                               <i className="fa-solid fa-print"></i> ŞABLON İNDİR (A5)
                            </button>
                         </div>
-                        <button onClick={handleSaveAnswerKey} className="px-8 h-10 bg-white text-black font-black text-[10px] uppercase tracking-widest hover:brightness-90 transition-all">KAYDET VE KAPAT</button>
+                        <button onClick={handleSaveAnswerKey} className="px-8 h-10 bg-white text-black font-normal text-[10px] uppercase tracking-widest hover:brightness-90 transition-all">KAYDET VE KAPAT</button>
                      </div>
                   </div>
                </div>
             )
          }
 
-         {isGradeScannerOpen && (<div className="fixed inset-0 z-[9999] flex flex-col bg-black animate-in slide-in-from-bottom-10"> <div className="absolute top-6 right-6 z-50"> <button onClick={() => setIsGradeScannerOpen(false)} className="w-12 h-12 bg-black/50 text-white rounded-full flex items-center justify-center border-2 border-white/20 hover:bg-red-600 transition-all"><i className="fa-solid fa-xmark text-xl"></i></button> </div> <div className="flex-1 relative"> {!capturedImage ? (<> <video ref={gradeVideoRef} autoPlay playsInline className="w-full h-full object-cover" /> <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"> <div className="w-[85%] aspect-[3/4] border-4 border-[#fbbf24] shadow-[0_0_100px_rgba(251,191,36,0.3)] relative"> <div className="absolute top-0 left-0 w-12 h-12 border-t-8 border-l-8 border-[#fbbf24] -mt-2 -ml-2"></div> <div className="absolute top-0 right-0 w-12 h-12 border-t-8 border-r-8 border-[#fbbf24] -mt-2 -mr-2"></div> <div className="absolute bottom-0 left-0 w-12 h-12 border-b-8 border-l-8 border-[#fbbf24] -mb-2 -ml-2"></div> <div className="absolute bottom-0 right-0 w-12 h-12 border-b-8 border-r-8 border-[#fbbf24] -mb-2 -mr-2"></div> <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500/50"></div> </div> <p className="mt-8 text-[14px] font-black text-white bg-black/60 px-6 py-3 uppercase tracking-[0.2em] border border-white/20 backdrop-blur-md">OPTİK FORMU ÇERÇEVEYE ALIN</p> </div> <div className="absolute bottom-12 left-0 right-0 flex justify-center pointer-events-auto"> <button onClick={() => { if (gradeVideoRef.current) { const canvas = document.createElement('canvas'); canvas.width = gradeVideoRef.current.videoWidth; canvas.height = gradeVideoRef.current.videoHeight; canvas.getContext('2d')?.drawImage(gradeVideoRef.current, 0, 0); const img = canvas.toDataURL('image/jpeg'); setCapturedImage(img); processGradeScan(img); } }} className="w-24 h-24 bg-white rounded-full border-4 border-[#fbbf24] shadow-[0_0_60px_rgba(251,191,36,0.6)] flex items-center justify-center active:scale-90 transition-all group"> <div className="w-20 h-20 bg-[#fbbf24] rounded-full group-hover:scale-90 transition-transform"></div> </button> </div> </>) : (<div className="w-full h-full flex flex-col items-center justify-center bg-grid-hatched"> {isAnalyzing ? (<div className="flex flex-col items-center"> <div className="relative mb-10"> <div className="w-32 h-32 border-4 border-[#fbbf24] border-t-transparent rounded-full animate-spin shadow-[0_0_40px_rgba(251,191,36,0.3)]"></div> <div className="absolute inset-0 flex flex-col items-center justify-center"> <span className="text-3xl font-black text-white font-mono">{analysisTimer}</span> <span className="text-[10px] font-bold text-[#fbbf24] uppercase tracking-widest">SN</span> </div> </div> <h3 className="text-2xl font-black text-white uppercase tracking-[0.3em] animate-pulse">DNA ANALİZİ YAPILIYOR...</h3> <div className="mt-6 space-y-2 text-center"> {analysisLogs.map((log, i) => <p key={i} className="text-[12px] font-mono text-[#fbbf24] uppercase tracking-widest">{log}</p>)} </div> </div>) : scanPreview ? (<div className="bg-[#1e293b] border-2 border-[#fbbf24] p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 text-center relative overflow-hidden"> <div className="absolute top-0 left-0 w-full h-2 bg-[#fbbf24] shadow-[0_0_20px_#fbbf24]"></div> <div className="mb-6"> <div className="w-20 h-20 bg-[#fbbf24] text-black rounded-full flex items-center justify-center text-3xl font-black mx-auto mb-4 shadow-lg"> {scanPreview.score} </div> <h2 className="text-2xl font-black text-white uppercase tracking-tight">{scanPreview.studentName}</h2> <p className="text-[12px] font-bold text-slate-400 uppercase tracking-widest mt-1">NO: {scanPreview.studentNumber}</p> </div> <div className="grid grid-cols-3 gap-2 mb-8"> <div className="bg-green-900/30 border border-green-500/30 p-2"><span className="block text-2xl font-black text-green-500">{scanPreview.corrects}</span><span className="text-[8px] font-bold text-slate-400 uppercase">DOĞRU</span></div> <div className="bg-red-900/30 border border-red-500/30 p-2"><span className="block text-2xl font-black text-red-500">{scanPreview.wrongs}</span><span className="text-[8px] font-bold text-slate-400 uppercase">YANLIŞ</span></div> <div className="bg-slate-800/50 border border-white/10 p-2"><span className="block text-2xl font-black text-white">{scanPreview.empties}</span><span className="text-[8px] font-bold text-slate-400 uppercase">BOŞ</span></div> </div> <div className="flex gap-4"> <button onClick={() => { setCapturedImage(null); setScanPreview(null); }} className="flex-1 h-14 border border-slate-500 text-slate-400 font-black text-[11px] uppercase tracking-widest hover:text-white hover:border-white transition-all">REDDET</button> <button onClick={handleApplyScanResult} className="flex-1 h-14 bg-[#fbbf24] text-black font-black text-[11px] uppercase tracking-widest shadow-xl hover:brightness-110 active:scale-95 transition-all">NOTU İŞLE</button> </div> </div>) : (<div className="text-center"> <h3 className="text-xl font-black text-red-500 uppercase tracking-widest mb-4">TARAMA BAŞARISIZ</h3> <button onClick={() => setCapturedImage(null)} className="px-8 h-12 bg-white text-black font-black text-[12px] uppercase tracking-widest hover:bg-slate-200">TEKRAR DENE</button> </div>)} </div>)} </div> </div>)}
+         {isGradeScannerOpen && (<div className="fixed inset-0 z-[9999] flex flex-col bg-black animate-in slide-in-from-bottom-10"> <div className="absolute top-6 right-6 z-50"> <button onClick={() => setIsGradeScannerOpen(false)} className="w-12 h-12 bg-black/50 text-white rounded-full flex items-center justify-center border-2 border-white/20 hover:bg-red-600 transition-all"><i className="fa-solid fa-xmark text-xl"></i></button> </div> <div className="flex-1 relative"> {!capturedImage ? (<> <video ref={gradeVideoRef} autoPlay playsInline className="w-full h-full object-cover" /> <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"> <div className="w-[85%] aspect-[3/4] border-4 border-[#fbbf24] shadow-[0_0_100px_rgba(251,191,36,0.3)] relative"> <div className="absolute top-0 left-0 w-12 h-12 border-t-8 border-l-8 border-[#fbbf24] -mt-2 -ml-2"></div> <div className="absolute top-0 right-0 w-12 h-12 border-t-8 border-r-8 border-[#fbbf24] -mt-2 -mr-2"></div> <div className="absolute bottom-0 left-0 w-12 h-12 border-b-8 border-l-8 border-[#fbbf24] -mb-2 -ml-2"></div> <div className="absolute bottom-0 right-0 w-12 h-12 border-b-8 border-r-8 border-[#fbbf24] -mb-2 -mr-2"></div> <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500/50"></div> </div> <p className="mt-8 text-[14px] font-normal text-white bg-black/60 px-6 py-3 uppercase tracking-[0.2em] border border-white/20 backdrop-blur-md">OPTİK FORMU ÇERÇEVEYE ALIN</p> </div> <div className="absolute bottom-12 left-0 right-0 flex justify-center pointer-events-auto"> <button onClick={() => { if (gradeVideoRef.current) { const canvas = document.createElement('canvas'); canvas.width = gradeVideoRef.current.videoWidth; canvas.height = gradeVideoRef.current.videoHeight; canvas.getContext('2d')?.drawImage(gradeVideoRef.current, 0, 0); const img = canvas.toDataURL('image/jpeg'); setCapturedImage(img); processGradeScan(img); } }} className="w-24 h-24 bg-white rounded-full border-4 border-[#fbbf24] shadow-[0_0_60px_rgba(251,191,36,0.6)] flex items-center justify-center active:scale-90 transition-all group"> <div className="w-20 h-20 bg-[#fbbf24] rounded-full group-hover:scale-90 transition-transform"></div> </button> </div> </>) : (<div className="w-full h-full flex flex-col items-center justify-center bg-grid-hatched"> {isAnalyzing ? (<div className="flex flex-col items-center"> <div className="relative mb-10"> <div className="w-32 h-32 border-4 border-[#fbbf24] border-t-transparent rounded-full animate-spin shadow-[0_0_40px_rgba(251,191,36,0.3)]"></div> <div className="absolute inset-0 flex flex-col items-center justify-center"> <span className="text-3xl font-normal text-white font-mono">{analysisTimer}</span> <span className="text-[10px] font-normal text-[#fbbf24] uppercase tracking-widest">SN</span> </div> </div> <h3 className="text-2xl font-normal text-white uppercase tracking-[0.3em] animate-pulse">DNA ANALİZİ YAPILIYOR...</h3> <div className="mt-6 space-y-2 text-center"> {analysisLogs.map((log, i) => <p key={i} className="text-[12px] font-mono text-[#fbbf24] uppercase tracking-widest">{log}</p>)} </div> </div>) : scanPreview ? (<div className="bg-[#1e293b] border-2 border-[#fbbf24] p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 text-center relative overflow-hidden"> <div className="absolute top-0 left-0 w-full h-2 bg-[#fbbf24] shadow-[0_0_20px_#fbbf24]"></div> <div className="mb-6"> <div className="w-20 h-20 bg-[#fbbf24] text-black rounded-full flex items-center justify-center text-3xl font-normal mx-auto mb-4 shadow-lg"> {scanPreview.score} </div> <h2 className="text-2xl font-normal text-white uppercase tracking-tight">{scanPreview.studentName}</h2> <p className="text-[12px] font-normal text-slate-400 uppercase tracking-widest mt-1">NO: {scanPreview.studentNumber}</p> </div> <div className="grid grid-cols-3 gap-2 mb-8"> <div className="bg-green-900/30 border border-green-500/30 p-2"><span className="block text-2xl font-normal text-green-500">{scanPreview.corrects}</span><span className="text-[8px] font-normal text-slate-400 uppercase">DOĞRU</span></div> <div className="bg-red-900/30 border border-red-500/30 p-2"><span className="block text-2xl font-normal text-red-500">{scanPreview.wrongs}</span><span className="text-[8px] font-normal text-slate-400 uppercase">YANLIŞ</span></div> <div className="bg-slate-800/50 border border-white/10 p-2"><span className="block text-2xl font-normal text-white">{scanPreview.empties}</span><span className="text-[8px] font-normal text-slate-400 uppercase">BOŞ</span></div> </div> <div className="flex gap-4"> <button onClick={() => { setCapturedImage(null); setScanPreview(null); }} className="flex-1 h-14 border border-slate-500 text-slate-400 font-normal text-[11px] uppercase tracking-widest hover:text-white hover:border-white transition-all">REDDET</button> <button onClick={handleApplyScanResult} className="flex-1 h-14 bg-[#fbbf24] text-black font-normal text-[11px] uppercase tracking-widest shadow-xl hover:brightness-110 active:scale-95 transition-all">NOTU İŞLE</button> </div> </div>) : (<div className="text-center"> <h3 className="text-xl font-normal text-red-500 uppercase tracking-widest mb-4">TARAMA BAŞARISIZ</h3> <button onClick={() => setCapturedImage(null)} className="px-8 h-12 bg-white text-black font-normal text-[12px] uppercase tracking-widest hover:bg-slate-200">TEKRAR DENE</button> </div>)} </div>)} </div> </div>)}
 
          {/* PROOF IMAGE VIEWER */}
          {
             proofImageToView && (
                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 p-4" onClick={() => setProofImageToView(null)}>
                   <img src={proofImageToView} className="max-w-full max-h-full border-2 border-[#fbbf24] shadow-[0_0_50px_rgba(251,191,36,0.2)] rounded-sm" />
-                  <div className="absolute top-4 right-4 bg-[#fbbf24] px-4 py-2 text-black font-black text-[12px] uppercase tracking-widest rounded-sm">SINAV KAĞIDI KANITI</div>
-                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-black/80 px-6 py-3 rounded-full text-white font-bold uppercase tracking-widest border border-white/20">KAPATMAK İÇİN TIKLAYIN</div>
+                  <div className="absolute top-4 right-4 bg-[#fbbf24] px-4 py-2 text-black font-normal text-[12px] uppercase tracking-widest rounded-sm">SINAV KAĞIDI KANITI</div>
+                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-black/80 px-6 py-3 rounded-full text-white font-normal uppercase tracking-widest border border-white/20">KAPATMAK İÇİN TIKLAYIN</div>
                </div>
             )
          }
@@ -2142,10 +2142,10 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                      {/* HEADER */}
                      <div className="p-5 border-b border-white/10 flex justify-between items-center bg-[#162431] shrink-0">
                         <div>
-                           <h3 className="text-[16px] font-black text-white uppercase tracking-widest">{viewingStudentAttendance.name}</h3>
+                           <h3 className="text-[16px] font-normal text-white uppercase tracking-widest">{viewingStudentAttendance.name}</h3>
                            <div className="flex items-center gap-2 mt-1">
-                              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{viewingStudentAttendance.number}</span>
-                              <span className={`text-[9px] font-black px-1.5 py-0.5 rounded-sm ${viewingStudentAttendance.gender === Gender.FEMALE ? 'bg-pink-500/20 text-pink-500' : 'bg-blue-500/20 text-blue-500'}`}>
+                              <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">{viewingStudentAttendance.number}</span>
+                              <span className={`text-[9px] font-normal px-1.5 py-0.5 rounded-sm ${viewingStudentAttendance.gender === Gender.FEMALE ? 'bg-pink-500/20 text-pink-500' : 'bg-blue-500/20 text-blue-500'}`}>
                                  {viewingStudentAttendance.gender === Gender.FEMALE ? 'KIZ ÖĞRENCİ' : 'ERKEK ÖĞRENCİ'}
                               </span>
                            </div>
@@ -2155,9 +2155,9 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
                      {/* TABS */}
                      <div className="flex border-b border-white/10 shrink-0">
-                        <button onClick={() => setStudentModalTab('ATTENDANCE')} className={`flex-1 h-12 text-[10px] font-black uppercase tracking-widest border-b-2 transition-all ${studentModalTab === 'ATTENDANCE' ? 'border-[#3b82f6] text-white bg-[#3b82f6]/10' : 'border-transparent text-slate-500 hover:text-white hover:bg-white/5'}`}>DEVAMSIZLIK</button>
-                        <button onClick={() => setStudentModalTab('GRADES')} className={`flex-1 h-12 text-[10px] font-black uppercase tracking-widest border-b-2 transition-all ${studentModalTab === 'GRADES' ? 'border-[#3b82f6] text-white bg-[#3b82f6]/10' : 'border-transparent text-slate-500 hover:text-white hover:bg-white/5'}`}>NOTLAR</button>
-                        <button onClick={() => setStudentModalTab('OBSERVATIONS')} className={`flex-1 h-12 text-[10px] font-black uppercase tracking-widest border-b-2 transition-all ${studentModalTab === 'OBSERVATIONS' ? 'border-[#a855f7] text-white bg-[#a855f7]/10' : 'border-transparent text-slate-500 hover:text-white hover:bg-white/5'}`}>KANAAT & GÖZLEM</button>
+                        <button onClick={() => setStudentModalTab('ATTENDANCE')} className={`flex-1 h-12 text-[10px] font-normal uppercase tracking-widest border-b-2 transition-all ${studentModalTab === 'ATTENDANCE' ? 'border-[#3b82f6] text-white bg-[#3b82f6]/10' : 'border-transparent text-slate-500 hover:text-white hover:bg-white/5'}`}>DEVAMSIZLIK</button>
+                        <button onClick={() => setStudentModalTab('GRADES')} className={`flex-1 h-12 text-[10px] font-normal uppercase tracking-widest border-b-2 transition-all ${studentModalTab === 'GRADES' ? 'border-[#3b82f6] text-white bg-[#3b82f6]/10' : 'border-transparent text-slate-500 hover:text-white hover:bg-white/5'}`}>NOTLAR</button>
+                        <button onClick={() => setStudentModalTab('OBSERVATIONS')} className={`flex-1 h-12 text-[10px] font-normal uppercase tracking-widest border-b-2 transition-all ${studentModalTab === 'OBSERVATIONS' ? 'border-[#a855f7] text-white bg-[#a855f7]/10' : 'border-transparent text-slate-500 hover:text-white hover:bg-white/5'}`}>KANAAT & GÖZLEM</button>
                      </div>
 
                      {/* CONTENT */}
@@ -2172,22 +2172,22 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
          }
 
          {/* ... Branch Picker ... */}
-         {isBranchPickerOpen && (<div className="fixed inset-0 z-[8500] flex items-center justify-center bg-black/95 backdrop-blur-md px-4 py-4"> <div className="bg-[#0d141b] border-2 border-[#fbbf24] p-6 max-md w-full shadow-2xl flex flex-col h-[70vh] rounded-sm bg-grid-hatched"> <div className="flex justify-between items-center mb-6 shrink-0 relative z-20"> <div><h3 className="text-[13px] font-black text-white uppercase tracking-widest">BRANŞ_KATALOĞU</h3></div> <button onClick={() => setIsBranchPickerOpen(false)} className="w-12 h-12 border border-white/10 text-white transition-all bg-black/20 flex items-center justify-center rounded-sm"><i className="fa-solid fa-xmark text-xl"></i></button> </div> <input placeholder="BRANŞ ARA..." className="w-full bg-black border border-white/10 p-3 text-[12px] font-black text-white uppercase mb-4 outline-none focus:border-[#fbbf24] shrink-0" value={branchSearchTerm} onChange={e => setBranchSearchTerm(e.target.value)} /> <div className="flex-1 overflow-y-auto no-scrollbar grid grid-cols-2 gap-2 p-1"> {filteredBranches.map(b => { const isSelected = teacherData.branchShorts.includes(b.code); return (<button key={b.code} onClick={() => toggleBranchSelection(b.code)} className={`p-4 border transition-all text-left flex items-center justify-between group ${isSelected ? 'bg-[#fbbf24] border-[#fbbf24] text-black shadow-lg' : 'bg-[#162431] border-white/5 text-slate-400 hover:border-[#fbbf24]/40 hover:text-white'}`}><div className="flex flex-col"><span className="text-[12px] font-black uppercase">{b.name}</span><span className={`text-[7px] font-bold uppercase ${isSelected ? 'text-black/60' : 'text-slate-600'}`}>{b.code}</span></div>{isSelected && <i className="fa-solid fa-check"></i>}</button>); })} </div> <button onClick={() => setIsBranchPickerOpen(false)} className="w-full h-14 bg-[#fbbf24] text-black font-black text-[11px] uppercase tracking-widest mt-6 shadow-xl active:scale-0.95 transition-all border border-white/10 shrink-0">SEÇİMİ_TAMAMLA</button> </div> </div>)}
+         {isBranchPickerOpen && (<div className="fixed inset-0 z-[8500] flex items-center justify-center bg-black/95 backdrop-blur-md px-4 py-4"> <div className="bg-[#0d141b] border-2 border-[#fbbf24] p-6 max-md w-full shadow-2xl flex flex-col h-[70vh] rounded-sm bg-grid-hatched"> <div className="flex justify-between items-center mb-6 shrink-0 relative z-20"> <div><h3 className="text-[13px] font-normal text-white uppercase tracking-widest">BRANŞ_KATALOĞU</h3></div> <button onClick={() => setIsBranchPickerOpen(false)} className="w-12 h-12 border border-white/10 text-white transition-all bg-black/20 flex items-center justify-center rounded-sm"><i className="fa-solid fa-xmark text-xl"></i></button> </div> <input placeholder="BRANŞ ARA..." className="w-full bg-black border border-white/10 p-3 text-[12px] font-normal text-white uppercase mb-4 outline-none focus:border-[#fbbf24] shrink-0" value={branchSearchTerm} onChange={e => setBranchSearchTerm(e.target.value)} /> <div className="flex-1 overflow-y-auto no-scrollbar grid grid-cols-2 gap-2 p-1"> {filteredBranches.map(b => { const isSelected = teacherData.branchShorts.includes(b.code); return (<button key={b.code} onClick={() => toggleBranchSelection(b.code)} className={`p-4 border transition-all text-left flex items-center justify-between group ${isSelected ? 'bg-[#fbbf24] border-[#fbbf24] text-black shadow-lg' : 'bg-[#162431] border-white/5 text-slate-400 hover:border-[#fbbf24]/40 hover:text-white'}`}><div className="flex flex-col"><span className="text-[12px] font-normal uppercase">{b.name}</span><span className={`text-[7px] font-normal uppercase ${isSelected ? 'text-black/60' : 'text-slate-600'}`}>{b.code}</span></div>{isSelected && <i className="fa-solid fa-check"></i>}</button>); })} </div> <button onClick={() => setIsBranchPickerOpen(false)} className="w-full h-14 bg-[#fbbf24] text-black font-normal text-[11px] uppercase tracking-widest mt-6 shadow-xl active:scale-0.95 transition-all border border-white/10 shrink-0">SEÇİMİ_TAMAMLA</button> </div> </div>)}
 
          {/* QR CODE MODAL */}
          {
             isQRModalOpen && (
                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-md px-4">
                   <div className="bg-white p-6 max-w-sm w-full shadow-2xl animate-in zoom-in-95 rounded-sm flex flex-col items-center">
-                     <h3 className="text-xl font-black text-black uppercase tracking-widest mb-2 text-center">{qrTeacherName}</h3>
-                     <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-6">HIZLI GİRİŞ QR KODU</p>
+                     <h3 className="text-xl font-normal text-black uppercase tracking-widest mb-2 text-center">{qrTeacherName}</h3>
+                     <p className="text-[10px] font-normal text-slate-500 uppercase tracking-widest mb-6">HIZLI GİRİŞ QR KODU</p>
 
                      <div className="p-4 border-4 border-black mb-6">
                         <QRCodeCanvas value={qrData} size={200} />
                      </div>
 
                      <div className="w-full space-y-3">
-                        <p className="text-[9px] text-center text-slate-400 font-bold uppercase mb-2 px-4">
+                        <p className="text-[9px] text-center text-slate-400 font-normal uppercase mb-2 px-4">
                            BU QR KOD İLE İLK GİRİŞ YAPILDIĞINDA ŞİFRE DEĞİŞİKLİĞİ ZORUNLUDUR.
                         </p>
 
@@ -2195,13 +2195,13 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                            href={`https://wa.me/?text=${encodeURIComponent(`🎓 SENKRON GİRİŞ LİNKİ\n\nSayın ${qrTeacherName},\n\nAşağıdaki linke tıklayarak sisteme giriş yapabilirsiniz:\n${qrData}\n\n⚠️ İlk girişinizde şifrenizi değiştirmeniz gerekmektedir.`)}`}
                            target="_blank"
                            rel="noopener noreferrer"
-                           className="w-full h-12 bg-[#25D366] text-white font-black text-[11px] uppercase tracking-widest shadow-xl flex items-center justify-center gap-3 hover:brightness-110 active:scale-95 transition-all rounded-sm"
+                           className="w-full h-12 bg-[#25D366] text-white font-normal text-[11px] uppercase tracking-widest shadow-xl flex items-center justify-center gap-3 hover:brightness-110 active:scale-95 transition-all rounded-sm"
                         >
                            <i className="fa-brands fa-whatsapp text-lg"></i>
                            WHATSAPP İLE PAYLAŞ
                         </a>
 
-                        <button onClick={() => setIsQRModalOpen(false)} className="w-full h-12 bg-black text-white font-black text-[11px] uppercase tracking-widest hover:bg-[#3b82f6] transition-all shadow-xl rounded-sm">
+                        <button onClick={() => setIsQRModalOpen(false)} className="w-full h-12 bg-black text-white font-normal text-[11px] uppercase tracking-widest hover:bg-[#3b82f6] transition-all shadow-xl rounded-sm">
                            KAPAT
                         </button>
                      </div>
@@ -2216,18 +2216,18 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <div className="bg-[#0d141b] border-t-4 border-[#3b82f6] p-6 max-md w-full shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col rounded-sm bg-grid-hatched">
                      <div className="flex justify-between items-center mb-8 shrink-0">
                         <div>
-                           <h3 className="text-[14px] font-black text-white uppercase tracking-widest leading-none">{drawerMode === 'ADD' ? 'YENİ_KADRO_KAYDI' : 'KADRO_GÜNCELLEME'}</h3>
-                           <span className="text-[8px] font-black text-[#3b82f6] uppercase tracking-[0.4em] mt-2 block">PERSONEL_DNA_GİRİŞİ</span>
+                           <h3 className="text-[14px] font-normal text-white uppercase tracking-widest leading-none">{drawerMode === 'ADD' ? 'YENİ_KADRO_KAYDI' : 'KADRO_GÜNCELLEME'}</h3>
+                           <span className="text-[8px] font-normal text-[#3b82f6] uppercase tracking-[0.4em] mt-2 block">PERSONEL_DNA_GİRİŞİ</span>
                         </div>
                         <button onClick={() => setIsDrawerOpen(false)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all active:scale-90"><i className="fa-solid fa-xmark text-lg"></i></button>
                      </div>
 
                      <div className="space-y-6">
                         <div className="space-y-1.5">
-                           <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">AD SOYAD</label>
+                           <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">AD SOYAD</label>
                            <input
                               autoFocus
-                              className="w-full bg-black border border-white/10 p-3 text-[13px] font-black text-white uppercase outline-none focus:border-[#3b82f6] shadow-inner"
+                              className="w-full bg-black border border-white/10 p-3 text-[13px] font-normal text-white uppercase outline-none focus:border-[#3b82f6] shadow-inner"
                               value={teacherData.name}
                               onFocus={handleInputFocus}
                               onChange={e => setTeacherData({ ...teacherData, name: e.target.value.toUpperCase() })}
@@ -2235,15 +2235,15 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                         </div>
 
                         <div className="space-y-1.5">
-                           <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">BRANŞLAR (ÇOKLU SEÇİM)</label>
+                           <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">BRANŞLAR (ÇOKLU SEÇİM)</label>
                            <button
                               onClick={() => setIsBranchPickerOpen(true)}
                               className="w-full bg-black border border-white/10 p-3 text-left flex items-center justify-between group hover:border-[#3b82f6] transition-all"
                            >
                               <div className="flex gap-1 overflow-x-auto no-scrollbar">
                                  {teacherData.branchShorts.length > 0 ? teacherData.branchShorts.map(b => (
-                                    <span key={b} className="text-[9px] font-black text-[#fbbf24] bg-[#fbbf24]/10 px-2 py-0.5 border border-[#fbbf24]/20 rounded-sm">{standardizeBranchCode(b)}</span>
-                                 )) : <span className="text-[11px] font-bold text-slate-600">BRANŞ SEÇİNİZ...</span>}
+                                    <span key={b} className="text-[9px] font-normal text-[#fbbf24] bg-[#fbbf24]/10 px-2 py-0.5 border border-[#fbbf24]/20 rounded-sm">{standardizeBranchCode(b)}</span>
+                                 )) : <span className="text-[11px] font-normal text-slate-600">BRANŞ SEÇİNİZ...</span>}
                               </div>
                               <i className="fa-solid fa-chevron-right text-slate-600 group-hover:text-[#3b82f6]"></i>
                            </button>
@@ -2251,24 +2251,24 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
 
                         <div className="grid grid-cols-2 gap-4">
                            <div className="space-y-1.5">
-                              <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">DERS YÜKÜ (KOTA)</label>
+                              <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">DERS YÜKÜ (KOTA)</label>
                               <div className="flex items-center gap-2 bg-black border border-white/10 p-1">
                                  <button onClick={() => setTeacherData(p => ({ ...p, lessonCount: Math.max(0, p.lessonCount - 1) }))} className="w-10 h-10 flex items-center justify-center text-red-500 hover:bg-white/5"><i className="fa-solid fa-minus"></i></button>
-                                 <span className="flex-1 text-center text-xl font-black text-white">{teacherData.lessonCount}</span>
+                                 <span className="flex-1 text-center text-xl font-normal text-white">{teacherData.lessonCount}</span>
                                  <button onClick={() => setTeacherData(p => ({ ...p, lessonCount: p.lessonCount + 1 }))} className="w-10 h-10 flex items-center justify-center text-green-500 hover:bg-white/5"><i className="fa-solid fa-plus"></i></button>
                               </div>
                            </div>
                            <div className="space-y-1.5">
-                              <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">TERCİH EDİLEN VARDİYA</label>
+                              <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">TERCİH EDİLEN VARDİYA</label>
                               <div className="flex gap-1">
-                                 <button onClick={() => setTeacherData(p => ({ ...p, shift: ShiftType.SABAH }))} className={`flex-1 h-12 border text-[9px] font-black uppercase transition-all ${teacherData.shift === ShiftType.SABAH ? 'bg-[#3b82f6] border-[#3b82f6] text-white shadow-lg' : 'bg-black border-white/10 text-slate-600'}`}>SABAH</button>
-                                 <button onClick={() => setTeacherData(p => ({ ...p, shift: ShiftType.OGLE }))} className={`flex-1 h-12 border text-[9px] font-black uppercase transition-all ${teacherData.shift === ShiftType.OGLE ? 'bg-[#fcd34d] border-[#fcd34d] text-black shadow-lg' : 'bg-black border-white/10 text-slate-600'}`}>ÖĞLE</button>
+                                 <button onClick={() => setTeacherData(p => ({ ...p, shift: ShiftType.SABAH }))} className={`flex-1 h-12 border text-[9px] font-normal uppercase transition-all ${teacherData.shift === ShiftType.SABAH ? 'bg-[#3b82f6] border-[#3b82f6] text-white shadow-lg' : 'bg-black border-white/10 text-slate-600'}`}>SABAH</button>
+                                 <button onClick={() => setTeacherData(p => ({ ...p, shift: ShiftType.OGLE }))} className={`flex-1 h-12 border text-[9px] font-normal uppercase transition-all ${teacherData.shift === ShiftType.OGLE ? 'bg-[#fcd34d] border-[#fcd34d] text-black shadow-lg' : 'bg-black border-white/10 text-slate-600'}`}>ÖĞLE</button>
                               </div>
                            </div>
                         </div>
 
                         <div className="space-y-1.5">
-                           <label className="text-[7px] font-black text-slate-500 uppercase tracking-widest ml-1">CİNSİYET</label>
+                           <label className="text-[7px] font-normal text-slate-500 uppercase tracking-widest ml-1">CİNSİYET</label>
                            <div className="flex gap-2">
                               <button onClick={() => setTeacherData(p => ({ ...p, gender: Gender.MALE }))} className={`flex-1 h-10 border flex items-center justify-center gap-2 transition-all ${teacherData.gender === Gender.MALE ? 'bg-slate-700 border-slate-500 text-white' : 'bg-black border-white/10 text-slate-600'}`}><i className="fa-solid fa-mars"></i> ERKEK</button>
                               <button onClick={() => setTeacherData(p => ({ ...p, gender: Gender.FEMALE }))} className={`flex-1 h-10 border flex items-center justify-center gap-2 transition-all ${teacherData.gender === Gender.FEMALE ? 'bg-pink-600 border-pink-500 text-white' : 'bg-black border-white/10 text-slate-600'}`}><i className="fa-solid fa-venus"></i> KADIN</button>
@@ -2276,17 +2276,17 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                         </div>
 
                         <div className="p-3 bg-black/20 border border-white/5 space-y-2">
-                           <span className="text-[8px] font-black text-[#3b82f6] uppercase tracking-widest block border-b border-white/5 pb-1">SİSTEM GİRİŞ BİLGİLERİ</span>
+                           <span className="text-[8px] font-normal text-[#3b82f6] uppercase tracking-widest block border-b border-white/5 pb-1">SİSTEM GİRİŞ BİLGİLERİ</span>
                            <div className="grid grid-cols-2 gap-2">
-                              <input placeholder="KULLANICI ADI" className="bg-black border border-white/10 p-2 text-[10px] font-bold text-white outline-none focus:border-[#3b82f6]" value={teacherData.username} onChange={e => setTeacherData({ ...teacherData, username: e.target.value })} />
-                              <input placeholder="ŞİFRE" className="bg-black border border-white/10 p-2 text-[10px] font-bold text-[#fbbf24] outline-none focus:border-[#3b82f6]" value={teacherData.password} onChange={e => setTeacherData({ ...teacherData, password: e.target.value })} />
+                              <input placeholder="KULLANICI ADI" className="bg-black border border-white/10 p-2 text-[10px] font-normal text-white outline-none focus:border-[#3b82f6]" value={teacherData.username} onChange={e => setTeacherData({ ...teacherData, username: e.target.value })} />
+                              <input placeholder="ŞİFRE" className="bg-black border border-white/10 p-2 text-[10px] font-normal text-[#fbbf24] outline-none focus:border-[#3b82f6]" value={teacherData.password} onChange={e => setTeacherData({ ...teacherData, password: e.target.value })} />
                            </div>
                         </div>
 
                         <button
                            onClick={handleSaveTeacher}
                            disabled={!teacherData.name || teacherData.branchShorts.length === 0}
-                           className="w-full h-14 bg-[#3b82f6] text-white font-black text-[12px] uppercase tracking-[0.4em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-20 disabled:grayscale"
+                           className="w-full h-14 bg-[#3b82f6] text-white font-normal text-[12px] uppercase tracking-[0.4em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-20 disabled:grayscale"
                         >
                            {drawerMode === 'ADD' ? 'DNAYI_KAYDET' : 'GÜNCELLEMEYİ_MÜHÜRLLE'}
                         </button>
@@ -2300,14 +2300,14 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
             teacherToDelete && (
                <div className="fixed inset-0 z-[9000] flex items-center justify-center bg-black/95 backdrop-blur-md px-4">
                   <div className="bg-[#0d141b] border-2 border-red-600 p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 rounded-sm">
-                     <h3 className="text-[14px] font-black text-white uppercase tracking-widest mb-4">PERSONEL_SİLME_ONAYI</h3>
-                     <p className="text-[11px] font-bold text-slate-400 uppercase leading-relaxed mb-8">
+                     <h3 className="text-[14px] font-normal text-white uppercase tracking-widest mb-4">PERSONEL_SİLME_ONAYI</h3>
+                     <p className="text-[11px] font-normal text-slate-400 uppercase leading-relaxed mb-8">
                         BU PERSONEL VE İLGİLİ DERS PROGRAMI KAYITLARI SİLİNECEKTİR: <br />
-                        <span className="text-red-500 text-lg block mt-2 font-black">{teacherToDelete.name}</span>
+                        <span className="text-red-500 text-lg block mt-2 font-normal">{teacherToDelete.name}</span>
                      </p>
                      <div className="flex gap-4">
-                        <button onClick={() => setTeacherToDelete(null)} className="flex-1 h-12 border border-[#64748b] text-[#f1f5f9] font-black text-[10px] uppercase hover:bg-white/5 transition-all">İPTAL</button>
-                        <button onClick={executeDeleteTeacher} className="flex-1 h-12 bg-red-600 text-white font-black text-[10px] uppercase shadow-xl hover:brightness-110 transition-all">EVET_SİL</button>
+                        <button onClick={() => setTeacherToDelete(null)} className="flex-1 h-12 border border-[#64748b] text-[#f1f5f9] font-normal text-[10px] uppercase hover:bg-white/5 transition-all">İPTAL</button>
+                        <button onClick={executeDeleteTeacher} className="flex-1 h-12 bg-red-600 text-white font-normal text-[10px] uppercase shadow-xl hover:brightness-110 transition-all">EVET_SİL</button>
                      </div>
                   </div>
                </div>
@@ -2321,21 +2321,21 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                   <div className="bg-[#0d141b] border-t-4 border-[#3b82f6] p-6 max-w-md w-full shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col rounded-sm">
                      <div className="flex justify-between items-center mb-6">
                         <div>
-                           <h3 className="text-[14px] font-black text-white uppercase tracking-widest">SINAV DÜZENLE</h3>
-                           <span className="text-[8px] font-black text-[#3b82f6] uppercase tracking-[0.4em] mt-2 block">{examToEdit.lessonName} | {examToEdit.className}</span>
+                           <h3 className="text-[14px] font-normal text-white uppercase tracking-widest">SINAV DÜZENLE</h3>
+                           <span className="text-[8px] font-normal text-[#3b82f6] uppercase tracking-[0.4em] mt-2 block">{examToEdit.lessonName} | {examToEdit.className}</span>
                         </div>
                         <button onClick={() => setIsEditExamModalOpen(false)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all"><i className="fa-solid fa-xmark text-lg"></i></button>
                      </div>
 
                      <div className="space-y-6">
                         <div className="space-y-2">
-                           <label className="text-[8px] font-black text-slate-500 uppercase tracking-widest block mb-2">SINAV NO</label>
+                           <label className="text-[8px] font-normal text-slate-500 uppercase tracking-widest block mb-2">SINAV NO</label>
                            <div className="grid grid-cols-4 gap-2">
                               {['exam1', 'exam2', 'exam3', 'exam4'].map((slot, idx) => (
                                  <button
                                     key={slot}
                                     onClick={() => setEditExamForm({ ...editExamForm, slot })}
-                                    className={`h-10 border text-[10px] font-black uppercase transition-all ${editExamForm.slot === slot ? 'bg-[#3b82f6] text-white border-[#3b82f6] shadow-lg' : 'bg-black border-white/10 text-slate-500 hover:text-white'}`}
+                                    className={`h-10 border text-[10px] font-normal uppercase transition-all ${editExamForm.slot === slot ? 'bg-[#3b82f6] text-white border-[#3b82f6] shadow-lg' : 'bg-black border-white/10 text-slate-500 hover:text-white'}`}
                                  >
                                     {idx + 1}. YAZILI
                                  </button>
@@ -2344,10 +2344,10 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                         </div>
 
                         <div className="space-y-1.5">
-                           <label className="text-[8px] font-black text-slate-500 uppercase tracking-widest ml-1">TARİH SEÇİNİZ</label>
+                           <label className="text-[8px] font-normal text-slate-500 uppercase tracking-widest ml-1">TARİH SEÇİNİZ</label>
                            <input
                               type="date"
-                              className="w-full bg-black border border-white/10 p-3 text-[12px] font-bold text-white outline-none focus:border-[#3b82f6] uppercase"
+                              className="w-full bg-black border border-white/10 p-3 text-[12px] font-normal text-white outline-none focus:border-[#3b82f6] uppercase"
                               value={editExamForm.date}
                               onChange={(e) => setEditExamForm({ ...editExamForm, date: e.target.value })}
                            />
@@ -2356,7 +2356,7 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                         <button
                            onClick={handleUpdateExam}
                            disabled={!editExamForm.date}
-                           className="w-full h-14 bg-[#3b82f6] text-white font-black text-[11px] uppercase tracking-[0.3em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-50 disabled:grayscale"
+                           className="w-full h-14 bg-[#3b82f6] text-white font-normal text-[11px] uppercase tracking-[0.3em] shadow-xl hover:brightness-110 active:scale-[0.98] transition-all border border-white/10 disabled:opacity-50 disabled:grayscale"
                         >
                            GÜNCELLEMEYİ KAYDET
                         </button>
@@ -2371,14 +2371,14 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
             examToDelete && (
                <div className="fixed inset-0 z-[9000] flex items-center justify-center bg-black/95 backdrop-blur-md px-4">
                   <div className="bg-[#0d141b] border-2 border-red-600 p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 rounded-sm">
-                     <h3 className="text-[14px] font-black text-white uppercase tracking-widest mb-4">SINAV_SİLME_ONAYI</h3>
-                     <p className="text-[11px] font-bold text-slate-400 uppercase leading-relaxed mb-8">
+                     <h3 className="text-[14px] font-normal text-white uppercase tracking-widest mb-4">SINAV_SİLME_ONAYI</h3>
+                     <p className="text-[11px] font-normal text-slate-400 uppercase leading-relaxed mb-8">
                         BU SINAV KAYDI SİSTEMDEN KALICI OLARAK SİLİNECEKTİR: <br />
-                        <span className="text-red-500 text-lg block mt-2 font-black">{examToDelete.lessonName} - {examToDelete.date}</span>
+                        <span className="text-red-500 text-lg block mt-2 font-normal">{examToDelete.lessonName} - {examToDelete.date}</span>
                      </p>
                      <div className="flex gap-4">
-                        <button onClick={() => setExamToDelete(null)} className="flex-1 h-12 border border-[#64748b] text-[#f1f5f9] font-black text-[10px] uppercase hover:bg-white/5 transition-all">İPTAL</button>
-                        <button onClick={executeDeleteExam} className="flex-1 h-12 bg-red-600 text-white font-black text-[10px] uppercase shadow-xl hover:brightness-110 transition-all">EVET_SİL</button>
+                        <button onClick={() => setExamToDelete(null)} className="flex-1 h-12 border border-[#64748b] text-[#f1f5f9] font-normal text-[10px] uppercase hover:bg-white/5 transition-all">İPTAL</button>
+                        <button onClick={executeDeleteExam} className="flex-1 h-12 bg-red-600 text-white font-normal text-[10px] uppercase shadow-xl hover:brightness-110 transition-all">EVET_SİL</button>
                      </div>
                   </div>
                </div>

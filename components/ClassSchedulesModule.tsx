@@ -263,16 +263,16 @@ const ClassSchedulesModule: React.FC<ClassSchedulesModuleProps> = ({
          <div className="flex flex-col gap-2 shrink-0 bg-[#0d141b] border border-white/5 p-2 rounded-sm shadow-2xl">
             <div className="flex items-center justify-between">
                <div className="flex bg-black/40 p-1 gap-1">
-                  <button onClick={() => handleToggleView('CLASS')} className={`px-4 py-1.5 text-[8px] font-black uppercase tracking-widest transition-all ${viewType === 'CLASS' ? 'bg-[#3b82f6] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>
+                  <button onClick={() => handleToggleView('CLASS')} className={`px-4 py-1.5 text-[8px] font-normal uppercase tracking-widest transition-all ${viewType === 'CLASS' ? 'bg-[#3b82f6] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>
                      {userRole === UserRole.STUDENT ? 'DERS PROGRAMI' : 'ŞUBE_ODAKLI'}
                   </button>
                   {userRole !== UserRole.STUDENT && (
-                     <button onClick={() => handleToggleView('TEACHER')} className={`px-4 py-1.5 text-[8px] font-black uppercase tracking-widest transition-all ${viewType === 'TEACHER' ? 'bg-[#a855f7] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>KADRO_ODAKLI</button>
+                     <button onClick={() => handleToggleView('TEACHER')} className={`px-4 py-1.5 text-[8px] font-normal uppercase tracking-widest transition-all ${viewType === 'TEACHER' ? 'bg-[#a855f7] text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}>KADRO_ODAKLI</button>
                   )}
                </div>
                {/* Show class name if single class mode (Student) */}
                {userRole === UserRole.STUDENT && viewingId && (
-                  <div className="px-3 py-1 bg-[#3b82f6]/10 border border-[#3b82f6]/30 text-[#3b82f6] text-[10px] font-black uppercase tracking-widest">
+                  <div className="px-3 py-1 bg-[#3b82f6]/10 border border-[#3b82f6]/30 text-[#3b82f6] text-[10px] font-normal uppercase tracking-widest">
                      {viewingId} ŞUBESİ
                   </div>
                )}
@@ -289,7 +289,7 @@ const ClassSchedulesModule: React.FC<ClassSchedulesModuleProps> = ({
                         <button
                            key={item.id}
                            onClick={() => setViewingId(viewType === 'CLASS' ? (item as any).name : (item as any).id)}
-                           className={`px-4 py-2 text-[9px] font-black uppercase tracking-tighter border transition-all whitespace-nowrap active:scale-[0.95] ${isSelected ? 'text-white shadow-lg ring-1 ring-white/10' : 'bg-black/20 border-white/5 text-slate-500 hover:bg-white/5'}`}
+                           className={`px-4 py-2 text-[9px] font-normal uppercase tracking-tighter border transition-all whitespace-nowrap active:scale-[0.95] ${isSelected ? 'text-white shadow-lg ring-1 ring-white/10' : 'bg-black/20 border-white/5 text-slate-500 hover:bg-white/5'}`}
                            style={isSelected ? { backgroundColor: color, borderColor: color } : {}}
                         >
                            {label}
@@ -304,20 +304,20 @@ const ClassSchedulesModule: React.FC<ClassSchedulesModuleProps> = ({
             {!viewingId || !currentSelectionObj ? (
                <div className="h-full flex flex-col items-center justify-center opacity-20">
                   <i className="fa-solid fa-table-cells text-6xl mb-4 text-[#354a5f]"></i>
-                  <span className="text-[12px] font-black uppercase tracking-[0.5em]">GÖRÜNÜM_SEÇİNİZ</span>
+                  <span className="text-[12px] font-normal uppercase tracking-[0.5em]">GÖRÜNÜM_SEÇİNİZ</span>
                </div>
             ) : (
                <table className="w-full h-full border-collapse table-fixed">
                   <thead>
                      <tr className="bg-[#1a242e]/98 sticky top-0 z-50 border-b border-[#354a5f]">
-                        <th className="w-12 py-2 text-[8px] font-black text-slate-500 uppercase">H</th>
-                        {DAYS_SHORT.map(d => <th key={d} className="text-[9px] font-black text-white tracking-[0.2em]">{d}</th>)}
+                        <th className="w-12 py-2 text-[8px] font-normal text-slate-500 uppercase">H</th>
+                        {DAYS_SHORT.map(d => <th key={d} className="text-[9px] font-normal text-white tracking-[0.2em]">{d}</th>)}
                      </tr>
                   </thead>
                   <tbody>
                      {HOURS.map(h => (
                         <tr key={h} className="border-b border-white/[0.03]" style={{ height: `${100 / HOURS.length}%` }}>
-                           <td className="bg-black/40 border-r border-white/5 text-center text-[11px] font-black text-slate-600 shadow-inner">{h}</td>
+                           <td className="bg-black/40 border-r border-white/5 text-center text-[11px] font-normal text-slate-600 shadow-inner">{h}</td>
                            {DAYS_SHORT.map(day => {
                               const entry = getEntry(day, h);
                               // Ders objesini ID, Name veya Branch ile bulmaya çalış
@@ -347,12 +347,12 @@ const ClassSchedulesModule: React.FC<ClassSchedulesModuleProps> = ({
                                           className={`h-full w-full flex flex-col items-center justify-center border-l-[3px] shadow-lg relative transition-transform active:scale-[0.95] ${entry.isLocked ? 'bg-slate-800' : 'bg-slate-900/60 hover:bg-slate-800'}`}
                                           style={{ borderLeftColor: (conflict || isBlockageInSlot) ? '#ef4444' : (viewType === 'TEACHER' ? getSectionColor(entry.sinif) : bColor) }}
                                        >
-                                          <span className="text-[10px] font-black text-white leading-none uppercase truncate w-full text-center px-1">
+                                          <span className="text-[10px] font-normal text-white leading-none uppercase truncate w-full text-center px-1">
                                              {viewType === 'CLASS'
                                                 ? (lessonObj ? standardizeBranchCode(lessonObj.branch) : entry.ders.substring(0, 5))
                                                 : entry.sinif}
                                           </span>
-                                          <span className="text-[7px] font-black text-slate-500 uppercase mt-1 truncate w-full text-center px-1">
+                                          <span className="text-[7px] font-normal text-slate-500 uppercase mt-1 truncate w-full text-center px-1">
                                              {viewType === 'CLASS'
                                                 ? formatTeacherName(entry.ogretmen)
                                                 : (lessonObj ? standardizeBranchCode(lessonObj.branch) : entry.ders.substring(0, 6))}
@@ -392,11 +392,11 @@ const ClassSchedulesModule: React.FC<ClassSchedulesModuleProps> = ({
             <div className="flex items-center gap-4">
                <div className="flex items-center gap-1.5">
                   <div className="w-1.5 h-1.5 bg-[#3b82f6] rounded-full shadow-[0_0_8px_#3b82f6]"></div>
-                  <span className="text-[7px] font-black text-slate-500 uppercase tracking-widest">DNA_MUHURLEME_AKTIF</span>
+                  <span className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">DNA_MUHURLEME_AKTIF</span>
                </div>
             </div>
             <div className="flex items-center gap-3">
-               <span className="text-[7px] font-black text-slate-500 uppercase tracking-widest">SYSTEM_STABILITY_v2.5</span>
+               <span className="text-[7px] font-normal text-slate-500 uppercase tracking-widest">SYSTEM_STABILITY_v2.5</span>
                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_100px_rgba(34,197,94,0.1)]"></div>
             </div>
          </div>
@@ -406,14 +406,14 @@ const ClassSchedulesModule: React.FC<ClassSchedulesModuleProps> = ({
                <div className="bg-[#0d141b] border-2 border-[#3b82f6] w-full max-w-md shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col rounded-sm overflow-hidden bg-grid-hatched">
                   <div className="p-4 border-b border-white/10 flex justify-between items-center bg-[#162431]">
                      <div>
-                        <h3 className="text-[13px] font-black text-white uppercase tracking-widest">MANUEL_DERS_YERLEŞTİRME</h3>
-                        <span className="text-[8px] font-black text-[#3b82f6] uppercase mt-2 block tracking-widest">{standardizeDayCode(manualPanel.day)} - {manualPanel.hour}. DERS</span>
+                        <h3 className="text-[13px] font-normal text-white uppercase tracking-widest">MANUEL_DERS_YERLEŞTİRME</h3>
+                        <span className="text-[8px] font-normal text-[#3b82f6] uppercase mt-2 block tracking-widest">{standardizeDayCode(manualPanel.day)} - {manualPanel.hour}. DERS</span>
                      </div>
                      <button onClick={() => setManualPanel(null)} className="w-10 h-10 border border-white/10 text-white/40 hover:text-white transition-all"><i className="fa-solid fa-xmark text-xl"></i></button>
                   </div>
 
                   <div className="p-4 space-y-3 max-h-[400px] overflow-y-auto no-scrollbar pr-1">
-                     <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.4em] ml-1">ŞUBE_GÖREVLERİ</span>
+                     <span className="text-[9px] font-normal text-slate-500 uppercase tracking-[0.4em] ml-1">ŞUBE_GÖREVLERİ</span>
                      {(currentSelectionObj as ClassSection).assignments && (currentSelectionObj as ClassSection).assignments!.length > 0 ? (
                         (currentSelectionObj as ClassSection).assignments!.map((assign) => {
                            const lesson = lessons.find(l => l.id === assign.lessonId);
@@ -438,26 +438,26 @@ const ClassSchedulesModule: React.FC<ClassSchedulesModuleProps> = ({
                               >
                                  <div className="absolute left-0 top-0 bottom-0 w-1" style={{ backgroundColor: bColor }}></div>
                                  <div className="flex flex-col items-start min-w-0 flex-1">
-                                    <span className={`text-[12px] font-black uppercase truncate pr-4 ${isQuotaFull ? 'text-red-500' : 'text-white'}`}>{lesson?.name}</span>
-                                    <span className="text-[8px] font-bold text-slate-500 uppercase mt-1">{teacher?.name || 'ATANMADI'}</span>
+                                    <span className={`text-[12px] font-normal uppercase truncate pr-4 ${isQuotaFull ? 'text-red-500' : 'text-white'}`}>{lesson?.name}</span>
+                                    <span className="text-[8px] font-normal text-slate-500 uppercase mt-1">{teacher?.name || 'ATANMADI'}</span>
                                  </div>
 
                                  <div className="flex flex-col items-end shrink-0 gap-1">
                                     {conflict ? (
                                        <div className="flex flex-col items-end">
-                                          <span className="text-[7px] font-black text-red-500 uppercase">ÇAKIŞMA</span>
+                                          <span className="text-[7px] font-normal text-red-500 uppercase">ÇAKIŞMA</span>
                                           <span className="text-[6px] text-slate-600 uppercase">{conflict.sinif} ŞUBESİNDE</span>
                                        </div>
                                     ) : blocked ? (
-                                       <span className="text-[7px] font-black text-red-500 uppercase">HOCA_KAPALI</span>
+                                       <span className="text-[7px] font-normal text-red-500 uppercase">HOCA_KAPALI</span>
                                     ) : isQuotaFull ? (
                                        <div className="flex flex-col items-end">
-                                          <span className="text-[12px] font-black text-red-500">{usedHours}/{plannedHours}</span>
-                                          <span className="text-[6px] font-black text-red-700 uppercase">KOTA DOLDU</span>
+                                          <span className="text-[12px] font-normal text-red-500">{usedHours}/{plannedHours}</span>
+                                          <span className="text-[6px] font-normal text-red-700 uppercase">KOTA DOLDU</span>
                                        </div>
                                     ) : (
                                        <div className="flex items-center gap-2">
-                                          <span className="text-[12px] font-black text-[#fbbf24]">{usedHours}/{plannedHours}</span>
+                                          <span className="text-[12px] font-normal text-[#fbbf24]">{usedHours}/{plannedHours}</span>
                                           <i className="fa-solid fa-plus text-[#3b82f6] opacity-0 group-hover:opacity-100 transition-opacity"></i>
                                        </div>
                                     )}
@@ -467,13 +467,13 @@ const ClassSchedulesModule: React.FC<ClassSchedulesModuleProps> = ({
                         })
                      ) : (
                         <div className="py-10 text-center opacity-30 border border-dashed border-white/10">
-                           <p className="text-[10px] font-black uppercase">BU ŞUBEYE DERS ATANMAMIŞ</p>
+                           <p className="text-[10px] font-normal uppercase">BU ŞUBEYE DERS ATANMAMIŞ</p>
                         </div>
                      )}
                   </div>
 
                   <div className="p-4 bg-black/60 border-t border-white/10">
-                     <p className="text-[7px] font-bold text-slate-600 uppercase leading-relaxed italic">
+                     <p className="text-[7px] font-normal text-slate-600 uppercase leading-relaxed italic">
                         * Sadece bu şubeye tanımlanmış olan dersler ve o dersin hocaları listelenir.
                      </p>
                   </div>

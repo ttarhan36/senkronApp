@@ -76,8 +76,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeModule, setActiveModule, userRo
           <LogoSVG className="w-full h-full text-[#3b82f6] drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
         </div>
         <div className="hidden md:block">
-          <h1 className="text-[12px] font-black tracking-[0.4em] text-white uppercase leading-none">SENKRON</h1>
-          <p className="text-[7px] text-[#3b82f6] font-bold uppercase tracking-[0.2em] mt-1.5 opacity-80 border-t border-[#354a5f] pt-1">BULUT_MODU v2.5</p>
+          <h1 className="text-[12px] font-normal tracking-[0.4em] text-white uppercase leading-none">SENKRON</h1>
+          <p className="text-[7px] text-[#3b82f6] font-normal uppercase tracking-[0.2em] mt-1.5 opacity-80 border-t border-[#354a5f] pt-1">BULUT_MODU v2.5</p>
         </div>
       </div>
 
@@ -92,7 +92,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeModule, setActiveModule, userRo
               }`}
           >
             <i className={`fa-solid ${item.icon} fa-fw text-[16px] md:text-[12px] group-hover:scale-125 md:group-hover:scale-110 transition-transform`}></i>
-            <span className="hidden md:block font-black text-[8px] uppercase tracking-widest">{item.label}</span>
+            <span className="hidden md:block font-normal text-[8px] uppercase tracking-widest">{item.label}</span>
           </button>
         ))}
 
@@ -107,14 +107,14 @@ const Sidebar: React.FC<SidebarProps> = ({ activeModule, setActiveModule, userRo
             title="Güvenli Çıkış"
           >
             <i className="fa-solid fa-right-from-bracket fa-fw text-[18px] md:text-[12px] group-hover:scale-110 transition-transform"></i>
-            <span className="hidden md:block font-black text-[8px] uppercase tracking-widest">GÜVENLİ ÇIKIŞ</span>
+            <span className="hidden md:block font-normal text-[8px] uppercase tracking-widest">GÜVENLİ ÇIKIŞ</span>
           </button>
         </div>
       </div>
 
       <div className="mt-auto px-6 py-4 border-t border-[#354a5f] hidden md:block">
         <div className="space-y-2">
-          <div className="flex justify-between items-center text-[6px] font-black uppercase tracking-widest">
+          <div className="flex justify-between items-center text-[6px] font-normal uppercase tracking-widest">
             <span className="text-[#909aa3]/30">CLOUD SYNC</span>
             {dbError === 'RLS_BLOCKED' ? (
               <span className="text-orange-500 animate-pulse">RLS_ENGELİ</span>
@@ -137,7 +137,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeModule, setActiveModule, userRo
                 const daysLeft = Math.ceil((session.trialEndsAt - Date.now()) / (1000 * 60 * 60 * 24));
                 return (
                   <div className="mt-3 pt-3 border-t border-[#354a5f] px-1 animate-in fade-in slide-in-from-bottom-2 duration-700">
-                    <div className="flex justify-between items-center text-[7px] font-black uppercase tracking-widest mb-1.5 transition-colors">
+                    <div className="flex justify-between items-center text-[7px] font-normal uppercase tracking-widest mb-1.5 transition-colors">
                       <span className="text-slate-500">DENEME_SÜRESİ</span>
                       <span className={daysLeft < 3 ? 'text-red-500 animate-pulse' : 'text-blue-500'}>{daysLeft} GÜN</span>
                     </div>

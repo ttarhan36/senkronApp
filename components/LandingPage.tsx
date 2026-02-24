@@ -75,15 +75,15 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                 <div className="space-y-4">
                     <p>Senkron Bulut Okul Yönetim Sistemi ("Sistem"), eğitim kurumlarının yönetim süreçlerini dijitalleştirmek amacıyla sunulan bir hizmettir.</p>
                     <section>
-                        <h4 className="font-bold">1. Lisans ve Kullanım</h4>
+                        <h4 className="font-normal">1. Lisans ve Kullanım</h4>
                         <p>Kullanıcılar, sistemi sadece kendi eğitim kurumlarının iç süreçleri için kullanma hakkına sahiptir. Sistemin kopyalanması veya üçüncü taraflara kiralanması yasaktır.</p>
                     </section>
                     <section>
-                        <h4 className="font-bold">2. Sorumluluklar</h4>
+                        <h4 className="font-normal">2. Sorumluluklar</h4>
                         <p>Kullanıcı, sisteme girilen verilerin doğruluğundan sorumludur. Senkron, veri girişi kaynaklı hatalardan dolayı sorumlu tutulamaz.</p>
                     </section>
                     <section>
-                        <h4 className="font-bold">3. Hizmet Kesintisi</h4>
+                        <h4 className="font-normal">3. Hizmet Kesintisi</h4>
                         <p>Planlı bakım çalışmaları dışında, sistem %99.9 erişilebilirlik hedefiyle sunulmaktadır.</p>
                     </section>
                 </div>
@@ -95,15 +95,15 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                 <div className="space-y-4">
                     <p>Veri gizliliğiniz bizim için en üst önceliktir. Senkron, verilerinizi asla reklam amaçlı üçüncü taraflarla paylaşmaz.</p>
                     <section>
-                        <h4 className="font-bold">1. Toplanan Veriler</h4>
+                        <h4 className="font-normal">1. Toplanan Veriler</h4>
                         <p>Öğrenci numaraları, öğretmen branş bilgileri ve kurum içi ders programları sistemin işleyişi için güvenli bulut sunucularımızda saklanır.</p>
                     </section>
                     <section>
-                        <h4 className="font-bold">2. Veri Güvenliği</h4>
+                        <h4 className="font-normal">2. Veri Güvenliği</h4>
                         <p>Tüm veriler SSL sertifikası ile şifrelenir ve düzenli olarak yedeklenir.</p>
                     </section>
                     <section>
-                        <h4 className="font-bold">3. Çerezler</h4>
+                        <h4 className="font-normal">3. Çerezler</h4>
                         <p>Oturum yönetimi ve kullanıcı deneyimini iyileştirmek için sadece teknik çerezler kullanılmaktadır.</p>
                     </section>
                 </div>
@@ -115,15 +115,15 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                 <div className="space-y-4">
                     <p>6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") uyarınca Senkron, veri işleyen sıfatıyla hareket etmektedir.</p>
                     <section>
-                        <h4 className="font-bold">1. İşleme Amacı</h4>
+                        <h4 className="font-normal">1. İşleme Amacı</h4>
                         <p>Kişisel veriler, okul yönetim süreçlerinin yürütülmesi, ders programlarının hazırlanması ve veli-öğrenci bilgilendirmesi amacıyla işlenir.</p>
                     </section>
                     <section>
-                        <h4 className="font-bold">2. Haklarınız</h4>
+                        <h4 className="font-normal">2. Haklarınız</h4>
                         <p>Veri sahipleri, KVKK'nın 11. maddesi uyarınca verilerinin işlenip işlenmediğini öğrenme ve düzeltilmesini isteme hakkına sahiptir.</p>
                     </section>
                     <section>
-                        <h4 className="font-bold">3. Veri Sorumlusu</h4>
+                        <h4 className="font-normal">3. Veri Sorumlusu</h4>
                         <p>Veri sorumlusu, hizmeti kullanan eğitim kurumudur. Senkron, veri işleyen alt yüklenici olarak hizmet vermektedir.</p>
                     </section>
                 </div>
@@ -254,19 +254,19 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                         <div className="w-10 h-10 rounded-none flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden">
                             <img src="/senkron_logo.png" alt="Senkron Logo" className="w-full h-full object-contain" />
                         </div>
-                        <span className="text-2xl font-black tracking-tighter text-slate-900 uppercase">Senkron</span>
+                        <span className="text-2xl font-normal tracking-tighter text-slate-900 uppercase">Senkron</span>
                     </div>
 
                     <div className="hidden md:flex items-center gap-8">
-                        <a href="#ozellikler" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">Özellikler</a>
-                        <a href="#sss" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">SSS</a>
-                        <a href="#nasil-calisir" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">Nasıl Çalışır</a>
-                        <a href="#hesaplayici" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">Hesaplayıcı</a>
-                        <a href="#taslaklar" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">Taslaklar</a>
-                        <a href="#katalog" className="text-sm font-semibold text-slate-600 hover:text-cyan-600 transition-colors">Katalog</a>
+                        <a href="#ozellikler" className="text-sm font-normal text-slate-600 hover:text-cyan-600 transition-colors">Özellikler</a>
+                        <a href="#sss" className="text-sm font-normal text-slate-600 hover:text-cyan-600 transition-colors">SSS</a>
+                        <a href="#nasil-calisir" className="text-sm font-normal text-slate-600 hover:text-cyan-600 transition-colors">Nasıl Çalışır</a>
+                        <a href="#hesaplayici" className="text-sm font-normal text-slate-600 hover:text-cyan-600 transition-colors">Hesaplayıcı</a>
+                        <a href="#taslaklar" className="text-sm font-normal text-slate-600 hover:text-cyan-600 transition-colors">Taslaklar</a>
+                        <a href="#katalog" className="text-sm font-normal text-slate-600 hover:text-cyan-600 transition-colors">Katalog</a>
                         <button
                             onClick={onLoginClick}
-                            className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-bold rounded-none shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all active:scale-95"
+                            className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-normal rounded-none shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all active:scale-95"
                         >
                             14 Gün Ücretsiz Dene
                         </button>
@@ -288,14 +288,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                         className="fixed inset-0 z-40 bg-white pt-24 px-6 md:hidden"
                     >
                         <div className="flex flex-col gap-6 text-center">
-                            <a href="#ozellikler" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-800">Özellikler</a>
-                            <a href="#sss" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-800">SSS</a>
-                            <a href="#nasil-calisir" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-800">Nasıl Çalışır</a>
-                            <a href="#hesaplayici" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-800">Hesaplayıcı</a>
-                            <a href="#taslaklar" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-800">Taslaklar</a>
+                            <a href="#ozellikler" onClick={() => setIsMenuOpen(false)} className="text-xl font-normal text-slate-800">Özellikler</a>
+                            <a href="#sss" onClick={() => setIsMenuOpen(false)} className="text-xl font-normal text-slate-800">SSS</a>
+                            <a href="#nasil-calisir" onClick={() => setIsMenuOpen(false)} className="text-xl font-normal text-slate-800">Nasıl Çalışır</a>
+                            <a href="#hesaplayici" onClick={() => setIsMenuOpen(false)} className="text-xl font-normal text-slate-800">Hesaplayıcı</a>
+                            <a href="#taslaklar" onClick={() => setIsMenuOpen(false)} className="text-xl font-normal text-slate-800">Taslaklar</a>
                             <button
                                 onClick={() => { setIsMenuOpen(false); onLoginClick(); }}
-                                className="w-full py-4 bg-cyan-500 text-white font-bold rounded-none"
+                                className="w-full py-4 bg-cyan-500 text-white font-normal rounded-none"
                             >
                                 14 Gün Ücretsiz Dene
                             </button>
@@ -314,29 +314,29 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs font-bold uppercase tracking-wider mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs font-normal uppercase tracking-wider mb-6">
                             <ShieldCheck className="w-4 h-4" /> MEB Müfredatı ile %100 Uyumlu
                         </div>
-                        <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.95] text-slate-900 mb-8 uppercase">
+                        <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-normal tracking-tighter leading-[0.95] text-slate-900 mb-8 uppercase">
                             OKUL<br />
                             YÖNETİMİNDE<br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">YENİ NESİL</span><br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">ÇÖZÜM</span>
                         </h1>
-                        <p className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto mb-8 font-medium leading-relaxed">
-                            Öğretmen, öğrenci ve sınıf yönetiminden otomatik ders programı oluşturmaya, <span className="text-slate-900 font-bold">sınav kağıdını okuma</span>, <span className="text-slate-900 font-bold">yoklama takibinden</span> AI destekli analize kadar tüm eğitim süreçlerinizi tek platformda yönetin.
+                        <p className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto mb-8 font-normal leading-relaxed">
+                            Öğretmen, öğrenci ve sınıf yönetiminden otomatik ders programı oluşturmaya, <span className="text-slate-900 font-normal">sınav kağıdını okuma</span>, <span className="text-slate-900 font-normal">yoklama takibinden</span> AI destekli analize kadar tüm eğitim süreçlerinizi tek platformda yönetin.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
                             <button
                                 onClick={onLoginClick}
-                                className="w-full sm:w-auto px-10 py-5 bg-slate-900 text-white rounded-none font-black text-lg shadow-2xl shadow-slate-900/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3"
+                                className="w-full sm:w-auto px-10 py-5 bg-slate-900 text-white rounded-none font-normal text-lg shadow-2xl shadow-slate-900/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3"
                             >
                                 ÜCRETSİZ KAYDOL <ArrowRight className="w-5 h-5" />
                             </button>
                             <a
                                 href="#nasil-calisir"
-                                className="w-full sm:w-auto px-10 py-5 bg-white border-2 border-slate-200 text-slate-900 rounded-none font-black text-lg hover:border-cyan-500 hover:text-cyan-600 transition-all flex items-center justify-center gap-3"
+                                className="w-full sm:w-auto px-10 py-5 bg-white border-2 border-slate-200 text-slate-900 rounded-none font-normal text-lg hover:border-cyan-500 hover:text-cyan-600 transition-all flex items-center justify-center gap-3"
                             >
                                 NASIL ÇALIŞIR? <PlayCircle className="w-5 h-5" />
                             </a>
@@ -349,11 +349,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                 <div className="flex items-center justify-between mb-2">
                                     <div className="flex items-center gap-2">
                                         <div className="w-1.5 h-6 bg-cyan-500 rounded-full" />
-                                        <span className="text-[10px] md:text-xs font-black text-cyan-600 uppercase tracking-[0.3em]">Senkron Özellikleri</span>
+                                        <span className="text-[10px] md:text-xs font-normal text-cyan-600 uppercase tracking-[0.3em]">Senkron Özellikleri</span>
                                     </div>
-                                    <span className="text-sm md:text-lg font-black text-slate-300 tabular-nums">{currentSlide + 1} / {slides.length}</span>
+                                    <span className="text-sm md:text-lg font-normal text-slate-300 tabular-nums">{currentSlide + 1} / {slides.length}</span>
                                 </div>
-                                <h2 className="text-2xl md:text-5xl font-black text-slate-900 tracking-tighter leading-none">
+                                <h2 className="text-2xl md:text-5xl font-normal text-slate-900 tracking-tighter leading-none">
                                     {slides[currentSlide].title}
                                 </h2>
                             </div>
@@ -407,8 +407,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
             <section id="nasil-calisir" className="py-24 md:py-32 bg-white">
                 <div className="container mx-auto px-6">
                     <div className="max-w-3xl mx-auto text-center mb-16">
-                        <h2 className="text-sm font-black text-cyan-600 uppercase tracking-widest mb-4">Süreç Nasıl İlerler?</h2>
-                        <h3 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-6 uppercase">3 ADIMDA OKULUNUZU DİJİTALLEŞTİRİN</h3>
+                        <h2 className="text-sm font-normal text-cyan-600 uppercase tracking-widest mb-4">Süreç Nasıl İlerler?</h2>
+                        <h3 className="text-4xl md:text-5xl font-normal tracking-tight text-slate-900 mb-6 uppercase">3 ADIMDA OKULUNUZU DİJİTALLEŞTİRİN</h3>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
@@ -417,9 +417,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                             <div className="w-20 h-20 bg-slate-100 flex items-center justify-center text-slate-900 mb-6 group-hover:bg-cyan-500 group-hover:text-white transition-all border-2 border-slate-900/5">
                                 <FileDown className="w-10 h-10" />
                             </div>
-                            <span className="text-xs font-black text-cyan-600 uppercase tracking-widest mb-2">ADIM 1</span>
-                            <h4 className="text-xl font-bold text-slate-900 mb-4 uppercase">TASLAKLARI İNDİRİN</h4>
-                            <p className="text-slate-600 text-sm font-medium leading-relaxed mb-8">
+                            <span className="text-xs font-normal text-cyan-600 uppercase tracking-widest mb-2">ADIM 1</span>
+                            <h4 className="text-xl font-normal text-slate-900 mb-4 uppercase">TASLAKLARI İNDİRİN</h4>
+                            <p className="text-slate-600 text-sm font-normal leading-relaxed mb-8">
                                 Sisteme veri girişi yapmak için hazırladığımız standart Excel taslaklarını bilgisayarınıza indirin.
                             </p>
 
@@ -428,7 +428,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                     href="https://docs.google.com/spreadsheets/d/1oXtMAcUM4MA14C5vBGecf_vUVhNWGEml/export?format=xlsx"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="flex items-center justify-between px-4 py-3 bg-slate-50 border border-slate-200 text-xs font-black text-slate-700 hover:border-cyan-500 hover:bg-white transition-all uppercase tracking-tighter"
+                                    className="flex items-center justify-between px-4 py-3 bg-slate-50 border border-slate-200 text-xs font-normal text-slate-700 hover:border-cyan-500 hover:bg-white transition-all uppercase tracking-tighter"
                                 >
                                     ÖĞRENCİ LİSTESİ TASLAĞI <FileDown className="w-4 h-4 text-cyan-500" />
                                 </a>
@@ -436,7 +436,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                     href="https://docs.google.com/spreadsheets/d/1KmAwIYC-XkB7HNTqaGP5r-VF4V_7rCUj/export?format=xlsx"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="flex items-center justify-between px-4 py-3 bg-slate-50 border border-slate-200 text-xs font-black text-slate-700 hover:border-cyan-500 hover:bg-white transition-all uppercase tracking-tighter"
+                                    className="flex items-center justify-between px-4 py-3 bg-slate-50 border border-slate-200 text-xs font-normal text-slate-700 hover:border-cyan-500 hover:bg-white transition-all uppercase tracking-tighter"
                                 >
                                     ÖĞRETMEN LİSTESİ TASLAĞI <FileDown className="w-4 h-4 text-cyan-500" />
                                 </a>
@@ -444,7 +444,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                     href="https://docs.google.com/spreadsheets/d/18w96kP-GBStFqsjfPC4f_III5N0NV9SB/export?format=xlsx"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="flex items-center justify-between px-4 py-3 bg-slate-50 border border-slate-200 text-xs font-black text-slate-700 hover:border-cyan-500 hover:bg-white transition-all uppercase tracking-tighter"
+                                    className="flex items-center justify-between px-4 py-3 bg-slate-50 border border-slate-200 text-xs font-normal text-slate-700 hover:border-cyan-500 hover:bg-white transition-all uppercase tracking-tighter"
                                 >
                                     DERS/BRANŞ TASLAĞI <FileDown className="w-4 h-4 text-cyan-500" />
                                 </a>
@@ -456,9 +456,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                             <div className="w-20 h-20 bg-slate-100 flex items-center justify-center text-slate-900 mb-6 group-hover:bg-cyan-500 group-hover:text-white transition-all border-2 border-slate-900/5">
                                 <Edit3 className="w-10 h-10" />
                             </div>
-                            <span className="text-xs font-black text-cyan-600 uppercase tracking-widest mb-2">ADIM 2</span>
-                            <h4 className="text-xl font-bold text-slate-900 mb-4 uppercase">BİLGİLERİ DOLDURUN</h4>
-                            <p className="text-slate-600 text-sm font-medium leading-relaxed">
+                            <span className="text-xs font-normal text-cyan-600 uppercase tracking-widest mb-2">ADIM 2</span>
+                            <h4 className="text-xl font-normal text-slate-900 mb-4 uppercase">BİLGİLERİ DOLDURUN</h4>
+                            <p className="text-slate-600 text-sm font-normal leading-relaxed">
                                 Okulunuzdaki mevcut verileri (öğrenci, öğretmen, ders programı) indirdiğiniz Excel dosyalarına kopyalayın.
                             </p>
                         </div>
@@ -468,9 +468,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                             <div className="w-20 h-20 bg-slate-100 flex items-center justify-center text-slate-900 mb-6 group-hover:bg-cyan-500 group-hover:text-white transition-all border-2 border-slate-900/5">
                                 <UploadCloud className="w-10 h-10" />
                             </div>
-                            <span className="text-xs font-black text-cyan-600 uppercase tracking-widest mb-2">ADIM 3</span>
-                            <h4 className="text-xl font-bold text-slate-900 mb-4 uppercase">SİSTEME YÜKLEYİN</h4>
-                            <p className="text-slate-600 text-sm font-medium leading-relaxed">
+                            <span className="text-xs font-normal text-cyan-600 uppercase tracking-widest mb-2">ADIM 3</span>
+                            <h4 className="text-xl font-normal text-slate-900 mb-4 uppercase">SİSTEME YÜKLEYİN</h4>
+                            <p className="text-slate-600 text-sm font-normal leading-relaxed">
                                 Hazırladığınız dosyaları Senkron paneline sürükleyip bırakın. Tüm okulunuz saniyeler içinde dijitalleşsin.
                             </p>
                         </div>
@@ -482,14 +482,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
             <section id="ozellikler" className="py-24 md:py-32 bg-slate-100/80">
                 <div className="container mx-auto px-6">
                     <div className="max-w-3xl mx-auto text-center mb-20">
-                        <h2 className="text-sm font-black text-cyan-600 uppercase tracking-widest mb-4">Üstün Teknoloji</h2>
-                        <h3 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-6">Senkron ile Yönetim Artık Bir Sanat</h3>
-                        <p className="text-lg text-slate-600 font-medium leading-relaxed mb-8">Ekipler arası veri kopukluğunu ve operasyonel karmaşayı ortadan kaldırıyoruz. Yapay zeka tabanlı bütünleşik ekosistemimizle okulunuzun akademik başarısını, idari verimliliğini ve kurumsal hafızasını tek bir merkezden, 360 derece yönetin.</p>
+                        <h2 className="text-sm font-normal text-cyan-600 uppercase tracking-widest mb-4">Üstün Teknoloji</h2>
+                        <h3 className="text-4xl md:text-5xl font-normal tracking-tight text-slate-900 mb-6">Senkron ile Yönetim Artık Bir Sanat</h3>
+                        <p className="text-lg text-slate-600 font-normal leading-relaxed mb-8">Ekipler arası veri kopukluğunu ve operasyonel karmaşayı ortadan kaldırıyoruz. Yapay zeka tabanlı bütünleşik ekosistemimizle okulunuzun akademik başarısını, idari verimliliğini ve kurumsal hafızasını tek bir merkezden, 360 derece yönetin.</p>
                         <a
                             href="https://drive.google.com/file/d/1L69KD7n84de0wc2lu4hmO8FSEW_1DOTI/view?usp=drive_link"
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-none text-sm font-bold text-slate-600 hover:border-cyan-500 hover:text-cyan-600 transition-all shadow-sm shadow-slate-100"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-none text-sm font-normal text-slate-600 hover:border-cyan-500 hover:text-cyan-600 transition-all shadow-sm shadow-slate-100"
                         >
                             <Database className="w-4 h-4" /> Detaylı Kataloğu İndirin (PDF)
                         </a>
@@ -505,11 +505,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                 <div className="w-14 h-14 bg-cyan-50 rounded-none flex items-center justify-center text-cyan-600 mb-6 group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300">
                                     {f.icon}
                                 </div>
-                                <h4 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">{f.title}</h4>
-                                <p className="text-slate-600 text-sm leading-relaxed mb-6 font-medium">{f.description}</p>
+                                <h4 className="text-xl font-normal text-slate-900 mb-4 tracking-tight">{f.title}</h4>
+                                <p className="text-slate-600 text-sm leading-relaxed mb-6 font-normal">{f.description}</p>
                                 <div className="flex flex-wrap gap-2">
                                     {f.items.map((item, i) => (
-                                        <span key={i} className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 bg-slate-50 text-slate-500 rounded-none border border-slate-100">
+                                        <span key={i} className="text-[10px] font-normal uppercase tracking-wider px-2.5 py-1 bg-slate-50 text-slate-500 rounded-none border border-slate-100">
                                             {item}
                                         </span>
                                     ))}
@@ -525,7 +525,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full" />
                 <div className="container mx-auto px-6 max-w-4xl relative z-10">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl font-black text-white mb-4 tracking-tighter uppercase">Sıkça Sorulan Sorular</h2>
+                        <h2 className="text-3xl font-normal text-white mb-4 tracking-tighter uppercase">Sıkça Sorulan Sorular</h2>
                     </div>
 
                     <div className="flex flex-col gap-4">
@@ -546,7 +546,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                             initial={{ height: 0, opacity: 0 }}
                                             animate={{ height: "auto", opacity: 1 }}
                                             exit={{ height: 0, opacity: 0 }}
-                                            className="px-8 pb-8 text-[15px] text-slate-300 font-medium leading-relaxed"
+                                            className="px-8 pb-8 text-[15px] text-slate-300 font-normal leading-relaxed"
                                         >
                                             {faq.a}
                                         </motion.div>
@@ -562,23 +562,23 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
             <section id="hesaplayici" className="py-24 md:py-32 overflow-hidden relative bg-slate-100/80">
                 <div className="container mx-auto px-6">
                     <div className="max-w-3xl mx-auto text-center mb-16">
-                        <h2 className="text-sm font-black text-cyan-600 uppercase tracking-widest mb-4">Şeffaf Fiyatlandırma</h2>
-                        <h3 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-8">Bütçenizi Şeffafça Planlayın</h3>
-                        <p className="text-lg text-slate-600 font-medium leading-relaxed">Senkron, okulunuzun büyüklüğüne göre ölçeklenir. Gizli ücretler yok, karmaşık paketler yok. Sadece öğrenci sayısı kadar ödeyin.</p>
+                        <h2 className="text-sm font-normal text-cyan-600 uppercase tracking-widest mb-4">Şeffaf Fiyatlandırma</h2>
+                        <h3 className="text-4xl md:text-5xl font-normal tracking-tight text-slate-900 mb-8">Bütçenizi Şeffafça Planlayın</h3>
+                        <p className="text-lg text-slate-600 font-normal leading-relaxed">Senkron, okulunuzun büyüklüğüne göre ölçeklenir. Gizli ücretler yok, karmaşık paketler yok. Sadece öğrenci sayısı kadar ödeyin.</p>
                     </div>
 
                     <div className="max-w-2xl mx-auto bg-white rounded-none p-8 md:p-12 border-2 border-slate-200 shadow-2xl relative">
                         <div className="flex flex-col gap-10">
                             <div className="space-y-8">
                                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                                    <label className="text-sm font-black text-slate-900 uppercase tracking-wider">Öğrenci Sayısı</label>
+                                    <label className="text-sm font-normal text-slate-900 uppercase tracking-wider">Öğrenci Sayısı</label>
                                     <div className="relative group">
                                         <input
                                             type="number"
                                             value={studentCount}
                                             onChange={(e) => setStudentCount(e.target.value === '' ? '' : Math.max(0, Number(e.target.value)))}
                                             onFocus={() => setStudentCount('')}
-                                            className="text-center sm:text-right text-3xl font-black text-cyan-600 bg-slate-50 border-2 border-slate-100 rounded-none px-6 py-3 focus:border-cyan-500 focus:bg-white outline-none w-full sm:w-48 transition-all"
+                                            className="text-center sm:text-right text-3xl font-normal text-cyan-600 bg-slate-50 border-2 border-slate-100 rounded-none px-6 py-3 focus:border-cyan-500 focus:bg-white outline-none w-full sm:w-48 transition-all"
                                         />
                                         <div className="absolute -top-2 -right-2 w-6 h-6 bg-cyan-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform">
                                             <Check className="w-3 h-3" />
@@ -596,14 +596,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                             <div className="pt-8 border-t border-slate-100 mt-4">
                                 <div className="flex flex-col sm:flex-row justify-between items-center gap-6 py-8 bg-gradient-to-br from-cyan-50 to-blue-50 px-8 rounded-none border border-cyan-100/50">
                                     <div className="flex flex-col text-center sm:text-left">
-                                        <span className="text-cyan-900 font-black text-xs uppercase tracking-[0.2em] mb-1">Yıllık Lisans Bedeli</span>
-                                        <span className="text-slate-500 text-[11px] font-bold">Öğrenci başı $1.80 (Tüm özellikler dahil)</span>
+                                        <span className="text-cyan-900 font-normal text-xs uppercase tracking-[0.2em] mb-1">Yıllık Lisans Bedeli</span>
+                                        <span className="text-slate-500 text-[11px] font-normal">Öğrenci başı $1.80 (Tüm özellikler dahil)</span>
                                     </div>
                                     <div className="flex flex-col items-center sm:items-end">
-                                        <div className="text-cyan-600 font-black text-5xl tracking-tighter">
+                                        <div className="text-cyan-600 font-normal text-5xl tracking-tighter">
                                             ${estimatedPrice.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                         </div>
-                                        <div className="text-cyan-600/60 font-bold text-[13px] mt-1">
+                                        <div className="text-cyan-600/60 font-normal text-[13px] mt-1">
                                             aylık: ${monthlyPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                         </div>
                                     </div>
@@ -611,20 +611,20 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                 <div className="mt-8">
                                     <button
                                         onClick={onLoginClick}
-                                        className="w-full py-5 bg-slate-900 text-white rounded-none font-black text-xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-slate-900/20 mb-4"
+                                        className="w-full py-5 bg-slate-900 text-white rounded-none font-normal text-xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-slate-900/20 mb-4"
                                     >
                                         ÜCRETSİZ KAYDOL
                                     </button>
-                                    <p className="text-center text-slate-500 text-sm font-medium">
+                                    <p className="text-center text-slate-500 text-sm font-normal">
                                         * Kayıt için kredi kartı bilgisi gerekmez. 14 gün boyunca tüm özellikleri çekinmeden deneyebilirsiniz.
                                     </p>
                                 </div>
                             </div>
 
                             <div className="text-center px-4">
-                                <p className="text-[11px] text-slate-400 font-medium leading-relaxed italic">
+                                <p className="text-[11px] text-slate-400 font-normal leading-relaxed italic">
                                     * Bu tutar, okulunuzun yıllık toplam kullanım bedelidir. Teknik destek, bulut barındırma ve tüm yapay zeka güncellemeleri fiyata dahildir.
-                                    <span className="text-cyan-600 font-bold block mt-1">İsteğe bağlı olarak veri girişleriniz uzman ekibimiz tarafından ücretsiz/destek kapsamında gerçekleştirilebilir.</span>
+                                    <span className="text-cyan-600 font-normal block mt-1">İsteğe bağlı olarak veri girişleriniz uzman ekibimiz tarafından ücretsiz/destek kapsamında gerçekleştirilebilir.</span>
                                 </p>
                             </div>
                         </div>
@@ -642,11 +642,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white opacity-10 blur-[100px] rounded-full -z-0" />
 
                         <div className="relative z-10 max-w-2xl mx-auto">
-                            <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter leading-tight uppercase">OKULUNUZUN RİTMİNİ DEĞİŞTİRMEYE HAZIR MISINIZ?</h2>
-                            <p className="text-cyan-100 text-xl font-medium mb-12">Karmaşayı durdurun, yönetimi sanat haline getirin. Senkron ile yarının okulunu bugün yönetin.</p>
+                            <h2 className="text-4xl md:text-6xl font-normal text-white mb-8 tracking-tighter leading-tight uppercase">OKULUNUZUN RİTMİNİ DEĞİŞTİRMEYE HAZIR MISINIZ?</h2>
+                            <p className="text-cyan-100 text-xl font-normal mb-12">Karmaşayı durdurun, yönetimi sanat haline getirin. Senkron ile yarının okulunu bugün yönetin.</p>
                             <button
                                 onClick={onLoginClick}
-                                className="px-12 py-6 bg-white text-slate-900 rounded-none font-black text-xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-cyan-900/40"
+                                className="px-12 py-6 bg-white text-slate-900 rounded-none font-normal text-xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-cyan-900/40"
                             >
                                 ÜCRETSİZ KAYDOL
                             </button>
@@ -664,9 +664,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                                 <div className="w-8 h-8 overflow-hidden">
                                     <img src="/senkron_logo.png" alt="Senkron Logo" className="w-full h-full object-contain" />
                                 </div>
-                                <span className="text-xl font-black tracking-tighter text-slate-900 uppercase">Senkron</span>
+                                <span className="text-xl font-normal tracking-tighter text-slate-900 uppercase">Senkron</span>
                             </div>
-                            <p className="text-slate-500 text-sm font-medium leading-relaxed mb-8">
+                            <p className="text-slate-500 text-sm font-normal leading-relaxed mb-8">
                                 Geleceğin okul yönetim sistemi. Yapay zeka ile her şey kontrolünüz altında.
                             </p>
                             <div className="flex gap-4">
@@ -683,35 +683,35 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                         </div>
 
                         <div className="flex flex-col gap-4">
-                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2">HIZLI MENÜ</span>
-                            <a href="#ozellikler" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">Özellikler</a>
-                            <a href="#sss" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">SSS</a>
-                            <a href="#nasil-calisir" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">Nasıl Çalışır</a>
-                            <a href="#taslaklar" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">Taslaklar</a>
-                            <a href="#hesaplayici" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">Hesaplayıcı</a>
-                            <a href="#katalog" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">Katalog</a>
+                            <span className="text-[10px] font-normal uppercase tracking-[0.3em] text-slate-400 mb-2">HIZLI MENÜ</span>
+                            <a href="#ozellikler" className="text-slate-600 font-normal hover:text-cyan-600 transition-colors">Özellikler</a>
+                            <a href="#sss" className="text-slate-600 font-normal hover:text-cyan-600 transition-colors">SSS</a>
+                            <a href="#nasil-calisir" className="text-slate-600 font-normal hover:text-cyan-600 transition-colors">Nasıl Çalışır</a>
+                            <a href="#taslaklar" className="text-slate-600 font-normal hover:text-cyan-600 transition-colors">Taslaklar</a>
+                            <a href="#hesaplayici" className="text-slate-600 font-normal hover:text-cyan-600 transition-colors">Hesaplayıcı</a>
+                            <a href="#katalog" className="text-slate-600 font-normal hover:text-cyan-600 transition-colors">Katalog</a>
                         </div>
 
                         <div className="flex flex-col gap-4">
-                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2">İLETİŞİM</span>
-                            <a href="mailto:agentzekai@gmail.com" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">agentzekai@gmail.com</a>
-                            <a href="tel:+905458858577" className="text-slate-600 font-bold hover:text-cyan-600 transition-colors">+90 (545) 885 85 77</a>
-                            <span className="text-slate-500 text-sm font-medium">Bilişim Vadisi, Gebze/Kocaeli</span>
+                            <span className="text-[10px] font-normal uppercase tracking-[0.3em] text-slate-400 mb-2">İLETİŞİM</span>
+                            <a href="mailto:agentzekai@gmail.com" className="text-slate-600 font-normal hover:text-cyan-600 transition-colors">agentzekai@gmail.com</a>
+                            <a href="tel:+905458858577" className="text-slate-600 font-normal hover:text-cyan-600 transition-colors">+90 (545) 885 85 77</a>
+                            <span className="text-slate-500 text-sm font-normal">Bilişim Vadisi, Gebze/Kocaeli</span>
                         </div>
 
                         <div className="flex flex-col gap-4">
-                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2">YASAL</span>
-                            <button onClick={() => setLegalModal({ isOpen: true, ...legalContent.terms })} className="text-left text-slate-600 font-bold hover:text-cyan-600 transition-colors">Kullanım Şartları</button>
-                            <button onClick={() => setLegalModal({ isOpen: true, ...legalContent.privacy })} className="text-left text-slate-600 font-bold hover:text-cyan-600 transition-colors">Gizlilik Politikası</button>
-                            <button onClick={() => setLegalModal({ isOpen: true, ...legalContent.kvkk })} className="text-left text-slate-600 font-bold hover:text-cyan-600 transition-colors">KVKK Aydınlatma</button>
+                            <span className="text-[10px] font-normal uppercase tracking-[0.3em] text-slate-400 mb-2">YASAL</span>
+                            <button onClick={() => setLegalModal({ isOpen: true, ...legalContent.terms })} className="text-left text-slate-600 font-normal hover:text-cyan-600 transition-colors">Kullanım Şartları</button>
+                            <button onClick={() => setLegalModal({ isOpen: true, ...legalContent.privacy })} className="text-left text-slate-600 font-normal hover:text-cyan-600 transition-colors">Gizlilik Politikası</button>
+                            <button onClick={() => setLegalModal({ isOpen: true, ...legalContent.kvkk })} className="text-left text-slate-600 font-normal hover:text-cyan-600 transition-colors">KVKK Aydınlatma</button>
                         </div>
                     </div>
 
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-10 border-t border-slate-200/50">
-                        <span className="text-slate-400 text-sm font-medium">© 2026 Senkron AI. Tüm hakları saklıdır.</span>
+                        <span className="text-slate-400 text-sm font-normal">© 2026 Senkron AI. Tüm hakları saklıdır.</span>
                         <div className="flex gap-8">
-                            <span className="text-slate-300 text-xs font-bold uppercase tracking-widest">MADE IN TURKIYE</span>
-                            <span className="text-slate-300 text-xs font-bold uppercase tracking-widest">SECURE PAYMENT</span>
+                            <span className="text-slate-300 text-xs font-normal uppercase tracking-widest">MADE IN TURKIYE</span>
+                            <span className="text-slate-300 text-xs font-normal uppercase tracking-widest">SECURE PAYMENT</span>
                         </div>
                     </div>
                 </div>
@@ -759,18 +759,18 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
                             className="relative w-full max-w-2xl bg-white rounded-none shadow-2xl overflow-hidden flex flex-col max-h-[80vh]"
                         >
                             <div className="p-8 border-b border-slate-100 flex justify-between items-center">
-                                <h3 className="text-2xl font-black text-slate-900 tracking-tighter">{legalModal.title}</h3>
+                                <h3 className="text-2xl font-normal text-slate-900 tracking-tighter">{legalModal.title}</h3>
                                 <button onClick={() => setLegalModal(null)} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
                                     <X className="w-6 h-6 text-slate-500" />
                                 </button>
                             </div>
-                            <div className="p-8 overflow-y-auto text-slate-600 font-medium leading-relaxed">
+                            <div className="p-8 overflow-y-auto text-slate-600 font-normal leading-relaxed">
                                 {legalModal.content}
                             </div>
                             <div className="p-6 bg-slate-50 border-t border-slate-100 text-center">
                                 <button
                                     onClick={() => setLegalModal(null)}
-                                    className="px-8 py-3 bg-slate-900 text-white rounded-none font-bold hover:scale-105 active:scale-95 transition-all"
+                                    className="px-8 py-3 bg-slate-900 text-white rounded-none font-normal hover:scale-105 active:scale-95 transition-all"
                                 >
                                     ANLADIM, KAPAT
                                 </button>
