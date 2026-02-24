@@ -44,7 +44,7 @@ const SubscriptionRequiredView = ({ studentCount, session }: { studentCount: num
 
   return (
     <div className="flex flex-col items-center justify-center h-full bg-[#0d141b] text-white p-8 text-center animate-in fade-in duration-500 font-mono">
-      <div className="w-24 h-24 bg-red-500/10 border border-red-500/20 rounded-full flex items-center justify-center mb-6 shadow-[0_0_50px_rgba(239,68,68,0.2)]">
+      <div className="w-24 h-24 bg-red-500/10 border border-red-500/20 rounded-none flex items-center justify-center mb-6 shadow-[0_0_50px_rgba(239,68,68,0.2)]">
         <i className="fa-solid fa-clock-rotate-left text-4xl text-red-500 animate-pulse"></i>
       </div>
       <h2 className="text-3xl font-normal tracking-tighter mb-4 uppercase">DENEME SÜRESİ DOLDU</h2>
@@ -53,7 +53,7 @@ const SubscriptionRequiredView = ({ studentCount, session }: { studentCount: num
         Sistemin tüm özelliklerine erişmeye devam etmek için yıllık aboneliğinizi başlatmanız gerekmektedir.
       </p>
 
-      <div className="bg-[#1a242e] border border-white/5 p-8 rounded-xl mb-8 w-full max-w-md shadow-2xl">
+      <div className="bg-[#1a242e] border border-white/5 p-8 rounded-none mb-8 w-full max-w-md shadow-2xl">
         <div className="flex justify-between items-center mb-6">
           <span className="text-[10px] font-normal text-slate-500 uppercase tracking-widest">YILLIK ÜCRET (ÖĞRENCİ BAŞI)</span>
           <span className="text-xl font-normal text-[#fbbf24]">$2.00</span>
@@ -61,7 +61,7 @@ const SubscriptionRequiredView = ({ studentCount, session }: { studentCount: num
         <div className="flex justify-between items-center pb-6 border-b border-white/5">
           <span className="text-[10px] font-normal text-slate-500 uppercase tracking-widest">AKTİF ÖĞRENCİ SAYISI</span>
           <div className="flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <div className="w-2 h-2 rounded-none bg-green-500 animate-pulse" />
             <span className="text-xl font-normal text-white">{studentCount}</span>
           </div>
         </div>
@@ -83,7 +83,7 @@ const SubscriptionRequiredView = ({ studentCount, session }: { studentCount: num
           </button>
         ) : (
           <div className="mt-6 animate-in zoom-in duration-300">
-            <div className="flex justify-between items-center p-4 bg-green-500/5 border border-green-500/20 rounded-lg mb-6">
+            <div className="flex justify-between items-center p-4 bg-green-500/5 border border-green-500/20 rounded-none mb-6">
               <span className="text-[12px] font-normal text-green-500 uppercase tracking-widest">TOPLAM TAHSİLAT</span>
               <span className="text-2xl font-normal text-green-500 animate-pulse">${totalAmount} <span className="text-xs">/ YIL</span></span>
             </div>
