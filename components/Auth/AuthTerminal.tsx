@@ -109,6 +109,9 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
     const input = email.trim().toUpperCase();
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 12000); // 12 Saniye Zaman Aşımı
+
       const { data, error: authError } = await supabase.auth.signInWithPassword({
         email: email.toLowerCase(),
         password
@@ -118,11 +121,15 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
 
       const user = data.user;
 
-      const { data: profile } = await supabase
+      const profilePromise = supabase
         .from('user_profiles')
         .select('*')
         .eq('user_id', user.id)
+        .abortSignal(controller.signal)
         .maybeSingle();
+
+      const { data: profile } = await profilePromise;
+      clearTimeout(timeoutId);
 
       if (profile) {
         onAuthSuccess({
@@ -145,7 +152,11 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
       }
       triggerSuccess("YÖNETİCİ_GİRİŞİ_BAŞARILI");
     } catch (err: any) {
-      setError(err.message.toUpperCase());
+      if (err.name === 'AbortError' || err.message?.includes('AbortError')) {
+        setError("SUNUCU YANIT VERMİYOR (DB KİLİTLİ OLABİLİR)");
+      } else {
+        setError(err.message.toUpperCase());
+      }
     } finally {
       setLoading(false);
     }
@@ -188,6 +199,9 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
     setError(null);
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
+
       const sid = schoolIdInput.trim().toUpperCase();
       const uName = usernameInput.trim();
       const uPass = userPasswordInput.trim();
@@ -196,8 +210,7 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
       let targetSchoolId = sid;
 
       if (sid) {
-        // Okul kodu verildiyse klasik kontrol
-        const { data: school, error: schoolError } = await supabase.from('schools').select('id, name').eq('id', sid).maybeSingle();
+        const { data: school, error: schoolError } = await supabase.from('schools').select('id, name').eq('id', sid).abortSignal(controller.signal).maybeSingle();
         if (schoolError || !school) throw new Error("GİRİLEN OKUL KODU GEÇERSİZ");
 
         const { data, error } = await supabase
@@ -206,22 +219,22 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
           .eq('school_id', sid)
           .eq('password', uPass)
           .or(`username.eq.${uName},number.eq.${uName}`)
+          .abortSignal(controller.signal)
           .maybeSingle();
 
         if (error || !data) throw new Error("KULLANICI ADI/NO VEYA ŞİFRE HATALI");
         student = data;
       } else {
-        // Okul kodu yoksa GLOBAL arama (Smart Login)
         const { data, error } = await supabase
           .from('students')
           .select('*')
           .eq('password', uPass)
-          .or(`username.eq.${uName},number.eq.${uName}`);
+          .or(`username.eq.${uName},number.eq.${uName}`)
+          .abortSignal(controller.signal);
 
         if (error) throw error;
 
         if (data && data.length === 1) {
-          // Tekil eşleşme, okul kodunu otomatik al
           student = data[0];
           targetSchoolId = student.school_id;
         } else if (data && data.length > 1) {
@@ -235,6 +248,8 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
         }
       }
 
+      clearTimeout(timeoutId);
+
       onAuthSuccess({
         role: UserRole.STUDENT,
         id: student.number,
@@ -245,7 +260,11 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
       triggerSuccess(`HOŞ GELDİN ${student.name.split(' ')[0]}`);
 
     } catch (err: any) {
-      setError(err.message);
+      if (err.name === 'AbortError' || err.message?.includes('AbortError')) {
+        setError("SUNUCU YANIT VERMİYOR (DB KİLİTLİ OLABİLİR)");
+      } else {
+        setError(err.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -257,6 +276,9 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
     setError(null);
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
+
       const sid = schoolIdInput.trim().toUpperCase();
       const uName = usernameInput.trim();
       const uPass = userPasswordInput.trim();
@@ -265,8 +287,7 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
       let targetSchoolId = sid;
 
       if (sid) {
-        // Okul Kodu varsa direkt kontrol
-        const { data: school, error: schoolError } = await supabase.from('schools').select('id, name').eq('id', sid).maybeSingle();
+        const { data: school, error: schoolError } = await supabase.from('schools').select('id, name').eq('id', sid).abortSignal(controller.signal).maybeSingle();
         if (schoolError || !school) throw new Error("GİRİLEN OKUL KODU GEÇERSİZ");
 
         const { data, error } = await supabase
@@ -275,17 +296,18 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
           .eq('school_id', sid)
           .eq('username', uName)
           .eq('password', uPass)
+          .abortSignal(controller.signal)
           .maybeSingle();
 
         if (error || !data) throw new Error("KULLANICI ADI VEYA ŞİFRE HATALI");
         teacher = data;
       } else {
-        // Okul kodu yoksa Global Arama
         const { data, error } = await supabase
           .from('teachers')
           .select('*')
           .eq('username', uName)
-          .eq('password', uPass);
+          .eq('password', uPass)
+          .abortSignal(controller.signal);
 
         if (error) throw error;
 
@@ -303,6 +325,8 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
         }
       }
 
+      clearTimeout(timeoutId);
+
       onAuthSuccess({
         role: UserRole.TEACHER,
         id: teacher.id,
@@ -313,7 +337,11 @@ const AuthTerminal: React.FC<AuthTerminalProps> = ({ onAuthSuccess, triggerSucce
       triggerSuccess(`HOŞ GELDİNİZ HOCAM`);
 
     } catch (err: any) {
-      setError(err.message);
+      if (err.name === 'AbortError' || err.message?.includes('AbortError')) {
+        setError("SUNUCU YANIT VERMİYOR (DB KİLİTLİ OLABİLİR)");
+      } else {
+        setError(err.message);
+      }
     } finally {
       setLoading(false);
     }
