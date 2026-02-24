@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS exams (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     school_id TEXT NOT NULL,
     name TEXT NOT NULL,
+    publisher TEXT, -- E.g. MEB, ÖZDEBİR, TÖDER, OKUL
     exam_type TEXT NOT NULL CHECK (exam_type IN ('LGS', 'TYT', 'AYT', 'YDT', 'TARAMA_11')),
     target_grade INTEGER,
     applied_date DATE,
@@ -77,7 +78,8 @@ CREATE TABLE IF NOT EXISTS exam_questions (
     session_id UUID NOT NULL REFERENCES exam_sessions(id) ON DELETE CASCADE,
     question_number INTEGER NOT NULL,
     subject TEXT NOT NULL,
-    correct_answer TEXT,
+    correct_answer TEXT, -- Optional backup
+    correct_answers JSONB, -- {"A": "B", "B": "C"}
     point_weight DECIMAL(6,4) DEFAULT 1.0,
     objective_id UUID REFERENCES objectives(id),
     ai_analysis_status TEXT DEFAULT 'PENDING' CHECK (ai_analysis_status IN ('PENDING', 'COMPLETED', 'FAILED')),
@@ -90,6 +92,7 @@ CREATE TABLE IF NOT EXISTS student_responses (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     student_id TEXT NOT NULL,
     question_id UUID NOT NULL REFERENCES exam_questions(id) ON DELETE CASCADE,
+    booklet_type TEXT, -- A, B, C, D vb.
     given_answer TEXT,
     is_correct BOOLEAN,
     is_empty BOOLEAN DEFAULT FALSE,
@@ -106,8 +109,11 @@ CREATE INDEX IF NOT EXISTS idx_student_responses_question_id ON student_response
 CREATE INDEX IF NOT EXISTS idx_objectives_school_id ON objectives(school_id);
 
 -- Upsert için unique kısıt (session başına soru numarası benzersiz)
-ALTER TABLE exam_questions ADD CONSTRAINT IF NOT EXISTS uq_session_question UNIQUE (session_id, question_number);
+ALTER TABLE exam_questions ADD CONSTRAINT uq_session_question UNIQUE (session_id, question_number);
 -- Öğrenci başına her soru için tek yanıt
-ALTER TABLE student_responses ADD CONSTRAINT IF NOT EXISTS uq_student_question UNIQUE (student_id, question_id);
+ALTER TABLE student_responses ADD CONSTRAINT uq_student_question UNIQUE (student_id, question_id);
 -- Migration: class_ids sütunu ekle (tablo zaten varsa)
 ALTER TABLE exams ADD COLUMN IF NOT EXISTS class_ids TEXT[];
+ALTER TABLE exams ADD COLUMN IF NOT EXISTS publisher TEXT;
+ALTER TABLE exam_questions ADD COLUMN IF NOT EXISTS correct_answers JSONB;
+ALTER TABLE student_responses ADD COLUMN IF NOT EXISTS booklet_type TEXT;

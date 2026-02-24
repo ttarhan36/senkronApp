@@ -18,7 +18,7 @@ export const chatWithGemini = async (message: string, content?: any) => {
   try {
     const ai = getAI();
     const response: GenerateContentResponse = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-2.5-flash',
       contents: message,
       config: {
         systemInstruction: "Sen bir okul yönetimi uzmanısın. Her zaman Türkçe yanıt ver.",
@@ -369,7 +369,7 @@ TALİMATLAR:
 }`;
 
     const response: GenerateContentResponse = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-2.5-flash',
       contents: [
         { inlineData: { data: base64Data, mimeType } },
         { text: prompt }
@@ -384,3 +384,52 @@ TALİMATLAR:
     throw new Error('Soru görüntüsü işlenirken bir hata oluştu. Lütfen tekrar deneyin.');
   }
 };
+
+/**
+ * Öğrencinin sınav sonuçlarına (kayıp puanlı kazanımlara) göre yapay zeka koçluk metni üretir.
+ */
+export const generateStudentCoachAdvice = async (
+  studentName: string,
+  examName: string,
+  alerts: { subject: string; objectiveDesc: string; lostPoints: number }[]
+): Promise<string> => {
+  try {
+    const ai = getAI();
+
+    if (alerts.length === 0) {
+      return `Merhaba ${studentName}, ${examName} sınavında harika bir iş çıkardın! Tüm konularda hedeflerine ulaşmış görünüyorsun. Başarılarının devamını dilerim!`;
+    }
+
+    const issuesList = alerts.map(a => `- ${a.subject}: "${a.objectiveDesc}" (Kayıp: ${a.lostPoints.toFixed(2)} puan)`).join('\n');
+
+    const prompt = `ROL: Sen deneyimli, motive edici ve anlayışlı bir eğitim koçusun.
+GÖREV: Aşağıdaki LGS/YKS sınav denemesi sonuçlarına göre öğrenciye kısa, samimi ve yönlendirici bir tavsiye yazısı yaz.
+    
+ÖĞRENCİ: ${studentName}
+SINAV: ${examName}
+
+DİKKAT EDİLMESİ GEREKEN EKSİK KAZANIMLAR (EN ÇOK PUAN KAYBETTİRENLER):
+${issuesList}
+
+TALİMATLAR:
+1. Öğrenciye ismiyle hitap et ve sıcak bir giriş yap.
+2. Sınav adı ve kaybettiği puanları baz alarak, eksik olduğu ilk 1 veya 2 konuyu VURGULA (kalın metin '***konu***' kullanabilirsin).
+3. Bu konulara çalışmasının LGS/YKS puanına nasıl etki edeceğini (kaybettiği puanı geri kazanabileceğini) belirt.
+4. Maksimum 3-4 cümlelik, çok uzun olmayan bir çıktı ver.
+5. Kullanıcı arayüzünde gösterileceği için markdown kullanma, sadece düz metin olsun (vurgular hariç).`;
+
+    const response: GenerateContentResponse = await ai.models.generateContent({
+      model: 'gemini-3-flash-preview',
+      contents: prompt,
+      config: {
+        thinkingConfig: { thinkingBudget: 0 }
+      }
+    });
+
+    return response.text || "Değerli öğrencimiz, analizin başarıyla tamamlandı. Detayları tablolardan inceleyebilirsin.";
+  } catch (error) {
+    console.error('AI Koçluk Hatası:', error);
+    return "Şu an yapay zeka koçuna bağlanılamıyor. Lütfen tabloları inceleyerek eksik konularını tespit et.";
+  }
+};
+

@@ -866,6 +866,9 @@ const App: React.FC = () => {
       if (activeModule === ModuleType.CLASS_SCHEDULES) {
         return <ClassSchedulesModule schedule={finalSchedule} setSchedule={setFinalSchedule} onDeleteScheduleEntry={deleteScheduleFromSupabase} classes={classes} lessons={lessons} teachers={teachers} schoolConfig={schoolConfig} editMode={false} onSuccess={triggerSuccess} userRole={session.role} initialClass={classes.find(c => c.students?.some(s => s.number === session.id))?.name} />;
       }
+      if (activeModule === ModuleType.STUDENT_EXAMS) {
+        return <StudentExamView session={session} />;
+      }
 
       return <Dashboard teachers={teachers} classes={classes} setClasses={setClasses} lessons={lessons} schedule={finalSchedule} setActiveModule={setActiveModule} announcements={announcements} userRole={session.role} userName={session.name} userId={session.id} courses={courses} setCourses={setCourses} onSuccess={triggerSuccess} studentTab={studentTab} subscriptionStatus={session.subscriptionStatus} trialEndsAt={session.trialEndsAt} />;
     }

@@ -70,7 +70,7 @@ function detectSubject(qNum: number, sessionName: SessionType, examType: ExamTyp
 
 function parseAnswerKey(text: string): Record<number, string> {
   const map: Record<number, string> = {};
-  const regex = /(\d+)[.\-\)]\s*([A-Ea-e])/g;
+  const regex = /(\d+)[.\-\),]\s*([A-Ea-e])/g;
   let match;
   while ((match = regex.exec(text)) !== null) {
     map[parseInt(match[1])] = match[2].toUpperCase();
@@ -121,6 +121,8 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
   const [error, setError] = useState<string | null>(null);
 
   // Create form
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(null);
+
   const [formName, setFormName] = useState('');
   const [formType, setFormType] = useState<ExamType>('LGS');
   const [formGrade, setFormGrade] = useState<number>(8);
@@ -136,6 +138,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
   // Upload state
   const [uploadSection, setUploadSection] = useState<'BOOKLET' | 'ANSWERS' | null>(null);
   const [ocrLoading, setOcrLoading] = useState(false);
+  const [ocrSeconds, setOcrSeconds] = useState(0);
   const [ocrError, setOcrError] = useState<string | null>(null);
   const [parsedQuestions, setParsedQuestions] = useState<ParsedQuestion[]>([]);
   const [savingQuestions, setSavingQuestions] = useState(false);
@@ -285,7 +288,9 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
   const handleFileUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !selectedSessionId || !selectedExam) return;
-    setOcrLoading(true); setOcrError(null); setParsedQuestions([]);
+    setOcrLoading(true); setOcrError(null); setParsedQuestions([]); setOcrSeconds(0);
+
+    const timer = setInterval(() => setOcrSeconds(s => s + 1), 1000);
 
     const session_ = selectedExam.sessions?.find(s => s.id === selectedSessionId);
     const sessionName = session_?.sessionName ?? 'SÖZEL' as SessionType;
@@ -325,6 +330,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
     } catch (err) {
       setOcrError(err instanceof Error ? err.message : 'İşlem sırasında hata oluştu.');
     } finally {
+      clearInterval(timer);
       setOcrLoading(false);
       e.target.value = '';
     }
@@ -334,7 +340,10 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
     if (!selectedSessionId || parsedQuestions.length === 0) return;
     setSavingQuestions(true);
 
-    const toInsert = parsedQuestions.map(q => ({
+    // Remove duplicates based on question_number
+    const uniqueQuestions = Array.from(new Map(parsedQuestions.map(q => [q.questionNumber, q])).values());
+
+    const toInsert = uniqueQuestions.map(q => ({
       session_id: selectedSessionId,
       question_number: q.questionNumber,
       subject: q.subject,
@@ -367,6 +376,23 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
   const handleParseAnswerKey = () => {
     const map = parseAnswerKey(answerText);
     setAnswerPreview(map);
+  };
+
+  const handleDeleteExam = async (e: React.MouseEvent, id: string) => {
+    e.stopPropagation();
+    if (showDeleteConfirm === id) {
+      setLoading(true);
+      const { error: delErr } = await supabase.from('exams').delete().eq('id', id);
+      if (!delErr) {
+        setExams(prev => prev.filter(ex => ex.id !== id));
+      } else {
+        setError('Silme işlemi başarısız: ' + delErr.message);
+      }
+      setShowDeleteConfirm(null);
+      setLoading(false);
+    } else {
+      setShowDeleteConfirm(id);
+    }
   };
 
   const handleSaveAnswers = async () => {
@@ -516,7 +542,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
               {ocrError && <p className="text-red-400 text-[9px] mb-2">{ocrError}</p>}
 
               <label className="flex items-center justify-center h-8 px-4 bg-[#1a2535] hover:bg-[#243040] border border-[#354a5f]/50 cursor-pointer transition-colors text-[9px] text-slate-300 uppercase tracking-widest mb-2">
-                {ocrLoading ? 'İŞLENİYOR...' : '+ DOSYA SEÇ'}
+                {ocrLoading ? `İŞLENİYOR... (${ocrSeconds} sn)` : '+ DOSYA SEÇ'}
                 <input
                   type="file"
                   accept="image/*,.pdf,.doc,.docx"
@@ -555,7 +581,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
           {uploadSection === 'ANSWERS' && (
             <div>
               <p className="text-[7px] text-slate-500 uppercase tracking-wider mb-1.5">
-                FORMAT: 1-A, 2-B, 3-C &nbsp;veya&nbsp; 1.A 2.B 3.C &nbsp;veya&nbsp; 1)A 2)B 3)C
+                FORMAT: 1-A, 2-B, 3-C &nbsp;veya&nbsp; 1.A 2.B 3.C &nbsp;veya&nbsp; 1)A 2)B &nbsp;veya&nbsp; 1,A 2,B
               </p>
               <textarea
                 value={answerText}
@@ -616,7 +642,7 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
             </div>
           ) : (
             <div className="bg-[#0d141b]/60 border border-[#354a5f]/30 p-3 flex items-center justify-center">
-              <p className="text-[7px] text-slate-600 uppercase text-center">Öğrenci yanıtı<br/>bekleniyor</p>
+              <p className="text-[7px] text-slate-600 uppercase text-center">Öğrenci yanıtı<br />bekleniyor</p>
             </div>
           )}
         </div>
@@ -744,25 +770,34 @@ const ExamModule: React.FC<Props> = ({ session, classes = [] }) => {
           {exams.map(exam => {
             const totalQ = (exam.sessions ?? []).reduce((a, s) => a + (s.questionCount ?? 0), 0);
             return (
-              <button key={exam.id}
-                onClick={() => {
-                  setSelectedExam(exam);
-                  const firstSession = exam.sessions?.[0];
-                  if (firstSession) setSelectedSessionId(firstSession.id);
-                  setView('DETAIL');
-                }}
-                className="w-full bg-[#0d141b]/60 hover:bg-[#0d141b] border border-[#354a5f]/30 hover:border-[#354a5f]/60 p-3 text-left transition-all">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="text-[10px] font-black text-white uppercase tracking-wider">{exam.name}</p>
-                    <p className="text-[8px] text-slate-500 mt-0.5 font-mono">{EXAM_TYPE_LABELS[exam.examType]} · {exam.sessions?.length ?? 0} OTURUM · {totalQ} SORU</p>
+              <div key={exam.id} className="relative group">
+                <button
+                  onClick={() => {
+                    setSelectedExam(exam);
+                    const firstSession = exam.sessions?.[0];
+                    if (firstSession) setSelectedSessionId(firstSession.id);
+                    setView('DETAIL');
+                  }}
+                  className="w-full bg-[#0d141b]/60 hover:bg-[#0d141b] border border-[#354a5f]/30 hover:border-[#354a5f]/60 p-3 pr-10 text-left transition-all">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-[10px] font-black text-white uppercase tracking-wider">{exam.name}</p>
+                      <p className="text-[8px] text-slate-500 mt-0.5 font-mono">{EXAM_TYPE_LABELS[exam.examType]} · {exam.sessions?.length ?? 0} OTURUM · {totalQ} SORU</p>
+                    </div>
+                    <span className={`shrink-0 text-[7px] font-black uppercase px-2 py-0.5 border ${exam.status === 'DONE' ? 'border-green-500/30 text-green-400 bg-green-500/10' : 'border-[#354a5f]/40 text-slate-500'}`}>
+                      {exam.status === 'DONE' ? 'TAMAMLANDI' : 'PLANLI'}
+                    </span>
                   </div>
-                  <span className={`shrink-0 text-[7px] font-black uppercase px-2 py-0.5 border ${exam.status === 'DONE' ? 'border-green-500/30 text-green-400 bg-green-500/10' : 'border-[#354a5f]/40 text-slate-500'}`}>
-                    {exam.status === 'DONE' ? 'TAMAMLANDI' : 'PLANLI'}
-                  </span>
-                </div>
-                {exam.appliedDate && <p className="text-[7px] text-slate-600 mt-1.5 font-mono">{exam.appliedDate}</p>}
-              </button>
+                  {exam.appliedDate && <p className="text-[7px] text-slate-600 mt-1.5 font-mono">{exam.appliedDate}</p>}
+                </button>
+                <button
+                  onClick={(e) => handleDeleteExam(e, exam.id)}
+                  className={`absolute right-2 top-1/2 -translate-y-1/2 p-2 transition-all ${showDeleteConfirm === exam.id ? 'text-white bg-red-600' : 'text-slate-600 hover:text-red-400 opacity-0 group-hover:opacity-100'}`}
+                  title={showDeleteConfirm === exam.id ? 'EMİN MİSİNİZ?' : 'SİL'}
+                >
+                  <i className={`fa-solid ${showDeleteConfirm === exam.id ? 'fa-triangle-exclamation animate-pulse' : 'fa-trash'}`}></i>
+                </button>
+              </div>
             );
           })}
         </div>

@@ -1467,11 +1467,11 @@ const TeachersModule: React.FC<TeachersModuleProps> = ({
                                              <div className="flex items-center gap-2 mt-1">
                                                 <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{exam.className}</span>
                                                 <span className="text-[7px] font-black text-[#fbbf24] bg-[#fbbf24]/10 px-1.5 py-0.5 border border-[#fbbf24]/20 uppercase">{exam.slot.replace('exam', '').toUpperCase()}. YAZILI</span>
-                                                 {exam.type && (
-                                                    <span className={	ext-[7px] font-black uppercase px-1.5 py-0.5 border rounded-sm ml-2 }>
-                                                       {exam.type}
-                                                    </span>
-                                                 )}
+                                                {exam.type && (
+                                                   <span className="text-[7px] font-black uppercase px-1.5 py-0.5 border rounded-sm ml-2">
+                                                      {exam.type}
+                                                   </span>
+                                                )}
 
                                                 {/* STATUS BADGE */}
                                                 {isPast ? (

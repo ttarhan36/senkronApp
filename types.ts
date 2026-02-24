@@ -348,6 +348,7 @@ export interface ExamPackage {
   id: string;
   schoolId: string;
   name: string;
+  publisher?: string;
   examType: ExamType;
   targetGrade?: number;
   appliedDate?: string;
@@ -386,6 +387,7 @@ export interface ExamQuestion {
   questionNumber: number;
   subject: string;
   correctAnswer?: string;
+  correctAnswers?: Record<string, string>;
   pointWeight: number;
   objectiveId?: string;
   objective?: Objective;
@@ -399,6 +401,7 @@ export interface StudentResponse {
   studentId: string;
   questionId: string;
   question?: ExamQuestion;
+  bookletType?: string;
   givenAnswer?: string;
   isCorrect?: boolean;
   isEmpty: boolean;
@@ -466,5 +469,4 @@ export interface StudentTask {
   description?: string;
   status: 'PENDING' | 'COMPLETED';
   dueDate?: string;
-}
 }
