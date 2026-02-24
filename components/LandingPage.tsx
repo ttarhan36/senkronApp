@@ -176,6 +176,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
             items: ["Yük dengeleme", "Performans grafikleri", "Yetkinlik eşleştirme"]
         },
         {
+            title: "LGS & YKS Gelişmiş Sınav Analizi",
+            description: "Sınav sonuçlarını sadece puan olarak bırakmaz; LGS, TYT ve AYT denemelerini konu bazlı analiz eder. Öğrencinin hangi derste, hangi alt konuda (örn: 'Üslü İfadeler', 'Hücre Bölünmesi') eksik olduğunu yapay zeka ile nokta atışı tespit eder.",
+            icon: <BarChart3 className="w-6 h-6" />,
+            items: ["Nokta atışı konu eksikleri", "LGS/YKS sayaçları", "Kişiselleştirilmiş hedef odaklı rapor"]
+        },
+        {
             title: "Öğrenci & Öğretmen Etkileşimi",
             description: "Öğretmenler her şubeye özel ödev ve duyurular gönderebilir. Öğrenciler ise kendilerine özel panellerinden ödevlerini, notlarını, devamsızlıklarını ve öğretmen görüşlerini anlık takip edebilir.",
             icon: <MessageSquare className="w-6 h-6" />,
@@ -199,6 +205,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
         {
             q: "Senkron tam olarak nedir ve okuluma ne katar?",
             a: "Senkron, okul yönetimini baştan sona dijitalleştiren yapay zeka tabanlı bütünleşik bir platformdur. Saniyeler içinde en adil ve optimize ders programını hazırlayan 'Zeka Motoru', ek bir cihaz gerektirmeden sadece cep telefonu kamerasıyla sınav kağıtlarını okuyan 'AI Optik', anlık mobil yoklama ve gelişmiş öğrenci akademik analiz araçlarını tek bir merkezde toplar. Manuel süreçlerin yarattığı veri karmaşasını ve personel yükünü ortadan kaldırarak okulunuza operasyonel verimlilik, %100 MEB uyumu ve objektif yönetim imkanı katar."
+        },
+        {
+            q: "LGS ve YKS (TYT/AYT) sınavlarında analizler ne kadar derin?",
+            a: "Senkron sıradan net/puan hesaplamanın ötesine geçer. Deneme sınavlarında öğrencilerin boş bıraktığı veya yanlış yaptığı soruları tarar ve eksik konuları (Örn: 'İnkilap Tarihi - Milli Uyanış', 'Matematik - Üslü İfadeler') yapay zeka ile tek tek listeler. Öğrenciler şahsi odaklanma gerektiren zayıf noktalarını panelinde listelenmiş halde görür. Ayrıca LGS ve YKS için hedef lise/üniversite sayaçları ile süreç şeffaflaşır."
         },
         {
             q: "Ders programını manuel hazırlayabilir miyim?",
